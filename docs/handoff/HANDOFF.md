@@ -14,7 +14,7 @@ current during the build. Agents read it after `AGENTS.md` and `GOTCHAS.md`.
 
 ## Status
 
-<Date> — <what is approved, what is built, what is next.>
+2026-10-27 — Loader installed on staging. Clean design reference made in Figma (page "↪ • Template — Clean Pages", node 2523:111): 9 desktop (1680) pages. Webflow build not started; waiting on tablet/mobile direction and the build approach.
 
 ## Ground rules for this project
 
@@ -63,7 +63,9 @@ Breakpoints: 991 (tablet), 767 (mobile landscape), 479 (mobile). Checked at
 
 ## Decisions
 
-- <Date> · <decision and why.>
+- 2026-10-27 · Nav: option "2V (with Part of TeraWulf logo clickable)" (Figma 2292:6818). The "Part of TeraWulf" logo links to terawulf.com. Every page already used its layout; the clean pages now carry its "Part of" label instead of "Site of".
+- 2026-10-27 · No FAQ or Contact page on the campus site. FAQ links (Home "All questions", footer "FAQ") and Contact links (nav "Contact Us", footer "Contact") go to the matching pages on terawulf.com.
+- 2026-10-27 · Build from the Figma page "↪ • Template — Clean Pages" (2523:111), not the working Template page.
 
 ## Open decisions
 
@@ -73,4 +75,5 @@ Breakpoints: 991 (tablet), 767 (mobile landscape), 479 (mobile). Checked at
 
 ## Stand-in assets and placeholders
 
-- <Images, copy and `#` links still to replace, with an owner.>
+- Home FAQ section intro is lorem ipsum: keep it as a placeholder for now (owner: client copy).
+- terawulf.com FAQ and Contact page URLs: to confirm before wiring the links.
