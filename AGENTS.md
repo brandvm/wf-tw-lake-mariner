@@ -1,4 +1,4 @@
-# <CLIENT> — Webflow custom code
+# Lake Mariner Data — Webflow custom code
 
 Agent instructions for this repository. Codex, Cursor and similar tools read
 this file directly; Claude Code reads it through `CLAUDE.md`. It is the single
@@ -6,16 +6,16 @@ source of agent rules — edit this file, never a copy of it.
 
 ## Project facts
 
-Fill these in when the repo is created from the template (`pnpm new-project`).
+Filled in by `pnpm new-project` on 2026-10-27.
 
-- Client / site: `<CLIENT>`
-- GitHub: `<ORG>/<REPO>`, default branch `master`
-- Webflow site ID: `<SITE_ID>`
-- Webflow MCP server: `webflow-<SLUG>` (`.mcp.json`)
-- Staging site: `https://<SLUG>.webflow.io`
-- Staging bundles: `https://<ORG>.github.io/<REPO>/`
-- Production domain: `<DOMAIN or "not attached yet">`
-- Production release: `<RELEASE in the head snippet, or "none yet">`
+- Client / site: `Lake Mariner Data`
+- GitHub: `brandvm/wf-tw-lake-mariner`, default branch `master`
+- Webflow site ID: `6ae0f7d7bcf5d7622aeac214`
+- Webflow MCP server: `webflow-tw-lake-mariner` (`.mcp.json`)
+- Staging site: `https://tw-lake-mariner.webflow.io`
+- Staging bundles: `https://brandvm.github.io/wf-tw-lake-mariner/`
+- Production domain: `not attached yet`
+- Production release: `none yet`
 
 ## Who owns what
 
