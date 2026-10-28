@@ -135,3 +135,12 @@ collected from client repos into those files.
 - Fix: `open(list.hidden !== false)` in custom-select.ts, in both copies. The prototype starter should pin the same TypeScript as the repo, so the prototype's own `pnpm check` catches it.
 - Status: worked around; not upstreamed
 - Found by: claude
+
+### 2026-10-28 · CMS image fields copy the image even when it is already a site asset
+- Area: mcp
+- Scope: template-candidate
+- Symptom: images uploaded as site assets (create_asset + presigned S3 POST) and then set on CMS Image fields by their hosted URL and fileId came back with a new fileId and URL under the CMS's own asset path, re-encoded as .jpeg; rich-text `<img>` sources were rewritten the same way.
+- Cause: Webflow re-hosts every CMS image from the URL it is given; the asset library and CMS images are separate stores.
+- Fix: none needed, but uploading to the asset library first only serves as a public URL source: for CMS-only images, pass any public URL straight to the item. The 15 site assets uploaded for the sample items are duplicates (they can go at the unused-assets cleanup).
+- Status: worked around
+- Found by: claude

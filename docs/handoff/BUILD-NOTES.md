@@ -9,7 +9,7 @@ credentials here: name the vault entry instead.
 How to edit what: each collection and its fields, which sections are
 conditional on which field, and each component's props.
 
-Collections created 2026-10-28 (structure only; items come in a later batch). The item's Name field is the title, question or person's name.
+Collections created 2026-10-28. Sample items from the approved prototype added and published the same day (43: 3 categories, 1 topic, 5 event types, 6 perks, 9 posts, 5 events, 7 documents, 4 FAQs, 3 testimonials). Placeholders say so in their title or text; replace them with real content before launch. The item's Name field is the title, question or person's name.
 
 | Collection / component | How to edit | Notes |
 | --- | --- | --- |
