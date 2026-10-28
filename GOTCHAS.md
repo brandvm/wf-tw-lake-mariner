@@ -50,7 +50,7 @@ collected from client repos into those files.
 - Scope: template-candidate
 - Symptom: 12 "values that differ" on an untouched starter site (G | Footer W, Skip Link, Chip padding).
 - Cause: Webflow publishes `padding: var(a) var(b)` with no spaces between the var() calls; the parser reads the whole shorthand as each side's value.
-- Fix: none yet; the findings are false positives. Split shorthands on `)var(` in scripts/check-drift.mjs.
+- Fix: none yet; the findings are false positives. Split shorthands on `)var(` in scripts/check-drift.mjs. Seen again 2026-10-28 with a number after the variable (`.tag`: `var(--_spacing---8).625em`): split after every closing `)` at depth 0, not only before `var(`.
 - Status: open
 - Found by: claude
 
