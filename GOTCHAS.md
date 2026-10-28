@@ -63,6 +63,33 @@ collected from client repos into those files.
 - Status: open
 - Found by: claude
 
+### 2026-10-28 · Anchor to a pinned section lands a screen short
+- Area: js
+- Scope: template-candidate
+- Symptom: arriving at /project-overview#highlights left the Highlights section 924px below the top of the screen.
+- Cause: anchor-scroll counts every sticky element whose parent contains the target as a bar covering it. The section's own sticky pin frame (inside the target, so its parent is the target) was counted as a 900px bar.
+- Fix: in pinnedBottom, skip a sticky element the target contains (`target.contains(el)`). Done in prototype/src/modules/anchor-scroll.ts; the recipe in the template (recipes/anchor-scroll) needs the same line.
+- Status: fixed in this project's prototype; not upstreamed
+- Found by: claude
+
+### 2026-10-28 · Design colours that fail WCAG AA contrast
+- Area: css
+- Scope: project
+- Symptom: axe flagged small text in Storm (#5C7592) on Frost (#EBF0F5), 4.15:1, and labels at 40% opacity (2.4:1).
+- Cause: the Figma uses Storm and low-opacity labels for secondary text at 13–14px, below AA's 4.5:1.
+- Fix: post topics and the Community Impact accordion text use Steel (6.7:1); the breadcrumb's current item drops its extra 60% opacity; stat labels 64%, fact labels 75%; the mobile fact bar is solid Steel. Listed in HANDOFF Decisions for the designer.
+- Status: fixed in the prototype
+- Found by: claude
+
+### 2026-10-28 · wf:styles splits CSS comments on semicolons
+- Area: css
+- Scope: template-candidate
+- Symptom: the styles plan listed rules like "items past the page size and filtered-out items are hidden. .clear-all { visibility: hidden; }" — comment text glued onto a selector.
+- Cause: styles.mjs splits declarations on `;` before it strips comments, so a `;` inside a `/* repo-css: … */` comment ends a "declaration" and the rest of the comment becomes part of the next selector.
+- Fix: no semicolons in CSS comments (22 comments reworded in prototype/src/css/new-classes.css). The script should strip comments first.
+- Status: worked around; not upstreamed
+- Found by: claude
+
 ### 2026-10-27 · pnpm classes crashes on .w--current
 - Area: css
 - Scope: template-candidate

@@ -16,7 +16,7 @@ current during the build. Agents read it after `AGENTS.md` and `GOTCHAS.md`.
 
 ## Status
 
-2026-10-27 — Loader installed on staging. Clean design reference made in Figma (page "↪ • Template — Clean Pages", node 2523:111): 9 desktop (1680) pages. Prototype phase. The style guide, Home, Project Overview, Community Impact, Closed-Loop Cooling, Careers, News, the News Article template (one item: `/news/understanding-energy-pricing-in-new-york`), Events the Event template (one item: `/events/terawulf-hiring-event-data-center-operators`) and the 404 page are built in `../prototype` (`pnpm dev`, port 5868) and waiting for review at 1440, 820 and 390. The variable proposal is `prototype/src/css/proposed.css` (P1–P10), the new classes are `prototype/CLASSES.md` (326). Phase 0 audit done (`AUDIT.md`): the Webflow site is the unchanged starter, so the prototype's starter snapshot matches it. Nothing written to Webflow yet.
+2026-10-28 — Prototype complete; handoff checklist run. The style guide and all 10 pages (Home, Project Overview, Community Impact, Closed-Loop Cooling, Careers, News, News Article template, Events, Event template, 404) are built in `../prototype` (`pnpm dev`, port 5868). Approved in chat page by page from Project Overview on; Home and the style guide were taken as approved when the handoff was asked for (2026-10-28). Checks at handoff: screens (2560–360), states, style guide, axe WCAG 2.2 AA at 1440 and 390, heading outline, `#section` arrivals and back/forward, `wf:preflight --strict` (0 to fix), `check:snapshot`, `check:drift` (only the known shorthand false positives). Loader installed on staging; nothing else written to Webflow yet. Next: the Webflow build session (kickoff message below).
 
 ## Ground rules for this project
 
@@ -48,9 +48,10 @@ Breakpoints: 991 (tablet), 767 (mobile landscape), 479 (mobile). Checked at
 
 ## Variables and classes
 
-- Variable changes, as old → new, grouped for approval: proposed in phase 1 (`BUILD-PLAN.md` › Design system read from Figma has the source values).
-- New classes, with what each is for: `CLASSES.md`, started in phase 1.
-- Approval state: pending.
+- Variable changes, as old → new, grouped P1–P10 for approval: `prototype/src/css/proposed.css` (colours incl. Storm, Frost, the tints; semantic Base and Dark modes; type scale and roles incl. breakpoints; layout; button and chip).
+- New classes, 326, with what each is for: `prototype/CLASSES.md`; every one is on the style guide.
+- The plan per declaration: `pnpm wf:styles` (`.webflow-build/styles/styles-plan.json`): about 2,300 declarations through the connector, 26 by hand (MANUAL-TODO A–Z), 132 rules for repo CSS (`repo-css:` tagged in `new-classes.css`). 51 declarations read variables that only exist once the P-batches are created: create the variables first.
+- Approval state: pages approved in the prototype; the variable batches are proposed again, batch by batch, at the start of the build.
 
 ## CMS
 
@@ -68,58 +69,86 @@ Breakpoints: 991 (tablet), 767 (mobile landscape), 479 (mobile). Checked at
 
 ## Components to make
 
-| Component | Used on | Props | Behaviour inside |
+From the prototype's partials and repeated blocks (each has its style-guide row; `prototype/CLASSES.md` lists the classes).
+
+| Component | Used on | Props / CMS | Behaviour inside |
 | --- | --- | --- | --- |
-| G \| Nav W | every page | theme (light/dark), announcement on/off | `nav`, `announcement` |
-| G \| Footer W | every page | — | — |
-| C \| Page Hero | Home, Project Overview, Community Impact, Cooling, Careers | image, heading, text (1–2 paragraphs), button label + link, fact bar on/off | — |
-| C \| Button | everywhere | variant (Solid, Light, Ghost, Small), label, link, icon (plus/arrow) | — |
-| Section Head | most sections | eyebrow, heading, text, alignment | — |
+| G \| Nav W | every page | — (theme follows the page: `data-nav-theme="dark"` on a dark hero) | `nav`, `nav-state`, `announcement` |
+| Intro Loader (in G \| Page W) | every page (first page of a visit) | — | `intro` |
+| G \| Footer W | every page | — | `year` |
+| C \| Page Hero | Home, Project Overview, Community Impact, Cooling, Careers, 404 | image, heading, text (1–2 paragraphs), button label + link, fact bar on/off | `intro`, `parallax`; Home: `hero-sequence` |
+| C \| Button | everywhere | variant (Solid, Light, Frost, Small), label, link, icon | — |
 | Fact Bar | Home (hero, aerial) | items as text props | — |
-| Stat Row | Home | 3 label/value pairs | `reveal` (count-up optional) |
-| C \| Explore Rail | Home, Project Overview | — (fixed 4 cards) | `explore-rail` |
-| C \| Accordion (Is Glass / Is Line) | Home FAQ, Cooling operations, Doc Accordion | — | `accordion` |
-| C \| Image Accordion (Is Light / Is Dark) | Project Overview, Community Impact | heading | `image-accordion` |
-| C \| Highlight Tabs | Project Overview | — | `highlight-tabs` |
-| C \| Promo Card | Project Overview | image, title, text, link | — |
+| Statement | Home, Cooling, Careers, News, Events | eyebrow, text (two-tone), button | `text-fill` |
+| Stat Row | Home | 3 label/value pairs | `count-up` |
+| C \| Explore Rail | Home, Project Overview | — (fixed 4 cards) | `hscroll`, `parallax`, `cursor-button`, `text-fill` |
+| Split + C \| Accordion (Is Glass) | Home FAQ, Cooling operations | heading, text, button; FAQs collection on Home | `accordion` |
+| C \| Doc Accordion (Accordion Is Line) | Project Overview, Community Impact (Resources, Initiatives) | — (Documents collection) | `accordion` |
+| C \| Image Accordion (dark / Is Filled light) | Project Overview (Responsible Development), Community Impact (Benefits) | heading | `accordion` (images, autoplay) |
+| Intro Row + Media Frame | Project Overview (About TeraWulf) | logo, heading, text, media | `scroll-fx` (media-grow), `parallax` |
+| Collage | Project Overview (About the Project) | — | `scroll-fx` (drift), `text-fill` |
+| C \| Promo Card | Project Overview (Cooling teaser) | image, title, text, link | — |
+| C \| Highlight Tabs | Project Overview | — | `tabs` |
+| C \| Photo Band | Cooling intro | photo, cloud layer, cut-out (one scene, fixed proportions) | `band-inset`, `parallax` |
 | C \| Step List | Cooling | — | `steps` |
 | C \| Hover Pair | Cooling | two images | CSS hover + `lightbox` |
-| C \| Photo Band | Cooling intro | photo, cloud layer, cut-out (one scene, fixed proportions) | `band-inset`, `parallax` |
 | C \| Video Frame | Careers | poster, video URL | `scroll-fx` (media-grow), `video-modal` |
 | C \| Benefit Grid | Careers | — | `benefits` |
-| C \| Quote Slider | Careers | — (CMS) | `quote-slider` |
-| C \| Post Card (Is Row) | News list, Related | — (CMS bound) | — |
-| C \| Event Card (Is Row) | Events, Other events | — (CMS bound) | — |
-| Download Card, Source Card, RSVP Card, Detail Bar, Perk Grid | templates | — (CMS bound) | `calendar-links` (Detail Bar) |
-| C \| Follow Band | News template, Events, Event template | — | — |
-| Share Buttons | both templates | — | `share` |
-| Breadcrumb | both templates | parent label + link | — |
+| C \| Quote Slider | Careers | — (Testimonials collection) | `quote-slider` |
+| Search Field, List Toolbar (pills, Select, Clear All) | News, Events | — | Finsweet List (`list-filter` in the prototype), `custom-select` |
+| C \| Post Card (Is Row) | News list, Related | — (News Posts) | — |
+| C \| Event Card | Events | — (Events) | `reveal` |
+| Empty Card | Events (upcoming list's empty state) | — | `reveal` |
+| Breadcrumb, Share Buttons | News and Event templates | parent label + link | `share` |
+| Article Body (Rich Text Is Article), Download Card, Source Card | News template | — (News Posts) | `lightbox` (rich-text images), `read-progress` |
+| Detail Bar, Perk Grid, Callout, RSVP (Download Card) | Event template | — (Events, Event Perks) | `calendar-links`, `count-up`, `reveal` |
+| C \| Follow Band | News template, Events, Event template | — | `follow-fan` |
+| Quick Links | 404 | — | — |
 
 ## Modules
 
+In `prototype/src/modules/`, one file each, run from `prototype/src/main.ts`; all move into the repo's `src/modules/` unchanged. Every one finds its elements by `data-*` attributes and does nothing when they are absent; every motion is off under reduced motion.
+
 | Module | `data-*` hooks | What it does |
 | --- | --- | --- |
-| nav | `data-nav`, `data-nav-menu`, `data-nav-toggle` | dropdowns, mobile sheet, light/dark from the section under it |
+| gsap, smooth-scroll | `data-lenis-prevent` | GSAP + ScrollTrigger, Lenis smooth scrolling (recipes); off under reduced motion |
+| anchor-scroll | — (any `#` link) | glides to the target below anything pinned; corrects an arriving hash (fixed for pinned sections, GOTCHAS 2026-10-28) |
+| intro | `data-page-loader`, `data-page-loader-mark`, `data-intro`, `data-intro-media` | intro loader on the first page of a visit, then the hero parts rise in; 4 s CSS backstop; `html.intro-seen` from the head-code line |
+| nav | `data-nav`, `data-nav-dropdown`, `data-nav-dropdown-toggle`, `data-nav-toggle`, `data-state` | dropdowns, mobile sheet (Lenis paused while open) |
+| nav-state | `data-nav`, sets `data-nav-up` | the bar returns as a white bar when scrolling up |
 | announcement | `data-announcement`, `data-announcement-close` | close and remember (localStorage, keyed by the message) |
-| accordion | `data-accordion`, `data-accordion-item`, `data-accordion-trigger` | one open at a time, ARIA expanded/controls, height animation |
-| image-accordion | `data-image-accordion`, `data-accordion-image` | accordion + swaps the image and runs the progress line on the open item |
-| highlight-tabs | `data-tabs`, `data-tab`, `data-tab-panel`, `data-tab-bg` | tab list with arrow keys; cross-fades background and text |
-| hscroll | `data-hscroll`, `data-hscroll-frame`, `data-hscroll-track`, `data-hscroll-item`, `data-hscroll-viewport` | Explore: the section pins in the middle of the screen and page scroll moves the whole row (title and cards) sideways until the last card meets the content edge; from 992px without reduced motion, otherwise a swipe row |
-| text-fill | `data-text-fill` | statement words fill from muted to the text colour as it scrolls up the screen |
-| parallax | `data-parallax` (`="x"` sideways) | photos drift against the scroll inside their frames; Explore card photos drift sideways |
-| intro | `data-page-loader`, `data-page-loader-mark`, `data-intro`, `data-intro-media` | intro loader on the first page of a visit: navy screen with the shield and a progress line, lifts like a curtain, hero parts rise in; 4 s CSS backstop, none under reduced motion or on later pages (head-code line adds `html.intro-seen`) |
-| smooth-scroll | — (GSAP ticker + Lenis, recipes/smooth-scroll) | Lenis smooth scrolling; off under reduced motion and in the Designer; anchor-scroll glides through it |
-| quote-slider | `data-slider`, `data-slide`, `data-slider-prev/next/count` | slides quote + photo, counter, swipe |
-| scroll-video | `data-scroll-video` | grows the frame on scroll (GSAP ScrollTrigger), off below 992 and with reduced motion |
-| video-modal | `data-video-modal="<YouTube URL>"` | opens the video in a dialog (`recipes/modal/`) |
-| share | `data-share="facebook|linkedin|x|native"` | share URLs from the page URL (canonical when set) and title; native opens the share sheet or copies the link |
-| read-progress | `data-read-progress`, optional `data-read-end` | the reading line on CMS templates |
-| follow-fan | `data-follow-area`, `data-follow-fan` | Follow Band fan entrance and pointer drift |
-| calendar-links | `data-calendar` + `data-start`, `data-end` (ISO with offset), `data-title`, `data-location`, `data-details`; `data-calendar-google`, `data-calendar-ics` | builds the Google Calendar link and an .ics download (data URL) from the event fields; in Webflow the attributes are bound to the Events fields |
-| list filters | Finsweet Attributes (`recipes/finsweet/`) | News: category filter, search, sort, load more; Events: search. The prototype's `list-filter` module stands in for it (one per list, by `fs-list-instance`) on the same `fs-list-*` markup; check the attribute names against the Finsweet List docs when building, and wire Show more to the Collection List pagination (`fs-list-load="more"`) |
+| accordion | `data-accordion`, `data-accordion-item`, `data-accordion-trigger`, `data-state`; images: `data-accordion-image`, `data-accordion-scope`; autoplay: `data-accordion-autoplay`, `data-accordion-progress` | one open at a time with ARIA; optional photo per item and timed autoplay with a progress bar |
+| tabs | `data-tabs`, `data-tabs-frame`, `data-tab-list`, `data-tab`, `data-tab-panel`, `data-tab-bg`, `data-tab-progress` | Highlight Tabs: pinned from 768px, scroll moves through the tabs, the line fills; click or arrow keys glide to a tab |
+| hscroll | `data-hscroll`, `data-hscroll-frame`, `data-hscroll-track`, `data-hscroll-item`, `data-hscroll-viewport` | Explore: pinned sideways scroll from 992px, a swipe row below |
+| text-fill | `data-text-fill` | headings and statements fill letter by letter as they scroll up |
+| parallax | `data-parallax` (`="x"` sideways) | photos drift inside their frames |
+| scroll-fx | `data-media-grow` (start scale, default 0.86), `data-drift` (px) | a frame grows to full size as it arrives; an element drifts at its own speed |
+| hero-sequence | `data-hero-seq`, `data-hero-content`, `data-hero-facts`, `data-hero-shade` | Home hero: text lifts and blurs, the photo darkens as it scrolls away |
+| count-up | `data-count`, `data-prefix`, `data-suffix`, `data-decimals` | numbers count up once on arrival; the final text stays in the markup |
+| cursor-button | `data-cursor-area`, `data-cursor-button` | the Explore pill follows the pointer over a card (mouse only) |
+| band-inset | `data-band-inset`, `data-band-content` | the full-bleed photo draws in to an inset frame |
+| steps | `data-steps`, `data-step`, `data-steps-bar`, `data-steps-count` | step cards fill in turn beside a sticky heading with a progress line |
+| lightbox | `data-lightbox-group`, `data-lightbox`, `data-lightbox-item`, `data-lightbox-rich`, `data-full` | image viewer dialog with arrows and thumbnails; wraps rich-text images by itself |
+| video-modal | `data-video-open`, `data-video-src`, `data-video-title` | the video in a dialog; "Video coming soon" without a src |
+| benefits | `data-benefits`, `data-benefit-grid`, `data-benefit`, `data-benefit-progress` | the active Benefit box grows and hands over on a 4 s timer while on screen |
+| quote-slider | `data-quote-slider`, `data-quote-slide`, `data-quote-bg`, `data-quote-prev`, `data-quote-next`, `data-quote-count` | quote and background photo change together; arrows, keys, swipe |
 | custom-select | `data-select` › `[role=combobox]`, `.select-list`, native `select` | the sort dropdown over a hidden native select (Finsweet sort-trigger) |
-| reveals | `data-reveal` | one IntersectionObserver for entrance fades, staggered; first screen never hidden; the hiding is set by the module, so nothing hides without it |
-| faq-schema | CMS embed on Home | FAQPage JSON-LD from the FAQs shown |
+| list-filter | `fs-list-*` markup, `data-list-root`, `data-list-more`, `data-list-page` | prototype stand-in for Finsweet List (filters, search, sort, show more). In Webflow: Finsweet Attributes (`recipes/finsweet/`); check the attribute names against the Finsweet List docs and wire Show more to the Collection List pagination (`fs-list-load="more"`) |
+| reveal | `data-reveal` | entrance rise, staggered; the first screen is never hidden; the hiding is set by the module |
+| calendar-links | `data-calendar` + `data-start`, `data-end` (ISO with offset), `data-title`, `data-location`, `data-details`; `data-calendar-google`, `data-calendar-ics` | Google Calendar link and .ics download from the event fields (bound as custom attributes) |
+| share | `data-share="facebook|linkedin|x|native"` | share links from the page URL and title; native share sheet or copy link |
+| read-progress | `data-read-progress`, `data-read-end` | the reading line on the CMS templates |
+| follow-fan | `data-follow-area`, `data-follow-fan` | the Follow Band fan fans in and drifts against the pointer |
+| style-guide-nav | `data-sg-nav` | the style guide's sidebar (style guide page only) |
+| faq-schema (to build) | CMS embed on Home | FAQPage JSON-LD from the FAQs shown |
+
+## Video list
+
+| Video | Where | Status |
+| --- | --- | --- |
+| Meet our employees | Careers › Video Frame (Play Video) | file or YouTube URL needed; the dialog says "Video coming soon" |
+| Cooling explained | Closed-Loop Cooling hero (Watch Cooling Explained) | file or YouTube URL needed |
+| About TeraWulf | Project Overview › About TeraWulf media (a video in Figma; a still is used) | file needed; then the Media page (`/design/media`) holds it |
 
 ## Motion references
 
@@ -170,6 +199,7 @@ The interaction level is set by two reference sites (2026-10-27): marketcap.webf
 - 2026-10-27 · Event template: the Detail Bar's Google Calendar and ICS buttons work (the times carry the New York offset). The perks with numbers count up and the perk boxes rise in. "Why TeraWulf" ends the body rich text and the Perk Grid follows it; the closing line is a Callout field; the RSVP card reuses the Download Card. The reading line runs here too. The announcement bar now links to this event.
 - 2026-10-27 · 404 (not designed, my design for review): the full-height dark Page Hero over the rooftop cooler photo, with the shield, an "Error 404" eyebrow, "Page not found", a line, Back to Home and News & Events, and frosted quick links to Project Overview, Community Impact, Closed-Loop Cooling, Careers and Events. Same intro and parallax as the other heroes; no new modules.
 - 2026-10-27 · No page transitions (Barba): pages load normally. Modules stay per page with no teardown, and wf:transitions is not part of the checks.
+- 2026-10-28 · Accessibility pass before the handoff (axe WCAG 2.2 AA on every page at 1440 and 390): small text that failed contrast now passes — post topics and the Community Impact accordion text in Steel instead of Storm, the breadcrumb's current item without its extra dimming, stat labels at 64% and fact labels at 75% opacity, the mobile fact bar solid Steel. For designer review. Left as designed: the Cooling step cards' faded "not reached yet" state (motion, not resting text).
 - 2026-10-27 · Build from the Figma page "↪ • Template — Clean Pages" (2523:111), not the working Template page.
 
 ## Open decisions
@@ -201,3 +231,10 @@ The interaction level is set by two reference sites (2026-10-27): marketcap.webf
 - Home FAQ answers 2–4: placeholder lines until the FAQs collection is filled from the live FAQ page.
 - Intro loader: when it is built in Webflow, the `intro-seen` line from `prototype/partials/head.html` goes into the head code (loader.html piece 1) and is re-pasted; the Intro Loader sits in G | Page W.
 - Logos: the light-page versions (`logo-lmd-horizontal-dark.svg`, `logo-terawulf-dark.svg`) were derived from the white exports with the TW gradient; ask the designer for official files.
+
+## Build kickoff
+
+Paste into a new Claude session opened in the workspace folder (`TeraWulf (Sites)/`):
+
+> Continue Lake Mariner Data: build in Webflow. The prototype is approved (every page and the style guide, 2026-10-28). Read the workspace CLAUDE.md, docs/handoff/ and the webflow-build skill. Start with the foundation: propose the variable batch from proposed.css and wait for my go-ahead before each Webflow write. Then tag styles, classes (from the styles plan), CMS collections, the repo port and the loader, the style guide page, the media page (if the video list has entries), components, and pages, one page per session.
+
