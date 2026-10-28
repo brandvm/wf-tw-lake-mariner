@@ -198,3 +198,21 @@ collected from client repos into those files.
 - Fix: closed by hand for the Webflow import. The marker should move after `</form>` in the prototype.
 - Status: open
 - Found by: claude
+
+### 2026-10-28 · Ported `@media` one-liners lost their braces
+- Area: css
+- Scope: project
+- Symptom: on staging at 390px the mobile menu stayed `display: none` although the nav module set `data-state="open"`.
+- Cause: three repo-CSS rules copied from the styles plan as `@media (max-width: 991px) .g-nav-w[data-state="open"] .nav-menu { display: flex; }`, without braces around the rule; browsers drop the whole at-rule. Also hit: the article blockquote padding and the open accordion trigger padding below 768px.
+- Fix: wrapped the three rules (`@media (…) { rule }`) in src/styles.css; checked with a grep for `@media` lines whose selector isn't inside braces. styles.mjs should emit the braces when it flattens a media block.
+- Status: fixed (uncommitted)
+- Found by: claude
+
+### 2026-10-28 · Component variant styles do work through the API
+- Area: mcp
+- Scope: template-candidate
+- Symptom: MANUAL-TODO AC said a style on a component variant needs the Designer ("the style API has no variant scope").
+- Cause: the style tool has no variant scope, but the component variants tool does: `set_variant_styles` with `variant_id`, `style_name` and optional `pseudo` (hover), with variable bindings.
+- Fix: Button Size › Small styles and the new Button Color variants Light and Frost (hover included) were set that way and read back with `get_variant_styles`. Works when the variant's element has a single class (lessons/mcp.md "Variant overrides on a combo element never apply").
+- Status: worked around
+- Found by: claude

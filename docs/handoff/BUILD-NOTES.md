@@ -36,7 +36,8 @@ The static News and Events pages share the slugs `news` and `events` with their 
 Changes made during the build that differ from the approved design, and
 who approved them.
 
-- <Date> · <change> · <approved by>
+- 2026-10-28 · Button Light and Frost are variants of Button Color (the prototype drew them as combos Is Light and Is Frost on Button Color); the combos stay for card buttons that are not C | Button. Same look. · per HANDOFF components table (variant Solid, Light, Frost, Small)
+- 2026-10-28 · Nav and footer icons are DOM `<i>` elements with the Phosphor classes as a class attribute, not Icon component instances (global components, edited rarely). · Claude, for review
 
 ## Redirect map
 

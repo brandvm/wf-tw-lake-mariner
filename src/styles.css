@@ -517,7 +517,7 @@ button.social-button { padding: 0; cursor: pointer; }
 .rich-text.is-article blockquote { margin: 0; padding: 2.5em 3em; border-left: 0; border-radius: var(--_radius---8); background-color: var(--_colors---brand--frost); font-family: var(--_typography-role---family--h5); font-size: var(--_typography-role---size--h5); font-weight: var(--_typography-role---weight--h5); line-height: 1.4; letter-spacing: var(--_typography-role---letter-spacing--h5); }
 .rich-text.is-article figure { margin: 0; }
 .rich-text.is-article img { display: block; width: 100%; height: auto; aspect-ratio: 760 / 420; border-radius: var(--_radius---8); object-fit: cover; }
-@media (max-width: 767px) .rich-text.is-article blockquote { padding: 1.75em 1.5em; }
+@media (max-width: 767px) { .rich-text.is-article blockquote { padding: 1.75em 1.5em; } }
 
 /* repo-css: designer-cant — descendant or sibling selector */
 .event-card .button-color { margin-top: auto; }
@@ -527,7 +527,7 @@ button.social-button { padding: 0; cursor: pointer; }
 
 /* repo-css: designer-cant — attribute selector */
 .nav-dropdown[data-state="open"] .nav-link-icon { transform: rotate(45deg); }
-@media (max-width: 991px) .g-nav-w[data-state="open"] .nav-menu { display: flex; }
+@media (max-width: 991px) { .g-nav-w[data-state="open"] .nav-menu { display: flex; } }
 .g-nav-w[data-state="open"] .nav-toggle-open { display: none; }
 
 /* repo-css: designer-cant — structural pseudo-class */
@@ -536,7 +536,7 @@ button.social-button { padding: 0; cursor: pointer; }
 /* repo-css: designer-cant — attribute selector */
 .accordion-item[data-state="open"] .accordion-panel { grid-template-rows: 1fr; }
 .accordion-item[data-state="open"] .accordion-trigger { padding-bottom: 1.25em; }
-@media (max-width: 767px) .accordion-item[data-state="open"] .accordion-trigger { padding-bottom: 0.75em; }
+@media (max-width: 767px) { .accordion-item[data-state="open"] .accordion-trigger { padding-bottom: 0.75em; } }
 .accordion-item[data-state="open"] .accordion-icon-plus { display: none; }
 
 /* repo-css: designer-cant — structural pseudo-class */
