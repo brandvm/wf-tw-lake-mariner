@@ -144,3 +144,39 @@ collected from client repos into those files.
 - Fix: none needed, but uploading to the asset library first only serves as a public URL source: for CMS-only images, pass any public URL straight to the item. The 15 site assets uploaded for the sample items are duplicates (they can go at the unused-assets cleanup).
 - Status: worked around
 - Found by: claude
+
+### 2026-10-28 · A new font from the fonts API also publishes from the second host
+- Area: mcp
+- Scope: template-candidate
+- Symptom: `create_font` for Space Grotesk returned a `hostedUrl` on cdn.prod.website-files.com, but the published CSS loads it (and the starter's Geist) from webflow-files-prod.global.ssl.fastly.net.
+- Cause: the font API stores files there, for new fonts as for replaced ones (lessons/mcp.md "Replacing a font through the API moves it to another host"); the `hostedUrl` in the API result is not the URL that publishes.
+- Fix: a `preconnect` (crossorigin) to the fastly host in loader piece 1, written to the site head code and published. Check font URLs in the published CSS, not in the API result.
+- Status: worked around
+- Found by: claude
+
+### 2026-10-28 · Style variable ids need their `variable-` prefix
+- Area: mcp
+- Scope: template-candidate
+- Symptom: `create_style` with `variable_as_value` failed with "An internal error occurred" for every action in the batch.
+- Cause: the ids were taken without the `variable-` prefix that `query_variables` returns; the style tool needs the full id and gives no useful error.
+- Fix: pass ids exactly as `query_variables` returns them (`variable-<uuid>`).
+- Status: worked around
+- Found by: claude
+
+### 2026-10-28 · The WHTML importer drops a plain space between two inline elements
+- Area: mcp
+- Scope: template-candidate
+- Symptom: `<span>Text / Secondary.</span> <a>A link</a>` published as "Secondary.A link." on the style guide's Themes rows.
+- Cause: the importer treats a whitespace-only text node between two inline elements as formatting and removes it (the same family as the trimmed space before `<br>`).
+- Fix: `&nbsp;` between the elements before importing (re-imported the Themes section).
+- Status: worked around
+- Found by: claude
+
+### 2026-10-28 · The style guide page already holds the starter's page, out of sight
+- Area: mcp
+- Scope: template-candidate
+- Symptom: `get_all_elements` on /design/style-guide showed G | Page W with an empty G | Main slot, which looked like an empty page; `query_elements` found the starter's whole style guide (about 1,000 elements) in it.
+- Cause: the page tree read doesn't descend into slot content (lessons/mcp.md "Filled slots read back empty"); scoped queries (`scope_element_id`) inside the slot return nothing either.
+- Fix: replace the starter's sections one by one: import the new section `before` the old one (a plain element in the slot is a valid anchor), remove the old one, re-point its sidebar link (`set_link`, linkType element). Keep the starter's instance-based Buttons, Forms and Components rows. Compare the published page's class lists before removing anything (here only Sg Preview and Sg Preview Screen were unique to the old Other classes and got tiles).
+- Status: done for sections 1–6 and 10
+- Found by: claude
