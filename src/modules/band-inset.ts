@@ -1,0 +1,35 @@
+// Photo Band (ported from the marketcap build): the full-bleed photo draws
+// in to an inset frame as it scrolls up — Section/Padding H clear at the top
+// and sides, 4px corners, flush with the next section at the bottom. The
+// band's own side padding is Section/Padding H, read at each refresh.
+// Markup: [data-band-inset] on the band, optional [data-band-content] for a
+// tag that moves in by half the inset (none on Cooling). Off under reduced
+// motion: the band stays full width.
+import { gsap, reducedMotion } from './gsap';
+
+const RADIUS = 4;
+
+export function initBandInset() {
+  if (reducedMotion()) return;
+  document.querySelectorAll<HTMLElement>('[data-band-inset]').forEach((band) => {
+    // Section/Padding H, read from the section's own padding at each refresh.
+    const pad = () => parseFloat(getComputedStyle(band).paddingLeft) || 0;
+    const content = band.querySelector<HTMLElement>('[data-band-content]');
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: band,
+        start: 'top 60%',
+        end: 'top top',
+        scrub: true,
+        invalidateOnRefresh: true,
+      },
+    });
+    tl.fromTo(
+      band,
+      { clipPath: 'inset(0px 0px 0px 0px round 0px)' },
+      { clipPath: () => `inset(${pad()}px ${pad()}px 0px ${pad()}px round ${RADIUS}px)`, ease: 'none', immediateRender: false },
+      0,
+    );
+    if (content) tl.fromTo(content, { x: 0, y: 0 }, { x: () => pad() / 2, y: () => pad() / 2, ease: 'none', immediateRender: false }, 0);
+  });
+}

@@ -126,3 +126,12 @@ collected from client repos into those files.
 - Fix: borders written as per-side longhands (confirmed on .button-color and the C1 nav classes; A, C, D ticked). Nav Link: imported, temporary element removed, class renamed to "Nav Link" (selector unchanged), Current colour left as typed `var()` with MANUAL-TODO AE to bind it. styles.mjs should emit border longhands instead of a by-hand row.
 - Status: worked around; not upstreamed
 - Found by: claude
+
+### 2026-10-28 · Prototype modules fail the repo's type check on `hidden`
+- Area: js
+- Scope: template-candidate
+- Symptom: `pnpm check` failed on a module copied unchanged from the prototype: `open(list.hidden)` → "Argument of type 'string | boolean' is not assignable to parameter of type 'boolean'".
+- Cause: the repo pins TypeScript 7, whose DOM types give `HTMLElement.hidden` the type `boolean | "until-found"`; the prototype starter uses TypeScript 5, where it is `boolean`. So "modules move into the repo unchanged" breaks on any code that passes `hidden` on as a boolean.
+- Fix: `open(list.hidden !== false)` in custom-select.ts, in both copies. The prototype starter should pin the same TypeScript as the repo, so the prototype's own `pnpm check` catches it.
+- Status: worked around; not upstreamed
+- Found by: claude

@@ -96,3 +96,4 @@ From `pnpm wf:styles` (2026-10-28), in class creation order. Borders and outline
 | AJ | .read-progress-bar | Desktop | background-image: linear-gradient(270deg, Colors/Brand/Storm, Colors/Brand/Accent) | a gradient with variables | ☐ |
 | AK | .accordion-progress.is-gradient | Desktop | background-image: linear-gradient(270deg, Colors/Brand/Storm, Colors/Brand/Accent) | a gradient with variables | ☐ |
 | AL | .post-card-media.is-fallback | Desktop | background-image: linear-gradient(180deg, Colors/Brand/Storm 5%, Colors/Brand/Accent 97%) | a gradient with variables | ☐ |
+| AM | Site settings › Custom code › Head code | — | re-paste piece 1 of `loader.html` (it now also sets `html.intro-seen` from sessionStorage, so the intro loader shows on the first page of a visit only); keep `RELEASE` as installed, then publish to webflow.io | loader snippets are not versioned: a push updates the bundles only | ☐ |

@@ -293,6 +293,26 @@ html.is-loading {
   overflow: hidden;
 }
 
+/* repo-css: third-party — Lenis (recipes/smooth-scroll). The core of
+   lenis/dist/lenis.css; compare with that file in the installed version
+   and copy anything newer. .lenis-stopped is how lenis.stop() locks the
+   page (the modal recipe relies on it). */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+
+.lenis [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+/* repo-css: designer-cant — no loader on later pages of a visit (head code sets html.intro-seen) or with reduced motion. §07. */
+html.intro-seen [data-page-loader] { display: none; }
+
 /* ============================================================
    05. COMPONENTS & MOTION
    ============================================================ */
@@ -453,6 +473,283 @@ html.is-loading {
 /* The list indent and the first/last-child margin trims already live in
    §03 — that is where the rest of the Rich Text patching sits, and its
    versions also cover the wrapper div Webflow sometimes nests. */
+
+
+/* TeraWulf components. Ported from prototype/src/css/new-classes.css in its
+   source order (state rules, vendor prefixes and hover effects together):
+   several of them override each other on the same element, so splitting
+   them across sections would change which one wins. Each group keeps its
+   repo-css reason from pnpm wf:styles. */
+
+/* repo-css: designer-cant — vendor-prefixed -webkit-backdrop-filter: custom properties refuse prefixes */
+.fact-bar { -webkit-backdrop-filter: blur(35px); }
+
+/* repo-css: designer-cant — vendor-prefixed -webkit-background-clip: custom properties refuse prefixes */
+.stat-value { -webkit-background-clip: text; }
+
+/* repo-css: designer-cant — vendor-prefixed -webkit-backdrop-filter: custom properties refuse prefixes */
+.tag { -webkit-backdrop-filter: blur(35px); }
+.accordion-item.is-glass { -webkit-backdrop-filter: blur(35px); }
+
+/* repo-css: designer-cant — descendant or sibling selector */
+.rich-text ul { margin-top: 0; margin-bottom: 0; padding-left: 1.25em; }
+.rich-text a { text-decoration: underline; text-underline-offset: 0.15em; }
+.rich-text a:hover { color: var(--_colors-semantic---link--hover); }
+
+/* repo-css: designer-cant — vendor-prefixed -webkit-backdrop-filter: custom properties refuse prefixes */
+.hover-card-icon { -webkit-backdrop-filter: blur(35px); }
+.lightbox-button { -webkit-backdrop-filter: blur(35px); }
+.quote-card { -webkit-backdrop-filter: blur(35px); }
+.quote-button { -webkit-backdrop-filter: blur(35px); }
+
+/* repo-css: designer-cant — descendant or sibling selector */
+.filter-pill:hover .filter-pill-label { background-color: rgba(92, 117, 146, 0.24); }
+.post-card .button-color { margin-top: auto; }
+
+/* repo-css: designer-cant — selector the Designer has no control for */
+button.social-button { padding: 0; cursor: pointer; }
+
+/* repo-css: js-state — descendant or sibling selector */
+.rich-text.is-article p { margin-top: 0; margin-bottom: 0; }
+.rich-text.is-article ul { margin-top: 0; margin-bottom: 0; }
+.rich-text.is-article h2 { margin-top: 0; margin-bottom: 0; font-family: var(--_typography-role---family--h4); font-size: var(--_typography-role---size--h4); font-weight: var(--_typography-role---weight--h4); line-height: var(--_typography-role---line-height--h4); letter-spacing: var(--_typography-role---letter-spacing--h4); }
+.rich-text.is-article li strong { font-weight: 700; }
+.rich-text.is-article blockquote { margin: 0; padding: 2.5em 3em; border-left: 0; border-radius: var(--_radius---8); background-color: var(--_colors---brand--frost); font-family: var(--_typography-role---family--h5); font-size: var(--_typography-role---size--h5); font-weight: var(--_typography-role---weight--h5); line-height: 1.4; letter-spacing: var(--_typography-role---letter-spacing--h5); }
+.rich-text.is-article figure { margin: 0; }
+.rich-text.is-article img { display: block; width: 100%; height: auto; aspect-ratio: 760 / 420; border-radius: var(--_radius---8); object-fit: cover; }
+@media (max-width: 767px) .rich-text.is-article blockquote { padding: 1.75em 1.5em; }
+
+/* repo-css: designer-cant — descendant or sibling selector */
+.event-card .button-color { margin-top: auto; }
+
+/* repo-css: js-state — states the modules set (nav, accordion, announcement). */
+.nav-dropdown[data-state="open"] .nav-dropdown-list { opacity: 1; visibility: visible; transform: none; }
+
+/* repo-css: designer-cant — attribute selector */
+.nav-dropdown[data-state="open"] .nav-link-icon { transform: rotate(45deg); }
+@media (max-width: 991px) .g-nav-w[data-state="open"] .nav-menu { display: flex; }
+.g-nav-w[data-state="open"] .nav-toggle-open { display: none; }
+
+/* repo-css: designer-cant — structural pseudo-class */
+.g-nav-w:not([data-state="open"]) .nav-toggle-close { display: none; }
+
+/* repo-css: designer-cant — attribute selector */
+.accordion-item[data-state="open"] .accordion-panel { grid-template-rows: 1fr; }
+.accordion-item[data-state="open"] .accordion-trigger { padding-bottom: 1.25em; }
+@media (max-width: 767px) .accordion-item[data-state="open"] .accordion-trigger { padding-bottom: 0.75em; }
+.accordion-item[data-state="open"] .accordion-icon-plus { display: none; }
+
+/* repo-css: designer-cant — structural pseudo-class */
+.accordion-item:not([data-state="open"]) .accordion-icon-minus { display: none; }
+
+/* repo-css: designer-cant — scrollbar styling on the Explore rail. */
+.explore-rail { scrollbar-width: none; }
+
+/* repo-css: designer-cant — selector the Designer has no control for */
+.explore-rail::-webkit-scrollbar { display: none; }
+
+/* repo-css: designer-cant — a child reacting to its parent's hover (Explore card image zoom). */
+.explore-card:hover .explore-card-img { transform: scale(1.04); }
+
+/* repo-css: designer-cant — :has(). The nav's light-page theme: dark text and the "Is On Light" logos on any page without a section marked data-nav-theme="dark" (News, Events, templates, style guide). */
+.g-page-w:not(:has([data-nav-theme="dark"])) .nav-bar { color: var(--_colors---brand--ink); }
+.g-nav-w[data-nav-up] .nav-bar { color: var(--_colors---brand--ink); }
+
+/* repo-css: designer-cant — :has() */
+.g-page-w:not(:has([data-nav-theme="dark"])) .nav-logo-img { display: none; }
+.g-page-w:not(:has([data-nav-theme="dark"])) .nav-parent-logo { display: none; }
+
+/* repo-css: designer-cant — attribute selector */
+.g-nav-w[data-nav-up] .nav-logo-img { display: none; }
+.g-nav-w[data-nav-up] .nav-parent-logo { display: none; }
+
+/* repo-css: js-state — :has() */
+.g-page-w:not(:has([data-nav-theme="dark"])) .nav-logo-img.is-on-light { display: block; }
+.g-page-w:not(:has([data-nav-theme="dark"])) .nav-parent-logo.is-on-light { display: block; }
+
+/* repo-css: js-state — attribute selector */
+.g-nav-w[data-nav-up] .nav-logo-img.is-on-light { display: block; }
+.g-nav-w[data-nav-up] .nav-parent-logo.is-on-light { display: block; }
+
+/* repo-css: designer-cant — :has() */
+.g-page-w:not(:has([data-nav-theme="dark"])) .nav-parent { color: var(--_colors---brand--accent); }
+
+/* repo-css: designer-cant — attribute selector */
+.g-nav-w[data-nav-up] .nav-parent { color: var(--_colors---brand--accent); }
+
+/* repo-css: designer-cant — :has() */
+.g-page-w:not(:has([data-nav-theme="dark"])) .nav-brand-divider { background-color: var(--_colors---brand--storm); }
+
+/* repo-css: designer-cant — attribute selector */
+.g-nav-w[data-nav-up] .nav-brand-divider { background-color: var(--_colors---brand--storm); }
+
+/* repo-css: designer-cant — :has() */
+.g-page-w:not(:has([data-nav-theme="dark"])) .nav-toggle { border-color: var(--_colors---ink-tint--ink-12); background-color: var(--_colors---brand--frost); color: var(--_colors---brand--ink); }
+
+/* repo-css: designer-cant — attribute selector */
+.g-nav-w[data-nav-up] .nav-toggle { border-color: var(--_colors---ink-tint--ink-12); background-color: var(--_colors---brand--frost); color: var(--_colors---brand--ink); }
+
+/* repo-css: js-state — the nav brought back by scrolling up (nav-state module): fixed to the top, solid white, dark text (the light-page rules above list it too). */
+.g-nav-w[data-nav-up] { position: fixed; border-bottom: 1px solid var(--_colors---ink-tint--ink-12); background-color: var(--_colors---brand--paper); animation: nav-up 350ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+
+/* repo-css: designer-cant — attribute selector */
+.g-nav-w[data-nav-up] .announcement { display: none; }
+
+/* repo-css: designer-cant — @keyframes */
+@keyframes nav-up { from { transform: translateY(-100%); } to { transform: none; } }
+
+/* repo-css: designer-cant — attribute selector */
+.g-page-w .g-nav-w[data-state="open"] .nav-bar { color: var(--_colors---brand--paper); }
+.g-page-w .g-nav-w[data-state="open"] .nav-logo-img { display: block; }
+.g-page-w .g-nav-w[data-state="open"] .nav-parent-logo { display: block; }
+
+/* repo-css: js-state — attribute selector */
+.g-page-w .g-nav-w[data-state="open"] .nav-logo-img.is-on-light { display: none; }
+.g-page-w .g-nav-w[data-state="open"] .nav-parent-logo.is-on-light { display: none; }
+
+/* repo-css: designer-cant — attribute selector */
+.g-page-w .g-nav-w[data-state="open"] .nav-toggle { border-color: var(--_colors---paper-tint--paper-20); background-color: var(--_colors---steel-tint--steel-60); color: var(--_colors---brand--paper); }
+
+/* repo-css: js-state — the pinned sideways scroll (hscroll module), on from 992px up without reduced motion. Off, the rail is a native swipe row. */
+.section[data-hscroll-state="on"] { padding-top: 0; padding-bottom: 0; }
+
+/* repo-css: designer-cant — attribute selector */
+[data-hscroll-state="on"] .pin-frame { position: sticky; top: 0; display: flex; height: 100svh; flex-direction: column; justify-content: center; }
+[data-hscroll-state="on"] .explore-rail { padding-right: 0; overflow: visible; }
+[data-hscroll-state="on"] .explore-track { will-change: transform; }
+
+/* repo-css: js-state — parallax (parallax module): scaled up so the drift never shows an edge, the module sets `translate`. */
+[data-parallax-state="on"] { scale: 1.15; will-change: translate; }
+
+/* repo-css: js-state — text fill on scroll, letter by letter (text-fill module sets each letter's opacity), the two-tone span is the no-script and reduced-motion look, so it takes the text colour once the fill runs. */
+[data-text-fill-state="on"] .text-muted { color: inherit; opacity: 1; }
+
+/* repo-css: designer-cant — attribute selector */
+[data-fill-word] { white-space: nowrap; }
+
+/* repo-css: designer-cant — @keyframes */
+@keyframes intro-loader-fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes page-loader-failsafe { to { opacity: 0; visibility: hidden; pointer-events: none; } }
+
+/* repo-css: designer-cant — attribute selector */
+[data-page-loader] { animation: page-loader-failsafe 0.4s ease 4s forwards; }
+
+/* repo-css: js-state — Highlight Tabs (tabs module). Without the module every panel and photo shows in turn, pinned: the frame sticks for the section's scroll length and one panel and photo show, static (reduced motion): one panel and photo, switched by click. */
+.section[data-tabs-state="pinned"] { min-height: 0; padding: 0; justify-content: flex-start; }
+
+/* repo-css: js-state — attribute selector */
+[data-tabs-state="pinned"] .pin-frame.is-highlights { position: sticky; top: 0; display: flex; height: 100svh; min-height: 40em; padding: var(--_layout---section--padding-v) var(--_layout---section--padding-h); flex-direction: column; justify-content: flex-end; }
+
+/* repo-css: designer-cant — attribute selector */
+[data-tabs-state] .highlights-panels { display: grid; }
+[data-tabs-state] .highlights-panel { grid-area: 1 / 1; opacity: 0; visibility: hidden; transform: translateY(1em); transition: opacity 500ms ease, transform 500ms ease, visibility 500ms; }
+[data-tabs-state] .highlights-panel[data-active] { opacity: 1; visibility: visible; transform: none; }
+[data-tabs-state] .highlights-bg-img { opacity: 0; transition: opacity 800ms ease; }
+[data-tabs-state] .highlights-bg-img[data-active] { opacity: 1; }
+.highlights-tab[aria-selected="true"] { opacity: 1; }
+.highlights-tab[data-passed] { opacity: 1; }
+
+/* repo-css: designer-cant — @keyframes */
+@keyframes progress-fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* repo-css: js-state — Image Accordion (accordion module): the photo of the open item, and the bar that fills while the item waits to advance. */
+[data-accordion-images="on"] .split-media-img { opacity: 0; transition: opacity 700ms ease; }
+
+/* repo-css: designer-cant — attribute selector */
+[data-accordion-images="on"] .split-media-img[data-active] { opacity: 1; }
+[data-accordion-autoplay-state="on"] .accordion-item[data-state="open"] .accordion-progress { animation: progress-fill var(--accordion-duration, 7s) linear forwards; }
+[data-accordion-autoplay-state="paused"] .accordion-item[data-state="open"] .accordion-progress { animation: progress-fill var(--accordion-duration, 7s) linear forwards; animation-play-state: paused; }
+[data-accordion-autoplay-state="off"] .accordion-item[data-state="open"] .accordion-progress { transform: none; }
+
+/* repo-css: js-state — Steps (steps module): cards not reached yet sit faint, without the module (or with reduced motion) every card is full. */
+[data-steps-state="on"] [data-step]:not([data-reached]) > * { opacity: 0.3; filter: grayscale(1); }
+
+/* repo-css: designer-cant — media query "min-width: 768px" is not a Webflow breakpoint */
+@media screen and (min-width: 768px) { .hover-pair:has(.hover-card:hover, .hover-card:focus-visible) .hover-card { flex-grow: 1; } .hover-pair:has(.hover-card:hover, .hover-card:focus-visible) .hover-card-tint { opacity: 1; } .hover-pair:has(.hover-card:hover, .hover-card:focus-visible) .hover-card:is(:hover, :focus-visible) { flex-grow: 2.18; } .hover-pair:has(.hover-card:hover, .hover-card:focus-visible) .hover-card:is(:hover, :focus-visible) .hover-card-tint { opacity: 0; } .hover-card:hover .hover-card-icon, .hover-card:focus-visible .hover-card-icon { opacity: 1; } }
+
+/* repo-css: designer-cant — the Lightbox and Video Modal <dialog>s: closed state and ::backdrop, the lightbox hides its arrows and thumbnails for a single image with `hidden`, which display:flex would beat. */
+.lightbox:not([open]) { display: none; }
+.video-modal:not([open]) { display: none; }
+
+/* repo-css: designer-cant — selector the Designer has no control for */
+.lightbox::backdrop { background-color: rgb(17 33 53 / 0.94); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+.video-modal::backdrop { background-color: rgb(17 33 53 / 0.94); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+
+/* repo-css: designer-cant — attribute selector */
+.lightbox [hidden] { display: none; }
+
+/* repo-css: js-state — Benefit Grid (benefits module): the inactive boxes' photos sit back, the module writes the grid tracks inline. */
+[data-benefits-state="on"] [data-benefit]:not([data-active]) .benefit-media { opacity: 0.6; filter: grayscale(0.6); }
+
+/* repo-css: js-state — Quote Slider (quote-slider module): the slides share one grid cell (the card takes the tallest) and cross-fade, as do the photos behind. Without the module the quotes are listed and only the first photo shows. */
+[data-quote-state="on"] [data-quote-slide] { grid-area: 1 / 1; transition: opacity 0.6s ease, visibility 0.6s; }
+
+/* repo-css: designer-cant — structural pseudo-class */
+[data-quote-state="on"] [data-quote-slide]:not([data-active]) { opacity: 0; visibility: hidden; }
+
+/* repo-css: designer-cant — attribute selector */
+[data-quote-bg] { transition: opacity 0.9s ease; }
+
+/* repo-css: designer-cant — structural pseudo-class */
+[data-quote-bg]:not(:first-child) { opacity: 0; }
+
+/* repo-css: designer-cant — attribute selector */
+[data-quote-state="on"] [data-quote-bg] { opacity: 0; }
+[data-quote-state="on"] [data-quote-bg][data-active] { opacity: 1; }
+
+/* repo-css: designer-cant — a dot between topics (a sibling combinator), the card image zooming on the card's hover, and line clamps. */
+.post-topic + .post-topic::before { content: ""; display: inline-block; width: 4px; height: 4px; margin: 0 0.6em 0.2em; border-radius: 50%; background-color: currentColor; opacity: 0.4; vertical-align: middle; }
+
+/* repo-css: designer-cant — descendant or sibling selector */
+.post-card:hover .post-card-img { transform: scale(1.05); }
+.event-card:hover .post-card-img { transform: scale(1.05); }
+.post-card:hover .post-card-mark { transform: scale(1.06) rotate(-3deg); }
+
+/* repo-css: designer-cant — vendor-prefixed -webkit-box-orient: custom properties refuse prefixes */
+.post-card-title { -webkit-box-orient: vertical; }
+
+/* repo-css: designer-cant — vendor-prefixed -webkit-line-clamp: custom properties refuse prefixes */
+.post-card-title { -webkit-line-clamp: 4; }
+
+/* repo-css: designer-cant — :has() */
+.post-card-title:has(+ .post-card-excerpt) { -webkit-line-clamp: 2; }
+
+/* repo-css: designer-cant — vendor-prefixed -webkit-box-orient: custom properties refuse prefixes */
+.post-card-excerpt { -webkit-box-orient: vertical; }
+
+/* repo-css: designer-cant — vendor-prefixed -webkit-line-clamp: custom properties refuse prefixes */
+.post-card-excerpt { -webkit-line-clamp: 2; }
+
+/* repo-css: designer-cant — descendant or sibling selector */
+.filter-pill-input:checked + .filter-pill-label { background-color: var(--_colors---brand--accent); background-image: linear-gradient(270deg, var(--_colors---brand--storm), var(--_colors---brand--accent)); color: var(--_colors---brand--paper); }
+.filter-pill-input:focus-visible + .filter-pill-label { outline: 2px solid var(--_colors---brand--accent); outline-offset: 2px; }
+
+/* repo-css: js-state — descendant or sibling selector */
+.select.is-open .select-icon { transform: rotate(180deg); }
+.select.is-up .select-list { top: auto; bottom: calc(100% + 0.25em); }
+
+/* repo-css: designer-cant — attribute selector */
+.select-list[popover] { position: fixed; inset: auto; margin: 0; min-width: 0; }
+
+/* repo-css: designer-cant — structural pseudo-class */
+.select-list[popover]:not(:popover-open) { display: none; }
+
+/* repo-css: designer-cant — attribute selector */
+.select-option[aria-selected="true"] { color: var(--_colors---brand--accent); font-weight: 500; }
+
+/* repo-css: js-state — filtered lists (list-filter module, a stand-in for Finsweet List): Clear All shows while a filter or search is on, items past the page size and filtered-out items are hidden. */
+.clear-all { visibility: hidden; }
+
+/* repo-css: designer-cant — attribute selector */
+[data-list-state="filtered"] .clear-all { visibility: visible; }
+[data-list-hidden] { display: none; }
+
+/* repo-css: designer-cant — Article: the source link's arrow nudges on the link's hover, the lightbox trigger the lightbox module wraps around each rich-text image. */
+.source-link:hover .source-arrow { transform: translateX(0.25em); }
+
+/* repo-css: designer-cant — descendant or sibling selector */
+.lightbox-trigger img { transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+.lightbox-trigger:hover img { transform: scale(1.03); }
 
 /* ============================================================
    06. UTILITIES
@@ -651,6 +948,17 @@ html.is-loading {
   }
 }
 
+/* TeraWulf: motion off under reduced motion (from the prototype). */
+/* repo-css: designer-cant — media query "prefers-reduced-motion: reduce" is not a Webflow breakpoint */
+@media (prefers-reduced-motion: reduce) { .explore-card-img { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .g-nav-w[data-nav-up] { animation: none; } }
+@media (prefers-reduced-motion: reduce) { [data-page-loader] { display: none !important; animation: none; } }
+@media (prefers-reduced-motion: reduce) { [data-tabs-state] .highlights-panel, [data-tabs-state] .highlights-bg-img, [data-accordion-images="on"] .split-media-img { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .hover-card, .hover-card-tint, .step-text, .step-media { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .benefit-grid, .benefit-media, [data-quote-slide], [data-quote-bg] { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .post-card-img, .post-card-mark { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .lightbox-trigger img, .source-arrow { transition: none; } }
+
 /* ============================================================
    08. EDITOR & DEV SUPPORTS
    ============================================================ */
@@ -668,3 +976,7 @@ html.is-loading {
   opacity: 1 !important;
   transform: none !important;
 }
+
+/* TeraWulf: the intro loader stays out of the Designer canvas. */
+/* repo-css: canvas-preview — never in the Designer canvas. §08. */
+html.wf-design-mode [data-page-loader] { display: none; animation: none; }

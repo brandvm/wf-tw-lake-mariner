@@ -127,6 +127,13 @@ published.
     var root = document.documentElement;
     root.classList.add("is-loading");
     setTimeout(function () { root.classList.remove("is-loading"); }, 3000);
+
+    // Intro loader (intro module): shown on the first page of a visit only.
+    // html.intro-seen hides it before first paint on every later page, so
+    // it never flashes; the module sets the sessionStorage flag.
+    try {
+      if (sessionStorage.getItem("intro-seen") === "1") root.classList.add("intro-seen");
+    } catch (e) { /* No storage: the intro plays on every page. */ }
   })();
 </script>
 
