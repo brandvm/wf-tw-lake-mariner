@@ -99,3 +99,30 @@ collected from client repos into those files.
 - Status: fixed in this project's prototype; not upstreamed
 - Found by: claude
 
+
+### 2026-10-28 · A breakpoint mode without its own value follows Base
+- Area: mcp
+- Scope: template-candidate
+- Symptom: after Typography Role Size/Label and Size/Button were changed in Base only, staging published 14px at every breakpoint too, while the prototype snapshot still listed the starter's per-mode values (12 and 16); check:drift reported 6 differences.
+- Cause: a mode that was never given its own value resolves to the Base value, and `get_variables` with all modes returns that resolved value, so a snapshot written per mode looks like an override that isn't one.
+- Fix: write the snapshot from a fresh `get_variables` read (all modes) after each batch instead of patching only the changed modes; check:drift confirms it.
+- Status: worked around
+- Found by: claude
+
+### 2026-10-28 · wf:styles splits a shorthand with calc() on its spaces
+- Area: css
+- Scope: template-candidate
+- Symptom: the styles plan gave Nav Menu at Tablet `padding-right: +` and `padding-bottom: 3.5em)` for `padding: calc(var(--nav-height) + 3.5em) var(--nav-padding-h) 2em`.
+- Cause: styles.mjs splits shorthand values on whitespace without keeping parentheses together.
+- Fix: values set by hand for this one rule (top is MANUAL-TODO B; right/left Nav/Padding H, bottom 2em). styles.mjs should tokenise shorthands with bracket depth.
+- Status: worked around; not upstreamed
+- Found by: claude
+
+### 2026-10-28 · Borders with a variable work as longhands; the importer's Current state is unbound
+- Area: mcp
+- Scope: template-candidate
+- Symptom: wf:styles listed every `border: 1px solid ⟨variable⟩` as a manual step (MANUAL-TODO A, C, D, H, I and five more). Separately, Nav Link's Current state could only be written by importing a temporary element, and the class came back named `nav-link` with `color: var(--…)` typed in, not bound.
+- Cause: the API keeps only the first variable of a shorthand value, but `border-<side>-width/style/color` with `variable_as_value` on the colour is four plain bindings; Webflow then publishes them merged as `border: 1px solid var(…)`. The WHTML importer names a new class after its selector slug and doesn't map `var()` to a variable.
+- Fix: borders written as per-side longhands (confirmed on .button-color and the C1 nav classes; A, C, D ticked). Nav Link: imported, temporary element removed, class renamed to "Nav Link" (selector unchanged), Current colour left as typed `var()` with MANUAL-TODO AE to bind it. styles.mjs should emit border longhands instead of a by-hand row.
+- Status: worked around; not upstreamed
+- Found by: claude

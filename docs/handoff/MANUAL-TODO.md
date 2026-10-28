@@ -54,14 +54,14 @@ again at each gate, so the steps are found early and not at the end:
 7. **Site settings:** fonts uploaded, head and footer code pasted, the
    staging password.
 
-From `pnpm wf:styles` (2026-10-28), in class creation order. Values are written with Designer variable names; type `calc(` and insert the variables with the picker. Check each against `prototype/src/css/new-classes.css` when doing it.
+From `pnpm wf:styles` (2026-10-28), in class creation order. Borders (`1px solid ⟨variable⟩`) are set through the API as per-side longhands instead (confirmed on .button-color and the nav classes); the border rows are ticked when their class batch is written. Rows AF–AL are classes not created yet: do them after their batch. Values are written with Designer variable names; type `calc(` and insert the variables with the picker. Check each against `prototype/src/css/new-classes.css` when doing it.
 
 | ID | Where (page › element or class) | Breakpoint | Set | Why the API can't | Done |
 | --- | --- | --- | --- | --- | --- |
-| A | .nav-menu | Desktop | border: 1px solid Colors/Ink Tint/Ink 12 | a variable inside calc(), a gradient or a border shorthand: the API stores only the first variable | ☐ |
+| A | .nav-menu | Desktop | border: 1px solid Colors/Ink Tint/Ink 12 | a variable inside calc(), a gradient or a border shorthand: the API stores only the first variable | ☑ through the API as per-side longhands (border-*-width/style/color), 2026-10-28 |
 | B | .nav-menu | Tablet | padding-top: calc(Layout/Nav/Height + 3.5em) | a variable inside calc(), a gradient or a border shorthand: the API stores only the first variable | ☐ |
-| C | .nav-link | Tablet | border-bottom: 1px solid Colors/Paper Tint/Paper 12 | a variable inside calc(), a gradient or a border shorthand: the API stores only the first variable | ☐ |
-| D | .nav-dropdown-list | Desktop | border: 1px solid Colors/Ink Tint/Ink 12 | a variable inside calc(), a gradient or a border shorthand: the API stores only the first variable | ☐ |
+| C | .nav-link | Tablet | border-bottom: 1px solid Colors/Paper Tint/Paper 12 | a variable inside calc(), a gradient or a border shorthand: the API stores only the first variable | ☑ through the API as per-side longhands (border-*-width/style/color), 2026-10-28 |
+| D | .nav-dropdown-list | Desktop | border: 1px solid Colors/Ink Tint/Ink 12 | a variable inside calc(), a gradient or a border shorthand: the API stores only the first variable | ☑ through the API as per-side longhands (border-*-width/style/color), 2026-10-28 |
 | E | .media-below | Mobile landscape | margin-right: calc(Layout/Section/Padding H * -1) | a variable inside calc(), a gradient or a border shorthand: the API stores only the first variable | ☐ |
 | F | .media-below | Mobile landscape | margin-left: calc(Layout/Section/Padding H * -1) | a variable inside calc(), a gradient or a border shorthand: the API stores only the first variable | ☐ |
 | G | .media-below-fade | Desktop | background-image: linear-gradient(180deg, Colors Semantic/Background/Page 17%, rgba(235, 240, 245, 0) 46%) | a variable inside calc(), a gradient or a border shorthand: the API stores only the first variable | ☐ |
@@ -84,3 +84,15 @@ From `pnpm wf:styles` (2026-10-28), in class creation order. Values are written 
 | X | .section.is-split-media | Desktop | padding-bottom: calc(Layout/Section/Padding V + 1em) | a variable inside calc(), a gradient or a border shorthand: the API stores only the first variable | ☐ |
 | Y | .section.is-page-head | Desktop | padding-top: calc(Layout/Nav/Height + 3.3125em) | a variable inside calc(), a gradient or a border shorthand: the API stores only the first variable | ☐ |
 | Z | .section.is-article-head | Desktop | padding-top: calc(Layout/Nav/Height + 3.375em) | a variable inside calc(), a gradient or a border shorthand: the API stores only the first variable | ☐ |
+| AA | Site settings › Fonts | — | Google Fonts: Space Grotesk 500, Space Mono 400. Upload: Satoshi 400 and 500 (woff2 from Fontshare, free licence). The Typography Scale family variables already name them (2026-10-28) | Google Fonts can't be added through the API; Satoshi uploaded through the API would be served from a second host (`lessons/mcp.md`, font replacement) | ☐ |
+| AB | .button-color | Desktop | background-image: linear-gradient(270deg, Colors/Brand/Storm, Colors/Brand/Accent) (P8, the TW gradient; hover already removes it) | a gradient with variables: the API stores only the first variable | ☐ |
+| AC | C \| Button › variant Small › .button-size | Desktop | height 2.1875em; padding left/right Spacing/16; font-size Typography Scale/Size/13; line-height Typography Scale/Line Height/Solid; letter-spacing −0.008em (P8) | a style on a component variant: the style API has no variant scope | ☐ |
+| AD | .section.is-hero | Desktop | padding-bottom: calc(Layout/Section/Padding V + 4.625em) (P10; Mobile landscape already Section/Padding V) | a variable inside calc() | ☐ |
+| AE | .nav-link (Current state) | Desktop | color: pick Colors/Brand/Storm with the variable picker. It is set and publishes, but as a typed `var()` (the importer created the state), so the Designer shows no variable | the style API has no Current state; the WHTML importer writes it without binding the variable | ☐ |
+| AF | .stat-value | Desktop | background-image: linear-gradient(270deg, Colors/Brand/Storm, Colors/Brand/Accent) | a gradient with variables | ☐ |
+| AG | .social-button | Desktop | background-image: linear-gradient(270deg, Colors/Brand/Storm, Colors/Brand/Accent) | a gradient with variables | ☐ |
+| AH | .steps-progress-bar | Desktop | background-image: linear-gradient(270deg, Colors/Brand/Storm, Colors/Brand/Accent) | a gradient with variables | ☐ |
+| AI | .benefit-progress | Desktop | background-image: linear-gradient(270deg, Colors/Brand/Storm, Colors/Brand/Accent) | a gradient with variables | ☐ |
+| AJ | .read-progress-bar | Desktop | background-image: linear-gradient(270deg, Colors/Brand/Storm, Colors/Brand/Accent) | a gradient with variables | ☐ |
+| AK | .accordion-progress.is-gradient | Desktop | background-image: linear-gradient(270deg, Colors/Brand/Storm, Colors/Brand/Accent) | a gradient with variables | ☐ |
+| AL | .post-card-media.is-fallback | Desktop | background-image: linear-gradient(180deg, Colors/Brand/Storm 5%, Colors/Brand/Accent 97%) | a gradient with variables | ☐ |
