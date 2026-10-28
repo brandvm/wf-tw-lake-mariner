@@ -22,6 +22,11 @@ Collections created 2026-10-28. Sample items from the approved prototype added a
 | Documents | Description, File or External URL, Group (Resources & Documents / Community & Partnership), Show on Project Overview, Show on Community Impact, Order | One item can show on both pages. Lower Order first. |
 | FAQs | Answer, Show on Home, Order | Home shows 4 (Show on Home) and adds them to the FAQPage schema. |
 | Testimonials | Quote, Role, Photo, Order | Careers Quote Slider; the photo sits behind the quote. |
+| C \| Page Hero (component) | Image, Heading, Text, Show Text 2 + Text 2, Button Label, Button Link, Button Hook, Video URL | Button Link is typed: `#section` on the page or a URL. Button Hook stays `data-hero-button`; on Cooling set it to `data-video-open` and put the video's URL in Video URL (empty shows "Video coming soon"). |
+| C \| Fact Bar (component) | Label/Value 1–3, Show Labels 2 and 3 | The aerial bar on Home turns the labels of items 2–3 off. |
+| C \| Statement (component) | Eyebrow, Statement, Statement Muted, Show Text, Text, Show Button, Button Label, Button Link | Statement is the dark first part, Statement Muted the lighter rest. |
+| C \| Stat Row (component) | Label, Value, Count 1–3, Suffix | Value is the text shown; Count is the number in it and Suffix what follows while it counts (keep them in step). |
+| C \| Accordion Item (component) | Question, Answer, State | State `open` on the item that starts open, `closed` on the others. Sits in an Accordion block. |
 
 The static News and Events pages share the slugs `news` and `events` with their collections: Webflow accepted both (2026-10-28), so list pages are `/news`, `/events` and items `/news/<slug>`, `/events/<slug>`.
 
@@ -38,6 +43,10 @@ who approved them.
 
 - 2026-10-28 · Button Light and Frost are variants of Button Color (the prototype drew them as combos Is Light and Is Frost on Button Color); the combos stay for card buttons that are not C | Button. Same look. · per HANDOFF components table (variant Solid, Light, Frost, Small)
 - 2026-10-28 · Nav and footer icons are DOM `<i>` elements with the Phosphor classes as a class attribute, not Icon component instances (global components, edited rarely). · Claude, for review
+- 2026-10-28 · C | Page Hero covers the inner pages only; Home's hero stays page markup with a C | Fact Bar instance. Its overlay (50% vs 70%), width, heading size and the `hero-sequence` hook differ, and component variants can't style the combo-class elements that carry them (lessons/mcp.md). Same look. · Claude, for review
+- 2026-10-28 · The hero button is a DOM `<a>` with its href bound to a text prop (Button Link takes `#section` or a URL, not the link picker): an attribute *name* can only be bound on a DOM element, and the Cooling hero needs `data-video-open` switched on by a prop (Button Hook). · Claude, for review
+- 2026-10-28 · C | Statement is the Home pattern (eyebrow, two-tone D4, optional line and button). The D2/D3 statements on Cooling and Careers and the News/Events page heads are built with their pages. · Claude, for review
+- 2026-10-28 · The Home FAQ is a C | Accordion Item repeated by the FAQs Collection List; the Split head and Accordion wrapper are page markup (a component can't hold a CMS list). · per HANDOFF
 
 ## Redirect map
 
@@ -51,9 +60,13 @@ Every old URL → its closest new page, from the crawl saved in discovery.
 
 ### Fix before launch
 
-- Style guide Components rows 6–34 are inert previews (markup copies, script hooks stripped, buttons imported as links, the Small button variant shown at the default size). Swap each for its component instance in the components step; nothing is built from these copies. · Claude
-- Classes the components need that the styles plan left out (repo CSS only): Sr Only (visually hidden label/legend, News search and pills), Accordion Icon Plus and Accordion Icon Minus (the open/closed icon swap). Propose them with the components. · Claude
+- Style guide Components rows 6–34 are inert previews (markup copies, script hooks stripped, buttons imported as links, the Small button variant shown at the default size). Swap each for its component instance in the components step; nothing is built from these copies. · Claude — K2a (2026-10-28): Page Hero, Fact Bar, Stat Row and Accordion · Glass are now live instances; Statement and Explore Rail rows added
+- Classes the components need that the styles plan left out (repo CSS only): Sr Only (visually hidden label/legend, News search and pills), Accordion Icon Plus and Accordion Icon Minus (the open/closed icon swap). Propose them with the components. · Claude — done in K1 (2026-10-28)
 - Style guide Buttons section: add a "Button Size · Small" row once the Small variant's styles are in (MANUAL-TODO AC). · Claude
+- Explore Rail: the cursor pill is the raw Button Size markup at the default size; the prototype uses Button Size's Small variant. Swap each pill's Button Color/Size for instances set to Small (after MANUAL-TODO AO). · Claude
+- C | Stat Row values are transparent until MANUAL-TODO AF (the gradient the text is clipped to) is done. · Person
+- Home FAQ: with a Collection List every item takes the same State, so none starts open (the prototype opens the first). Either an "Open first" option in the accordion module or a CMS switch bound to State; decide with the Home page. · Claude
+- Style guide specimens of absolutely positioned or full-bleed parts (Fact Bar, Explore Rail) are clipped by their row at 820 and 390; on the pages they span the section. · Claude
 
 ### Fix after launch
 

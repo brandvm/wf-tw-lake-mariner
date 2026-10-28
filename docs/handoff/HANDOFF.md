@@ -16,7 +16,7 @@ current during the build. Agents read it after `AGENTS.md` and `GOTCHAS.md`.
 
 ## Status
 
-2026-10-28 — Prototype complete; handoff checklist run. The style guide and all 10 pages (Home, Project Overview, Community Impact, Closed-Loop Cooling, Careers, News, News Article template, Events, Event template, 404) are built in `../prototype` (`pnpm dev`, port 5868). Approved in chat page by page from Project Overview on; Home and the style guide were taken as approved when the handoff was asked for (2026-10-28). Checks at handoff: screens (2560–360), states, style guide, axe WCAG 2.2 AA at 1440 and 390, heading outline, `#section` arrivals and back/forward, `wf:preflight --strict` (0 to fix), `check:snapshot`, `check:drift` (only the known shorthand false positives). Loader installed on staging. 2026-10-28 build: variables P1–P10, all 326 classes, the repo port, 9 CMS collections with 43 sample items, and the style guide base (all sections; Components rows 6–34 as inert previews until their components exist) are in Webflow; the style guide base was approved by the Brand Vision lead on 2026-10-28. Next: components.
+2026-10-28 — Prototype complete; handoff checklist run. The style guide and all 10 pages (Home, Project Overview, Community Impact, Closed-Loop Cooling, Careers, News, News Article template, Events, Event template, 404) are built in `../prototype` (`pnpm dev`, port 5868). Approved in chat page by page from Project Overview on; Home and the style guide were taken as approved when the handoff was asked for (2026-10-28). Checks at handoff: screens (2560–360), states, style guide, axe WCAG 2.2 AA at 1440 and 390, heading outline, `#section` arrivals and back/forward, `wf:preflight --strict` (0 to fix), `check:snapshot`, `check:drift` (only the known shorthand false positives). Loader installed on staging. 2026-10-28 build: variables P1–P10, all 326 classes, the repo port, 9 CMS collections with 43 sample items, and the style guide base (all sections; Components rows 6–34 as inert previews until their components exist) are in Webflow; the style guide base was approved by the Brand Vision lead on 2026-10-28. Components: K1 (nav, footer, intro loader, button variants) and K2a (Page Hero, Fact Bar, Statement, Stat Row, Explore Rail, Accordion Item) built and published 2026-10-28. Next: K2b.
 
 ## Ground rules for this project
 
@@ -76,13 +76,13 @@ From the prototype's partials and repeated blocks (each has its style-guide row;
 | G \| Nav W | every page | — (theme follows the page: `data-nav-theme="dark"` on a dark hero) | `nav`, `nav-state`, `announcement` |
 | Intro Loader (in G \| Page W) | every page (first page of a visit) | — | `intro` |
 | G \| Footer W | every page | — | `year` |
-| C \| Page Hero | Home, Project Overview, Community Impact, Cooling, Careers, 404 | image, heading, text (1–2 paragraphs), button label + link, fact bar on/off | `intro`, `parallax`; Home: `hero-sequence` |
+| C \| Page Hero | Project Overview, Community Impact, Cooling, Careers (built 2026-10-28) | Image, Heading, Text, Show Text 2 + Text 2, Button Label, Button Link (text: `#section` or URL), Button Hook (`data-video-open` on Cooling), Video URL. Home's hero is page markup (its overlay, width, heading size and `hero-sequence` hook differ) with a C \| Fact Bar; 404 by hand | `intro`, `parallax` |
 | C \| Button | everywhere | variant (Solid, Light, Frost, Small), label, link, icon | — |
-| Fact Bar | Home (hero, aerial) | items as text props | — |
-| Statement | Home, Cooling, Careers, News, Events | eyebrow, text (two-tone), button | `text-fill` |
-| Stat Row | Home | 3 label/value pairs | `count-up` |
-| C \| Explore Rail | Home, Project Overview | — (fixed 4 cards) | `hscroll`, `parallax`, `cursor-button`, `text-fill` |
-| Split + C \| Accordion (Is Glass) | Home FAQ, Cooling operations | heading, text, button; FAQs collection on Home | `accordion` |
+| C \| Fact Bar | Home (hero, aerial) (built 2026-10-28) | Label/Value 1–3, Show Labels 2 and 3 (off for the aerial bar) | `intro` (always on its root) |
+| C \| Statement | Home intro (built 2026-10-28); the larger Cooling and Careers statements and the News/Events page heads are set with their pages | Eyebrow, Statement + Statement Muted (two-tone), Show Text + Text, Show Button + Button Label + Button Link | `text-fill` |
+| C \| Stat Row | Home (built 2026-10-28) | Label, Value and Count 1–3, Suffix (shared, starts with a non-breaking space) | `count-up` |
+| C \| Explore Rail | Home, Project Overview (built 2026-10-28) | — (fixed 4 cards) | `hscroll`, `parallax`, `cursor-button`, `text-fill` |
+| Split + C \| Accordion Item (Is Glass) | Home FAQ, Cooling operations (item built 2026-10-28) | Item: Question, Answer (rich text), State (`open`/`closed`). The Split head and the Accordion wrapper are page markup; on Home the FAQs Collection List repeats the item | `accordion` |
 | C \| Doc Accordion (Accordion Is Line) | Project Overview, Community Impact (Resources, Initiatives) | — (Documents collection) | `accordion` |
 | C \| Image Accordion (dark / Is Filled light) | Project Overview (Responsible Development), Community Impact (Benefits) | heading | `accordion` (images, autoplay) |
 | Intro Row + Media Frame | Project Overview (About TeraWulf) | logo, heading, text, media | `scroll-fx` (media-grow), `parallax` |

@@ -90,6 +90,15 @@ collected from client repos into those files.
 - Status: worked around; not upstreamed
 - Found by: claude
 
+### 2026-10-28 · Component prop bindings: what binds where
+- Area: mcp
+- Scope: template-candidate
+- Symptom: building C | Page Hero, C | Statement and C | Fact Bar: (1) binding an attribute *name* to a prop failed on a Link ("name bindings are not supported on this element yet") and on a Block root; (2) `text` was "not applicable" on the text Spans the importer makes from `<span>`; (3) `image` was not a setting key on an Image; (4) an image prop has no default, so the instance showed no photo; (5) the Fact Bar specimen (position absolute) rendered at the bottom of the style guide page.
+- Cause: name bindings exist only on DOM elements; importer Spans have no text setting; the Image's key is `assetId`; image props take no default group; Sg Demo is not a positioned box.
+- Fix: (1) the hero button rebuilt as a DOM `a` (style Button), href bound to a text prop, the hook name bound to a text prop (Button Hook, `data-video-open` on Cooling); a Block keeps static attribute names, values bind fine (data-count, data-state). (2) a DOM `span` has a bindable `text`: two DOM spans (the second styled Text Muted) for the two-tone statement. (3) `set_settings` key `assetId` with a prop binding. (4) set the instance's image prop with `type: "string"` and the asset id. (5) the specimen sits in a Media Frame (position relative) over a photo.
+- Status: worked around
+- Found by: claude
+
 ### 2026-10-27 · pnpm classes crashes on .w--current
 - Area: css
 - Scope: template-candidate
@@ -205,7 +214,7 @@ collected from client repos into those files.
 - Symptom: on staging at 390px the mobile menu stayed `display: none` although the nav module set `data-state="open"`.
 - Cause: three repo-CSS rules copied from the styles plan as `@media (max-width: 991px) .g-nav-w[data-state="open"] .nav-menu { display: flex; }`, without braces around the rule; browsers drop the whole at-rule. Also hit: the article blockquote padding and the open accordion trigger padding below 768px.
 - Fix: wrapped the three rules (`@media (…) { rule }`) in src/styles.css; checked with a grep for `@media` lines whose selector isn't inside braces. styles.mjs should emit the braces when it flattens a media block.
-- Status: fixed (uncommitted)
+- Status: fixed dfb90cc
 - Found by: claude
 
 ### 2026-10-28 · Component variant styles do work through the API
