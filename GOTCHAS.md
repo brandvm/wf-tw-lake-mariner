@@ -180,3 +180,21 @@ collected from client repos into those files.
 - Fix: replace the starter's sections one by one: import the new section `before` the old one (a plain element in the slot is a valid anchor), remove the old one, re-point its sidebar link (`set_link`, linkType element). Keep the starter's instance-based Buttons, Forms and Components rows. Compare the published page's class lists before removing anything (here only Sg Preview and Sg Preview Screen were unique to the old Other classes and got tiles).
 - Status: done for sections 1–6 and 10
 - Found by: claude
+
+### 2026-10-28 · WHTML importer: images, icon classes and variant classes
+- Area: mcp
+- Scope: template-candidate
+- Symptom: style guide component previews (29 rows, 43 images, 36 icons). (1) Every `<img>` came in without its asset ("not found in the asset library") whether `src` was the prototype path, the asset's hosted URL or its file name; alt text was kept. (2) `<i class="icon-glyph ph ph-arrow-left">` made the importer create empty combo classes `ph` and `ph-arrow-left` on Icon Glyph. (3) A `w-variant-…` token (a component variant, copied from published HTML) would be created the same way; so would repo-CSS-only classes (`sr-only`, `accordion-icon-plus`).
+- Cause: the importer matches images against the asset library by something other than URL or name, and turns every unknown class token into a new class.
+- Fix: (1) `set_image_asset` on each image after the import; they come back from `query_elements` (type Image) in document order. `width`/`height` can't be set on an Image (internal error); Webflow takes them from the asset. (2) Import icons as `class="icon-glyph"` only, then `set_attributes` `class="icon-glyph ph ph-<name>"` on the DOM `<i>`: it publishes merged as `icon-glyph icon-glyph ph ph-<name>` and the glyph draws. The stray combos were removed (`remove_style`, deepest first). (3) Strip `w-variant-*` and repo-only tokens before importing; check every token against the site's classes first. A global class placed second (`accordion-body rich-text`) becomes an empty combo; that is how Webflow stacks classes and is harmless.
+- Status: worked around
+- Found by: claude
+
+### 2026-10-28 · Prototype List Toolbar specimen is cut off inside its form
+- Area: css
+- Scope: project
+- Symptom: the regenerated style guide's List Toolbar row had an unclosed `<form>` and no Clear All button.
+- Cause: the `sg:end` marker on prototype/news/index.html sits before the end of the toolbar form, so the specimen stops mid-form; the browser closes it silently.
+- Fix: closed by hand for the Webflow import. The marker should move after `</form>` in the prototype.
+- Status: open
+- Found by: claude
