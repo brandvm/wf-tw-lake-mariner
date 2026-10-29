@@ -253,11 +253,21 @@ collected from client repos into those files.
 - Status: worked around
 - Found by: claude
 
-### 2026-10-29 · A Switch filter on a Collection List breaks the list
+### 2026-10-29 · A page made with `duplicateOf` brings the source page's slot content, out of sight
 - Area: mcp
 - Scope: template-candidate
-- Symptom: the Home FAQ list's filter "Show on Home is On" failed with "[Conflict] The operation could not be applied to the component map", through the API (`filters` with `isOn`) and in the Designer alike. After the failed write the same list refused its sort too, which looked like "this list refuses every query write".
-- Cause: unknown Webflow-side; isolated with test lists on Home: source + sort by name or by the Number field Order work on FAQs and Testimonials; the `isOn` filter on the Switch field is the write that fails (`equals` is rejected as invalid for a Switch).
-- Fix: rebuild the list and write source, sort, limit first; leave the Switch filter out (Home shows the first 4 FAQs by Order; MANUAL-TODO AP keeps the filter for when Webflow accepts it). Try the filter last on any list, so a failure can't block the rest; never send query writes to one list in parallel.
+- Symptom: Community Impact, created as a duplicate of the Media page for its shell, published with a second H1 ("Media") and the Media page's instructions inside `main`, although `get_all_elements` showed G | Main empty.
+- Cause: the duplicate copies the slot content too; the page tree read doesn't descend into slots (`lessons/mcp.md`, Filled slots read back empty).
+- Fix: find it with `query_elements` (style filter) and remove it. Useful on purpose: that copied plain element is the anchor `lessons/mcp.md` asks for, so the page was built in a body-level wrapper, the wrapper moved `before` it into the slot, the sections moved out `before` the wrapper, and wrapper and copy removed. No person had to drag anything.
 - Status: worked around
 - Found by: claude
+
+### 2026-10-29 · Image attributes and Collection List queries refused while the Designer is on another page
+- Area: mcp
+- Scope: template-candidate
+- Symptom: on Community Impact, `set_attributes` (`data-accordion-image`, `data-parallax`, `loading`) on 7 imported Images, sent after `set_image_asset` in one batch, reported success and stored nothing; retried alone, they failed with "[Conflict] The operation could not be applied to the component map". The same write on a div on that page worked. Every `filters` and `sort` write on its two Documents lists failed the same way (Home row AP hit the same). The Designer had Home open the whole time (another session was working there).
+- Cause: unconfirmed; writes that touch images or CMS queries seem to need the page open in the Designer. The API does check the value shapes before refusing: a Switch filter is `{"fieldSlug": "<slug>", "operator": "isOn"}` (or `isOff`), an Option filter `{"fieldSlug", "operator": "equals", "value": "<option id>"}`, a sort `{"fieldSlug", "direction": "ascending"}`.
+- Fix: MANUAL-TODO BK (filters, sort) and BL (image attributes), to retry through the API with the page open in the Designer first. Read image attributes back after every write; "success" is not proof.
+- Status: open
+- Found by: claude
+
