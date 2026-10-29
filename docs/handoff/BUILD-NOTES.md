@@ -100,6 +100,7 @@ Every old URL → its closest new page, from the crawl saved in discovery.
 - C | Stat Row values are transparent until MANUAL-TODO AF (the gradient the text is clipped to) is done. · Person — done 2026-10-29 (AF through the API, literal colours)
 - Home FAQ: with a Collection List every item takes the same State, so none starts open (the prototype opens the first). Either an "Open first" option in the accordion module or a CMS switch bound to State; decide with the Home page. · Claude — done 2026-10-29: the FAQ Accordion has `data-accordion-open-first` (and `data-faq-schema`, FAQPage JSON-LD from the items shown)
 - Style guide specimens of absolutely positioned or full-bleed parts (Fact Bar, Explore Rail) are clipped by their row at 820 and 390; on the pages they span the section. · Claude
+- The Intro Loader classes (Intro Loader, Inner, Mark, Bar, Bar Fill) and the `intro-seen` tile on the style guide are unused since the loader was removed (2026-10-29): remove their style-guide tiles, then clean up unused styles. · Claude
 
 ### Fix after launch
 

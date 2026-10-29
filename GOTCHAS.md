@@ -360,3 +360,12 @@ collected from client repos into those files.
 - Fix: check `get_asset` variants before asking a person to re-pick an image; wait and republish first. A plain Image whose asset got its variants later still needs a re-pick in the Designer (or set it after the variants exist). `get_asset` keeps reporting size 0 even with variants.
 - Status: worked around
 - Found by: claude
+
+### 2026-10-29 · A hero entrance from opacity 0 holds the LCP, even in pure CSS
+- Area: perf
+- Scope: template-candidate
+- Symptom: after the intro loader was replaced by a CSS entrance (`@keyframes` from `opacity: 0`, starting at first paint), mobile LCP went to 4.5 s although FCP was 2.8 s; the LCP element was the hero H1.
+- Cause: an element painted at opacity 0 isn't an LCP candidate, and the opacity animation runs on the compositor, so the H1 was only counted after the animation, not at its first frame.
+- Fix: start from a partial opacity (0.6) with a small rise (12px): the H1 counts from first paint (mobile median 93, LCP 3.1 s). Never animate the LCP element from opacity 0, in JS or CSS.
+- Status: fixed a9e60d6
+- Found by: claude

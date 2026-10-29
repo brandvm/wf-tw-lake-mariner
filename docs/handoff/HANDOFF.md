@@ -113,7 +113,7 @@ In `prototype/src/modules/`, one file each, run from `prototype/src/main.ts`; al
 | --- | --- | --- |
 | gsap, smooth-scroll | `data-lenis-prevent` | GSAP + ScrollTrigger, Lenis smooth scrolling (recipes); off under reduced motion |
 | anchor-scroll | — (any `#` link) | glides to the target below anything pinned; corrects an arriving hash (fixed for pinned sections, GOTCHAS 2026-10-28) |
-| intro | `data-page-loader`, `data-page-loader-mark`, `data-intro`, `data-intro-media` | intro loader on the first page of a visit, then the hero parts rise in (they move but never fade, so the hero H1 stays the LCP: mobile PageSpeed 80 → 93 on Home, 2026-10-29); 4 s CSS backstop; `html.intro-seen` from the head-code line |
+| intro (removed 2026-10-29) | `data-intro`, `data-intro-media` (Home hero only, inside `data-hero-seq`) | no loader any more: the Home hero settles in with a short CSS entrance (styles.css `hero-rise`, `hero-zoom`: 12px rise from 60% opacity, photo from 1.04), from first paint; elsewhere `data-intro` does nothing |
 | nav | `data-nav`, `data-nav-dropdown`, `data-nav-dropdown-toggle`, `data-nav-toggle`, `data-state` | dropdowns, mobile sheet (Lenis paused while open) |
 | nav-state | `data-nav`, sets `data-nav-up` | the bar returns as a white bar when scrolling up |
 | announcement | `data-announcement`, `data-announcement-close` | close and remember (localStorage, keyed by the message) |
@@ -201,6 +201,7 @@ The interaction level is set by two reference sites (2026-10-27): marketcap.webf
 - 2026-10-27 · No page transitions (Barba): pages load normally. Modules stay per page with no teardown, and wf:transitions is not part of the checks.
 - 2026-10-28 · Accessibility pass before the handoff (axe WCAG 2.2 AA on every page at 1440 and 390): small text that failed contrast now passes — post topics and the Community Impact accordion text in Steel instead of Storm, the breadcrumb's current item without its extra dimming, stat labels at 64% and fact labels at 75% opacity, the mobile fact bar solid Steel. For designer review. Left as designed: the Cooling step cards' faded "not reached yet" state (motion, not resting text).
 - 2026-10-27 · Build from the Figma page "↪ • Template — Clean Pages" (2523:111), not the working Template page.
+- 2026-10-29 · No intro loader (user: "remove the preloader, just the homepage intro is fine"). The navy shield screen is gone from G | Page W on every page; only the Home hero keeps an entrance, made subtle at the user's request (12px rise from 60% opacity, short stagger), pure CSS so it starts at first paint. Mobile PageSpeed on Home: 93 median on this machine (range 74–96, noisy), desktop 98.
 
 ## Open decisions
 
