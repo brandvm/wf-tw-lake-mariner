@@ -113,7 +113,7 @@ In `prototype/src/modules/`, one file each, run from `prototype/src/main.ts`; al
 | --- | --- | --- |
 | gsap, smooth-scroll | `data-lenis-prevent` | GSAP + ScrollTrigger, Lenis smooth scrolling (recipes); off under reduced motion |
 | anchor-scroll | — (any `#` link) | glides to the target below anything pinned; corrects an arriving hash (fixed for pinned sections, GOTCHAS 2026-10-28) |
-| intro | `data-page-loader`, `data-page-loader-mark`, `data-intro`, `data-intro-media` | intro loader on the first page of a visit, then the hero parts rise in; 4 s CSS backstop; `html.intro-seen` from the head-code line |
+| intro | `data-page-loader`, `data-page-loader-mark`, `data-intro`, `data-intro-media` | intro loader on the first page of a visit, then the hero parts rise in (they move but never fade, so the hero H1 stays the LCP: mobile PageSpeed 80 → 93 on Home, 2026-10-29); 4 s CSS backstop; `html.intro-seen` from the head-code line |
 | nav | `data-nav`, `data-nav-dropdown`, `data-nav-dropdown-toggle`, `data-nav-toggle`, `data-state` | dropdowns, mobile sheet (Lenis paused while open) |
 | nav-state | `data-nav`, sets `data-nav-up` | the bar returns as a white bar when scrolling up |
 | announcement | `data-announcement`, `data-announcement-close` | close and remember (localStorage, keyed by the message) |

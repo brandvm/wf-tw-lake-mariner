@@ -288,3 +288,12 @@ collected from client repos into those files.
 - Fix: `.accordion-panel` got `grid-template-columns: 1fr` with the user's OK (2026-10-29); published CSS reads it back and the live answer is unchanged (656 of 658px). Any class ported from the prototype as a grid without columns does the same: set its columns.
 - Status: fixed (Webflow, 2026-10-29)
 - Found by: claude
+
+### 2026-10-29 · An intro loader that fades the hero in costs the LCP
+- Area: perf
+- Scope: template-candidate
+- Symptom: Home scored 80 on mobile PageSpeed (desktop 96): LCP 4.0 s, of which 3 s "render delay"; the LCP element was the hero H1.
+- Cause: Lighthouse always loads as a first visit, so it always sees the intro loader, and the intro set the hero parts to `opacity: 0` under it. An element at opacity 0 isn't an LCP candidate, so LCP waited for the curtain to lift; a covered but painted element does count.
+- Fix: the hero parts only move (`y`), never fade, under the loader (src/modules/intro.ts, d1097d7). Mobile 93 (LCP 2.7 s), desktop 95; the reveal looks the same because the curtain covers the start. What is left of LCP is the render-blocking bundle stylesheet and the web-font swap.
+- Status: fixed d1097d7
+- Found by: claude
