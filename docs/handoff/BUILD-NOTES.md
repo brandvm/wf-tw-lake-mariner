@@ -45,6 +45,8 @@ Collections created 2026-10-28. Sample items from the approved prototype added a
 | C \| Source Card (component) | Label, Link Text, Link | News: Source Name and Source URL. |
 | C \| Accordion Item (component) | Question, Answer, State | State `open` on the item that starts open, `closed` on the others. Sits in an Accordion block. |
 
+Community Impact (`/community-impact`, page 6ae36b2aaf117d0db6644e71, built 2026-10-29): C | Page Hero (hero photo `ci-hero-ci.jpg`), How Barker benefits (page markup: Split Media with 7 photos, Image Accordion title, Accordion with autoplay 7000 and scope `#benefits`, 7 C | Image Accordion Item Light; the first one's State is `open`; edit each item's Title and Answer on the instance), Resources & Documents and Community & Partnership Initiatives (Documents Collection Lists of C | Doc Accordion Item, Name/Description/Link bound to Name, Description, External URL; `data-accordion-open-first` opens the first row). A document that has only a File needs its Link bound to File instead. Until MANUAL-TODO BK both lists show every document.
+
 The static News and Events pages share the slugs `news` and `events` with their collections: Webflow accepted both (2026-10-28), so list pages are `/news`, `/events` and items `/news/<slug>`, `/events/<slug>`.
 
 ## Integrations
