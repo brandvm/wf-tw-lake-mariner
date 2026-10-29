@@ -16,7 +16,7 @@ current during the build. Agents read it after `AGENTS.md` and `GOTCHAS.md`.
 
 ## Status
 
-2026-10-28 — Prototype complete; handoff checklist run. The style guide and all 10 pages (Home, Project Overview, Community Impact, Closed-Loop Cooling, Careers, News, News Article template, Events, Event template, 404) are built in `../prototype` (`pnpm dev`, port 5868). Approved in chat page by page from Project Overview on; Home and the style guide were taken as approved when the handoff was asked for (2026-10-28). Checks at handoff: screens (2560–360), states, style guide, axe WCAG 2.2 AA at 1440 and 390, heading outline, `#section` arrivals and back/forward, `wf:preflight --strict` (0 to fix), `check:snapshot`, `check:drift` (only the known shorthand false positives). Loader installed on staging. 2026-10-28 build: variables P1–P10, all 326 classes, the repo port, 9 CMS collections with 43 sample items, and the style guide base (all sections; Components rows 6–34 as inert previews until their components exist) are in Webflow; the style guide base was approved by the Brand Vision lead on 2026-10-28. Components: K1 (nav, footer, intro loader, button variants) and K2a (Page Hero, Fact Bar, Statement, Stat Row, Explore Rail, Accordion Item) and K2b-1 (Intro Row, Collage, Promo Card, Highlight Tabs, Image Accordion Items, Doc Accordion Item) built and published 2026-10-28; K2b-2 (Photo Band, Step List, Hover Pair, Video Frame, Benefit Grid) 2026-10-29. Next: K3 (lists and templates).
+2026-10-28 — Prototype complete; handoff checklist run. The style guide and all 10 pages (Home, Project Overview, Community Impact, Closed-Loop Cooling, Careers, News, News Article template, Events, Event template, 404) are built in `../prototype` (`pnpm dev`, port 5868). Approved in chat page by page from Project Overview on; Home and the style guide were taken as approved when the handoff was asked for (2026-10-28). Checks at handoff: screens (2560–360), states, style guide, axe WCAG 2.2 AA at 1440 and 390, heading outline, `#section` arrivals and back/forward, `wf:preflight --strict` (0 to fix), `check:snapshot`, `check:drift` (only the known shorthand false positives). Loader installed on staging. 2026-10-28 build: variables P1–P10, all 326 classes, the repo port, 9 CMS collections with 43 sample items, and the style guide base (all sections; Components rows 6–34 as inert previews until their components exist) are in Webflow; the style guide base was approved by the Brand Vision lead on 2026-10-28. Components: K1 (nav, footer, intro loader, button variants) and K2a (Page Hero, Fact Bar, Statement, Stat Row, Explore Rail, Accordion Item) and K2b-1 (Intro Row, Collage, Promo Card, Highlight Tabs, Image Accordion Items, Doc Accordion Item) built and published 2026-10-28; K2b-2 (Photo Band, Step List, Hover Pair, Video Frame, Benefit Grid) and K3 (Follow Band, Empty Card, Breadcrumb, Share Buttons, Download Card, Source Card) 2026-10-29. CMS cards and template parts are built with their pages. Next: pages, one per session, starting with Home.
 
 ## Ground rules for this project
 
@@ -95,15 +95,15 @@ From the prototype's partials and repeated blocks (each has its style-guide row;
 | C \| Video Frame | Careers (built 2026-10-29) | Poster, Poster Alt, Button Label, Video URL, Video Title | `scroll-fx` (media-grow), `video-modal` |
 | C \| Benefit Grid | Careers (built 2026-10-29) | Title, Text, Photo × 4 | `benefits` |
 | Quote Slider | Careers | — (Testimonials collection: two Collection Lists, quotes and photos; built with the Careers page, a component can't hold a CMS list) | `quote-slider` |
-| Search Field, List Toolbar (pills, Select, Clear All) | News, Events | — | Finsweet List (`list-filter` in the prototype), `custom-select` |
-| C \| Post Card (Is Row) | News list, Related | — (News Posts) | — |
-| C \| Event Card | Events | — (Events) | `reveal` |
-| Empty Card | Events (upcoming list's empty state) | — | `reveal` |
-| Breadcrumb, Share Buttons | News and Event templates | parent label + link | `share` |
-| Article Body (Rich Text Is Article), Download Card, Source Card | News template | — (News Posts) | `lightbox` (rich-text images), `read-progress` |
-| Detail Bar, Perk Grid, Callout, RSVP (Download Card) | Event template | — (Events, Event Perks) | `calendar-links`, `count-up`, `reveal` |
-| C \| Follow Band | News template, Events, Event template | — | `follow-fan` |
-| Quick Links | 404 | — | — |
+| Search Field, List Toolbar (pills, Select, Clear All) | News, Events | — (page markup, built with the News and Events pages; wired to Finsweet List) | Finsweet List (`list-filter` in the prototype), `custom-select` |
+| Post Card (Is Row) | News list, Related | — (News Posts; page markup in each Collection List: the Topics nested list and the link to the current item can't live in a component through the API) | — |
+| Event Card | Events, Other events | — (Events; page markup in each Collection List: current-item link, date formats on the badge) | `reveal` |
+| C \| Empty Card | Events (upcoming list's empty state) (built 2026-10-29) | Label, Heading, Text, Button Label, Button Link, Image | `reveal` |
+| C \| Breadcrumb, C \| Share Buttons | News and Event templates (built 2026-10-29) | Breadcrumb: Parent Label, Parent Link, Current (connect to Name on the templates); Share Buttons: none | `share` |
+| Article Body (Rich Text Is Article), C \| Download Card, C \| Source Card | News template (cards built 2026-10-29) | Download Card: Name, Meta, Button Label, Link; Source Card: Label, Link Text, Link; Article Body is the Body field on the template | `lightbox` (rich-text images), `read-progress` |
+| Detail Bar, Perk Grid, Callout, RSVP (C \| Download Card) | Event template | — (Events, Event Perks; page markup on the template, bound to the fields) | `calendar-links`, `count-up`, `reveal` |
+| C \| Follow Band | News template, Events, Event template (built 2026-10-29) | Eyebrow, Heading, Text, Facebook, LinkedIn, X | `follow-fan` |
+| Quick Links | 404 | — (built by hand on the 404 utility page) | — |
 
 ## Modules
 

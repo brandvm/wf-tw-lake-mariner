@@ -37,6 +37,12 @@ Collections created 2026-10-28. Sample items from the approved prototype added a
 | C \| Hover Pair (component) | Image, Alt, Button Label 1–2 | Button Label is what a screen reader hears; the lightbox shows the image itself. |
 | C \| Video Frame (component) | Poster, Poster Alt, Button Label, Video URL, Video Title | Empty Video URL shows "Video coming soon" in the dialog. |
 | C \| Benefit Grid (component) | Title, Text, Photo 1–4 | Four boxes, fixed. |
+| C \| Follow Band (component) | Eyebrow, Heading, Text, Facebook, LinkedIn, X | Social links are `#` until the accounts are decided (HANDOFF Open decisions). Section id `follow` (Subscribe to updates scrolls to it). |
+| C \| Empty Card (component) | Label, Heading, Text, Button Label, Button Link, Image | Goes in the Events upcoming list's Empty state. |
+| C \| Breadcrumb (component) | Parent Label, Parent Link, Current | On the templates, connect Current to the item's Name. |
+| C \| Share Buttons (component) | none | The share module fills the links from the page's URL and title. |
+| C \| Download Card (component) | Name, Meta, Button Label, Link | News: the Attachment fields; Event: the RSVP URL. Opens in a new tab. |
+| C \| Source Card (component) | Label, Link Text, Link | News: Source Name and Source URL. |
 | C \| Accordion Item (component) | Question, Answer, State | State `open` on the item that starts open, `closed` on the others. Sits in an Accordion block. |
 
 The static News and Events pages share the slugs `news` and `events` with their collections: Webflow accepted both (2026-10-28), so list pages are `/news`, `/events` and items `/news/<slug>`, `/events/<slug>`.
@@ -60,6 +66,8 @@ who approved them.
 - 2026-10-28 · The Home FAQ is a C | Accordion Item repeated by the FAQs Collection List; the Split head and Accordion wrapper are page markup (a component can't hold a CMS list). · per HANDOFF
 - 2026-10-28 · The Image Accordion and Doc Accordion are item components (the lists differ per page and the Doc list is a Collection List); the light Image Accordion item is its own component, since its structure differs (icons, gradient bar, text-secondary rich text) and variants can't change a combo element. Same look. · Claude, for review
 - 2026-10-29 · The Quote Slider is built with the Careers page, not as a component (its quotes and photos are two lists from the Testimonials collection). · Claude, per the K2b proposal
+- 2026-10-29 · Post Card, Event Card, Detail Bar, Perk Grid, Callout and Article Body are built in each page's Collection List or template, not as components: nested lists (Topics, Perks), links to the current item and date formats can't be set on component props through the API. Same look. · Claude, per the K3 proposal
+- 2026-10-29 · The Download Card's button no longer has the `download` attribute (it is also the Event RSVP link); it opens in a new tab instead. · Claude, for review
 
 ## Redirect map
 
@@ -73,7 +81,7 @@ Every old URL → its closest new page, from the crawl saved in discovery.
 
 ### Fix before launch
 
-- Style guide Components rows 6–34 are inert previews (markup copies, script hooks stripped, buttons imported as links, the Small button variant shown at the default size). Swap each for its component instance in the components step; nothing is built from these copies. · Claude — K2a (2026-10-28): Page Hero, Fact Bar, Stat Row and Accordion · Glass are now live instances; Statement and Explore Rail rows added; K2b-1: Intro Row, Collage, Promo Card, Highlight Tabs, Image Accordion (dark and light) and Accordion · Line are live instances; K2b-2: Photo Band, Steps, Hover Pair, Video Frame, Benefits too. Still inert: Quick Links, Empty Card, Event Card, Detail Bar, Perk Grid, Callout, List Toolbar, Post Card (Is Row), Breadcrumb, Share Buttons, Article Body, Download Card, Source Card, Quote Slider (K3 and the page sessions)
+- Style guide Components rows 6–34 are inert previews (markup copies, script hooks stripped, buttons imported as links, the Small button variant shown at the default size). Swap each for its component instance in the components step; nothing is built from these copies. · Claude — K2a (2026-10-28): Page Hero, Fact Bar, Stat Row and Accordion · Glass are now live instances; Statement and Explore Rail rows added; K2b-1: Intro Row, Collage, Promo Card, Highlight Tabs, Image Accordion (dark and light) and Accordion · Line are live instances; K2b-2: Photo Band, Steps, Hover Pair, Video Frame, Benefits too. K3: Follow Band, Empty Card, Breadcrumb, Share Buttons, Download Card, Source Card too. Still inert, each swapped for a live Collection List or the template part in its page session: Quick Links, Event Card, Detail Bar, Perk Grid, Callout, List Toolbar, Post Card (Is Row), Article Body, Quote Slider
 - Classes the components need that the styles plan left out (repo CSS only): Sr Only (visually hidden label/legend, News search and pills), Accordion Icon Plus and Accordion Icon Minus (the open/closed icon swap). Propose them with the components. · Claude — done in K1 (2026-10-28)
 - Style guide Buttons section: add a "Button Size · Small" row once the Small variant's styles are in (MANUAL-TODO AC). · Claude
 - Explore Rail: the cursor pill is the raw Button Size markup at the default size; the prototype uses Button Size's Small variant. Swap each pill's Button Color/Size for instances set to Small (after MANUAL-TODO AO). · Claude
