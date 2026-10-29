@@ -285,6 +285,6 @@ collected from client repos into those files.
 - Scope: template-candidate
 - Symptom: on the Cooling canvas the open accordion answer filled only the left half of the Accordion Item; on the published page it is full width (656 of 658px at 1440).
 - Cause: `.accordion-panel` is `display: grid` with only `grid-template-rows` set (the 0fr → 1fr open animation). The published CSS has no columns, so the browser makes one; the Designer shows Webflow's default two-column grid for it.
-- Fix: none needed for visitors. To make the canvas match, give `.accordion-panel` `grid-template-columns: 1fr` (a shared class, so asked first). Any class ported from the prototype as a grid without columns does the same.
-- Status: open
+- Fix: `.accordion-panel` got `grid-template-columns: 1fr` with the user's OK (2026-10-29); published CSS reads it back and the live answer is unchanged (656 of 658px). Any class ported from the prototype as a grid without columns does the same: set its columns.
+- Status: fixed (Webflow, 2026-10-29)
 - Found by: claude
