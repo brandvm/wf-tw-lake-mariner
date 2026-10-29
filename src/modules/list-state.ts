@@ -4,6 +4,9 @@
 //   data-list-root on the section that holds the list: it takes
 //     data-list-state="filtered" while a filter or search of that instance
 //     is on (Clear All shows, styles.css), "all" otherwise;
+//   the instance's [fs-list-element="empty"] message shows only while the
+//     list has no items (Finsweet 2.7 doesn't toggle one that sits outside
+//     the Collection List);
 //   items that Finsweet adds to the list (a filter, sort or Show more) rise
 //     in, as in the prototype (not with reduced motion).
 // The state is read from the controls themselves (a checked radio with a
@@ -39,8 +42,13 @@ export function initListState() {
     });
     update();
 
-    if (reducedMotion()) return;
+    const empty = document.querySelector<HTMLElement>(`[fs-list-element="empty"][fs-list-instance="${instance}"]`);
+    const toggleEmpty = () => empty?.toggleAttribute('data-list-hidden', list.children.length > 0);
+    toggleEmpty();
+
     new MutationObserver((records) => {
+      toggleEmpty();
+      if (reducedMotion()) return;
       const added = records.flatMap((r) => [...r.addedNodes]).filter((n): n is HTMLElement => n instanceof HTMLElement);
       if (added.length) gsap.fromTo(added, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', stagger: 0.06, clearProps: 'opacity,transform' });
     }).observe(list, { childList: true });
