@@ -625,7 +625,7 @@ button.social-button { padding: 0; cursor: pointer; }
 [data-fill-word] { white-space: nowrap; }
 
 /* repo-css: designer-cant — @keyframes. The Home hero's entrance (data-hero-seq): pure CSS, so it starts at first paint without waiting for the bundle (there is no loader). The separate translate and scale properties leave each part's own transform and the hero-sequence scrub alone, and fill-mode backwards holds nothing once a part has arrived. */
-@keyframes hero-rise { from { translate: 0 2em; opacity: 0; } }
+@keyframes hero-rise { from { translate: 0 32px; opacity: 0; } }
 @keyframes hero-zoom { from { scale: 1.12; } }
 [data-hero-seq] [data-intro-media] { animation: hero-zoom 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) backwards; }
 [data-hero-seq] [data-intro] { animation: hero-rise 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) 0.1s backwards; }
