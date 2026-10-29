@@ -28,7 +28,8 @@
     "wf:seo": "node .claude/skills/webflow-build/scripts/seo.mjs",
     "wf:install": "node .claude/skills/webflow-build/scripts/install.mjs",
     "wf:parity": "node .claude/skills/webflow-build/scripts/parity.mjs",
-    "wf:overflow": "node .claude/skills/webflow-build/scripts/overflow.mjs"
+    "wf:overflow": "node .claude/skills/webflow-build/scripts/overflow.mjs",
+    "finsweet": "node scripts/finsweet.mjs"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",
@@ -38,6 +39,7 @@
     "typescript": "^7.0.2"
   },
   "dependencies": {
+    "@finsweet/attributes": "2.7.1",
     "gsap": "3.15.0",
     "lenis": "1.3.27"
   }

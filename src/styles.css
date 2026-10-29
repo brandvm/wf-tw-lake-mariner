@@ -737,7 +737,7 @@ button.social-button { padding: 0; cursor: pointer; }
 /* repo-css: designer-cant — attribute selector */
 .select-option[aria-selected="true"] { color: var(--_colors---brand--accent); font-weight: 500; }
 
-/* repo-css: js-state — filtered lists (list-filter module, a stand-in for Finsweet List): Clear All shows while a filter or search is on, items past the page size and filtered-out items are hidden. */
+/* repo-css: js-state — filtered lists (Finsweet List with the list-state module): Clear All shows while a filter or search is on. */
 .clear-all { visibility: hidden; }
 
 /* repo-css: designer-cant — attribute selector */

@@ -35,6 +35,8 @@ import { initShare } from './modules/share';
 import { initReadProgress } from './modules/read-progress';
 import { initFollowFan } from './modules/follow-fan';
 import { initFaqSchema } from './modules/faq-schema';
+import { initListState } from './modules/list-state';
+import { initFinsweet } from './modules/finsweet';
 
 // Each module runs in isolation: one that throws is logged and skipped,
 // and every module after it still initializes.
@@ -92,7 +94,10 @@ function boot() {
   run('read-progress', initReadProgress);
   run('follow-fan', initFollowFan);
   run('faq-schema', initFaqSchema);
-  // Finsweet List (News and Events filters) joins when the News page is built.
+  run('list-state', initListState);
+  // Finsweet last: it starts a microtask later, so attributes set by the
+  // modules above are seen (recipes/finsweet).
+  run('finsweet', initFinsweet);
 }
 
 if (document.readyState === 'loading') {
