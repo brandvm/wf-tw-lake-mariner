@@ -438,7 +438,7 @@ collected from client repos into those files.
 - Scope: template-candidate
 - Symptom: (1) `data-list-root` on the imported Past Events section: `set_attributes` reported success and stored nothing, and `set_settings` key `attributes` also read back `[]` (on News the second route worked). (2) The upcoming list's Empty state showed a grey 10px frame around C | Empty Card. (3) The imported search `<form>` came out 200px wide in the centred page head.
 - Cause: (1) unknown, on WHTML-imported blocks; (2) Webflow's `.w-dyn-empty { background-color: #ddd; padding: 10px }`; (3) the importer makes FormWrapper › FormForm, and the class-less `.w-form` wrapper shrinks in a centred flex column (and keeps `margin-bottom: 15px`).
-- Fix: (1) a DivBlock made with `data_element_builder` around the list carries the attribute (read back, published); (2) class List Empty State (padding 0, transparent) on each DynamoEmpty; never remove a DynamoEmpty through the API (it deletes the whole list, per the News session); (3) class Search Field Wrap (width 100%, max-width 32em, margin-bottom 0) on the FormWrapper, Search Field on the FormForm.
+- Fix: (1) a DivBlock made with `data_element_builder` around the list carries the attribute (read back, published); (2) class List Empty State (padding 0, transparent) on each DynamoEmpty; never remove a DynamoEmpty through the API (it deletes the whole list, per the News session); (3) class Search Field Wrap (width 100%, max-width 32em, margin-bottom 0) on the FormWrapper, Search Field on the FormForm. Update: replaced by a plain DOM form (see "Imported form controls" update): no wrapper, no Turnstile; Search Field Wrap removed.
 - Status: worked around
 - Found by: claude
 
