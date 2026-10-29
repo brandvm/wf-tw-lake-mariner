@@ -11,6 +11,9 @@
 // this module while the loader still covers it; reduced motion shows no
 // loader at all (CSS); later pages of the visit skip it (head code adds
 // html.intro-seen before first paint, so it never flashes).
+// The parts only move, never fade: they stay painted under the loader, so
+// the hero heading is the page's LCP at first paint instead of after the
+// intro (an element at opacity 0 isn't an LCP candidate).
 
 import type Lenis from 'lenis';
 import { gsap, reducedMotion } from './gsap';
@@ -49,8 +52,8 @@ export function initIntro(lenis: Lenis | null) {
   const media = document.querySelector<HTMLElement>('[data-intro-media]');
   const mediaImg = media?.querySelector('img');
   const mark = loader.querySelector('[data-page-loader-mark]');
-  // Hidden only now, while the loader covers them.
-  gsap.set(parts, { y: 32, opacity: 0 });
+  // Moved down only now, while the loader covers them; never hidden.
+  gsap.set(parts, { y: 32 });
   if (media) gsap.set(media, { scale: 1.12 });
 
   const ready = Promise.all([
@@ -71,6 +74,6 @@ export function initIntro(lenis: Lenis | null) {
       .to(mark, { y: -16, opacity: 0, duration: 0.35, ease: 'power2.in' })
       .to(loader, { yPercent: -100, duration: 0.85, ease: 'power3.inOut' }, '-=0.05')
       .to(media, { scale: 1, duration: 1.4, ease: 'power2.out' }, '<')
-      .to(parts, { y: 0, opacity: 1, duration: 0.8, stagger: 0.08, ease: 'power3.out' }, '<0.35');
+      .to(parts, { y: 0, duration: 0.8, stagger: 0.08, ease: 'power3.out' }, '<0.35');
   });
 }
