@@ -441,3 +441,39 @@ collected from client repos into those files.
 - Fix: (1) a DivBlock made with `data_element_builder` around the list carries the attribute (read back, published); (2) class List Empty State (padding 0, transparent) on each DynamoEmpty; never remove a DynamoEmpty through the API (it deletes the whole list, per the News session); (3) class Search Field Wrap (width 100%, max-width 32em, margin-bottom 0) on the FormWrapper, Search Field on the FormForm.
 - Status: worked around
 - Found by: claude
+
+### 2026-10-29 · Removing a Collection List's Empty State deletes the whole list
+- Area: mcp
+- Scope: template-candidate
+- Symptom: on News, `remove_element` on the DynamoEmpty of a nested Topics list and of the main News Posts list reported success; afterwards `query_elements` found no DynamoWrapper on the page: both lists, with the bound card, were gone.
+- Cause: the API removes the Empty State's parent Collection List with it.
+- Fix: never remove a DynamoEmpty; give it a class with `display: none` instead (Post Topics Empty) or style it. The card was rebuilt.
+- Status: worked around
+- Found by: claude
+
+### 2026-10-29 · Finsweet List 2.7: what the markup needs on Webflow
+- Area: js
+- Scope: template-candidate
+- Symptom: on News, (1) the custom empty message (`fs-list-element="empty"` outside the Collection List) showed all the time, with and without matches; (2) checks from a script saw Finsweet never start in a hidden browser pane.
+- Cause: (1) Finsweet 2.7 finds the empty element but doesn't toggle one that isn't the list's own Empty State; (2) the recipe's loader starts an attribute when its elements come near the viewport (IntersectionObserver) or on the first scroll, pointer or key input, and a hidden pane gives neither.
+- Fix: (1) list-state module (072daa3) shows the empty message only while the list has no items; put `data-list-hidden` on it in Webflow so it doesn't flash. (2) In checks, scroll or move the pointer first. What works as documented (read from the 2.7.1 source and checked on staging): `fs-list-element="list"`, `fs-list-load="more"` and `fs-list-itemsperpage` on the DynamoList; a custom Show more with `fs-list-element="pagination-next"` + instance (hidden when all are shown); filters on the FormForm (submit is prevented and stopped, so Webflow's form handler doesn't run); search `fs-list-field="*"`; the sort select's initial value (`date-desc`) is applied on start, so the list is sorted even without a native sort.
+- Status: fixed 072daa3
+- Found by: claude
+
+### 2026-10-29 · Imported form controls: `for=""`, lost `checked`, bold labels, grey read-only inputs
+- Area: mcp
+- Scope: template-candidate
+- Symptom: the News List Toolbar from `data_whtml_builder`: (1) every FormBlockLabel published `for=""`, which ties the label to nothing, so clicking a pill would not check its radio; (2) the `checked` on the All radio was dropped; (3) the pills were bold; (4) the read-only sort input was grey.
+- Cause: (1)(2) importer; (3) webflow.css gives `label` `font-weight: bold; margin-bottom: 5px`; (4) webflow.css `.w-input[readonly] { background-color: #eee }` outranks a single class.
+- Fix: (1) `set_attributes` `for` = the radio's id on each label (give the radios unique ids in the import); (2) `set_attributes` `checked` = `true`; (3) `font-weight: 400`, `margin-bottom: 0` on Filter Pill; (4) a combo (Select Input Is Readonly) with the background: two classes beat the attribute selector. Also give each FormWrapper a class (Form + Is Search / Is Toolbar) with a width, or it shrinks.
+- Status: worked around
+- Found by: claude
+
+### 2026-10-29 · Empty CMS fields: bound elements get `w-dyn-bind-empty`, component props don't
+- Area: designer
+- Scope: template-candidate
+- Symptom: on the News template, an empty Cover Image or Excerpt bound to an Image or Paragraph published with `w-dyn-bind-empty` (hidden by webflow.css), but C | Download Card and C | Source Card with props bound to empty fields published as empty divs with `href="#"`. Conditional visibility on a field isn't in the API (`set_visibility` binds to props only).
+- Cause: Webflow marks only elements bound directly to a field.
+- Fix: the no-cover card fallback works without conditions (the shield sits under an absolutely placed cover image that hides itself when empty). The template parts are hidden with `:has()` in repo CSS (`.download-card:has(.download-name:empty)`, `.source-card:has(.source-link > :first-child:empty)`, `.article-cover:has(> .w-dyn-bind-empty)`; 677e97c). A title clamp that looks at the next sibling must skip `.w-dyn-bind-empty`.
+- Status: worked around
+- Found by: claude
