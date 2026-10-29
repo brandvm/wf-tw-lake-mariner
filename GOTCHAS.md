@@ -306,3 +306,12 @@ collected from client repos into those files.
 - Fix: one Size variable per calc in the same collection as its inputs (Layout), with static values: Base plus its own value in every breakpoint mode (Tablet, Mobile Landscape, Mobile), each worked out from the input's value in that mode. Negative values are accepted (`Section/Padding H Negative` = -4 / -2.5 / -1.5 / -1.25em; `Calc/Nav Height + 3.5em` = 9 / 8 / 7.5 / 7.5em). Bind the class property with `variable_as_value`. The published CSS declares each variable in `:root` and in each breakpoint's `body` block, so the value follows the breakpoint. Trade-off: the values are copies, not formulas. When Nav/Height, Section/Padding V/H or Content/Gap change, update the `Calc/…` variables too (the names say which input they follow).
 - Status: worked around
 - Found by: claude
+
+### 2026-10-29 · Gradients with variables: literal colours through the API, and check every variant
+- Area: mcp
+- Scope: template-candidate
+- Symptom: 10 MANUAL-TODO rows (G, R, AB, AF–AL) were `linear-gradient()` values using colour variables (the TW gradient, fades to Background/Page). A gradient with `var()` keeps only its first variable, and a Color variable can't hold a gradient (`custom_value` fails on create and update anyway).
+- Cause: the style API collapses any value containing a Webflow variable to a binding; Color variables are single colours.
+- Fix: `update_style` `background-image` with the variables' literal values (`linear-gradient(270deg, #5c7592, #3e5570)`; for fades to Background/Page, the colour that mode resolves to in that section: Frost on Home's media-below section, Paper on the Cooling band). Published as given, same look; the gradients don't follow a later change of Storm, Accent or the page colour, so a palette change means updating them too (or binding the stops in the Designer). Setting it on a class shared by a component (Button Color) also reaches every variant that doesn't override it: Light and Frost already had `background-image: none`, Secondary didn't and got it through `set_variant_styles`. Check each variant with `get_variant_styles` before publishing.
+- Status: worked around
+- Found by: claude
