@@ -477,3 +477,30 @@ collected from client repos into those files.
 - Fix: the no-cover card fallback works without conditions (the shield sits under an absolutely placed cover image that hides itself when empty). The template parts are hidden with `:has()` in repo CSS (`.download-card:has(.download-name:empty)`, `.source-card:has(.source-link > :first-child:empty)`, `.article-cover:has(> .w-dyn-bind-empty)`; 677e97c). A title clamp that looks at the next sibling must skip `.w-dyn-bind-empty`.
 - Status: worked around
 - Found by: claude
+
+### 2026-10-29 · Lighthouse counts anything that finishes before the first paint, including the async bundle and swap fonts
+- Area: perf
+- Scope: template-candidate
+- Symptom: the same page scored 84 one run and 94 the next on mobile (Project Overview, Home, Community Impact). Blocking the repo CSS, jQuery, Webflow's JS or the hero image one at a time changed nothing.
+- Cause: Lighthouse's simulated FCP/LCP averages a graph of render-blocking requests with one of *every* request that finished before the first paint in the real (unthrottled) load. The footer loader appended `index.js` (100 KB) at parse time, and the fonts (`font-display: swap`) start as soon as the CSS is parsed; whenever either finished a few ms before the paint, it was billed to the paint. The fonts uploaded through the API come from `webflow-files-prod.global.ssl.fastly.net`, which serves HTTP/1.1, so each one is also simulated as a new connection; the Space Grotesk preload made that font finish first in every run.
+- Fix: the footer requests the bundle two animation frames after it runs (at once in a hidden tab, 3 s fallback), and records `WFC.source` straight away so Embed 2b's after-`load` stylesheet refresh still runs; the head code no longer preloads Space Grotesk (24bb03f). Mobile medians: Community Impact 82 → 96, Cooling 88 → 95, Careers 92 → 96, Home 88 → 93; CLS rose to 0.02–0.03 from the later font swap. Moving the fonts to the asset CDN (Designer upload) is MANUAL-TODO DS. To diagnose, list the requests in the saved report whose `networkEndTime` is before `metrics.observedFirstContentfulPaint`; `--blocked-url-patterns` doesn't show the gain, since the blocked request still opens its connection in the simulation.
+- Status: fixed 24bb03f (loader re-pasted and published); fonts open (DS)
+- Found by: claude
+
+### 2026-10-29 · Rich-text images publish eager; `loading="lazy"` written through the API is kept
+- Area: mcp
+- Scope: template-candidate
+- Symptom: on the News template both body images (233 and 169 KB, no `srcset`) loaded before the first paint and held the mobile LCP (the lead paragraph) at 4.5 s.
+- Cause: Webflow publishes rich-text `<img>` without a `loading` attribute, and the Designer and CMS editor have no setting for it.
+- Fix: write the Body field through the CMS API with `loading="lazy"` on each `<img>`: it is stored and published as written. Images an editor adds later in the CMS editor are eager again, so do this for long posts with several images, or ask the editor to keep the first body image below the lead.
+- Status: worked around (sample post)
+- Found by: claude
+
+### 2026-10-29 · An API-uploaded asset still publishes without srcset after a rebuild and compress_assets
+- Area: mcp
+- Scope: template-candidate
+- Symptom: `careers-openings.jpg` had variants (500–2000) from `get_asset`, but a new Image built with `data_element_builder` and that asset published with no `srcset`; after `compress_assets` (WebP, 351 → 99 KB, same asset id) and `set_image_asset` it still had none.
+- Cause: unknown; `get_asset` reports `size: 0` for API uploads, which may be what the publisher reads. Component image props on such assets do get `srcset` (heroes, Step List).
+- Fix: none through the API; the image is lazy and below the fold, so it costs bytes but not the LCP. A Designer re-pick (or upload in the Designer) is the remaining route. `compress_assets` replaces the file in place and keeps the asset id, which is useful on its own.
+- Status: open
+- Found by: claude

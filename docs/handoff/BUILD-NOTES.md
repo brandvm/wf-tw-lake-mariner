@@ -86,6 +86,7 @@ who approved them.
 - 2026-10-29 · Home hero button: C | Button inside a plain div that carries `data-intro` (an instance can't take attributes). Home's hero texts are page text, edited on the page. · Claude
 - 2026-10-29 · Icons: the Phosphor font is subset to the icons in `phosphor.icons` (31, inlined in the stylesheet, no font request). An icon typed into a C | Button Icon prop that isn't in that file draws nothing: add its name there, run `pnpm phosphor --subset` and `pnpm build`, push. · Claude (PageSpeed)
 - 2026-10-29 · Head code preloads the Space Grotesk woff2 (the hero H1 font). Re-uploading that font changes its URL: update the preload in `loader.html` piece 1 and the site head code. · Claude (PageSpeed)
+- 2026-10-29 · The Space Grotesk preload is gone from the head code again, and the footer loader requests the JS bundle after the first paint (24bb03f): both counted against the first paint on mobile. Motion and modules start in the frame after the first paint, as before in most loads. · Claude (PageSpeed)
 - 2026-10-29 · Careers: the Quote Slider slides are the Collection Items themselves (the prototype's `<figure>` and `<blockquote>` are divs, the quote is a Rich Text bound to Quote) and the slide labels "n of 3" are left out (the counter shows the position). The hero photo lacks the prototype's `object-position: 50% 30%` (C | Page Hero has no position option; the crop is ~15px higher). Same look otherwise. · Claude, for review
 - 2026-10-29 · Events: the search covers the past list only (Finsweet List instance `events`), so its placeholder says "Search past events…" (the prototype said "upcoming and past"). Upcoming and past are decided by the End date (an event stays upcoming through its last day), not Start. · Claude, for review
 - 2026-10-29 · Event Cards and the Event template's Detail Bar and Other events cards are page markup with the default button size: the "View Event", "Read more", "Google Calendar" and "ICS" buttons are a little larger than the prototype's Small buttons (no Small class exists outside C | Button; MANUAL-TODO AO). · Claude, for review
@@ -106,6 +107,21 @@ Every old URL → its closest new page, from the crawl saved in discovery.
 ## Known issues
 
 ### Fix before launch
+- PageSpeed, all pages, 2026-10-29 evening (median of 5, `lighthouse@12` as `wf:perf` runs it; this supersedes the per-page PageSpeed bullets below). Before → after the loader change (bundle after first paint, no Space Grotesk preload, 24bb03f), WebP testimonial photos and the openings screenshot, lazy article body images:
+
+  | Page | Mobile before | Mobile after (range) | Desktop before → after |
+  | --- | --- | --- | --- |
+  | / | 89 | 83 (78–88); 93 in the run an hour earlier | 97 → 98 |
+  | /project-overview | 84 | 94 (91–95) | 98 → 97 |
+  | /community-impact | 89 | 88 (66–96); 96 earlier | 99 → 99 |
+  | /closed-loop-cooling | 89 | 96 (78–96) | 99 → 99 |
+  | /careers | 86 (earlier today) / 92 | 96 (86–97) | 99 → 100 |
+  | /news | 76 | 74 (72–76) | 96 → 95 |
+  | /news/<sample post> | 82 | 89 (80–96) | 95 → 95 |
+  | /events | 84 | 87 (79–96) | 98 → 99 |
+  | /events/<sample event> | 87 | 88 (80–97); 95 earlier | 98 → 98 |
+
+  Desktop is 95+ everywhere. Mobile medians swing ±5–10 between runs of an unchanged page: the three fonts come from webflow-files-prod.global.ssl.fastly.net (HTTP/1.1), so Lighthouse simulates a new connection for each font that finishes before the first paint, and whether they do is a coin flip in each run (GOTCHAS 2026-10-29). MANUAL-TODO DS (re-upload the fonts in the Designer, so they come from the asset CDN) is the next step for every page. /news is also held by its LCP, the first card's CMS image: lazy, 1600px WebP without `srcset` (API-created sample images; images uploaded in the CMS editor get responsive sizes), with a load delay of ~3 s. Project Overview's 92 KB hero JPEG and its lazy tab photos (fetched early, within Chrome's lazy-load distance) are its remaining cost. On staging the Webflow badge and webflow.io's server time (~450 ms TTFB in the simulation) count too; production will differ. · Claude
 - PageSpeed on /news: mobile 76 (range 72–77), desktop 96 (96–96), transfer 1.0 MB, after the WebP conversion and the plain DOM forms (before: 70/84, 4.7 MB); on the News template (sample article): mobile 77 (64–98), desktop 95 (95–97) (medians of 5, 2026-10-29). The sample CMS images were converted to WebP at the user's request (cwebp q78, at most 1600px wide; 3.7 → 1.1 MB) and the template cover's design-time placeholder is the small shield SVG. Mobile is still held by FCP (~3.2 s) and LCP (~5.5 s): the first card image is lazy and has no `srcset` (API-created CMS images), and the HTML lists the oldest post first until MANUAL-TODO CZ, so Finsweet swaps the first card after it starts. Real posts uploaded in the Designer get responsive sizes. · Claude
 - PageSpeed after the search became a plain DOM form and the sample event photos were converted to WebP (user's OK, 2026-10-29; cwebp q78, at most 1600px wide, 2.0 → 0.44 MB; the Empty Card photo asset compressed to WebP, 332 → 127 KB, and its image prop re-set so it publishes with `srcset`): /events mobile 89 (range 82–89), desktop 97, transfer 774 KB (was 68 / 92, 3.4 MB); the Event template mobile 95 (74–96), desktop 98, 598 KB (was 69 / 97). /events is held by the site-wide FCP (~2.8 s: render-blocking bundle stylesheet, fonts). The CMS card photos still have no `srcset` (API-created CMS images); real photos uploaded in the CMS editor get responsive sizes. · Claude
 - News template: rich-text images publish without the prototype's 8px corners (`.rich-text.is-article img` has `border-radius`, the computed value is 0 even inline; not found yet). · Claude
