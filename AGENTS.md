@@ -160,8 +160,10 @@ sign-in (OAuth token) never goes in the repo: these repos are public.
 Worked around, not fixed — do not rediscover these.
 
 - `custom_value` is rejected for Color and Size variables (`color-mix()`,
-  `oklch()`, `calc()`). Create those through the variables JSON import with
-  `valueType: "custom"`.
+  `oklch()`, `calc()`), on create and on update. Create those through the
+  Designer's variables JSON import with `valueType: "custom"`, or, for a
+  calc of layout variables, as a static variable with its own value in each
+  breakpoint mode (GOTCHAS 2026-10-29).
 - No variable reorder within a collection. `rename_variable` works and
   keeps ids and aliases (recreating does not); check the `name` in every
   create result, which can come back suffixed ("-9").

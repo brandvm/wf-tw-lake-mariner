@@ -297,3 +297,12 @@ collected from client repos into those files.
 - Fix: the hero parts only move (`y`), never fade, under the loader (src/modules/intro.ts, d1097d7). Mobile 93 (LCP 2.7 s), desktop 95; the reveal looks the same because the curtain covers the start. What is left of LCP is the render-blocking bundle stylesheet and the web-font swap.
 - Status: fixed d1097d7
 - Found by: claude
+
+### 2026-10-29 · calc() values with variables: a computed variable with a value per mode
+- Area: mcp
+- Scope: template-candidate
+- Symptom: 17 MANUAL-TODO rows (B, E, F, J, K–Q, S, V, X, Y, Z, AD) were class values like `calc(Section/Padding H * -1)` or `calc(Nav/Height + 3.5em)`, which the style API collapses to the first variable.
+- Cause: the style API keeps one variable per value. The variable tool now lists `custom_value` (MCP 2.2.0), but `create_size_variable` and `update_size_variable` with `custom_value` both fail with "An internal error occurred", even for `calc(100vh - 60px)` without any variable.
+- Fix: one Size variable per calc in the same collection as its inputs (Layout), with static values: Base plus its own value in every breakpoint mode (Tablet, Mobile Landscape, Mobile), each worked out from the input's value in that mode. Negative values are accepted (`Section/Padding H Negative` = -4 / -2.5 / -1.5 / -1.25em; `Calc/Nav Height + 3.5em` = 9 / 8 / 7.5 / 7.5em). Bind the class property with `variable_as_value`. The published CSS declares each variable in `:root` and in each breakpoint's `body` block, so the value follows the breakpoint. Trade-off: the values are copies, not formulas. When Nav/Height, Section/Padding V/H or Content/Gap change, update the `Calc/…` variables too (the names say which input they follow).
+- Status: worked around
+- Found by: claude
