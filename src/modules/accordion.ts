@@ -11,6 +11,10 @@
 // hover, focus and off screen; stops after a click; off with reduced
 // motion. State: data-accordion-images on the scope,
 // data-accordion-autoplay-state (on, paused, off) on the accordion.
+//
+// Open first (optional, data-accordion-open-first): when no item starts
+// open, the first one does. For items repeated by a Collection List, which
+// all take the same State.
 
 const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)');
 
@@ -38,6 +42,7 @@ export function initAccordions() {
       images.forEach((img, i) => img.toggleAttribute('data-active', i === index));
     };
     const openIndex = () => items.findIndex((item) => item.dataset.state === 'open');
+    if (accordion.hasAttribute('data-accordion-open-first') && items[0] && openIndex() < 0) items[0].dataset.state = 'open';
 
     items.forEach((item, i) => {
       set(item, item.dataset.state === 'open');

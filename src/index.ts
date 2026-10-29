@@ -35,6 +35,7 @@ import { initCalendarLinks } from './modules/calendar-links';
 import { initShare } from './modules/share';
 import { initReadProgress } from './modules/read-progress';
 import { initFollowFan } from './modules/follow-fan';
+import { initFaqSchema } from './modules/faq-schema';
 
 // Each module runs in isolation: one that throws is logged and skipped,
 // and every module after it still initializes.
@@ -92,6 +93,7 @@ function boot() {
   run('share', initShare);
   run('read-progress', initReadProgress);
   run('follow-fan', initFollowFan);
+  run('faq-schema', initFaqSchema);
   // Finsweet List (News and Events filters) joins when the News page is built.
 }
 

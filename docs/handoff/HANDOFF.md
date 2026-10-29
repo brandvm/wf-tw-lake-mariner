@@ -117,7 +117,7 @@ In `prototype/src/modules/`, one file each, run from `prototype/src/main.ts`; al
 | nav | `data-nav`, `data-nav-dropdown`, `data-nav-dropdown-toggle`, `data-nav-toggle`, `data-state` | dropdowns, mobile sheet (Lenis paused while open) |
 | nav-state | `data-nav`, sets `data-nav-up` | the bar returns as a white bar when scrolling up |
 | announcement | `data-announcement`, `data-announcement-close` | close and remember (localStorage, keyed by the message) |
-| accordion | `data-accordion`, `data-accordion-item`, `data-accordion-trigger`, `data-state`; images: `data-accordion-image`, `data-accordion-scope`; autoplay: `data-accordion-autoplay`, `data-accordion-progress` | one open at a time with ARIA; optional photo per item and timed autoplay with a progress bar |
+| accordion | `data-accordion`, `data-accordion-item`, `data-accordion-trigger`, `data-state`; images: `data-accordion-image`, `data-accordion-scope`; autoplay: `data-accordion-autoplay`, `data-accordion-progress`; `data-accordion-open-first` | one open at a time with ARIA; optional photo per item and timed autoplay with a progress bar; `data-accordion-open-first` opens the first item when none starts open (Collection Lists, where every item takes the same State) |
 | tabs | `data-tabs`, `data-tabs-frame`, `data-tab-list`, `data-tab`, `data-tab-panel`, `data-tab-bg`, `data-tab-progress` | Highlight Tabs: pinned from 768px, scroll moves through the tabs, the line fills; click or arrow keys glide to a tab |
 | hscroll | `data-hscroll`, `data-hscroll-frame`, `data-hscroll-track`, `data-hscroll-item`, `data-hscroll-viewport` | Explore: pinned sideways scroll from 992px, a swipe row below |
 | text-fill | `data-text-fill` | headings and statements fill letter by letter as they scroll up |
@@ -140,7 +140,7 @@ In `prototype/src/modules/`, one file each, run from `prototype/src/main.ts`; al
 | read-progress | `data-read-progress`, `data-read-end` | the reading line on the CMS templates |
 | follow-fan | `data-follow-area`, `data-follow-fan` | the Follow Band fan fans in and drifts against the pointer |
 | style-guide-nav | `data-sg-nav` | the style guide's sidebar (style guide page only) |
-| faq-schema (to build) | CMS embed on Home | FAQPage JSON-LD from the FAQs shown |
+| faq-schema | `data-faq-schema` (on the Home FAQ Accordion; reads each `data-accordion-item`'s `.accordion-question` and `.accordion-body`) | FAQPage JSON-LD in the head from the FAQs shown; none without items, no duplicate on re-run |
 
 ## Video list
 
