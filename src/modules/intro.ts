@@ -20,7 +20,9 @@ import { gsap, reducedMotion } from './gsap';
 
 const KEY = 'intro-seen';
 const MIN_MS = 1000; // long enough for the shield and the line to read
-const MAX_MS = 2600; // well inside the 4 s CSS backstop
+// The curtain uncovers the hero heading, the page's LCP: a slow photo
+// decode on mobile mustn't hold it past 1.6 s (it was 2.6 s; PageSpeed).
+const MAX_MS = 1600; // well inside the 4 s CSS backstop
 
 const wait = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
 
