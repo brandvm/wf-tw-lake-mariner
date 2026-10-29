@@ -47,6 +47,10 @@ published.
 <!-- Fonts uploaded through the Webflow API (Geist, Space Grotesk) publish
      from this host, not the asset CDN: warm it (lessons/mcp.md). -->
 <link rel="preconnect" href="https://webflow-files-prod.global.ssl.fastly.net" crossorigin />
+<!-- The hero heading font (Space Grotesk, the H1 is the LCP): preload it so it
+     downloads with the stylesheets instead of after them. Update this URL if
+     the font is re-uploaded (Site settings › Fonts; the published CSS has it). -->
+<link rel="preload" as="font" type="font/woff2" crossorigin href="https://webflow-files-prod.global.ssl.fastly.net/6ae0f7d7bcf5d7622aeac214/fonts/6ae25420f20026a0602781e0-SpaceGrotesk-Variable-latin.woff2" />
 
 <script>
   (function () {
