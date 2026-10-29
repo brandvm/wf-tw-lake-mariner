@@ -16,7 +16,7 @@ current during the build. Agents read it after `AGENTS.md` and `GOTCHAS.md`.
 
 ## Status
 
-2026-10-28 — Prototype complete; handoff checklist run. The style guide and all 10 pages (Home, Project Overview, Community Impact, Closed-Loop Cooling, Careers, News, News Article template, Events, Event template, 404) are built in `../prototype` (`pnpm dev`, port 5868). Approved in chat page by page from Project Overview on; Home and the style guide were taken as approved when the handoff was asked for (2026-10-28). Checks at handoff: screens (2560–360), states, style guide, axe WCAG 2.2 AA at 1440 and 390, heading outline, `#section` arrivals and back/forward, `wf:preflight --strict` (0 to fix), `check:snapshot`, `check:drift` (only the known shorthand false positives). Loader installed on staging. 2026-10-28 build: variables P1–P10, all 326 classes, the repo port, 9 CMS collections with 43 sample items, and the style guide base (all sections; Components rows 6–34 as inert previews until their components exist) are in Webflow; the style guide base was approved by the Brand Vision lead on 2026-10-28. Components: K1 (nav, footer, intro loader, button variants) and K2a (Page Hero, Fact Bar, Statement, Stat Row, Explore Rail, Accordion Item) and K2b-1 (Intro Row, Collage, Promo Card, Highlight Tabs, Image Accordion Items, Doc Accordion Item) built and published 2026-10-28. Next: K2b-2.
+2026-10-28 — Prototype complete; handoff checklist run. The style guide and all 10 pages (Home, Project Overview, Community Impact, Closed-Loop Cooling, Careers, News, News Article template, Events, Event template, 404) are built in `../prototype` (`pnpm dev`, port 5868). Approved in chat page by page from Project Overview on; Home and the style guide were taken as approved when the handoff was asked for (2026-10-28). Checks at handoff: screens (2560–360), states, style guide, axe WCAG 2.2 AA at 1440 and 390, heading outline, `#section` arrivals and back/forward, `wf:preflight --strict` (0 to fix), `check:snapshot`, `check:drift` (only the known shorthand false positives). Loader installed on staging. 2026-10-28 build: variables P1–P10, all 326 classes, the repo port, 9 CMS collections with 43 sample items, and the style guide base (all sections; Components rows 6–34 as inert previews until their components exist) are in Webflow; the style guide base was approved by the Brand Vision lead on 2026-10-28. Components: K1 (nav, footer, intro loader, button variants) and K2a (Page Hero, Fact Bar, Statement, Stat Row, Explore Rail, Accordion Item) and K2b-1 (Intro Row, Collage, Promo Card, Highlight Tabs, Image Accordion Items, Doc Accordion Item) built and published 2026-10-28; K2b-2 (Photo Band, Step List, Hover Pair, Video Frame, Benefit Grid) 2026-10-29. Next: K3 (lists and templates).
 
 ## Ground rules for this project
 
@@ -89,12 +89,12 @@ From the prototype's partials and repeated blocks (each has its style-guide row;
 | C \| Collage | Project Overview (About the Project) (built 2026-10-28) | Eyebrow, Heading, Wide Image, Square Image, Statement + Statement Muted | `scroll-fx` (drift), `text-fill` |
 | C \| Promo Card | Project Overview (Cooling teaser) (built 2026-10-28) | Image, Heading, Text, Button Label, Button Link | — |
 | C \| Highlight Tabs | Project Overview (built 2026-10-28) | Eyebrow; Title, Text, Photo × 5 (the tab name repeats the Title) | `tabs` |
-| C \| Photo Band | Cooling intro | photo, cloud layer, cut-out (one scene, fixed proportions) | `band-inset`, `parallax` |
-| C \| Step List | Cooling | — | `steps` |
-| C \| Hover Pair | Cooling | two images | CSS hover + `lightbox` |
-| C \| Video Frame | Careers | poster, video URL | `scroll-fx` (media-grow), `video-modal` |
-| C \| Benefit Grid | Careers | — | `benefits` |
-| C \| Quote Slider | Careers | — (Testimonials collection) | `quote-slider` |
+| C \| Photo Band | Cooling intro (built 2026-10-29) | Eyebrow, Statement + Statement Muted, Text; the photo, cloud layer and cut-out are one fixed scene inside the component | `band-inset`, `parallax` |
+| C \| Step List | Cooling (built 2026-10-29) | Eyebrow, Heading; Text, Image, Alt × 3 | `steps` |
+| C \| Hover Pair | Cooling (built 2026-10-29) | Image, Alt, Button Label × 2 (wide, narrow) | CSS hover + `lightbox` |
+| C \| Video Frame | Careers (built 2026-10-29) | Poster, Poster Alt, Button Label, Video URL, Video Title | `scroll-fx` (media-grow), `video-modal` |
+| C \| Benefit Grid | Careers (built 2026-10-29) | Title, Text, Photo × 4 | `benefits` |
+| Quote Slider | Careers | — (Testimonials collection: two Collection Lists, quotes and photos; built with the Careers page, a component can't hold a CMS list) | `quote-slider` |
 | Search Field, List Toolbar (pills, Select, Clear All) | News, Events | — | Finsweet List (`list-filter` in the prototype), `custom-select` |
 | C \| Post Card (Is Row) | News list, Related | — (News Posts) | — |
 | C \| Event Card | Events | — (Events) | `reveal` |
