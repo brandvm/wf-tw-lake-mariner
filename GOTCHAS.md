@@ -369,3 +369,39 @@ collected from client repos into those files.
 - Fix: start from a partial opacity (0.6) with a small rise (12px): the H1 counts from first paint (mobile median 93, LCP 3.1 s). Never animate the LCP element from opacity 0, in JS or CSS.
 - Status: fixed a9e60d6
 - Found by: claude
+
+### 2026-10-29 · Section ids refused on a duplicated page; import the id instead
+- Area: mcp
+- Scope: template-candidate
+- Symptom: on Careers (created with `duplicateOf` Closed-Loop Cooling), three sections imported without ids then refused every id write: `set_dom_id` and `set_settings` key `domId` failed with "[Conflict] … component map", `set_attributes` `id` with "An internal error occurred". Other writes on the same page (classes, attributes on an Image, instances) took.
+- Cause: unknown Webflow-side.
+- Fix: import an empty `<section class="…" id="…">` next to the built one (the importer kept these ids), `move_element` the section's wrapper into it, remove the id-less section. Read the ids back with `query_elements` (`attribute_name: "id"`).
+- Status: worked around
+- Found by: claude
+
+### 2026-10-29 · A list's first sort refused, a fresh list's sort taken minutes later
+- Area: mcp
+- Scope: template-candidate
+- Symptom: Careers Quote Slider: two Testimonials Collection Lists took `source`, then refused `sort` (Order ascending) with "[Conflict] … component map", three times over 10 minutes. Unsorted, the lists published newest item first, so a placeholder quote showed before Jim Spoon's. Two new body-level lists made later took `source` and `sort` in back-to-back calls.
+- Cause: unknown (the site-wide list conflict in the entries above, intermittent).
+- Fix: rebuild instead of retrying: a new Collection List at body level, `source` then `sort` (one key per call, read back), then `move_element` the bound children from the old item into the new item (CMS bindings kept), copy the item and list classes and attributes, move the list into place, remove the old list.
+- Status: worked around
+- Found by: claude
+
+### 2026-10-29 · A lazy image with no width/height takes no space until it loads
+- Area: designer
+- Scope: template-candidate
+- Symptom: the Careers testimonial card was 55px shorter on staging than in the prototype, and grew when scrolled to.
+- Cause: the quote-mark SVG (Image element, `loading="lazy"`, class `height: auto`) publishes without `width`/`height` attributes, so it is 0px tall until it loads; the prototype's `<img width height>` reserved the space.
+- Fix: `aspect-ratio: 83 / 65` on the Quote Mark class (through the style API). Any small image (icons, marks, logos) with `height: auto` in a lazy spot needs its aspect ratio on the class.
+- Status: fixed (Webflow, 2026-10-29)
+- Found by: claude
+
+### 2026-10-29 · A component image prop publishes without srcset until it is cleared and set again
+- Area: mcp
+- Scope: template-candidate
+- Symptom: on Careers the C | Video Frame poster and the four C | Benefit Grid photos published as full-size images without `srcset` (Lighthouse mobile: ~1.2 MB of oversized images, render delay 92% of LCP), although their assets had variants and the props were set after the variants existed. The same images on the style guide's instances also have none; C | Step List and C | Page Hero props did get `srcset`.
+- Cause: unknown; the Image settings inside the components are the same as Step List's.
+- Fix: set each image prop to `null`, then to the asset id again (`set_component_instance_prop_values`), and publish: all five then published with `sizes` and `srcset`. Check the published `<img>` for `srcset` after setting any image prop.
+- Status: worked around (Careers); the style guide instances still have none
+- Found by: claude

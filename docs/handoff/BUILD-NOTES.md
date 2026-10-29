@@ -47,6 +47,8 @@ Collections created 2026-10-28. Sample items from the approved prototype added a
 
 Community Impact (`/community-impact`, page 6ae36b2aaf117d0db6644e71, built 2026-10-29): C | Page Hero (hero photo `ci-hero-ci.jpg`), How Barker benefits (page markup: Split Media with 7 photos, Image Accordion title, Accordion with autoplay 7000 and scope `#benefits`, 7 C | Image Accordion Item Light; the first one's State is `open`; edit each item's Title and Answer on the instance), Resources & Documents and Community & Partnership Initiatives (Documents Collection Lists of C | Doc Accordion Item, Name/Description/Link bound to Name, Description, External URL; `data-accordion-open-first` opens the first row). A document that has only a File needs its Link bound to File instead. Until MANUAL-TODO BK both lists show every document.
 
+Careers (`/careers`, page 6ae37c6cfd76d0a366065c7b, built 2026-10-29): C | Page Hero (hero photo `careers-hero-careers.jpg`, button to `#openings`), Meet our employees (page statement + C | Video Frame; put the video's URL in Video URL), Your Benefits (page statement + C | Benefit Grid; edit the four boxes on the instance), Current Openings (the portal screenshot `careers-openings.jpg` and a C | Button "View All Openings", Link `#` until the portal URL is decided), and the Quote Slider (`#testimonials`): two Collection Lists of Testimonials sorted by Order, photos in the section background and quotes in the glass card. Add, reorder or replace testimonials in the CMS (Quote, Name, Role, Photo, Order); the counter and arrows follow the number of items, and each Photo shows behind its own quote.
+
 The static News and Events pages share the slugs `news` and `events` with their collections: Webflow accepted both (2026-10-28), so list pages are `/news`, `/events` and items `/news/<slug>`, `/events/<slug>`.
 
 ## Integrations
@@ -77,6 +79,7 @@ who approved them.
 - 2026-10-29 · Home hero button: C | Button inside a plain div that carries `data-intro` (an instance can't take attributes). Home's hero texts are page text, edited on the page. · Claude
 - 2026-10-29 · Icons: the Phosphor font is subset to the icons in `phosphor.icons` (31, inlined in the stylesheet, no font request). An icon typed into a C | Button Icon prop that isn't in that file draws nothing: add its name there, run `pnpm phosphor --subset` and `pnpm build`, push. · Claude (PageSpeed)
 - 2026-10-29 · Head code preloads the Space Grotesk woff2 (the hero H1 font). Re-uploading that font changes its URL: update the preload in `loader.html` piece 1 and the site head code. · Claude (PageSpeed)
+- 2026-10-29 · Careers: the Quote Slider slides are the Collection Items themselves (the prototype's `<figure>` and `<blockquote>` are divs, the quote is a Rich Text bound to Quote) and the slide labels "n of 3" are left out (the counter shows the position). The hero photo lacks the prototype's `object-position: 50% 30%` (C | Page Hero has no position option; the crop is ~15px higher). Same look otherwise. · Claude, for review
 
 ## Redirect map
 
@@ -89,6 +92,8 @@ Every old URL → its closest new page, from the crawl saved in discovery.
 ## Known issues
 
 ### Fix before launch
+- Mobile PageSpeed on /careers is 86 (median of 5, range 64–96; desktop 98; 2026-10-29). The LCP is the hero paragraph and ~90% of it is render delay: the full-size Testimonials photos (CMS images, ~690 KB, no `srcset`) and `careers-openings.jpg` (350 KB; uploaded through the API at 17:04, no variants yet, so no `srcset`) load in the same window as the stylesheet and fonts. Next: once the openings asset has variants, build a new Image for it (a plain Image keeps no `srcset`, GOTCHAS); WebP for the CMS photos waits for the user's OK. · Claude
+- Footer (G | Footer W) is 142px shorter on staging than in the prototype at 820 and 390, on every page (seen on /careers and /closed-loop-cooling with wf:pass; main content matches). Not checked further. · Claude
 - Mobile PageSpeed on /closed-loop-cooling is 85 (median of 5, range 64–87; desktop 96; 2026-10-29). Same cause as Project Overview: the LCP is the hero H1 and 91% of it is render delay behind the intro loader; the rest is ~720 KiB of images without `srcset` (MANUAL-TODO BV). · Claude
 - Closed-Loop Cooling vs prototype (wf:pass 1440/820/390): the Photo Band was 115px shorter at 1440 (84 at 820) with the smoke layer's edge showing, and the How It Works heading didn't stick: MANUAL-TODO N–Q (band margins, full bleed now), R (band fade) and S (heading sticks at Nav Height + 2.5em) are done through the API (2026-10-29); recompare. Labels and body text use Space Mono and Satoshi since AA (2026-10-29). Operations and Inside the Loop match in height at all three widths. · Person
 
