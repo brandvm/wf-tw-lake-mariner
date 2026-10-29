@@ -315,3 +315,12 @@ collected from client repos into those files.
 - Fix: `update_style` `background-image` with the variables' literal values (`linear-gradient(270deg, #5c7592, #3e5570)`; for fades to Background/Page, the colour that mode resolves to in that section: Frost on Home's media-below section, Paper on the Cooling band). Published as given, same look; the gradients don't follow a later change of Storm, Accent or the page colour, so a palette change means updating them too (or binding the stops in the Designer). Setting it on a class shared by a component (Button Color) also reaches every variant that doesn't override it: Light and Frost already had `background-image: none`, Secondary didn't and got it through `set_variant_styles`. Check each variant with `get_variant_styles` before publishing.
 - Status: worked around
 - Found by: claude
+
+### 2026-10-29 · Fonts through the API: check the licence before subsetting
+- Area: mcp
+- Scope: template-candidate
+- Symptom: MANUAL-TODO AA (Space Mono, Satoshi) was left for the Designer because Google Fonts can't be added through the API.
+- Cause: —
+- Fix: download the files and upload them as custom fonts: `create_font` (family name exactly as the Typography Scale family variables name it; `axes` for a variable font, which publishes as `font-weight: 300 900`), then POST the returned `upload.fields` plus `file` as multipart to `upload.url` (201 = done), publish, check the `@font-face` in the published CSS and `document.fonts` on a page. The files publish from the fastly host (see "A new font from the fonts API also publishes from the second host"). Licence first: OFL fonts (Google Fonts) may be subset (Space Mono, Latin, 99 → 16 KB), but Fontshare's FFL forbids subsetting and format conversion, so Satoshi went up as Fontshare's own `Satoshi-Variable.woff2` (42.6 KB, one file for 400 and 500). Keep the originals and licence texts in `Assets/fonts/`.
+- Status: worked around
+- Found by: claude
