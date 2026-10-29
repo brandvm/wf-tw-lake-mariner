@@ -405,3 +405,39 @@ collected from client repos into those files.
 - Fix: set each image prop to `null`, then to the asset id again (`set_component_instance_prop_values`), and publish: all five then published with `sizes` and `srcset`. Check the published `<img>` for `srcset` after setting any image prop.
 - Status: worked around (Careers); the style guide instances still have none
 - Found by: claude
+
+### 2026-10-29 · A plain element in a page-shell slot without a duplicate page or a person
+- Area: mcp
+- Scope: template-candidate
+- Symptom: the Events page and the Events CMS template were empty bodies; the API can't build into an empty slot, and a CMS template can't be made with `duplicateOf`.
+- Cause: the API addresses slot content only beside a plain element already in the slot (lessons/mcp.md, Slots), and `insert_in_slot` takes component instances only.
+- Fix: a blank component (here "ZZ Slot Anchor", its root is a plain div) inserted with `data_component_builder` `insert_in_slot` into G | Page W's "G | Main", then `unlink_component_instance`: a plain div is left in the slot and `data_whtml_builder` / `data_element_builder` work `before` it. Remove the div when the page is built, and unregister the helper component when no page needs it. G | Page W stays a linked instance. (Used on /events, the Events and the News templates.)
+- Status: worked around
+- Found by: claude
+
+### 2026-10-29 · Collection List date filters: the value shape, and a date filter and a sort refuse each other
+- Area: mcp
+- Scope: template-candidate
+- Symptom: Events lists (upcoming, past). A DateTime filter took only `greaterThanOrEqual` / `lessThanOrEqual` and failed "requires a valid DateFilterValue object" for `{"type":"now"}`, `{"kind":…}`, `{"mode":…}` and absolute dates. With the right shape, on six fresh body-level lists, whichever of filter and sort was written second failed with `[Conflict] … component map`: sort then filter, filter then sort, both in one write, on the same date field or on Start/End; a filter replacing a filter and a sort replacing a sort took. A sort on a list without a filter (Other events) took.
+- Cause: unknown Webflow-side; the shape is from the Designer API docs (Webflow AI).
+- Fix: the value is relative: `{"amount": 0, "unit": "days", "direction": "past"}` (`unit` days/weeks/months/years; `amount: 0` = today and is stored as `direction: "past"`). Upcoming: `end` greaterThanOrEqual amount 0; past: `end` lessThanOrEqual amount 1 past (ended by yesterday, so an event ending today is upcoming only). Filters were kept (they decide which list an event is in); the sorts are MANUAL-TODO DK.
+- Status: worked around (sort by hand)
+- Found by: claude
+
+### 2026-10-29 · Bound CMS dates publish in one fixed format, and no API link points at the current item
+- Area: mcp
+- Scope: template-candidate
+- Symptom: every Start/End binding (text, DOM span, custom attribute) published as "October 7, 2025", no time; Event Card links published `href="detail_events"` (`static_link` mode `collectionPage`) or `/events` (mode `page` with the template id).
+- Cause: the binding has no format field (`set_settings` binding takes source, collection, field; the raw setting stores nothing else); the link setting has no "current item" target.
+- Fix: both are Designer steps (MANUAL-TODO DI date formats, DJ and DL links). calendar-links now reads New York wall time without an offset ("2026-07-24 08:30", "July 24, 2026 8:30 AM"; 66a0a9b), since Webflow can't publish a date with its offset; a value without a time builds no links.
+- Status: open (Designer steps)
+- Found by: claude
+
+### 2026-10-29 · Imported blocks that refuse attributes; the grey empty state; a form wrapper that shrinks
+- Area: mcp
+- Scope: template-candidate
+- Symptom: (1) `data-list-root` on the imported Past Events section: `set_attributes` reported success and stored nothing, and `set_settings` key `attributes` also read back `[]` (on News the second route worked). (2) The upcoming list's Empty state showed a grey 10px frame around C | Empty Card. (3) The imported search `<form>` came out 200px wide in the centred page head.
+- Cause: (1) unknown, on WHTML-imported blocks; (2) Webflow's `.w-dyn-empty { background-color: #ddd; padding: 10px }`; (3) the importer makes FormWrapper › FormForm, and the class-less `.w-form` wrapper shrinks in a centred flex column (and keeps `margin-bottom: 15px`).
+- Fix: (1) a DivBlock made with `data_element_builder` around the list carries the attribute (read back, published); (2) class List Empty State (padding 0, transparent) on each DynamoEmpty; never remove a DynamoEmpty through the API (it deletes the whole list, per the News session); (3) class Search Field Wrap (width 100%, max-width 32em, margin-bottom 0) on the FormWrapper, Search Field on the FormForm.
+- Status: worked around
+- Found by: claude
