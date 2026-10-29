@@ -271,3 +271,20 @@ collected from client repos into those files.
 - Status: open
 - Found by: claude
 
+### 2026-10-29 · A list inside a component's rich-text prop can't get text through the API
+- Area: mcp
+- Scope: template-candidate
+- Symptom: the Cooling "Key Benefits" answer (C | Accordion Item › Answer, rich text) needed a bulleted list. `data_whtml_builder` into the prop (parent = instance + `prop`) failed ("Failed to create element from WHTML"). `data_element_builder` with `BY_CUSTOM_TAG` `ul` and the instance + `prop` as parent did create a List, but it came with three default items, and `li` children took no `set_text` (published as empty `<li>`); `set_text` on an item with the prop id answered "Element not found"; `query_elements` can't see inside the prop at all.
+- Cause: text inside a rich-text prop is reachable only as the whole prop value (`rich_text_inner_text`, plain paragraphs and line breaks).
+- Fix: set the paragraphs with `rich_text_inner_text` (blank line between items), then a person selects them in the Designer and clicks the bulleted-list button (done 2026-10-29, published as `<ul role="list">` with 6 items). Setting the prop value again also clears a half-built list.
+- Status: worked around
+- Found by: claude
+
+### 2026-10-29 · The canvas draws a grid with no columns at half width
+- Area: designer
+- Scope: template-candidate
+- Symptom: on the Cooling canvas the open accordion answer filled only the left half of the Accordion Item; on the published page it is full width (656 of 658px at 1440).
+- Cause: `.accordion-panel` is `display: grid` with only `grid-template-rows` set (the 0fr → 1fr open animation). The published CSS has no columns, so the browser makes one; the Designer shows Webflow's default two-column grid for it.
+- Fix: none needed for visitors. To make the canvas match, give `.accordion-panel` `grid-template-columns: 1fr` (a shared class, so asked first). Any class ported from the prototype as a grid without columns does the same.
+- Status: open
+- Found by: claude
