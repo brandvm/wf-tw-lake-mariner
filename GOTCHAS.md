@@ -99,6 +99,15 @@ collected from client repos into those files.
 - Status: worked around
 - Found by: claude
 
+### 2026-10-28 · A 40-action element batch times out half-applied; a new Rich Text arrives full of sample content
+- Area: mcp
+- Scope: template-candidate
+- Symptom: rebuilding 8 importer Links as DOM buttons in one `data_element_tool` call (41 set_attributes/move/remove actions) returned "The operation timed out"; reading back showed the first 25 actions applied and the rest not. Separately, every `RichText` made with the element builder came with Webflow's sample content (Heading 1–6, lists, a block quote).
+- Cause: the call has a time limit and applies actions in order without rolling back. The builder's Rich Text is the Designer's default element.
+- Fix: keep element batches to about 20 actions and read back after a timeout before retrying the rest (the remaining moves and removals were sent again). Bind the Rich Text to a rich-text prop at once (the prop's text replaces the sample), or remove the sample children.
+- Status: worked around
+- Found by: claude
+
 ### 2026-10-27 · pnpm classes crashes on .w--current
 - Area: css
 - Scope: template-candidate
