@@ -15,8 +15,9 @@ export function initHeroSequence() {
   const shade = section.querySelector<HTMLElement>('[data-hero-shade]');
   if (!content) return;
 
-  // fromTo with immediateRender off: the intro loader animates the same
-  // parts at load, and nothing here may overwrite that before a scroll.
+  // fromTo with immediateRender off: the CSS entrance (styles.css, hero-rise)
+  // runs on the same parts at load, and nothing here may touch them before a
+  // scroll.
   const tl = gsap.timeline({
     defaults: { ease: 'none', immediateRender: false },
     scrollTrigger: { trigger: section, start: 'top top', end: 'bottom top', scrub: 0.6 },

@@ -310,9 +310,6 @@ html.lenis body {
   overscroll-behavior: contain;
 }
 
-/* repo-css: designer-cant — no loader on later pages of a visit (head code sets html.intro-seen) or with reduced motion. §07. */
-html.intro-seen [data-page-loader] { display: none; }
-
 /* ============================================================
    05. COMPONENTS & MOTION
    ============================================================ */
@@ -627,12 +624,15 @@ button.social-button { padding: 0; cursor: pointer; }
 /* repo-css: designer-cant — attribute selector */
 [data-fill-word] { white-space: nowrap; }
 
-/* repo-css: designer-cant — @keyframes */
-@keyframes intro-loader-fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-@keyframes page-loader-failsafe { to { opacity: 0; visibility: hidden; pointer-events: none; } }
-
-/* repo-css: designer-cant — attribute selector */
-[data-page-loader] { animation: page-loader-failsafe 0.4s ease 4s forwards; }
+/* repo-css: designer-cant — @keyframes. The Home hero's entrance (data-hero-seq): pure CSS, so it starts at first paint without waiting for the bundle (there is no loader). The separate translate and scale properties leave each part's own transform and the hero-sequence scrub alone, and fill-mode backwards holds nothing once a part has arrived. */
+@keyframes hero-rise { from { translate: 0 2em; opacity: 0; } }
+@keyframes hero-zoom { from { scale: 1.12; } }
+[data-hero-seq] [data-intro-media] { animation: hero-zoom 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) backwards; }
+[data-hero-seq] [data-intro] { animation: hero-rise 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) 0.1s backwards; }
+[data-hero-seq] .hero-heading > h1[data-intro] { animation-delay: 0.18s; }
+[data-hero-seq] .hero-heading > p[data-intro] { animation-delay: 0.26s; }
+[data-hero-seq] [data-hero-content] > [data-intro] { animation-delay: 0.34s; }
+[data-hero-seq] [data-hero-facts] { animation-delay: 0.42s; }
 
 /* repo-css: js-state — Highlight Tabs (tabs module). Without the module every panel and photo shows in turn, pinned: the frame sticks for the section's scroll length and one panel and photo show, static (reduced motion): one panel and photo, switched by click. */
 .section[data-tabs-state="pinned"] { min-height: 0; padding: 0; justify-content: flex-start; }
@@ -952,7 +952,7 @@ button.social-button { padding: 0; cursor: pointer; }
 /* repo-css: designer-cant — media query "prefers-reduced-motion: reduce" is not a Webflow breakpoint */
 @media (prefers-reduced-motion: reduce) { .explore-card-img { transition: none; } }
 @media (prefers-reduced-motion: reduce) { .g-nav-w[data-nav-up] { animation: none; } }
-@media (prefers-reduced-motion: reduce) { [data-page-loader] { display: none !important; animation: none; } }
+@media (prefers-reduced-motion: reduce) { [data-hero-seq] [data-intro], [data-hero-seq] [data-intro-media] { animation: none; } }
 @media (prefers-reduced-motion: reduce) { [data-tabs-state] .highlights-panel, [data-tabs-state] .highlights-bg-img, [data-accordion-images="on"] .split-media-img { transition: none; } }
 @media (prefers-reduced-motion: reduce) { .hover-card, .hover-card-tint, .step-text, .step-media { transition: none; } }
 @media (prefers-reduced-motion: reduce) { .benefit-grid, .benefit-media, [data-quote-slide], [data-quote-bg] { transition: none; } }
@@ -977,6 +977,3 @@ button.social-button { padding: 0; cursor: pointer; }
   transform: none !important;
 }
 
-/* TeraWulf: the intro loader stays out of the Designer canvas. */
-/* repo-css: canvas-preview — never in the Designer canvas. §08. */
-html.wf-design-mode [data-page-loader] { display: none; animation: none; }

@@ -7,7 +7,6 @@ import { initPlaceholders } from './modules/placeholders';
 import { initUniqueFormIds } from './modules/unique-form-ids';
 import type Lenis from 'lenis';
 import { initSmoothScroll } from './modules/smooth-scroll';
-import { initIntro } from './modules/intro';
 import { initAnchorScroll } from './modules/anchor-scroll';
 import { initYear } from './modules/year';
 import { initStyleGuideNav } from './modules/style-guide-nav';
@@ -65,7 +64,6 @@ function boot() {
   // (never window.lenis, lessons/js.md).
   let lenis: Lenis | null = null;
   run('smooth-scroll', () => { lenis = initSmoothScroll(); });
-  run('intro', () => initIntro(lenis));
   run('anchor-scroll', () => initAnchorScroll(lenis ?? undefined));
   run('year', initYear);
   run('style-guide-nav', initStyleGuideNav);
