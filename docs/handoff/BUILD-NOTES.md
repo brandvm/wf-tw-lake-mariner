@@ -73,6 +73,8 @@ who approved them.
 - 2026-10-29 · Project Overview: the Responsible Development item [5] answer ends "A video of the stack demolition is to come." instead of the prototype's "View the demolition … here" link, which pointed at `#` (no video yet). Put the link back when the video exists. · Claude, for review
 - 2026-10-29 · Project Overview: the Doc Accordion Item's Link is bound to the Documents External URL field only (a link reads one field; the API accepts the File field too). A PDF uploaded to File alone shows no link: put the file's URL in External URL, or rebind Link to File in the Designer if the client prefers uploads. Same choice for Community Impact. · Claude, for review
 - 2026-10-29 · Closed-Loop Cooling: the hero and Photo Band sections have no `id="top"` / `id="system"` (their section is the component root, which has no id prop); nothing links to them. The Key Benefits list is a bulleted list made in the Designer (MANUAL-TODO BU). · Claude, for review
+- 2026-10-29 · Home FAQ shows the first 4 FAQs by Order; the Show on Home switch filter can't be set (Webflow conflict, GOTCHAS 2026-10-29, MANUAL-TODO AP), so editors put the Home questions at Order 1–4 for now. · Claude, for review
+- 2026-10-29 · Home hero button: C | Button inside a plain div that carries `data-intro` (an instance can't take attributes). Home's hero texts are page text, edited on the page. · Claude
 
 ## Redirect map
 
@@ -94,7 +96,7 @@ Every old URL → its closest new page, from the crawl saved in discovery.
 - Style guide Buttons section: add a "Button Size · Small" row once the Small variant's styles are in (MANUAL-TODO AC). · Claude
 - Explore Rail: the cursor pill is the raw Button Size markup at the default size; the prototype uses Button Size's Small variant. Swap each pill's Button Color/Size for instances set to Small (after MANUAL-TODO AO). · Claude
 - C | Stat Row values are transparent until MANUAL-TODO AF (the gradient the text is clipped to) is done. · Person
-- Home FAQ: with a Collection List every item takes the same State, so none starts open (the prototype opens the first). Either an "Open first" option in the accordion module or a CMS switch bound to State; decide with the Home page. · Claude
+- Home FAQ: with a Collection List every item takes the same State, so none starts open (the prototype opens the first). Either an "Open first" option in the accordion module or a CMS switch bound to State; decide with the Home page. · Claude — done 2026-10-29: the FAQ Accordion has `data-accordion-open-first` (and `data-faq-schema`, FAQPage JSON-LD from the items shown)
 - Style guide specimens of absolutely positioned or full-bleed parts (Fact Bar, Explore Rail) are clipped by their row at 820 and 390; on the pages they span the section. · Claude
 
 ### Fix after launch
