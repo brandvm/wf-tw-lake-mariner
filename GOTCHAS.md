@@ -250,7 +250,7 @@ collected from client repos into those files.
 - Symptom: the Home FAQ list's filter "Show on Home is On" failed with "[Conflict] The operation could not be applied to the component map", through the API (`filters` with `isOn`) and in the Designer alike. After the failed write the same list refused its sort too, which looked like "this list refuses every query write".
 - Cause: unknown Webflow-side; isolated with test lists on Home: source + sort by name or by the Number field Order work on FAQs and Testimonials; the `isOn` filter on the Switch field is the write that fails (`equals` is rejected as invalid for a Switch).
 - Fix: rebuild the list and write source, sort, limit first; leave the Switch filter out (Home shows the first 4 FAQs by Order; MANUAL-TODO AP keeps the filter for when Webflow accepts it). Try the filter last on any list, so a failure can't block the rest; never send query writes to one list in parallel.
-- Status: worked around Update 2026-10-29 (later): on the Project Overview lists and the Home FAQ list the Option and Switch filters now take through `set_settings` and publish; see "List filters take on some lists and not on others".
+- Status: worked around; update 2026-10-29: the `isOn` filter took on the rebuilt Home list later the same day (MANUAL-TODO AP), so the conflict is intermittent, not permanent: retry it last, alone, with the page open in the Designer Update 2026-10-29 (later): on the Project Overview lists and the Home FAQ list the Option and Switch filters now take through `set_settings` and publish; see "List filters take on some lists and not on others".
 - Found by: claude
 
 ### 2026-10-29 · A page made with `duplicateOf` brings the source page's slot content, out of sight
