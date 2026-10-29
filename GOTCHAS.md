@@ -324,3 +324,12 @@ collected from client repos into those files.
 - Fix: download the files and upload them as custom fonts: `create_font` (family name exactly as the Typography Scale family variables name it; `axes` for a variable font, which publishes as `font-weight: 300 900`), then POST the returned `upload.fields` plus `file` as multipart to `upload.url` (201 = done), publish, check the `@font-face` in the published CSS and `document.fonts` on a page. The files publish from the fastly host (see "A new font from the fonts API also publishes from the second host"). Licence first: OFL fonts (Google Fonts) may be subset (Space Mono, Latin, 99 → 16 KB), but Fontshare's FFL forbids subsetting and format conversion, so Satoshi went up as Fontshare's own `Satoshi-Variable.woff2` (42.6 KB, one file for 400 and 500). Keep the originals and licence texts in `Assets/fonts/`.
 - Status: worked around
 - Found by: claude
+
+### 2026-10-29 · The template's update-skills test assumes the full Phosphor font
+- Area: ci
+- Scope: template-candidate
+- Symptom: after `pnpm phosphor --subset`, `pnpm test` failed in tests/update-skills.check.mjs: "src/phosphor has a .woff2" was false.
+- Cause: the test copies the icon font from this repo as if it were the template, and `--subset` (an option the template documents) inlines the font into src/phosphor.css and removes the .woff2.
+- Fix: the test now expects the source's own font files (none after a subset) and the same phosphor.css (d707883). The template's copy of the test needs the same change.
+- Status: fixed d707883; not upstreamed
+- Found by: claude

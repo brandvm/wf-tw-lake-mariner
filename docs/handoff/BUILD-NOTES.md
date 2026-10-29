@@ -75,6 +75,8 @@ who approved them.
 - 2026-10-29 · Closed-Loop Cooling: the hero and Photo Band sections have no `id="top"` / `id="system"` (their section is the component root, which has no id prop); nothing links to them. The Key Benefits list is a bulleted list made in the Designer (MANUAL-TODO BU). · Claude, for review
 - 2026-10-29 · Home FAQ shows the first 4 FAQs by Order; the Show on Home switch filter can't be set (Webflow conflict, GOTCHAS 2026-10-29, MANUAL-TODO AP), so editors put the Home questions at Order 1–4 for now. · Claude, for review
 - 2026-10-29 · Home hero button: C | Button inside a plain div that carries `data-intro` (an instance can't take attributes). Home's hero texts are page text, edited on the page. · Claude
+- 2026-10-29 · Icons: the Phosphor font is subset to the icons in `phosphor.icons` (31, inlined in the stylesheet, no font request). An icon typed into a C | Button Icon prop that isn't in that file draws nothing: add its name there, run `pnpm phosphor --subset` and `pnpm build`, push. · Claude (PageSpeed)
+- 2026-10-29 · Head code preloads the Space Grotesk woff2 (the hero H1 font). Re-uploading that font changes its URL: update the preload in `loader.html` piece 1 and the site head code. · Claude (PageSpeed)
 
 ## Redirect map
 
