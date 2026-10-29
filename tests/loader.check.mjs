@@ -25,7 +25,7 @@ const release = (v) => `https://cdn.jsdelivr.net/gh/${org}/${repo}@${v}/dist/`;
 
 // A page with the loader pieces in it. `pieces` picks which ones are
 // installed (a missing head code is the "config missing" case).
-function load({ host = 'example.webflow.io', search = '', stored = null, denyStorage = false, RELEASE = null, pieces = ['head', 'embed', 'footer'] } = {}) {
+function load({ host = 'example.webflow.io', search = '', stored = null, denyStorage = false, RELEASE = null, pieces = ['head', 'embed', 'footer'], frames = null, hidden = false } = {}) {
   const logs = { error: [], warn: [] };
   const timers = [];
   const listeners = {};
@@ -54,6 +54,7 @@ function load({ host = 'example.webflow.io', search = '', stored = null, denySto
     // Piece 1 writes the release <link> into <head> on a release domain.
     write: (html) => { const node = el('link'); node.rel = 'stylesheet'; node.href = html.match(/href="([^"]+)"/)?.[1]; node.written = true; attach(document.head, node); },
     getElementById: (id) => nodes.find((n) => n.parentNode && n.id === id) ?? null,
+    visibilityState: hidden ? 'hidden' : 'visible',
   };
   const page = vm.createContext({
     document,
@@ -66,6 +67,8 @@ function load({ host = 'example.webflow.io', search = '', stored = null, denySto
     console: { error: (m) => logs.error.push(String(m)), warn: (m) => logs.warn.push(String(m)) },
     setTimeout: (fn, ms) => timers.push({ fn, ms }),
     addEventListener: (type, fn) => (listeners[type] ??= []).push(fn),
+    // `frames` (an array) stands in for the browser's animation frames.
+    ...(frames ? { requestAnimationFrame: (fn) => frames.push(fn) } : {}),
   });
   page.window = page;
   const code = { head: head.replace('var RELEASE = null;', `var RELEASE = ${JSON.stringify(RELEASE)};`), embed, footer };
@@ -239,4 +242,18 @@ test('RELEASE set: production writes the pinned stylesheet into <head>; staging 
   assert.deepEqual(prod.written().map((n) => n.href), [release('1.0.0') + 'styles.css']);
   assert.equal(load({ RELEASE: '1.0.0' }).written().length, 0, 'staging keeps the 2a sheet');
   assert.equal(load({ host: 'client.example' }).written().length, 0, 'no release, nothing written');
+});
+
+test('the bundle starts after the first painted frame, at once in a hidden tab', () => {
+  const frames = [];
+  const h = load({ frames });
+  assert.equal(h.scripts().length, 0, 'nothing requested before the first frame');
+  frames.shift()();
+  assert.equal(h.scripts().length, 0, 'still waiting during the first frame');
+  frames.shift()();
+  assert.equal(h.scripts().length, 1, 'requested in the frame after the first paint');
+  h.timers.find((t) => t.ms === 3000 && t.fn.name === 'start').fn();
+  assert.equal(h.scripts().length, 1, 'the fallback timeout does not load it twice');
+  const bg = load({ frames: [], hidden: true });
+  assert.equal(bg.scripts().length, 1, 'a hidden tab paints no frames: start at once');
 });

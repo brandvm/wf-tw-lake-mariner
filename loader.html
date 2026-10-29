@@ -47,10 +47,6 @@ published.
 <!-- Fonts uploaded through the Webflow API (Geist, Space Grotesk) publish
      from this host, not the asset CDN: warm it (lessons/mcp.md). -->
 <link rel="preconnect" href="https://webflow-files-prod.global.ssl.fastly.net" crossorigin />
-<!-- The hero heading font (Space Grotesk, the H1 is the LCP): preload it so it
-     downloads with the stylesheets instead of after them. Update this URL if
-     the font is re-uploaded (Site settings › Fonts; the published CSS has it). -->
-<link rel="preload" as="font" type="font/woff2" crossorigin href="https://webflow-files-prod.global.ssl.fastly.net/6ae0f7d7bcf5d7622aeac214/fonts/6ae25420f20026a0602781e0-SpaceGrotesk-Variable-latin.woff2" />
 
 <script>
   (function () {
@@ -292,15 +288,34 @@ Rollback = set RELEASE in piece 1 back to the previous tag and publish.
       if (fallback) s.onerror = fallback;
       document.head.appendChild(s);
     }
+    // Start the bundle once the first frame has painted (two animation
+    // frames), not when the parser gets here. Lighthouse counts every
+    // request that ends before the first paint as needed for it, so the
+    // ~100 KB bundle racing the paint cost mobile scores up to 10 points.
+    // The first frame needs nothing from the bundle (motion states are set
+    // after it anyway). A hidden tab paints no frames: start at once there;
+    // the timeout covers a tab hidden mid-load. C.source is set now, not at
+    // the request: 2b reads it on `load`, which can come first.
     var v = "?v=" + Date.now();
-    if (C.dev)
-      js(C.devBase + "index.js", function () {
-        js(C.stag + "index.js" + v);
-      });
-    else if (C.staging)
-      js(C.stag + "index.js" + v, C.release ? function () {
-        js(C.prod + "index.js");
-      } : null);
-    else js(C.prod + "index.js" + (C.release ? "" : v));
+    var first, fallback;
+    if (C.dev) {
+      first = C.devBase + "index.js";
+      fallback = function () { js(C.stag + "index.js" + v); };
+    } else if (C.staging) {
+      first = C.stag + "index.js" + v;
+      if (C.release) fallback = function () { js(C.prod + "index.js"); };
+    } else first = C.prod + "index.js" + (C.release ? "" : v);
+    C.source = new URL(".", first).href;
+    var started = false;
+    function start() {
+      if (started) return;
+      started = true;
+      js(first, fallback);
+    }
+    if (!window.requestAnimationFrame || document.visibilityState === "hidden") start();
+    else {
+      requestAnimationFrame(function () { requestAnimationFrame(start); });
+      setTimeout(start, 3000);
+    }
   })();
 </script>
