@@ -333,3 +333,12 @@ collected from client repos into those files.
 - Fix: the test now expects the source's own font files (none after a subset) and the same phosphor.css (d707883). The template's copy of the test needs the same change.
 - Status: fixed d707883; not upstreamed
 - Found by: claude
+
+### 2026-10-29 · A Collection List inside a flex wrapper loses the wrapper's gap
+- Area: designer
+- Scope: template-candidate
+- Symptom: the Home FAQ items sat flush against each other on staging although the Accordion is `display: flex` with a 1em row gap (found by the Community Impact session).
+- Cause: the Collection List adds two block wrappers (`.w-dyn-list` › `.w-dyn-items`) between the Accordion and its items, so the gap spaces the one wrapper, not the items.
+- Fix: the existing Accordion class also on the list's items wrapper (DynamoList), no new class: gaps 13.7px at 1440, 16px at 820 and 390. Any list built inside a flex/grid wrapper (Doc Accordions, cards) needs the same.
+- Status: fixed (Home, published)
+- Found by: claude
