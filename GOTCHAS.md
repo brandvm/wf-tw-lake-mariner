@@ -262,12 +262,12 @@ collected from client repos into those files.
 - Status: worked around
 - Found by: claude
 
-### 2026-10-29 · Image attributes and Collection List queries refused while the Designer is on another page
+### 2026-10-29 · Imported Images refuse attributes; Collection List queries refused on Community Impact
 - Area: mcp
 - Scope: template-candidate
 - Symptom: on Community Impact, `set_attributes` (`data-accordion-image`, `data-parallax`, `loading`) on 7 imported Images, sent after `set_image_asset` in one batch, reported success and stored nothing; retried alone, they failed with "[Conflict] The operation could not be applied to the component map". The same write on a div on that page worked. Every `filters` and `sort` write on its two Documents lists failed the same way (Home row AP hit the same). The Designer had Home open the whole time (another session was working there).
 - Cause: unconfirmed; writes that touch images or CMS queries seem to need the page open in the Designer. The API does check the value shapes before refusing: a Switch filter is `{"fieldSlug": "<slug>", "operator": "isOn"}` (or `isOff`), an Option filter `{"fieldSlug", "operator": "equals", "value": "<option id>"}`, a sort `{"fieldSlug", "direction": "ascending"}`.
-- Fix: MANUAL-TODO BK (filters, sort) and BL (image attributes), to retry through the API with the page open in the Designer first. Read image attributes back after every write; "success" is not proof. Update: on fresh lists rebuilt at body level (after the Switch-filter entry above), `source` and `sort` took, but an Option filter (`group` equals) reported "applied" and read back `[]` on one list and was refused on the other, and `curatedItemIds` was refused after `queryMode` curated took. So it isn't only the Switch filter: on this page no item-level query write sticks.
+- Fix: MANUAL-TODO BK (filters, sort) and BL (image attributes), to retry through the API with the page open in the Designer first. Read image attributes back after every write; "success" is not proof. Update: on fresh lists rebuilt at body level (after the Switch-filter entry above), `source` and `sort` took, but an Option filter (`group` equals) reported "applied" and read back `[]` on one list and was refused on the other, and `curatedItemIds` was refused after `queryMode` curated took. So it isn't only the Switch filter: on this page no item-level query write sticks. Update 2: with the Designer open on the page it was no better. Even `sort` (by Order, then by name) was refused on a brand-new list, after the two broken lists were deleted. The image writes failed because the Images came from the WHTML importer: Images made with `data_element_builder` (type Image, `set_image_asset`, then `set_attributes`) took `data-accordion-image`, `data-parallax` and `loading` at once. Fix for images: build them, don't import them.
 - Status: open
 - Found by: claude
 
