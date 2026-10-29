@@ -241,7 +241,7 @@ collected from client repos into those files.
 - Symptom: on Project Overview, `filters` (switch `isOn`, option `equals`, alone or together) and then `sort` on two fresh Documents Collection Lists, built at body level as `lessons/mcp.md` advises, failed with "[Conflict] The operation could not be applied to the component map". `source`, classes, attributes, the item's component instance and its CMS prop bindings all took.
 - Cause: unknown Webflow-side. Update the same day, after the Home finding ("A Switch filter on a Collection List breaks the list"): on two new lists, source then sort by Order (one call each, in sequence) took; an Option filter (`group` `equals` the option id) alone then failed the same way, so it isn't only the Switch: on this site no filter write takes. A failed filter also blocks later query writes on that list.
 - Fix: new lists with source and sort first; the filters stay a Designer step (MANUAL-TODO BA, AP, BK); mark the unfiltered list on the page with a `data-manual-todo` caption. The bound item instance can be moved from a stuck list into the new one (bindings kept), then the stuck list removed.
-- Status: worked around (sort through the API, filters by hand)
+- Status: worked around (sort through the API, filters by hand) Update 2026-10-29 (later): on the Project Overview lists and the Home FAQ list the Option and Switch filters now take through `set_settings` and publish; see "List filters take on some lists and not on others".
 - Found by: claude
 
 ### 2026-10-29 · A Switch filter on a Collection List breaks the list
@@ -250,7 +250,7 @@ collected from client repos into those files.
 - Symptom: the Home FAQ list's filter "Show on Home is On" failed with "[Conflict] The operation could not be applied to the component map", through the API (`filters` with `isOn`) and in the Designer alike. After the failed write the same list refused its sort too, which looked like "this list refuses every query write".
 - Cause: unknown Webflow-side; isolated with test lists on Home: source + sort by name or by the Number field Order work on FAQs and Testimonials; the `isOn` filter on the Switch field is the write that fails (`equals` is rejected as invalid for a Switch).
 - Fix: rebuild the list and write source, sort, limit first; leave the Switch filter out (Home shows the first 4 FAQs by Order; MANUAL-TODO AP keeps the filter for when Webflow accepts it). Try the filter last on any list, so a failure can't block the rest; never send query writes to one list in parallel.
-- Status: worked around
+- Status: worked around Update 2026-10-29 (later): on the Project Overview lists and the Home FAQ list the Option and Switch filters now take through `set_settings` and publish; see "List filters take on some lists and not on others".
 - Found by: claude
 
 ### 2026-10-29 · A page made with `duplicateOf` brings the source page's slot content, out of sight
@@ -341,4 +341,22 @@ collected from client repos into those files.
 - Cause: the Collection List adds two block wrappers (`.w-dyn-list` › `.w-dyn-items`) between the Accordion and its items, so the gap spaces the one wrapper, not the items.
 - Fix: the existing Accordion class also on the list's items wrapper (DynamoList), no new class: gaps 13.7px at 1440, 16px at 820 and 390. Any list built inside a flex/grid wrapper (Doc Accordions, cards) needs the same.
 - Status: fixed (Home, published)
+- Found by: claude
+
+### 2026-10-29 · List filters take on some lists and not on others
+- Area: mcp
+- Scope: template-candidate
+- Symptom: the same `filters` write (`group` equals the option id, then with `show-on-project-overview` isOn) was stored, read back and published on both Project Overview Documents lists, and the Home FAQ list reads back `show-on-home` isOn and publishes 4 items, while on the two Community Impact Documents lists `filters` and even `sort` were refused with `[Conflict] … component map`, also after moving the list to body level.
+- Cause: unknown. The difference seen: the PO and Home lists carry their classes and `data-accordion` attributes on the Collection List itself and had sort written earlier without a failure; the CI lists sit inside a separate Accordion wrapper and had already had refused writes (lessons/mcp.md: a list that refused a write once refuses later writes).
+- Fix: try the filter on each list once, alone (one key per `set_settings`), read it back, check the published list. A list that refused once is a Designer step (or rebuild it and write source, sort, filters one at a time before anything fails). Earlier entries that said "no filter write takes on this site" were too broad.
+- Status: worked around (BA and AP done through the API, BK left to the Designer)
+- Found by: claude
+
+### 2026-10-29 · API-uploaded images get their variants late; a plain Image keeps no srcset
+- Area: mcp
+- Scope: template-candidate
+- Symptom: three images uploaded through the assets API at 15:50 had size 0 and no variants, so the Community Impact and Cooling heroes published without `srcset` (MANUAL-TODO BN, BV asked a person to re-pick them). At 16:32 all three had variants (500 to 2000px). The heroes (C | Page Hero image prop) then published with `srcset` with no other change. The Operations background, a plain Image element set while its asset had no variants, still published without `srcset`, also after `set_image_asset` with the same asset.
+- Cause: Webflow makes the variants asynchronously, here about 40 minutes after the upload (all three in the same minute; a re-post of one file's bytes to its S3 key just before may or may not have set it off). A component image prop resolves the variants at publish; a plain Image element seems to keep what it had when it was set.
+- Fix: check `get_asset` variants before asking a person to re-pick an image; wait and republish first. A plain Image whose asset got its variants later still needs a re-pick in the Designer (or set it after the variants exist). `get_asset` keeps reporting size 0 even with variants.
+- Status: worked around
 - Found by: claude
