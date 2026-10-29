@@ -27,16 +27,21 @@ function wrapLetters(el: HTMLElement) {
         frag.append(part);
         return;
       }
-      const word = document.createElement('span');
-      word.dataset.fillWord = '';
-      [...part].forEach((ch) => {
-        const letter = document.createElement('span');
-        letter.dataset.fillLetter = '';
-        letter.textContent = ch;
-        letters.push(letter);
-        word.append(letter);
+      // A hyphenated word is split after each hyphen or dash, so it can
+      // still break there as the plain text did ("high-performance" kept
+      // whole wrapped one line later and the statement grew by a line).
+      part.split(/(?<=[-\u2010-\u2014/])/).forEach((piece) => {
+        const word = document.createElement('span');
+        word.dataset.fillWord = '';
+        [...piece].forEach((ch) => {
+          const letter = document.createElement('span');
+          letter.dataset.fillLetter = '';
+          letter.textContent = ch;
+          letters.push(letter);
+          word.append(letter);
+        });
+        frag.append(word);
       });
-      frag.append(word);
     });
     node.replaceWith(frag);
   });

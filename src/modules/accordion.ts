@@ -33,6 +33,9 @@ export function initAccordions() {
       accordion.style.setProperty('--accordion-duration', `${duration}ms`);
     }
 
+    // Tells the CSS the module has started (the open-first pre-state lets go).
+    accordion.dataset.accordionState = 'on';
+
     const set = (item: HTMLElement, open: boolean) => {
       item.dataset.state = open ? 'open' : 'closed';
       item.querySelector('[data-accordion-trigger]')?.setAttribute('aria-expanded', String(open));

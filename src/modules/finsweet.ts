@@ -79,11 +79,14 @@ export function loadAttribute(name: string): Promise<unknown> {
         entry.destroy?.();
         return loadAttribute(name);
       };
+      document.documentElement.setAttribute(`data-fs-${name}`, 'on');
       entry.resolve?.(started.result);
     })
     .catch((error: unknown) => {
       // The page still works without the enhancement (e.g. a list in CMS order).
       console.warn(`[finsweet] ${name} unavailable`, error);
+      // Lets go of the pre-start CSS (styles.css), so every item shows.
+      document.documentElement.setAttribute(`data-fs-${name}`, 'failed');
       entry.resolve?.(undefined);
     });
   return entry.loading;

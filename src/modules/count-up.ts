@@ -90,13 +90,17 @@ export function initCountUp() {
     primeCount(el);
     if (reducedMotion()) return;
     const state = { v: 0 };
+    // Hold the final text's height while counting: a shorter number can
+    // unwrap a line ("$28 – 0 / hr" fits where "$28 – 36 / hr" wraps) and
+    // move everything below.
+    el.style.minHeight = `${el.offsetHeight}px`;
     setCount(el, 0);
     ScrollTrigger.create({
       trigger: el,
       // In a hero the numbers are on screen at load: count straight away.
       start: el.closest('[data-hero]') ? 'top bottom' : 'top 85%',
       once: true,
-      onEnter: () => gsap.to(state, { v: 1, duration: 1.6, ease: 'power2.out', onUpdate: () => setCount(el, state.v) }),
+      onEnter: () => gsap.to(state, { v: 1, duration: 1.6, ease: 'power2.out', onUpdate: () => setCount(el, state.v), onComplete: () => { el.style.minHeight = ''; } }),
     });
   });
 }

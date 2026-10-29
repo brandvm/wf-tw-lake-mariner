@@ -293,6 +293,15 @@ html.is-loading {
   overflow: hidden;
 }
 
+/* repo-css: designer-cant — scrollbar-gutter. The scrollbar's space is
+   always reserved: with classic (non-overlay) scrollbars the lock above
+   would otherwise make the page a scrollbar wider until the bundle boots,
+   then narrow and reflow. Reserving it only while locked moves the page
+   the other way when the lock lifts. Overlay scrollbars have no gutter. */
+html {
+  scrollbar-gutter: stable;
+}
+
 /* repo-css: third-party — Lenis (recipes/smooth-scroll). The core of
    lenis/dist/lenis.css; compare with that file in the installed version
    and copy anything newer. .lenis-stopped is how lenis.stop() locks the
@@ -530,14 +539,14 @@ button.social-button { padding: 0; cursor: pointer; }
 /* repo-css: designer-cant — structural pseudo-class */
 .g-nav-w:not([data-state="open"]) .nav-toggle-close { display: none; }
 
-/* repo-css: designer-cant — attribute selector */
-.accordion-item[data-state="open"] .accordion-panel { grid-template-rows: 1fr; }
-.accordion-item[data-state="open"] .accordion-trigger { padding-bottom: 1.25em; }
-@media (max-width: 767px) { .accordion-item[data-state="open"] .accordion-trigger { padding-bottom: 0.75em; } }
-.accordion-item[data-state="open"] .accordion-icon-plus { display: none; }
+/* repo-css: designer-cant — attribute selector. An accordion with data-accordion-open-first and no item open shows its first item open before the module runs (it sets data-accordion-state), so the rows below don't slide down when the bundle arrives after the first paint. */
+.accordion-item[data-state="open"] .accordion-panel, [data-accordion-open-first]:not([data-accordion-state]):not(:has([data-state="open"])) .w-dyn-item:first-child > .accordion-item .accordion-panel { grid-template-rows: 1fr; }
+.accordion-item[data-state="open"] .accordion-trigger, [data-accordion-open-first]:not([data-accordion-state]):not(:has([data-state="open"])) .w-dyn-item:first-child > .accordion-item .accordion-trigger { padding-bottom: 1.25em; }
+@media (max-width: 767px) { .accordion-item[data-state="open"] .accordion-trigger, [data-accordion-open-first]:not([data-accordion-state]):not(:has([data-state="open"])) .w-dyn-item:first-child > .accordion-item .accordion-trigger { padding-bottom: 0.75em; } }
+.accordion-item[data-state="open"] .accordion-icon-plus, [data-accordion-open-first]:not([data-accordion-state]):not(:has([data-state="open"])) .w-dyn-item:first-child > .accordion-item .accordion-icon-plus { display: none; }
 
 /* repo-css: designer-cant — structural pseudo-class */
-.accordion-item:not([data-state="open"]) .accordion-icon-minus { display: none; }
+.accordion-item:not([data-state="open"]):not([data-accordion-open-first]:not([data-accordion-state]):not(:has([data-state="open"])) .w-dyn-item:first-child > *) .accordion-icon-minus { display: none; }
 
 /* repo-css: designer-cant — scrollbar styling on the Explore rail. */
 .explore-rail { scrollbar-width: none; }
@@ -607,8 +616,9 @@ button.social-button { padding: 0; cursor: pointer; }
 /* repo-css: designer-cant — attribute selector */
 .g-page-w .g-nav-w[data-state="open"] .nav-toggle { border-color: var(--_colors---paper-tint--paper-20); background-color: var(--_colors---steel-tint--steel-60); color: var(--_colors---brand--paper); }
 
-/* repo-css: js-state — the pinned sideways scroll (hscroll module), on from 992px up without reduced motion. Off, the rail is a native swipe row. */
+/* repo-css: js-state — the pinned sideways scroll (hscroll module), on from 992px up without reduced motion. Off, the rail is a native swipe row. The pinned layout also applies before the module runs (no state yet), under the same media query, so a page reloaded below the rail doesn't jump when the bundle arrives after the first paint. The height is the module's own sum (the pinned frame plus the travel: the four cards' 207em run minus the content width, min(80em, 100vw minus the 4em side padding twice)), the module then sets the measured value. If the cards change size, this is only an estimate and the module still corrects it. */
 .section[data-hscroll-state="on"] { padding-top: 0; padding-bottom: 0; }
+@media screen and (min-width: 992px) and (prefers-reduced-motion: no-preference) { .section[data-hscroll]:not([data-hscroll-state]) { height: calc(100svh + 207em - min(80em, 100vw - 8em)); padding-top: 0; padding-bottom: 0; } [data-hscroll]:not([data-hscroll-state]) .pin-frame { position: sticky; top: 0; display: flex; height: 100svh; flex-direction: column; justify-content: center; } [data-hscroll]:not([data-hscroll-state]) .explore-rail { padding-right: 0; overflow: visible; } }
 
 /* repo-css: designer-cant — attribute selector */
 [data-hscroll-state="on"] .pin-frame { position: sticky; top: 0; display: flex; height: 100svh; flex-direction: column; justify-content: center; }
@@ -634,18 +644,19 @@ button.social-button { padding: 0; cursor: pointer; }
 [data-hero-seq] [data-hero-content] > [data-intro] { animation-delay: 0.23s; }
 [data-hero-seq] [data-hero-facts] { animation-delay: 0.29s; }
 
-/* repo-css: js-state — Highlight Tabs (tabs module). Without the module every panel and photo shows in turn, pinned: the frame sticks for the section's scroll length and one panel and photo show, static (reduced motion): one panel and photo, switched by click. */
+/* repo-css: js-state — Highlight Tabs (tabs module). Pinned (768px up, motion allowed): the frame sticks for the section's scroll length and one panel and photo show, static (below 768px or reduced motion): one panel and photo, switched by click. Before the module runs (no state yet) the page already has that layout with the first panel and photo, so nothing jumps when the bundle arrives after the first paint. The pinned height is the module's sum (the frame plus half a screen per tab, five tabs), which the module then sets itself. */
 .section[data-tabs-state="pinned"] { min-height: 0; padding: 0; justify-content: flex-start; }
+@media screen and (min-width: 768px) and (prefers-reduced-motion: no-preference) { .section[data-tabs]:not([data-tabs-state]) { height: calc(max(100svh, 40em) + 250vh); min-height: 0; padding: 0; justify-content: flex-start; } [data-tabs]:not([data-tabs-state]) .pin-frame.is-highlights { position: sticky; top: 0; display: flex; height: 100svh; min-height: 40em; padding: var(--_layout---section--padding-v) var(--_layout---section--padding-h); flex-direction: column; justify-content: flex-end; } }
 
 /* repo-css: js-state — attribute selector */
 [data-tabs-state="pinned"] .pin-frame.is-highlights { position: sticky; top: 0; display: flex; height: 100svh; min-height: 40em; padding: var(--_layout---section--padding-v) var(--_layout---section--padding-h); flex-direction: column; justify-content: flex-end; }
 
 /* repo-css: designer-cant — attribute selector */
-[data-tabs-state] .highlights-panels { display: grid; }
-[data-tabs-state] .highlights-panel { grid-area: 1 / 1; opacity: 0; visibility: hidden; transform: translateY(1em); transition: opacity 500ms ease, transform 500ms ease, visibility 500ms; }
-[data-tabs-state] .highlights-panel[data-active] { opacity: 1; visibility: visible; transform: none; }
-[data-tabs-state] .highlights-bg-img { opacity: 0; transition: opacity 800ms ease; }
-[data-tabs-state] .highlights-bg-img[data-active] { opacity: 1; }
+[data-tabs] .highlights-panels { display: grid; }
+[data-tabs] .highlights-panel { grid-area: 1 / 1; opacity: 0; visibility: hidden; transform: translateY(1em); transition: opacity 500ms ease, transform 500ms ease, visibility 500ms; }
+[data-tabs] .highlights-panel[data-active], [data-tabs]:not([data-tabs-state]) .highlights-panel:first-child { opacity: 1; visibility: visible; transform: none; }
+[data-tabs] .highlights-bg-img { opacity: 0; transition: opacity 800ms ease; }
+[data-tabs] .highlights-bg-img[data-active], [data-tabs]:not([data-tabs-state]) .highlights-bg-img:first-child { opacity: 1; }
 .highlights-tab[aria-selected="true"] { opacity: 1; }
 .highlights-tab[data-passed] { opacity: 1; }
 
@@ -681,11 +692,11 @@ button.social-button { padding: 0; cursor: pointer; }
 /* repo-css: js-state — Benefit Grid (benefits module): the inactive boxes' photos sit back, the module writes the grid tracks inline. */
 [data-benefits-state="on"] [data-benefit]:not([data-active]) .benefit-media { opacity: 0.6; filter: grayscale(0.6); }
 
-/* repo-css: js-state — Quote Slider (quote-slider module): the slides share one grid cell (the card takes the tallest) and cross-fade, as do the photos behind. Without the module the quotes are listed and only the first photo shows. */
-[data-quote-state="on"] [data-quote-slide] { grid-area: 1 / 1; transition: opacity 0.6s ease, visibility 0.6s; }
+/* repo-css: js-state — Quote Slider (quote-slider module): the slides share one grid cell (the card takes the tallest) and cross-fade, as do the photos behind. The same layout applies before the module runs (no state yet) with the first quote showing, so the section keeps its height when the bundle arrives after the first paint. A single quote is left alone (the module does nothing then). */
+[data-quote-state="on"] [data-quote-slide], [data-quote-slider]:not([data-quote-state]) [data-quote-slide]:not(:only-child) { grid-area: 1 / 1; transition: opacity 0.6s ease, visibility 0.6s; }
 
 /* repo-css: designer-cant — structural pseudo-class */
-[data-quote-state="on"] [data-quote-slide]:not([data-active]) { opacity: 0; visibility: hidden; }
+[data-quote-state="on"] [data-quote-slide]:not([data-active]), [data-quote-slider]:not([data-quote-state]) [data-quote-slide]:not(:first-child) { opacity: 0; visibility: hidden; }
 
 /* repo-css: designer-cant — attribute selector */
 [data-quote-bg] { transition: opacity 0.9s ease; }
@@ -743,6 +754,9 @@ button.social-button { padding: 0; cursor: pointer; }
 /* repo-css: designer-cant — attribute selector */
 [data-list-state="filtered"] .clear-all { visibility: visible; }
 [data-list-hidden] { display: none; }
+
+/* repo-css: js-state — until Finsweet List has started (finsweet.ts sets data-fs-list on <html>, also if it fails) only the first page of a paginated list shows, as Finsweet will show it, so the cards below and the footer don't jump up when it starts. One rule per fs-list-itemsperpage value in use (News: 6). */
+html:not([data-fs-list]) [fs-list-element="list"][fs-list-itemsperpage="6"] > .w-dyn-item:nth-child(n+7) { display: none; }
 
 /* repo-css: designer-cant — Article: the source link's arrow nudges on the link's hover, the lightbox trigger the lightbox module wraps around each rich-text image. */
 .source-link:hover .source-arrow { transform: translateX(0.25em); }
