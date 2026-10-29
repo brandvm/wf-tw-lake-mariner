@@ -68,6 +68,8 @@ who approved them.
 - 2026-10-29 · The Quote Slider is built with the Careers page, not as a component (its quotes and photos are two lists from the Testimonials collection). · Claude, per the K2b proposal
 - 2026-10-29 · Post Card, Event Card, Detail Bar, Perk Grid, Callout and Article Body are built in each page's Collection List or template, not as components: nested lists (Topics, Perks), links to the current item and date formats can't be set on component props through the API. Same look. · Claude, per the K3 proposal
 - 2026-10-29 · The Download Card's button no longer has the `download` attribute (it is also the Event RSVP link); it opens in a new tab instead. · Claude, for review
+- 2026-10-29 · Project Overview: the Responsible Development item [5] answer ends "A video of the stack demolition is to come." instead of the prototype's "View the demolition … here" link, which pointed at `#` (no video yet). Put the link back when the video exists. · Claude, for review
+- 2026-10-29 · Project Overview: the Doc Accordion Item's Link is bound to the Documents External URL field only (a link reads one field; the API accepts the File field too). A PDF uploaded to File alone shows no link: put the file's URL in External URL, or rebind Link to File in the Designer if the client prefers uploads. Same choice for Community Impact. · Claude, for review
 
 ## Redirect map
 
@@ -81,6 +83,7 @@ Every old URL → its closest new page, from the crawl saved in discovery.
 
 ### Fix before launch
 
+- Mobile PageSpeed on /project-overview is 68 (median of 5; desktop 95; 2026-10-29). LCP is the hero paragraph and 91% of its 6.1 s is render delay: the intro loader and the `data-intro` hide keep the hero text invisible until the intro plays. Site-wide (every hero), so it needs a change in the intro module or loader, not on a page. Also on this page: `po-rd-servers.jpg` loads at full size (265 KB, no responsive variants); WebP/AVIF conversion is waiting for the user's OK. · Claude
 - Style guide Components rows 6–34 are inert previews (markup copies, script hooks stripped, buttons imported as links, the Small button variant shown at the default size). Swap each for its component instance in the components step; nothing is built from these copies. · Claude — K2a (2026-10-28): Page Hero, Fact Bar, Stat Row and Accordion · Glass are now live instances; Statement and Explore Rail rows added; K2b-1: Intro Row, Collage, Promo Card, Highlight Tabs, Image Accordion (dark and light) and Accordion · Line are live instances; K2b-2: Photo Band, Steps, Hover Pair, Video Frame, Benefits too. K3: Follow Band, Empty Card, Breadcrumb, Share Buttons, Download Card, Source Card too. Still inert, each swapped for a live Collection List or the template part in its page session: Quick Links, Event Card, Detail Bar, Perk Grid, Callout, List Toolbar, Post Card (Is Row), Article Body, Quote Slider
 - Classes the components need that the styles plan left out (repo CSS only): Sr Only (visually hidden label/legend, News search and pills), Accordion Icon Plus and Accordion Icon Minus (the open/closed icon swap). Propose them with the components. · Claude — done in K1 (2026-10-28)
 - Style guide Buttons section: add a "Button Size · Small" row once the Small variant's styles are in (MANUAL-TODO AC). · Claude

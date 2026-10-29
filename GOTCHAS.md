@@ -234,3 +234,21 @@ collected from client repos into those files.
 - Fix: Button Size › Small styles and the new Button Color variants Light and Frost (hover included) were set that way and read back with `get_variant_styles`. Works when the variant's element has a single class (lessons/mcp.md "Variant overrides on a combo element never apply").
 - Status: worked around
 - Found by: claude
+
+### 2026-10-29 · Collection List filter and sort writes refused at body level too
+- Area: mcp
+- Scope: template-candidate
+- Symptom: on Project Overview, `filters` (switch `isOn`, option `equals`, alone or together) and `sort` on two fresh Documents Collection Lists, built at body level as `lessons/mcp.md` advises, failed with "[Conflict] The operation could not be applied to the component map". `source`, classes, attributes, the item's component instance and its CMS prop bindings all took. The Home FAQ list failed the same way (MANUAL-TODO AP), and Community Impact's (BK).
+- Cause: unknown; the lesson's "build at body level, then move into the slot" route no longer gets filters or sort through on this site (the page is a duplicate of a page whose body holds G | Page W).
+- Fix: list query settings are a Designer step (MANUAL-TODO BA); mark the unfiltered list on the page with a `data-manual-todo` caption. Everything else is built through the API, then the list is moved into the slot.
+- Status: open
+- Found by: claude
+
+### 2026-10-29 · A Switch filter on a Collection List breaks the list
+- Area: mcp
+- Scope: template-candidate
+- Symptom: the Home FAQ list's filter "Show on Home is On" failed with "[Conflict] The operation could not be applied to the component map", through the API (`filters` with `isOn`) and in the Designer alike. After the failed write the same list refused its sort too, which looked like "this list refuses every query write".
+- Cause: unknown Webflow-side; isolated with test lists on Home: source + sort by name or by the Number field Order work on FAQs and Testimonials; the `isOn` filter on the Switch field is the write that fails (`equals` is rejected as invalid for a Switch).
+- Fix: rebuild the list and write source, sort, limit first; leave the Switch filter out (Home shows the first 4 FAQs by Order; MANUAL-TODO AP keeps the filter for when Webflow accepts it). Try the filter last on any list, so a failure can't block the rest; never send query writes to one list in parallel.
+- Status: worked around
+- Found by: claude
