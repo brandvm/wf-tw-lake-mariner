@@ -66,9 +66,27 @@ function formatNumbers() {
   });
 }
 
+// CMS text that can't carry its own count (Event Perks Value: "$28 – 36 / hr",
+// "80%", "Generous PTO"): data-count="auto" counts the last number in the
+// text, with what comes before and after it as prefix and suffix. Text
+// without a number stays as written and doesn't count.
+function resolveAuto(el: HTMLElement) {
+  if (el.dataset.count !== 'auto') return true;
+  const text = (el.textContent ?? '').trim();
+  const match = /(\d+(?:\.\d+)?)(?!.*\d)/.exec(text);
+  if (!match) return false;
+  const [number] = match;
+  el.dataset.count = number;
+  el.dataset.decimals = String(number.split('.')[1]?.length ?? 0);
+  el.dataset.prefix = text.slice(0, match.index);
+  el.dataset.suffix = text.slice(match.index + number.length);
+  return true;
+}
+
 export function initCountUp() {
   formatNumbers();
   document.querySelectorAll<HTMLElement>('[data-count]').forEach((el) => {
+    if (!resolveAuto(el)) return;
     primeCount(el);
     if (reducedMotion()) return;
     const state = { v: 0 };
