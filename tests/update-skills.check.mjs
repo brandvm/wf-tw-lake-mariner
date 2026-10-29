@@ -53,7 +53,11 @@ test('brings skills, tooling, package entries and the icon font', () => {
   const css = read(dir, 'src/styles.css');
   assert.ok(css.startsWith('/* Site styles. */'));
   assert.ok(css.indexOf('@import "./phosphor.css";') < css.indexOf(':root'), 'the import is above every rule');
-  assert.ok(fs.readdirSync(path.join(dir, 'src/phosphor')).some((f) => f.endsWith('.woff2')));
+  // The same font files as the source; none after `pnpm phosphor --subset`,
+  // which inlines the font into phosphor.css.
+  const fonts = (d) => fs.readdirSync(path.join(d, 'src/phosphor')).filter((f) => f.endsWith('.woff2'));
+  assert.deepEqual(fonts(dir), fonts(root));
+  assert.equal(read(dir, 'src/phosphor.css'), read(root, 'src/phosphor.css'));
 });
 
 test('a second run changes nothing, and a site without icons keeps it that way', () => {

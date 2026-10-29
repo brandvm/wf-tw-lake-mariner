@@ -1,0 +1,40 @@
+# Phosphor icons kept in the bundle (`pnpm phosphor --subset`). Icons in
+# Webflow markup and C | Button's Icon prop aren't in src/, so they are
+# listed here: every icon the approved prototype uses, plus a few an editor
+# is likely to pick. An icon not listed draws nothing until it is added here
+# and `pnpm phosphor --subset` and `pnpm build` are run again.
+
+# Used by the design
+arrow-right
+arrow-left
+arrow-up-right
+arrow-down
+plus
+minus
+x
+x-circle
+check-circle
+brackets-square
+magnifying-glass
+share-fat
+caret-right
+caret-down
+warning
+star
+play
+house
+envelope-simple
+cube
+list
+
+# Likely editor picks
+download-simple
+calendar-blank
+map-pin
+clock
+file-text
+file-pdf
+link-simple
+phone
+info
+user
