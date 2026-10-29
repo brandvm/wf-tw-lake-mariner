@@ -712,7 +712,7 @@ button.social-button { padding: 0; cursor: pointer; }
 .post-card-title { -webkit-line-clamp: 4; }
 
 /* repo-css: designer-cant — :has() */
-.post-card-title:has(+ .post-card-excerpt) { -webkit-line-clamp: 2; }
+.post-card-title:has(+ .post-card-excerpt:not(.w-dyn-bind-empty)) { -webkit-line-clamp: 2; }
 
 /* repo-css: designer-cant — vendor-prefixed -webkit-box-orient: custom properties refuse prefixes */
 .post-card-excerpt { -webkit-box-orient: vertical; }
@@ -750,6 +750,11 @@ button.social-button { padding: 0; cursor: pointer; }
 /* repo-css: designer-cant — descendant or sibling selector */
 .lightbox-trigger img { transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
 .lightbox-trigger:hover img { transform: scale(1.03); }
+
+/* repo-css: designer-cant — :has() — News template parts left out when their CMS fields are empty (conditional visibility on a field can't be set through the API): the cover frame without a Cover Image, the Download Card without an Attachment Label, the Source Card without a Source Name. */
+.article-cover:has(> .w-dyn-bind-empty) { display: none; }
+.download-card:has(.download-name:empty) { display: none; }
+.source-card:has(.source-link > :first-child:empty) { display: none; }
 
 /* ============================================================
    06. UTILITIES
