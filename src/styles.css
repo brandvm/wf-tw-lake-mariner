@@ -624,15 +624,15 @@ button.social-button { padding: 0; cursor: pointer; }
 /* repo-css: designer-cant — attribute selector */
 [data-fill-word] { white-space: nowrap; }
 
-/* repo-css: designer-cant — @keyframes. The Home hero's entrance (data-hero-seq): pure CSS, so it starts at first paint without waiting for the bundle (there is no loader). The separate translate and scale properties leave each part's own transform and the hero-sequence scrub alone, and fill-mode backwards holds nothing once a part has arrived. */
-@keyframes hero-rise { from { translate: 0 32px; opacity: 0; } }
-@keyframes hero-zoom { from { scale: 1.12; } }
-[data-hero-seq] [data-intro-media] { animation: hero-zoom 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) backwards; }
-[data-hero-seq] [data-intro] { animation: hero-rise 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) 0.1s backwards; }
-[data-hero-seq] .hero-heading > h1[data-intro] { animation-delay: 0.18s; }
-[data-hero-seq] .hero-heading > p[data-intro] { animation-delay: 0.26s; }
-[data-hero-seq] [data-hero-content] > [data-intro] { animation-delay: 0.34s; }
-[data-hero-seq] [data-hero-facts] { animation-delay: 0.42s; }
+/* repo-css: designer-cant — @keyframes. The Home hero's entrance (data-hero-seq): pure CSS, so it starts at first paint without waiting for the bundle (there is no loader). The separate translate and scale properties leave each part's own transform and the hero-sequence scrub alone, and fill-mode backwards holds nothing once a part has arrived. Kept subtle (12px, from 60% opacity): the parts are never at opacity 0, so the H1 counts as the LCP from first paint. */
+@keyframes hero-rise { from { translate: 0 12px; opacity: 0.6; } }
+@keyframes hero-zoom { from { scale: 1.04; } }
+[data-hero-seq] [data-intro-media] { animation: hero-zoom 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) backwards; }
+[data-hero-seq] [data-intro] { animation: hero-rise 0.7s cubic-bezier(0.215, 0.61, 0.355, 1) 0.05s backwards; }
+[data-hero-seq] .hero-heading > h1[data-intro] { animation-delay: 0.11s; }
+[data-hero-seq] .hero-heading > p[data-intro] { animation-delay: 0.17s; }
+[data-hero-seq] [data-hero-content] > [data-intro] { animation-delay: 0.23s; }
+[data-hero-seq] [data-hero-facts] { animation-delay: 0.29s; }
 
 /* repo-css: js-state — Highlight Tabs (tabs module). Without the module every panel and photo shows in turn, pinned: the frame sticks for the section's scroll length and one panel and photo show, static (reduced motion): one panel and photo, switched by click. */
 .section[data-tabs-state="pinned"] { min-height: 0; padding: 0; justify-content: flex-start; }
