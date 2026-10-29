@@ -238,10 +238,10 @@ collected from client repos into those files.
 ### 2026-10-29 · Collection List filter and sort writes refused at body level too
 - Area: mcp
 - Scope: template-candidate
-- Symptom: on Project Overview, `filters` (switch `isOn`, option `equals`, alone or together) and `sort` on two fresh Documents Collection Lists, built at body level as `lessons/mcp.md` advises, failed with "[Conflict] The operation could not be applied to the component map". `source`, classes, attributes, the item's component instance and its CMS prop bindings all took. The Home FAQ list failed the same way (MANUAL-TODO AP), and Community Impact's (BK).
-- Cause: unknown; the lesson's "build at body level, then move into the slot" route no longer gets filters or sort through on this site (the page is a duplicate of a page whose body holds G | Page W).
-- Fix: list query settings are a Designer step (MANUAL-TODO BA); mark the unfiltered list on the page with a `data-manual-todo` caption. Everything else is built through the API, then the list is moved into the slot.
-- Status: open
+- Symptom: on Project Overview, `filters` (switch `isOn`, option `equals`, alone or together) and then `sort` on two fresh Documents Collection Lists, built at body level as `lessons/mcp.md` advises, failed with "[Conflict] The operation could not be applied to the component map". `source`, classes, attributes, the item's component instance and its CMS prop bindings all took.
+- Cause: unknown Webflow-side. Update the same day, after the Home finding ("A Switch filter on a Collection List breaks the list"): on two new lists, source then sort by Order (one call each, in sequence) took; an Option filter (`group` `equals` the option id) alone then failed the same way, so it isn't only the Switch: on this site no filter write takes. A failed filter also blocks later query writes on that list.
+- Fix: new lists with source and sort first; the filters stay a Designer step (MANUAL-TODO BA, AP, BK); mark the unfiltered list on the page with a `data-manual-todo` caption. The bound item instance can be moved from a stuck list into the new one (bindings kept), then the stuck list removed.
+- Status: worked around (sort through the API, filters by hand)
 - Found by: claude
 
 ### 2026-10-29 · A Switch filter on a Collection List breaks the list
