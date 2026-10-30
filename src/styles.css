@@ -116,6 +116,40 @@ body {
    02. BASE
    ============================================================ */
 
+/* repo-css: designer-cant — @font-face metric overrides. Fallback faces
+   shaped like the web fonts (local Arial / Courier New, scaled and with the
+   web fonts' ascent and descent), so text keeps its lines and position
+   when Satoshi, Space Grotesk and Space Mono swap in. The Typography Scale
+   family variables in Webflow name each one second, after its web font.
+   size-adjust is the width ratio measured on the site's own text (canvas,
+   all nine pages); the overrides are the web font's typo metrics divided
+   by it. Where Arial is missing (Android), the stack moves on to system-ui
+   as before. Re-measure if a font is replaced. */
+@font-face {
+  font-family: "Satoshi Fallback";
+  src: local("Arial"), local("ArialMT"), local("Liberation Sans"), local("Arimo");
+  size-adjust: 99.6%;
+  ascent-override: 101.41%;
+  descent-override: 24.1%;
+  line-gap-override: 10.04%;
+}
+@font-face {
+  font-family: "Space Grotesk Fallback";
+  src: local("Arial"), local("ArialMT"), local("Liberation Sans"), local("Arimo");
+  size-adjust: 108.77%;
+  ascent-override: 90.46%;
+  descent-override: 26.85%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Space Mono Fallback";
+  src: local("Courier New"), local("CourierNewPSMT"), local("Liberation Mono"), local("Cousine");
+  size-adjust: 101.98%;
+  ascent-override: 109.82%;
+  descent-override: 35.4%;
+  line-gap-override: 0%;
+}
+
 /* repo-css: approved-base — element resets below class specificity (0-0-1), so Designer classes always win */
 
 *,
