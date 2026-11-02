@@ -3,10 +3,12 @@
 // fills as one continuous progress line, tabs already passed stay bright,
 // and the panel and background photo follow the current tab. Clicking a
 // tab (or arrow keys, Home, End) glides the page to that tab's point.
+// Where the tab row is wider than the screen (tablet, phone) it scrolls
+// sideways with the same page scroll, so the current tab is always in view.
 // Hooks: data-tabs on the section, data-tabs-frame (the part that pins),
 // data-tab-list, data-tab (buttons, aria-controls → panel id) each with a
 // data-tab-progress line, data-tab-panel, data-tab-bg (photos, tab order).
-// Reduced motion and below 768px: no pin; the tabs switch on click. ARIA tab roles are set
+// Reduced motion: no pin; the tabs switch on click. ARIA tab roles are set
 // here, so Webflow keeps plain divs and buttons.
 // State: data-tabs-state (pinned, static) on the section; data-active on the
 // shown panel and photo; data-passed on tabs before the current one.
@@ -14,8 +16,6 @@
 import type Lenis from 'lenis';
 
 const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)');
-// As marketcap's approach-steps: nothing pins below 768px.
-const PIN = window.matchMedia('(min-width: 768px)');
 const STEP = 0.5; // scroll per tab, in screen heights
 
 export function initTabs(lenis: Lenis | null = null) {
@@ -49,9 +49,10 @@ export function initTabs(lenis: Lenis | null = null) {
         panels[j].setAttribute('aria-hidden', String(!on));
         bgs[j]?.toggleAttribute('data-active', on);
       });
-      // Keep the current tab in view where the tab row scrolls sideways.
-      if (list && list.scrollWidth > list.clientWidth) {
-        list.scrollTo({ left: tabs[i].offsetLeft - list.offsetLeft, behavior: 'smooth' });
+      // Static (reduced motion): bring the clicked tab into view. Pinned, the
+      // row follows the page scroll instead (follow()).
+      if (!pinned && list && list.scrollWidth > list.clientWidth) {
+        list.scrollTo({ left: tabs[i].offsetLeft - tabs[0].offsetLeft, behavior: 'smooth' });
       }
     };
     const fill = (progress: number) => {
@@ -63,8 +64,20 @@ export function initTabs(lenis: Lenis | null = null) {
     let pinned = false;
     let distance = 0;
 
+    // The tab row's sideways position for a page-scroll progress: each tab
+    // lines up with the row's start halfway through its own stretch of
+    // scroll, gliding between tabs in between. No-op when the row fits.
+    const follow = (progress: number) => {
+      if (!list || list.scrollWidth <= list.clientWidth) return;
+      const f = Math.min(tabs.length - 1, Math.max(0, progress * tabs.length - 0.5));
+      const a = Math.floor(f);
+      const b = Math.min(tabs.length - 1, a + 1);
+      const left = (i: number) => tabs[i].offsetLeft - tabs[0].offsetLeft;
+      list.scrollLeft = left(a) + (left(b) - left(a)) * (f - a);
+    };
+
     const measure = () => {
-      pinned = !!frame && !REDUCED.matches && PIN.matches;
+      pinned = !!frame && !REDUCED.matches;
       root.dataset.tabsState = pinned ? 'pinned' : 'static';
       if (!pinned || !frame) {
         root.style.height = '';
@@ -80,6 +93,7 @@ export function initTabs(lenis: Lenis | null = null) {
       if (!pinned || !distance) return;
       const progress = Math.min(1, Math.max(0, -root.getBoundingClientRect().top / distance));
       fill(progress);
+      follow(progress);
       show(Math.min(tabs.length - 1, Math.floor(progress * tabs.length)));
     };
     // The scroll position where tab i is current (a little past its start).
