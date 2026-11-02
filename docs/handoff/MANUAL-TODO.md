@@ -56,7 +56,7 @@ again at each gate, so the steps are found early and not at the end:
 
 ## To do
 
-17 rows a person still has to do in the Designer. When one is done, Claude ticks it and moves it to Done.
+18 rows a person still has to do in the Designer. When one is done, Claude ticks it and moves it to Done.
 
 | ID | Where (page › element or class) | Breakpoint | Set | Why the API can't | Done |
 | --- | --- | --- | --- | --- | --- |
@@ -77,6 +77,7 @@ again at each gate, so the steps are found early and not at the end:
 | DB | News Posts Template › Article Byline › the date (Publish Date) | — | Binding settings › Format: `D MMMM YYYY` (e.g. 18 November 2025, as in the prototype). Then Claude checks the published text | a date binding through the API takes no format and publishes `MMMM D, YYYY` (same as Events DI). The hidden card date on /news can keep the default: Finsweet only sorts by it | ☐ |
 | DC | Pages › "ZZ News empty (delete)" (`/zz-news-empty`, draft, never published) | — | Delete the page | the original empty News page; /news was recreated as a duplicate of Community Impact so its G \| Page W slot had a plain element to build next to (GOTCHAS 2026-10-29). The API can't delete pages | ☐ |
 | DS | Site settings › Fonts | — | Upload Space Grotesk (`Assets/fonts/space-grotesk/`), Space Mono and Satoshi (`Assets/fonts/`, Satoshi as Fontshare's own file) again in the Designer with the same family names, and delete the copies uploaded through the API. Then Claude checks that the published CSS loads them from cdn.prod.website-files.com, removes the fastly preconnect from head code (loader.html piece 1) and reruns `pnpm wf:perf` | fonts created through the fonts API are stored on webflow-files-prod.global.ssl.fastly.net, which serves HTTP/1.1, so Lighthouse simulates a separate connection per font before the first paint (GOTCHAS 2026-10-29, "Lighthouse counts anything that finishes before the first paint"); Designer uploads go to the asset CDN the page already uses (lessons/mcp.md). Expected: a steadier mobile score on every page | ☐ |
+| DT | Site settings › General › Favicon and Webclip | — | Favicon: upload `Assets/favicon/favicon-32.png` (32×32, the logo's shield on a transparent background). Webclip: upload `Assets/favicon/webclip-256.png` (256×256, the shield on Night #112135). Save, publish to webflow.io. Then Claude checks the published `<link rel="shortcut icon">` and `apple-touch-icon` point at them | the site favicon and webclip aren't in the Webflow API (the sites tool reads and publishes only); `<link rel="icon">` in head code would sit beside Webflow's default favicon links, so the browser's pick isn't certain. Made from `prototype/public/assets/shield.svg` (2026-11-02) | ☐ |
 
 ## Done
 
