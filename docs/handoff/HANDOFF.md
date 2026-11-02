@@ -203,6 +203,7 @@ The interaction level is set by two reference sites (2026-10-27): marketcap.webf
 - 2026-10-27 · Build from the Figma page "↪ • Template — Clean Pages" (2523:111), not the working Template page.
 - 2026-10-29 · No intro loader (user: "remove the preloader, just the homepage intro is fine"). The navy shield screen is gone from G | Page W on every page; only the Home hero keeps an entrance, made subtle at the user's request (12px rise from 60% opacity, short stagger), pure CSS so it starts at first paint. Mobile PageSpeed on Home: 93 median on this machine (range 74–96, noisy), desktop 98.
 - 2026-11-02 · Project Overview Highlight Tabs: scroll-driven on phones as on desktop (user: "make the project highlight section in mobile work the same as desktop … the list can also scroll on scroll interaction for mobile"). The section pins below 768px too, and the tab row scrolls sideways with the page scroll so the current tab is always in view; tapping a tab glides to it. No Webflow breakpoint styles were needed: the pinned frame's styles already fit 390. Off with reduced motion (tabs switch on tap).
+- 2026-11-02 · Mobile menu animation (user: the open was "janky … smooth it out with slide, fade or fancy animation"): the navy sheet wipes down like a curtain, the menu items rise in 50 ms apart, and closing uncovers it from the top down; the ✕/☰ icons turn in. The bar's colours switch when the curtain covers it, so the logo is never shown on the wrong background.
 
 ## Open decisions
 
