@@ -573,6 +573,25 @@ button.social-button { padding: 0; cursor: pointer; }
 /* repo-css: designer-cant — structural pseudo-class */
 .g-nav-w:not([data-state="open"]) .nav-toggle-close { display: none; }
 
+/* repo-css: designer-cant — @starting-style, discrete display transitions and clip-path. The menu sheet (below 992px) passes like a curtain: it wipes down from the top as it opens, its items rise in one after another, and it closes by uncovering from the top down, so the top of the screen is covered first and uncovered first, as the bar's colours and logos switch at once (the open state rules above): the sheet starts with the bar's band (7.5rem) already covered, and the close easing (linear(), after a cubic-bezier fallback) clears that band in its first frame. The Designer's closed state (Nav Menu hidden at Tablet) stays the source: display is transitioned as a discrete property, so a browser without @starting-style opens and closes instantly as before. The toggle's icons turn in only after the first open (data-state is set by the nav module), never at page load. */
+@media (max-width: 991px) and (prefers-reduced-motion: no-preference) {
+  .g-nav-w .nav-menu { clip-path: inset(100% 0 0 0); transition: clip-path 0.5s cubic-bezier(0.33, 1, 0.68, 1), display 0.5s allow-discrete; transition: clip-path 0.5s linear(0, 0.15 0%, 0.45 14%, 0.7 32%, 0.88 56%, 0.97 80%, 1), display 0.5s allow-discrete; }
+  .g-nav-w[data-state="open"] .nav-menu { clip-path: inset(0 0 0 0); transition: clip-path 0.65s cubic-bezier(0.16, 1, 0.3, 1), display 0.65s allow-discrete; }
+  .g-nav-w[data-state="open"] .nav-menu > * { transition: opacity 0.5s ease, translate 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+  .g-nav-w[data-state="open"] .nav-menu > :nth-child(1) { transition-delay: 0.14s; }
+  .g-nav-w[data-state="open"] .nav-menu > :nth-child(2) { transition-delay: 0.19s; }
+  .g-nav-w[data-state="open"] .nav-menu > :nth-child(3) { transition-delay: 0.24s; }
+  .g-nav-w[data-state="open"] .nav-menu > :nth-child(4) { transition-delay: 0.29s; }
+  .g-nav-w[data-state="open"] .nav-menu > :nth-child(n+5) { transition-delay: 0.34s; }
+  .g-nav-w .nav-toggle-open, .g-nav-w .nav-toggle-close { transition: opacity 0.3s ease, rotate 0.45s cubic-bezier(0.16, 1, 0.3, 1); }
+  @starting-style {
+    .g-nav-w[data-state="open"] .nav-menu { clip-path: inset(0 0 calc(100% - 7.5rem) 0); }
+    .g-nav-w[data-state="open"] .nav-menu > * { opacity: 0; translate: 0 1rem; }
+    .g-nav-w[data-state="open"] .nav-toggle-close { opacity: 0; rotate: -90deg; }
+    .g-nav-w[data-state="closed"] .nav-toggle-open { opacity: 0; rotate: 90deg; }
+  }
+}
+
 /* repo-css: designer-cant — attribute selector. An accordion with data-accordion-open-first and no item open shows its first item open before the module runs (it sets data-accordion-state), so the rows below don't slide down when the bundle arrives after the first paint. */
 .accordion-item[data-state="open"] .accordion-panel, [data-accordion-open-first]:not([data-accordion-state]):not(:has([data-state="open"])) .w-dyn-item:first-child > .accordion-item .accordion-panel { grid-template-rows: 1fr; }
 .accordion-item[data-state="open"] .accordion-trigger, [data-accordion-open-first]:not([data-accordion-state]):not(:has([data-state="open"])) .w-dyn-item:first-child > .accordion-item .accordion-trigger { padding-bottom: 1.25em; }
