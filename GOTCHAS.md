@@ -33,7 +33,7 @@ collected from client repos into those files.
 - Symptom: below 992px the prototype showed the starter's fonts and sizes although proposed.css overrode the role variables at each breakpoint.
 - Cause: the starter applies breakpoint variable modes on the Body tag style, so webflow.css sets the role and layout variables on `body` inside each @media block; a proposal on `:root` is overridden for everything inside body.
 - Fix: write breakpoint proposals on `:root, body` (prototype/src/css/proposed.css says so). The proposed.css template comment should say this.
-- Status: open
+- Status: harvested into wf-template 0.9.0; open
 - Found by: claude
 
 ### 2026-10-27 · Prototype starter has no fluid scaling
@@ -42,7 +42,7 @@ collected from client repos into those files.
 - Symptom: at 1440 the prototype rendered at 16px = 1em while staging renders at 13.7px (the repo's §01 scaling), so prototype and staging would never match at the check width.
 - Cause: the prototype doesn't load the repo's src/styles.css, and prototype.css has no copy of §01.
 - Fix: a stand-in of §01 in prototype/src/css/prototype.css with the same ideal/min/max.
-- Status: open
+- Status: harvested into wf-template 0.9.0; open
 - Found by: claude
 
 ### 2026-10-27 · check:drift reports padding shorthands as drift
@@ -51,7 +51,7 @@ collected from client repos into those files.
 - Symptom: 12 "values that differ" on an untouched starter site (G | Footer W, Skip Link, Chip padding).
 - Cause: Webflow publishes `padding: var(a) var(b)` with no spaces between the var() calls; the parser reads the whole shorthand as each side's value.
 - Fix: none yet; the findings are false positives. Split shorthands on `)var(` in scripts/check-drift.mjs. Seen again 2026-10-28 with a number after the variable (`.tag`: `var(--_spacing---8).625em`): split after every closing `)` at depth 0, not only before `var(`.
-- Status: open
+- Status: harvested into wf-template 0.9.0; open
 - Found by: claude
 
 ### 2026-10-27 · check:states reports a pressed state missing after a control removes itself
@@ -60,7 +60,7 @@ collected from client repos into those files.
 - Symptom: "a.button: no pressed state" on the style guide, although every a.button has an :active rule.
 - Cause: the check reloads the page per control and finds it by index; the announcement's close button remembers dismissal in localStorage, so after it is clicked the bar is gone and every later index points at another element.
 - Fix: none in the script yet (clear storage before each load, or find controls by a stable key). Verified by hand that every a.button has :active. Seen again on /closed-loop-cooling (button.hover-card), /careers (button.quote-button) and /news (a.button, button.button), each pressed as another element after the shift; their :active rules are in place. It now costs a debug run on every page: worth fixing in the template's check-states.mjs.
-- Status: open
+- Status: harvested into wf-template 0.9.0; open
 - Found by: claude
 
 ### 2026-10-28 · Anchor to a pinned section lands a screen short
@@ -96,7 +96,7 @@ collected from client repos into those files.
 - Symptom: building C | Page Hero, C | Statement and C | Fact Bar: (1) binding an attribute *name* to a prop failed on a Link ("name bindings are not supported on this element yet") and on a Block root; (2) `text` was "not applicable" on the text Spans the importer makes from `<span>`; (3) `image` was not a setting key on an Image; (4) an image prop has no default, so the instance showed no photo; (5) the Fact Bar specimen (position absolute) rendered at the bottom of the style guide page.
 - Cause: name bindings exist only on DOM elements; importer Spans have no text setting; the Image's key is `assetId`; image props take no default group; Sg Demo is not a positioned box.
 - Fix: (1) the hero button rebuilt as a DOM `a` (style Button), href bound to a text prop, the hook name bound to a text prop (Button Hook, `data-video-open` on Cooling); a Block keeps static attribute names, values bind fine (data-count, data-state); 2026-10-29: attribute values also bind on a Link (C | Video Frame's data-video-src and data-video-title). Replacing a Link's attribute list drops its imported href attribute: set the link with `set_settings` key `link` afterwards. (2) a DOM `span` has a bindable `text`: two DOM spans (the second styled Text Muted) for the two-tone statement. (3) `set_settings` key `assetId` with a prop binding. (4) set the instance's image prop with `type: "string"` and the asset id. (5) the specimen sits in a Media Frame (position relative) over a photo.
-- Status: worked around
+- Status: harvested into wf-template 0.9.0; worked around
 - Found by: claude
 
 ### 2026-10-28 · A 40-action element batch times out half-applied; a new Rich Text arrives full of sample content
@@ -105,7 +105,7 @@ collected from client repos into those files.
 - Symptom: rebuilding 8 importer Links as DOM buttons in one `data_element_tool` call (41 set_attributes/move/remove actions) returned "The operation timed out"; reading back showed the first 25 actions applied and the rest not. Separately, every `RichText` made with the element builder came with Webflow's sample content (Heading 1–6, lists, a block quote).
 - Cause: the call has a time limit and applies actions in order without rolling back. The builder's Rich Text is the Designer's default element.
 - Fix: keep element batches to about 20 actions and read back after a timeout before retrying the rest (the remaining moves and removals were sent again). Bind the Rich Text to a rich-text prop at once (the prop's text replaces the sample), or remove the sample children.
-- Status: worked around
+- Status: harvested into wf-template 0.9.0; worked around
 - Found by: claude
 
 ### 2026-10-27 · pnpm classes crashes on .w--current
@@ -124,7 +124,7 @@ collected from client repos into those files.
 - Symptom: after Typography Role Size/Label and Size/Button were changed in Base only, staging published 14px at every breakpoint too, while the prototype snapshot still listed the starter's per-mode values (12 and 16); check:drift reported 6 differences.
 - Cause: a mode that was never given its own value resolves to the Base value, and `get_variables` with all modes returns that resolved value, so a snapshot written per mode looks like an override that isn't one.
 - Fix: write the snapshot from a fresh `get_variables` read (all modes) after each batch instead of patching only the changed modes; check:drift confirms it.
-- Status: worked around
+- Status: harvested into wf-template 0.9.0; worked around
 - Found by: claude
 
 ### 2026-10-28 · wf:styles splits a shorthand with calc() on its spaces
@@ -160,7 +160,7 @@ collected from client repos into those files.
 - Symptom: images uploaded as site assets (create_asset + presigned S3 POST) and then set on CMS Image fields by their hosted URL and fileId came back with a new fileId and URL under the CMS's own asset path, re-encoded as .jpeg; rich-text `<img>` sources were rewritten the same way.
 - Cause: Webflow re-hosts every CMS image from the URL it is given; the asset library and CMS images are separate stores.
 - Fix: none needed, but uploading to the asset library first only serves as a public URL source: for CMS-only images, pass any public URL straight to the item. The 15 site assets uploaded for the sample items are duplicates (they can go at the unused-assets cleanup).
-- Status: worked around
+- Status: harvested into wf-template 0.9.0; worked around
 - Found by: claude
 
 ### 2026-10-28 · A new font from the fonts API also publishes from the second host
@@ -169,7 +169,7 @@ collected from client repos into those files.
 - Symptom: `create_font` for Space Grotesk returned a `hostedUrl` on cdn.prod.website-files.com, but the published CSS loads it (and the starter's Geist) from webflow-files-prod.global.ssl.fastly.net.
 - Cause: the font API stores files there, for new fonts as for replaced ones (lessons/mcp.md "Replacing a font through the API moves it to another host"); the `hostedUrl` in the API result is not the URL that publishes.
 - Fix: a `preconnect` (crossorigin) to the fastly host in loader piece 1, written to the site head code and published. Check font URLs in the published CSS, not in the API result.
-- Status: worked around
+- Status: harvested into wf-template 0.9.0; worked around
 - Found by: claude
 
 ### 2026-10-28 · Style variable ids need their `variable-` prefix
@@ -178,7 +178,7 @@ collected from client repos into those files.
 - Symptom: `create_style` with `variable_as_value` failed with "An internal error occurred" for every action in the batch.
 - Cause: the ids were taken without the `variable-` prefix that `query_variables` returns; the style tool needs the full id and gives no useful error.
 - Fix: pass ids exactly as `query_variables` returns them (`variable-<uuid>`).
-- Status: worked around
+- Status: harvested into wf-template 0.9.0; worked around
 - Found by: claude
 
 ### 2026-10-28 · The WHTML importer drops a plain space between two inline elements
@@ -187,7 +187,7 @@ collected from client repos into those files.
 - Symptom: `<span>Text / Secondary.</span> <a>A link</a>` published as "Secondary.A link." on the style guide's Themes rows.
 - Cause: the importer treats a whitespace-only text node between two inline elements as formatting and removes it (the same family as the trimmed space before `<br>`).
 - Fix: `&nbsp;` between the elements before importing (re-imported the Themes section).
-- Status: worked around
+- Status: harvested into wf-template 0.9.0; worked around
 - Found by: claude
 
 ### 2026-10-28 · The style guide page already holds the starter's page, out of sight
@@ -196,7 +196,7 @@ collected from client repos into those files.
 - Symptom: `get_all_elements` on /design/style-guide showed G | Page W with an empty G | Main slot, which looked like an empty page; `query_elements` found the starter's whole style guide (about 1,000 elements) in it.
 - Cause: the page tree read doesn't descend into slot content (lessons/mcp.md "Filled slots read back empty"); scoped queries (`scope_element_id`) inside the slot return nothing either.
 - Fix: replace the starter's sections one by one: import the new section `before` the old one (a plain element in the slot is a valid anchor), remove the old one, re-point its sidebar link (`set_link`, linkType element). Keep the starter's instance-based Buttons, Forms and Components rows. Compare the published page's class lists before removing anything (here only Sg Preview and Sg Preview Screen were unique to the old Other classes and got tiles).
-- Status: done for sections 1–6 and 10
+- Status: harvested into wf-template 0.9.0; done for sections 1–6 and 10
 - Found by: claude
 
 ### 2026-10-28 · WHTML importer: images, icon classes and variant classes
@@ -205,7 +205,7 @@ collected from client repos into those files.
 - Symptom: style guide component previews (29 rows, 43 images, 36 icons). (1) Every `<img>` came in without its asset ("not found in the asset library") whether `src` was the prototype path, the asset's hosted URL or its file name; alt text was kept. (2) `<i class="icon-glyph ph ph-arrow-left">` made the importer create empty combo classes `ph` and `ph-arrow-left` on Icon Glyph. (3) A `w-variant-…` token (a component variant, copied from published HTML) would be created the same way; so would repo-CSS-only classes (`sr-only`, `accordion-icon-plus`).
 - Cause: the importer matches images against the asset library by something other than URL or name, and turns every unknown class token into a new class.
 - Fix: (1) `set_image_asset` on each image after the import; they come back from `query_elements` (type Image) in document order. `width`/`height` can't be set on an Image (internal error); Webflow takes them from the asset. (2) Import icons as `class="icon-glyph"` only, then `set_attributes` `class="icon-glyph ph ph-<name>"` on the DOM `<i>`: it publishes merged as `icon-glyph icon-glyph ph ph-<name>` and the glyph draws. The stray combos were removed (`remove_style`, deepest first). (3) Strip `w-variant-*` and repo-only tokens before importing; check every token against the site's classes first. A global class placed second (`accordion-body rich-text`) becomes an empty combo; that is how Webflow stacks classes and is harmless.
-- Status: worked around
+- Status: harvested into wf-template 0.9.0; worked around
 - Found by: claude
 
 ### 2026-10-28 · Prototype List Toolbar specimen is cut off inside its form
@@ -232,7 +232,7 @@ collected from client repos into those files.
 - Symptom: MANUAL-TODO AC said a style on a component variant needs the Designer ("the style API has no variant scope").
 - Cause: the style tool has no variant scope, but the component variants tool does: `set_variant_styles` with `variant_id`, `style_name` and optional `pseudo` (hover), with variable bindings.
 - Fix: Button Size › Small styles and the new Button Color variants Light and Frost (hover included) were set that way and read back with `get_variant_styles`. Works when the variant's element has a single class (lessons/mcp.md "Variant overrides on a combo element never apply").
-- Status: worked around
+- Status: harvested into wf-template 0.9.0; worked around
 - Found by: claude
 
 ### 2026-10-29 · Collection List filter and sort writes refused at body level too
@@ -241,7 +241,7 @@ collected from client repos into those files.
 - Symptom: on Project Overview, `filters` (switch `isOn`, option `equals`, alone or together) and then `sort` on two fresh Documents Collection Lists, built at body level as `lessons/mcp.md` advises, failed with "[Conflict] The operation could not be applied to the component map". `source`, classes, attributes, the item's component instance and its CMS prop bindings all took.
 - Cause: unknown Webflow-side. Update the same day, after the Home finding ("A Switch filter on a Collection List breaks the list"): on two new lists, source then sort by Order (one call each, in sequence) took; an Option filter (`group` `equals` the option id) alone then failed the same way, so it isn't only the Switch: on this site no filter write takes. A failed filter also blocks later query writes on that list.
 - Fix: new lists with source and sort first; the filters stay a Designer step (MANUAL-TODO BA, AP, BK); mark the unfiltered list on the page with a `data-manual-todo` caption. The bound item instance can be moved from a stuck list into the new one (bindings kept), then the stuck list removed.
-- Status: worked around (sort through the API, filters by hand) Update 2026-10-29 (later): on the Project Overview lists and the Home FAQ list the Option and Switch filters now take through `set_settings` and publish; see "List filters take on some lists and not on others".
+- Status: harvested into wf-template 0.9.0; worked around (sort through the API, filters by hand) Update 2026-10-29 (later): on the Project Overview lists and the Home FAQ list the Option and Switch filters now take through `set_settings` and publish; see "List filters take on some lists and not on others".
 - Found by: claude
 
 ### 2026-10-29 · A Switch filter on a Collection List breaks the list
@@ -250,7 +250,7 @@ collected from client repos into those files.
 - Symptom: the Home FAQ list's filter "Show on Home is On" failed with "[Conflict] The operation could not be applied to the component map", through the API (`filters` with `isOn`) and in the Designer alike. After the failed write the same list refused its sort too, which looked like "this list refuses every query write".
 - Cause: unknown Webflow-side; isolated with test lists on Home: source + sort by name or by the Number field Order work on FAQs and Testimonials; the `isOn` filter on the Switch field is the write that fails (`equals` is rejected as invalid for a Switch).
 - Fix: rebuild the list and write source, sort, limit first; leave the Switch filter out (Home shows the first 4 FAQs by Order; MANUAL-TODO AP keeps the filter for when Webflow accepts it). Try the filter last on any list, so a failure can't block the rest; never send query writes to one list in parallel.
-- Status: worked around; update 2026-10-29: the `isOn` filter took on the rebuilt Home list later the same day (MANUAL-TODO AP), so the conflict is intermittent, not permanent: retry it last, alone, with the page open in the Designer Update 2026-10-29 (later): on the Project Overview lists and the Home FAQ list the Option and Switch filters now take through `set_settings` and publish; see "List filters take on some lists and not on others".
+- Status: harvested into wf-template 0.9.0; worked around; update 2026-10-29: the `isOn` filter took on the rebuilt Home list later the same day (MANUAL-TODO AP), so the conflict is intermittent, not permanent: retry it last, alone, with the page open in the Designer Update 2026-10-29 (later): on the Project Overview lists and the Home FAQ list the Option and Switch filters now take through `set_settings` and publish; see "List filters take on some lists and not on others".
 - Found by: claude
 
 ### 2026-10-29 · A page made with `duplicateOf` brings the source page's slot content, out of sight
@@ -259,7 +259,7 @@ collected from client repos into those files.
 - Symptom: Community Impact, created as a duplicate of the Media page for its shell, published with a second H1 ("Media") and the Media page's instructions inside `main`, although `get_all_elements` showed G | Main empty.
 - Cause: the duplicate copies the slot content too; the page tree read doesn't descend into slots (`lessons/mcp.md`, Filled slots read back empty).
 - Fix: find it with `query_elements` (style filter) and remove it. Useful on purpose: that copied plain element is the anchor `lessons/mcp.md` asks for, so the page was built in a body-level wrapper, the wrapper moved `before` it into the slot, the sections moved out `before` the wrapper, and wrapper and copy removed. No person had to drag anything.
-- Status: worked around
+- Status: harvested into wf-template 0.9.0; worked around
 - Found by: claude
 
 ### 2026-10-29 · Imported Images refuse attributes; Collection List queries refused on Community Impact
@@ -268,7 +268,7 @@ collected from client repos into those files.
 - Symptom: on Community Impact, `set_attributes` (`data-accordion-image`, `data-parallax`, `loading`) on 7 imported Images, sent after `set_image_asset` in one batch, reported success and stored nothing; retried alone, they failed with "[Conflict] The operation could not be applied to the component map". The same write on a div on that page worked. Every `filters` and `sort` write on its two Documents lists failed the same way (Home row AP hit the same). The Designer had Home open the whole time (another session was working there).
 - Cause: unconfirmed; writes that touch images or CMS queries seem to need the page open in the Designer. The API does check the value shapes before refusing: a Switch filter is `{"fieldSlug": "<slug>", "operator": "isOn"}` (or `isOff`), an Option filter `{"fieldSlug", "operator": "equals", "value": "<option id>"}`, a sort `{"fieldSlug", "direction": "ascending"}`.
 - Fix: MANUAL-TODO BK (filters, sort) and BL (image attributes), to retry through the API with the page open in the Designer first. Read image attributes back after every write; "success" is not proof. Update: on fresh lists rebuilt at body level (after the Switch-filter entry above), `source` and `sort` took, but an Option filter (`group` equals) reported "applied" and read back `[]` on one list and was refused on the other, and `curatedItemIds` was refused after `queryMode` curated took. So it isn't only the Switch filter: on this page no item-level query write sticks. Update 2: with the Designer open on the page it was no better. Even `sort` (by Order, then by name) was refused on a brand-new list, after the two broken lists were deleted. The image writes failed because the Images came from the WHTML importer: Images made with `data_element_builder` (type Image, `set_image_asset`, then `set_attributes`) took `data-accordion-image`, `data-parallax` and `loading` at once. Fix for images: build them, don't import them. Update 3 (16:30): on a brand-new blank draft page (ZZ List Test), `sort` was refused on fresh lists of Documents (by Order) and of FAQs (by name, which took on Home in the morning), before and after a Designer reload; the person's filter in the Designer was refused too. So by the afternoon every Collection List query write was refused site-wide, not per page or per collection.
-- Status: open
+- Status: harvested into wf-template 0.9.0; open
 - Found by: claude
 
 ### 2026-10-29 · A list inside a component's rich-text prop can't get text through the API
@@ -277,7 +277,7 @@ collected from client repos into those files.
 - Symptom: the Cooling "Key Benefits" answer (C | Accordion Item › Answer, rich text) needed a bulleted list. `data_whtml_builder` into the prop (parent = instance + `prop`) failed ("Failed to create element from WHTML"). `data_element_builder` with `BY_CUSTOM_TAG` `ul` and the instance + `prop` as parent did create a List, but it came with three default items, and `li` children took no `set_text` (published as empty `<li>`); `set_text` on an item with the prop id answered "Element not found"; `query_elements` can't see inside the prop at all.
 - Cause: text inside a rich-text prop is reachable only as the whole prop value (`rich_text_inner_text`, plain paragraphs and line breaks).
 - Fix: set the paragraphs with `rich_text_inner_text` (blank line between items), then a person selects them in the Designer and clicks the bulleted-list button (done 2026-10-29, published as `<ul role="list">` with 6 items). Setting the prop value again also clears a half-built list.
-- Status: worked around
+- Status: harvested into wf-template 0.9.0; worked around
 - Found by: claude
 
 ### 2026-10-29 · The canvas draws a grid with no columns at half width
@@ -286,7 +286,7 @@ collected from client repos into those files.
 - Symptom: on the Cooling canvas the open accordion answer filled only the left half of the Accordion Item; on the published page it is full width (656 of 658px at 1440).
 - Cause: `.accordion-panel` is `display: grid` with only `grid-template-rows` set (the 0fr → 1fr open animation). The published CSS has no columns, so the browser makes one; the Designer shows Webflow's default two-column grid for it.
 - Fix: `.accordion-panel` got `grid-template-columns: 1fr` with the user's OK (2026-10-29); published CSS reads it back and the live answer is unchanged (656 of 658px). Any class ported from the prototype as a grid without columns does the same: set its columns.
-- Status: fixed (Webflow, 2026-10-29)
+- Status: harvested into wf-template 0.9.0; fixed (Webflow, 2026-10-29)
 - Found by: claude
 
 ### 2026-10-29 · An intro loader that fades the hero in costs the LCP
@@ -295,7 +295,7 @@ collected from client repos into those files.
 - Symptom: Home scored 80 on mobile PageSpeed (desktop 96): LCP 4.0 s, of which 3 s "render delay"; the LCP element was the hero H1.
 - Cause: Lighthouse always loads as a first visit, so it always sees the intro loader, and the intro set the hero parts to `opacity: 0` under it. An element at opacity 0 isn't an LCP candidate, so LCP waited for the curtain to lift; a covered but painted element does count.
 - Fix: the hero parts only move (`y`), never fade, under the loader (src/modules/intro.ts, d1097d7). Mobile 93 (LCP 2.7 s), desktop 95; the reveal looks the same because the curtain covers the start. What is left of LCP is the render-blocking bundle stylesheet and the web-font swap.
-- Status: fixed d1097d7
+- Status: harvested into wf-template 0.9.0; fixed d1097d7
 - Found by: claude
 
 ### 2026-10-29 · calc() values with variables: a computed variable with a value per mode
@@ -304,7 +304,7 @@ collected from client repos into those files.
 - Symptom: 17 MANUAL-TODO rows (B, E, F, J, K–Q, S, V, X, Y, Z, AD) were class values like `calc(Section/Padding H * -1)` or `calc(Nav/Height + 3.5em)`, which the style API collapses to the first variable.
 - Cause: the style API keeps one variable per value. The variable tool now lists `custom_value` (MCP 2.2.0), but `create_size_variable` and `update_size_variable` with `custom_value` both fail with "An internal error occurred", even for `calc(100vh - 60px)` without any variable.
 - Fix: one Size variable per calc in the same collection as its inputs (Layout), with static values: Base plus its own value in every breakpoint mode (Tablet, Mobile Landscape, Mobile), each worked out from the input's value in that mode. Negative values are accepted (`Section/Padding H Negative` = -4 / -2.5 / -1.5 / -1.25em; `Calc/Nav Height + 3.5em` = 9 / 8 / 7.5 / 7.5em). Bind the class property with `variable_as_value`. The published CSS declares each variable in `:root` and in each breakpoint's `body` block, so the value follows the breakpoint. Trade-off: the values are copies, not formulas. When Nav/Height, Section/Padding V/H or Content/Gap change, update the `Calc/…` variables too (the names say which input they follow).
-- Status: worked around
+- Status: harvested into wf-template 0.9.0; worked around
 - Found by: claude
 
 ### 2026-10-29 · Gradients with variables: literal colours through the API, and check every variant
@@ -313,7 +313,7 @@ collected from client repos into those files.
 - Symptom: 10 MANUAL-TODO rows (G, R, AB, AF–AL) were `linear-gradient()` values using colour variables (the TW gradient, fades to Background/Page). A gradient with `var()` keeps only its first variable, and a Color variable can't hold a gradient (`custom_value` fails on create and update anyway).
 - Cause: the style API collapses any value containing a Webflow variable to a binding; Color variables are single colours.
 - Fix: `update_style` `background-image` with the variables' literal values (`linear-gradient(270deg, #5c7592, #3e5570)`; for fades to Background/Page, the colour that mode resolves to in that section: Frost on Home's media-below section, Paper on the Cooling band). Published as given, same look; the gradients don't follow a later change of Storm, Accent or the page colour, so a palette change means updating them too (or binding the stops in the Designer). Setting it on a class shared by a component (Button Color) also reaches every variant that doesn't override it: Light and Frost already had `background-image: none`, Secondary didn't and got it through `set_variant_styles`. Check each variant with `get_variant_styles` before publishing.
-- Status: worked around
+- Status: harvested into wf-template 0.9.0; worked around
 - Found by: claude
 
 ### 2026-10-29 · Fonts through the API: check the licence before subsetting
@@ -322,7 +322,7 @@ collected from client repos into those files.
 - Symptom: MANUAL-TODO AA (Space Mono, Satoshi) was left for the Designer because Google Fonts can't be added through the API.
 - Cause: —
 - Fix: download the files and upload them as custom fonts: `create_font` (family name exactly as the Typography Scale family variables name it; `axes` for a variable font, which publishes as `font-weight: 300 900`), then POST the returned `upload.fields` plus `file` as multipart to `upload.url` (201 = done), publish, check the `@font-face` in the published CSS and `document.fonts` on a page. The files publish from the fastly host (see "A new font from the fonts API also publishes from the second host"). Licence first: OFL fonts (Google Fonts) may be subset (Space Mono, Latin, 99 → 16 KB), but Fontshare's FFL forbids subsetting and format conversion, so Satoshi went up as Fontshare's own `Satoshi-Variable.woff2` (42.6 KB, one file for 400 and 500). Keep the originals and licence texts in `Assets/fonts/`.
-- Status: worked around
+- Status: harvested into wf-template 0.9.0; worked around
 - Found by: claude
 
 ### 2026-10-29 · The template's update-skills test assumes the full Phosphor font
@@ -340,7 +340,7 @@ collected from client repos into those files.
 - Symptom: the Home FAQ items sat flush against each other on staging although the Accordion is `display: flex` with a 1em row gap (found by the Community Impact session).
 - Cause: the Collection List adds two block wrappers (`.w-dyn-list` › `.w-dyn-items`) between the Accordion and its items, so the gap spaces the one wrapper, not the items.
 - Fix: the existing Accordion class also on the list's items wrapper (DynamoList), no new class: gaps 13.7px at 1440, 16px at 820 and 390. Any list built inside a flex/grid wrapper (Doc Accordions, cards) needs the same.
-- Status: fixed (Home, published)
+- Status: harvested into wf-template 0.9.0; fixed (Home, published)
 - Found by: claude
 
 ### 2026-10-29 · List filters take on some lists and not on others
@@ -349,7 +349,7 @@ collected from client repos into those files.
 - Symptom: the same `filters` write (`group` equals the option id, then with `show-on-project-overview` isOn) was stored, read back and published on both Project Overview Documents lists, and the Home FAQ list reads back `show-on-home` isOn and publishes 4 items, while on the two Community Impact Documents lists `filters` and even `sort` were refused with `[Conflict] … component map`, also after moving the list to body level.
 - Cause: unknown. The difference seen: the PO and Home lists carry their classes and `data-accordion` attributes on the Collection List itself and had sort written earlier without a failure; the CI lists sit inside a separate Accordion wrapper and had already had refused writes (lessons/mcp.md: a list that refused a write once refuses later writes).
 - Fix: try the filter on each list once, alone (one key per `set_settings`), read it back, check the published list. A list that refused once is a Designer step (or rebuild it and write source, sort, filters one at a time before anything fails). Earlier entries that said "no filter write takes on this site" were too broad.
-- Status: worked around (BA and AP done through the API, BK left to the Designer)
+- Status: harvested into wf-template 0.9.0; worked around (BA and AP done through the API, BK left to the Designer)
 - Found by: claude
 
 ### 2026-10-29 · API-uploaded images get their variants late; a plain Image keeps no srcset
@@ -358,7 +358,7 @@ collected from client repos into those files.
 - Symptom: three images uploaded through the assets API at 15:50 had size 0 and no variants, so the Community Impact and Cooling heroes published without `srcset` (MANUAL-TODO BN, BV asked a person to re-pick them). At 16:32 all three had variants (500 to 2000px). The heroes (C | Page Hero image prop) then published with `srcset` with no other change. The Operations background, a plain Image element set while its asset had no variants, still published without `srcset`, also after `set_image_asset` with the same asset.
 - Cause: Webflow makes the variants asynchronously, here about 40 minutes after the upload (all three in the same minute; a re-post of one file's bytes to its S3 key just before may or may not have set it off). A component image prop resolves the variants at publish; a plain Image element seems to keep what it had when it was set.
 - Fix: check `get_asset` variants before asking a person to re-pick an image; wait and republish first. A plain Image whose asset got its variants later still needs a re-pick in the Designer (or set it after the variants exist). `get_asset` keeps reporting size 0 even with variants.
-- Status: worked around
+- Status: harvested into wf-template 0.9.0; worked around
 - Found by: claude
 
 ### 2026-10-29 · A hero entrance from opacity 0 holds the LCP, even in pure CSS
@@ -367,7 +367,7 @@ collected from client repos into those files.
 - Symptom: after the intro loader was replaced by a CSS entrance (`@keyframes` from `opacity: 0`, starting at first paint), mobile LCP went to 4.5 s although FCP was 2.8 s; the LCP element was the hero H1.
 - Cause: an element painted at opacity 0 isn't an LCP candidate, and the opacity animation runs on the compositor, so the H1 was only counted after the animation, not at its first frame.
 - Fix: start from a partial opacity (0.6) with a small rise (12px): the H1 counts from first paint (mobile median 93, LCP 3.1 s). Never animate the LCP element from opacity 0, in JS or CSS.
-- Status: fixed a9e60d6
+- Status: harvested into wf-template 0.9.0; fixed a9e60d6
 - Found by: claude
 
 ### 2026-10-29 · Section ids refused on a duplicated page; import the id instead
@@ -376,7 +376,7 @@ collected from client repos into those files.
 - Symptom: on Careers (created with `duplicateOf` Closed-Loop Cooling), three sections imported without ids then refused every id write: `set_dom_id` and `set_settings` key `domId` failed with "[Conflict] … component map", `set_attributes` `id` with "An internal error occurred". Other writes on the same page (classes, attributes on an Image, instances) took.
 - Cause: unknown Webflow-side.
 - Fix: import an empty `<section class="…" id="…">` next to the built one (the importer kept these ids), `move_element` the section's wrapper into it, remove the id-less section. Read the ids back with `query_elements` (`attribute_name: "id"`).
-- Status: worked around
+- Status: harvested into wf-template 0.9.0; worked around
 - Found by: claude
 
 ### 2026-10-29 · A list's first sort refused, a fresh list's sort taken minutes later
@@ -385,7 +385,7 @@ collected from client repos into those files.
 - Symptom: Careers Quote Slider: two Testimonials Collection Lists took `source`, then refused `sort` (Order ascending) with "[Conflict] … component map", three times over 10 minutes. Unsorted, the lists published newest item first, so a placeholder quote showed before Jim Spoon's. Two new body-level lists made later took `source` and `sort` in back-to-back calls.
 - Cause: unknown (the site-wide list conflict in the entries above, intermittent).
 - Fix: rebuild instead of retrying: a new Collection List at body level, `source` then `sort` (one key per call, read back), then `move_element` the bound children from the old item into the new item (CMS bindings kept), copy the item and list classes and attributes, move the list into place, remove the old list.
-- Status: worked around
+- Status: harvested into wf-template 0.9.0; worked around
 - Found by: claude
 
 ### 2026-10-29 · A lazy image with no width/height takes no space until it loads
@@ -394,7 +394,7 @@ collected from client repos into those files.
 - Symptom: the Careers testimonial card was 55px shorter on staging than in the prototype, and grew when scrolled to.
 - Cause: the quote-mark SVG (Image element, `loading="lazy"`, class `height: auto`) publishes without `width`/`height` attributes, so it is 0px tall until it loads; the prototype's `<img width height>` reserved the space.
 - Fix: `aspect-ratio: 83 / 65` on the Quote Mark class (through the style API). Any small image (icons, marks, logos) with `height: auto` in a lazy spot needs its aspect ratio on the class.
-- Status: fixed (Webflow, 2026-10-29)
+- Status: harvested into wf-template 0.9.0; fixed (Webflow, 2026-10-29)
 - Found by: claude
 
 ### 2026-10-29 · A component image prop publishes without srcset until it is cleared and set again
@@ -403,7 +403,7 @@ collected from client repos into those files.
 - Symptom: on Careers the C | Video Frame poster and the four C | Benefit Grid photos published as full-size images without `srcset` (Lighthouse mobile: ~1.2 MB of oversized images, render delay 92% of LCP), although their assets had variants and the props were set after the variants existed. The same images on the style guide's instances also have none; C | Step List and C | Page Hero props did get `srcset`.
 - Cause: unknown; the Image settings inside the components are the same as Step List's.
 - Fix: set each image prop to `null`, then to the asset id again (`set_component_instance_prop_values`), and publish: all five then published with `sizes` and `srcset`. Check the published `<img>` for `srcset` after setting any image prop.
-- Status: worked around (Careers); the style guide instances still have none
+- Status: harvested into wf-template 0.9.0; worked around (Careers); the style guide instances still have none
 - Found by: claude
 
 ### 2026-10-29 · A plain element in a page-shell slot without a duplicate page or a person
@@ -412,7 +412,7 @@ collected from client repos into those files.
 - Symptom: the Events page and the Events CMS template were empty bodies; the API can't build into an empty slot, and a CMS template can't be made with `duplicateOf`.
 - Cause: the API addresses slot content only beside a plain element already in the slot (lessons/mcp.md, Slots), and `insert_in_slot` takes component instances only.
 - Fix: a blank component (here "ZZ Slot Anchor", its root is a plain div) inserted with `data_component_builder` `insert_in_slot` into G | Page W's "G | Main", then `unlink_component_instance`: a plain div is left in the slot and `data_whtml_builder` / `data_element_builder` work `before` it. Remove the div when the page is built, and unregister the helper component when no page needs it. G | Page W stays a linked instance. (Used on /events, the Events and the News templates.)
-- Status: worked around
+- Status: harvested into wf-template 0.9.0; worked around
 - Found by: claude
 
 ### 2026-10-29 · Collection List date filters: the value shape, and a date filter and a sort refuse each other
@@ -421,7 +421,7 @@ collected from client repos into those files.
 - Symptom: Events lists (upcoming, past). A DateTime filter took only `greaterThanOrEqual` / `lessThanOrEqual` and failed "requires a valid DateFilterValue object" for `{"type":"now"}`, `{"kind":…}`, `{"mode":…}` and absolute dates. With the right shape, on six fresh body-level lists, whichever of filter and sort was written second failed with `[Conflict] … component map`: sort then filter, filter then sort, both in one write, on the same date field or on Start/End; a filter replacing a filter and a sort replacing a sort took. A sort on a list without a filter (Other events) took.
 - Cause: unknown Webflow-side; the shape is from the Designer API docs (Webflow AI).
 - Fix: the value is relative: `{"amount": 0, "unit": "days", "direction": "past"}` (`unit` days/weeks/months/years; `amount: 0` = today and is stored as `direction: "past"`). Upcoming: `end` greaterThanOrEqual amount 0; past: `end` lessThanOrEqual amount 1 past (ended by yesterday, so an event ending today is upcoming only). Filters were kept (they decide which list an event is in); the sorts are MANUAL-TODO DK.
-- Status: worked around (sort by hand)
+- Status: harvested into wf-template 0.9.0; worked around (sort by hand)
 - Found by: claude
 
 ### 2026-10-29 · Bound CMS dates publish in one fixed format, and no API link points at the current item
@@ -430,7 +430,7 @@ collected from client repos into those files.
 - Symptom: every Start/End binding (text, DOM span, custom attribute) published as "October 7, 2025", no time; Event Card links published `href="detail_events"` (`static_link` mode `collectionPage`) or `/events` (mode `page` with the template id).
 - Cause: the binding has no format field (`set_settings` binding takes source, collection, field; the raw setting stores nothing else); the link setting has no "current item" target.
 - Fix: both are Designer steps (MANUAL-TODO DI date formats, DJ and DL links). calendar-links now reads New York wall time without an offset ("2026-07-24 08:30", "July 24, 2026 8:30 AM"; 66a0a9b), since Webflow can't publish a date with its offset; a value without a time builds no links.
-- Status: open (Designer steps)
+- Status: harvested into wf-template 0.9.0; open (Designer steps)
 - Found by: claude
 
 ### 2026-10-29 · Imported blocks that refuse attributes; the grey empty state; a form wrapper that shrinks
@@ -439,7 +439,7 @@ collected from client repos into those files.
 - Symptom: (1) `data-list-root` on the imported Past Events section: `set_attributes` reported success and stored nothing, and `set_settings` key `attributes` also read back `[]` (on News the second route worked). (2) The upcoming list's Empty state showed a grey 10px frame around C | Empty Card. (3) The imported search `<form>` came out 200px wide in the centred page head.
 - Cause: (1) unknown, on WHTML-imported blocks; (2) Webflow's `.w-dyn-empty { background-color: #ddd; padding: 10px }`; (3) the importer makes FormWrapper › FormForm, and the class-less `.w-form` wrapper shrinks in a centred flex column (and keeps `margin-bottom: 15px`).
 - Fix: (1) a DivBlock made with `data_element_builder` around the list carries the attribute (read back, published); (2) class List Empty State (padding 0, transparent) on each DynamoEmpty; never remove a DynamoEmpty through the API (it deletes the whole list, per the News session); (3) class Search Field Wrap (width 100%, max-width 32em, margin-bottom 0) on the FormWrapper, Search Field on the FormForm. Update: replaced by a plain DOM form (see "Imported form controls" update): no wrapper, no Turnstile; Search Field Wrap removed.
-- Status: worked around
+- Status: harvested into wf-template 0.9.0; worked around
 - Found by: claude
 
 ### 2026-10-29 · Removing a Collection List's Empty State deletes the whole list
@@ -448,7 +448,7 @@ collected from client repos into those files.
 - Symptom: on News, `remove_element` on the DynamoEmpty of a nested Topics list and of the main News Posts list reported success; afterwards `query_elements` found no DynamoWrapper on the page: both lists, with the bound card, were gone.
 - Cause: the API removes the Empty State's parent Collection List with it.
 - Fix: never remove a DynamoEmpty; give it a class with `display: none` instead (Post Topics Empty) or style it. The card was rebuilt.
-- Status: worked around
+- Status: harvested into wf-template 0.9.0; worked around
 - Found by: claude
 
 ### 2026-10-29 · Finsweet List 2.7: what the markup needs on Webflow
@@ -457,7 +457,7 @@ collected from client repos into those files.
 - Symptom: on News, (1) the custom empty message (`fs-list-element="empty"` outside the Collection List) showed all the time, with and without matches; (2) checks from a script saw Finsweet never start in a hidden browser pane.
 - Cause: (1) Finsweet 2.7 finds the empty element but doesn't toggle one that isn't the list's own Empty State; (2) the recipe's loader starts an attribute when its elements come near the viewport (IntersectionObserver) or on the first scroll, pointer or key input, and a hidden pane gives neither.
 - Fix: (1) list-state module (072daa3) shows the empty message only while the list has no items; put `data-list-hidden` on it in Webflow so it doesn't flash. (2) In checks, scroll or move the pointer first. What works as documented (read from the 2.7.1 source and checked on staging): `fs-list-element="list"`, `fs-list-load="more"` and `fs-list-itemsperpage` on the DynamoList; a custom Show more with `fs-list-element="pagination-next"` + instance (hidden when all are shown); filters on the FormForm (submit is prevented and stopped, so Webflow's form handler doesn't run); search `fs-list-field="*"`; the sort select's initial value (`date-desc`) is applied on start, so the list is sorted even without a native sort.
-- Status: fixed 072daa3
+- Status: harvested into wf-template 0.9.0; fixed 072daa3
 - Found by: claude
 
 ### 2026-10-29 · Imported form controls: `for=""`, lost `checked`, bold labels, grey read-only inputs
@@ -466,7 +466,7 @@ collected from client repos into those files.
 - Symptom: the News List Toolbar from `data_whtml_builder`: (1) every FormBlockLabel published `for=""`, which ties the label to nothing, so clicking a pill would not check its radio; (2) the `checked` on the All radio was dropped; (3) the pills were bold; (4) the read-only sort input was grey.
 - Cause: (1)(2) importer; (3) webflow.css gives `label` `font-weight: bold; margin-bottom: 5px`; (4) webflow.css `.w-input[readonly] { background-color: #eee }` outranks a single class.
 - Fix: (1) `set_attributes` `for` = the radio's id on each label (give the radios unique ids in the import); (2) `set_attributes` `checked` = `true`; (3) `font-weight: 400`, `margin-bottom: 0` on Filter Pill; (4) a combo (Select Input Is Readonly) with the background: two classes beat the attribute selector. Also give each FormWrapper a class (Form + Is Search / Is Toolbar) with a width, or it shrinks. Update 2026-10-29: better, skip the form block altogether: on News the search and toolbar were rebuilt as DOM elements (`data_element_builder` type DOM, tags form/label/input/select/option/button; attributes and option text through `set_settings` `attributes` and `text`), which publish exactly as written, keep Finsweet working and stop the page loading Cloudflare Turnstile (a Webflow form block on a page loads it; /news went from 2.7 to 1.0 MB with the WebP images).
-- Status: worked around
+- Status: harvested into wf-template 0.9.0; worked around
 - Found by: claude
 
 ### 2026-10-29 · Empty CMS fields: bound elements get `w-dyn-bind-empty`, component props don't
@@ -475,7 +475,7 @@ collected from client repos into those files.
 - Symptom: on the News template, an empty Cover Image or Excerpt bound to an Image or Paragraph published with `w-dyn-bind-empty` (hidden by webflow.css), but C | Download Card and C | Source Card with props bound to empty fields published as empty divs with `href="#"`. Conditional visibility on a field isn't in the API (`set_visibility` binds to props only).
 - Cause: Webflow marks only elements bound directly to a field.
 - Fix: the no-cover card fallback works without conditions (the shield sits under an absolutely placed cover image that hides itself when empty). The template parts are hidden with `:has()` in repo CSS (`.download-card:has(.download-name:empty)`, `.source-card:has(.source-link > :first-child:empty)`, `.article-cover:has(> .w-dyn-bind-empty)`; 677e97c). A title clamp that looks at the next sibling must skip `.w-dyn-bind-empty`.
-- Status: worked around
+- Status: harvested into wf-template 0.9.0; worked around
 - Found by: claude
 
 ### 2026-10-29 · Lighthouse counts anything that finishes before the first paint, including the async bundle and swap fonts
