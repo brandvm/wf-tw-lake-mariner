@@ -61,6 +61,9 @@ pages (`SEO-PLAN.md`)>.
 | 9 | "don't forget to link letters of support!" | C \| Highlight Tabs › Text 3 (now a rich-text prop) → the PDF re-hosted from the old site on Webflow assets (`Letters-of-Support_Local-Contractors.pdf`), new tab | done, on staging |
 | 10 | Tab 4 copy "As we expand operations in Barker…" with bold phrases, "here" → Community Impact | C \| Highlight Tabs › Text 4 (rich text) | done, on staging |
 | 11 | "change to: (15-20+ years)" | C \| Highlight Tabs › Text 5 | done, on staging |
+| 12 | "can we please capitalize all of these like titles?" | Community Impact › How Barker benefits › accordion titles | done, on staging |
+| 13 | "replace these images with attached (cool way to display these gifs?)" | Closed-Loop Cooling › Inside the Loop: Loop Modes, two looping diagram videos with a Warmer days / Below 60°F switch, alternating every 8 s (4cd8597) | done, on staging |
+| 14 | add the two testimonials (Figma 2299:11727, 2299:11776) | Testimonials CMS: Dan Heidemann (VP of Construction), Jesse Rohring (Site Lead) replace the two placeholders | done, on staging; name spelling "Jasse" in Figma vs "Jesse" to confirm |
 
 <!-- Copy the table for each round; follow-ups from the same reviewer go
 under their round as "Round N follow-ups". -->

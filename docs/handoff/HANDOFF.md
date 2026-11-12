@@ -131,6 +131,7 @@ In `prototype/src/modules/`, one file each, run from `prototype/src/main.ts`; al
 | lightbox | `data-lightbox-group`, `data-lightbox`, `data-lightbox-item`, `data-lightbox-rich`, `data-full` | image viewer dialog with arrows and thumbnails; wraps rich-text images by itself |
 | video-modal | `data-video-open`, `data-video-src`, `data-video-title` | the video in a dialog; "Video coming soon" without a src |
 | benefits | `data-benefits`, `data-benefit-grid`, `data-benefit`, `data-benefit-progress` | the active Benefit box grows and hands over on a 4 s timer while on screen |
+| loop-modes | `data-loop-modes` (ms), `data-loop-tab`, `data-loop-video` | Cooling › Inside the Loop: two looping diagram videos, tabs switch them, alternates while on screen until a tab is clicked; posters only with reduced motion (added 2026-11-12) |
 | quote-slider | `data-quote-slider`, `data-quote-slide`, `data-quote-bg`, `data-quote-prev`, `data-quote-next`, `data-quote-count` | quote and background photo change together; arrows, keys, swipe |
 | custom-select | `data-select` › `[role=combobox]`, `.select-list`, native `select` | the sort dropdown over a hidden native select (Finsweet sort-trigger) |
 | list-filter | `fs-list-*` markup, `data-list-root`, `data-list-more`, `data-list-page` | prototype stand-in for Finsweet List (filters, search, sort, show more). In Webflow: Finsweet Attributes (`recipes/finsweet/`); check the attribute names against the Finsweet List docs and wire Show more to the Collection List pagination (`fs-list-load="more"`) |
