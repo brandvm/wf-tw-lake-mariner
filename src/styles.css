@@ -788,6 +788,15 @@ button.social-button { padding: 0; cursor: pointer; }
 .filter-pill-input:checked + .filter-pill-label { background-color: var(--_colors---brand--accent); background-image: linear-gradient(270deg, var(--_colors---brand--storm), var(--_colors---brand--accent)); color: var(--_colors---brand--paper); }
 .filter-pill-input:focus-visible + .filter-pill-label { outline: 2px solid var(--_colors---brand--accent); outline-offset: 2px; }
 
+/* repo-css: js-state — Loop Modes (Closed-Loop Cooling, loop-modes.ts). The tabs reuse Filter Pill Label, the selected one takes the checked pill look. Only the active video shows, and the first one shows before the module starts (and on the canvas) */
+.loop-video { opacity: 0; transition: opacity 600ms ease; }
+.loop-video[data-active], [data-loop-modes]:not([data-loop-state]) .loop-video:first-child { opacity: 1; }
+[data-loop-tab] { border: 0; cursor: pointer; }
+[data-loop-tab]:hover { background-color: rgba(92, 117, 146, 0.24); }
+[data-loop-tab][aria-selected="true"] { background-color: var(--_colors---brand--accent); background-image: linear-gradient(270deg, var(--_colors---brand--storm), var(--_colors---brand--accent)); color: var(--_colors---brand--paper); }
+[data-loop-tab]:focus-visible { outline: 2px solid var(--_colors---brand--accent); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .loop-video { transition: none; } }
+
 /* repo-css: js-state — descendant or sibling selector */
 .select.is-open .select-icon { transform: rotate(180deg); }
 .select.is-up .select-list { top: auto; bottom: calc(100% + 0.25em); }

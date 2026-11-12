@@ -8,7 +8,7 @@ skill). Agents read this file after `HANDOFF.md` once it has a status line.
 ## Status
 
 2026-11-12 — round 1 feedback received (client PDF "Terawulf - Lake Mariner"). Staging:
-`https://tw-lake-mariner.webflow.io`. Waiting on: Designer steps DI/DK (event dates), FAQ page content.
+`https://tw-lake-mariner.webflow.io`. Waiting on: FAQ page content, Facebook URL, Benefits layout go-ahead. Figma has a second set of client comments (Chloe, 2026-11-12, ~40 threads) not yet logged as a round.
 
 ## What is built
 
@@ -45,7 +45,7 @@ pages (`SEO-PLAN.md`)>.
 
 | # | Item | Where | Status |
 | --- | --- | --- | --- |
-| 1 | "events page: theres a bug with the dates" | Events › Event Cards, Events template › Detail Bar: every bound date publishes as `MMMM D, YYYY` and the lists are unsorted | waiting on a person: MANUAL-TODO DI (date formats), DK (sorts) |
+| 1 | "events page: theres a bug with the dates" | Events › Event Cards, Events template › Detail Bar and Other events: date formats, list sorts, links, exclude current (MANUAL-TODO DI–DL) | done in the Designer through Chrome, on staging 2026-11-12 |
 | 2 | "remove these" (the grey lines above Past events) | the `data-manual-todo` captions: Events (DI, DJ, DK), Events template (DI, DL), and the same kind on /news (CY CZ) and the News template (CY CZ DA DB) | done, on staging 2026-11-12 (the rows stay open in MANUAL-TODO) |
 | 3 | "remove body" (Follow band) | C \| Follow Band › Text paragraph and its Text prop removed | done, on staging 2026-11-12 |
 | 4 | "add instagram" | C \| Follow Band › new Instagram button + prop (default instagram.com/terawulf); G \| Footer W › Instagram button. Also filled LinkedIn and X with TeraWulf's accounts (were `#`); Facebook stays `#` (TeraWulf has none) | done, on staging 2026-11-12; Facebook URL or removal to decide |
@@ -53,6 +53,14 @@ pages (`SEO-PLAN.md`)>.
 | 6 | "faq page needed" | new page `/faq` (reverses the 2026-10-27 "no FAQ page" decision) | waiting on content: which questions and answers |
 | 7 | "make simple like the main site" | Careers › Your Benefits (C \| Benefit Grid): terawulf.com/careers shows four static items, photo + title + line, no timer | to propose |
 | 8 | "remove the bubbles on all images here - homepage" | C \| Explore Rail: the 13 Tags removed; the empty Tag Cloud wrappers stay as the cards' flex spacer (Home and Project Overview share it) | done, on staging 2026-11-12 |
+
+### Round 1 follow-ups (2026-11-12, Figma comments on Project Overview)
+
+| # | Item | Where | Status |
+| --- | --- | --- | --- |
+| 9 | "don't forget to link letters of support!" | C \| Highlight Tabs › Text 3 (now a rich-text prop) → the PDF re-hosted from the old site on Webflow assets (`Letters-of-Support_Local-Contractors.pdf`), new tab | done, on staging |
+| 10 | Tab 4 copy "As we expand operations in Barker…" with bold phrases, "here" → Community Impact | C \| Highlight Tabs › Text 4 (rich text) | done, on staging |
+| 11 | "change to: (15-20+ years)" | C \| Highlight Tabs › Text 5 | done, on staging |
 
 <!-- Copy the table for each round; follow-ups from the same reviewer go
 under their round as "Round N follow-ups". -->

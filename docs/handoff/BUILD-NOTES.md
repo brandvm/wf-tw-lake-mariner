@@ -29,7 +29,7 @@ Collections created 2026-10-28. Sample items from the approved prototype added a
 | C \| Intro Row (component) | Logo, Heading, Media, Media Alt | The two paragraphs are edited inside the component (rich text with the TeraWulf Inc. link), not per instance. |
 | C \| Collage (component) | Eyebrow, Heading, Wide Image, Square Image, Statement, Statement Muted | Statement Muted starts with a non-breaking space so the two parts don't join. |
 | C \| Promo Card (component) | Image, Heading, Text, Button Label, Button Link | |
-| C \| Highlight Tabs (component) | Eyebrow; Title, Text, Photo 1–5 | Five tabs, fixed; each Title is also its tab's name. |
+| C \| Highlight Tabs (component) | Eyebrow; Title, Text, Photo 1–5 | Five tabs, fixed; each Title is also its tab's name. Text 3 and Text 4 are rich text (links, bold): select the instance, Properties › Text N › Edit Rich Text. Texts 1, 2 and 5 are plain. |
 | C \| Image Accordion Item / Item Light (components) | Title, (Number), Answer, State | Sit in an Accordion with `data-accordion-autoplay="7000"`; the photos beside it carry `data-accordion-image`, one per item, in order. |
 | C \| Doc Accordion Item (component) | Name, Description, Button Label, Link, State | In a Collection List of Documents on Project Overview and Community Impact; bind Link to File or External URL. |
 | C \| Photo Band (component) | Eyebrow, Statement, Statement Muted, Text | The three photo layers stay fixed in the component (the cut-out sits on the worker in the photo). |
@@ -67,6 +67,7 @@ The static News and Events pages share the slugs `news` and `events` with their 
 
 Changes made during the build that differ from the approved design, and
 who approved them.
+- 2026-11-12 · Project Overview Highlight Tabs: Text 3 and 4 became rich-text props so they can carry links (letters of support → the PDF, re-hosted on Webflow from the old Squarespace site; "here" → /community-impact) and bold. Tab 4 copy and tab 5 "(15-20+ years)" from the client's Figma comments. Event and news date formats, list sorts and filters set in the Designer. · client, via Figma comments
 - 2026-11-12 · Review round 1 (client): Follow band has no body line; it and the footer gain an Instagram button (TeraWulf's account), and LinkedIn and X point to TeraWulf's accounts. Facebook is still `#`. Explore cards have no tag bubbles. Nav "Contact Us" and footer "Contact" go to terawulf.com/connect. The manual-step captions are off the published pages. · client, via Brand Vision
 - 2026-10-29 · Events: the search is a plain DOM form (form, label, input), not a Webflow Form block, as on News: the form block loaded Cloudflare Turnstile on a page that sends nothing (/events mobile 68 → 88). Edit its placeholder and label under Settings › Custom attributes. · Claude (PageSpeed)
 

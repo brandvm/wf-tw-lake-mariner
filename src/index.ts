@@ -37,6 +37,7 @@ import { initFollowFan } from './modules/follow-fan';
 import { initFaqSchema } from './modules/faq-schema';
 import { initListState } from './modules/list-state';
 import { initFinsweet } from './modules/finsweet';
+import { initLoopModes } from './modules/loop-modes';
 
 // Each module runs in isolation: one that throws is logged and skipped,
 // and every module after it still initializes.
@@ -86,6 +87,7 @@ function boot() {
   run('lightbox', initLightbox);
   run('video-modal', initVideoModal);
   run('benefits', initBenefits);
+  run('loop-modes', initLoopModes);
   run('quote-slider', initQuoteSlider);
   run('custom-select', initCustomSelect);
   run('reveal', initReveal);
