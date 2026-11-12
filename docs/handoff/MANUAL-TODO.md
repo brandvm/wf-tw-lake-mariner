@@ -28,7 +28,10 @@ the step is found on the canvas and nobody mistakes the unfinished state
 for the design: a small Caption next to the element (on the style guide,
 next to its specimen) with the attribute `data-manual-todo="<letter>"` and
 the text "Manual step <letter>: <what>". When the row is done, Claude
-removes the marker in the same batch that ticks the row. Before the build
+removes the marker in the same batch that ticks the row. (2026-11-12: at the client's request in review round 1, the markers on
+Events, the Events template, News and the News template were removed while
+DI–DL and CY–DB are still open; from the review phase on, open rows are
+tracked here only, not on published pages.) Before the build
 handoff and before launch, no `data-manual-todo` may be left on any
 published page (search the published HTML for it).
 

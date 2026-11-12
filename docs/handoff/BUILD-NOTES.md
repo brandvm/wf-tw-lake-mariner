@@ -37,7 +37,7 @@ Collections created 2026-10-28. Sample items from the approved prototype added a
 | C \| Hover Pair (component) | Image, Alt, Button Label 1–2 | Button Label is what a screen reader hears; the lightbox shows the image itself. |
 | C \| Video Frame (component) | Poster, Poster Alt, Button Label, Video URL, Video Title | Empty Video URL shows "Video coming soon" in the dialog. |
 | C \| Benefit Grid (component) | Title, Text, Photo 1–4 | Four boxes, fixed. |
-| C \| Follow Band (component) | Eyebrow, Heading, Text, Facebook, LinkedIn, X | Social links are `#` until the accounts are decided (HANDOFF Open decisions). Section id `follow` (Subscribe to updates scrolls to it). |
+| C \| Follow Band (component) | Eyebrow, Heading, Facebook, LinkedIn, X, Instagram | LinkedIn, X and Instagram default to TeraWulf's accounts; Facebook is `#` until decided (HANDOFF Open decisions). The footer's social row is page markup in G \| Footer W, set separately. Section id `follow` (Subscribe to updates scrolls to it). |
 | C \| Empty Card (component) | Label, Heading, Text, Button Label, Button Link, Image | Goes in the Events upcoming list's Empty state. |
 | C \| Breadcrumb (component) | Parent Label, Parent Link, Current | On the templates, connect Current to the item's Name. |
 | C \| Share Buttons (component) | none | The share module fills the links from the page's URL and title. |
@@ -67,6 +67,7 @@ The static News and Events pages share the slugs `news` and `events` with their 
 
 Changes made during the build that differ from the approved design, and
 who approved them.
+- 2026-11-12 · Review round 1 (client): Follow band has no body line; it and the footer gain an Instagram button (TeraWulf's account), and LinkedIn and X point to TeraWulf's accounts. Facebook is still `#`. Explore cards have no tag bubbles. Nav "Contact Us" and footer "Contact" go to terawulf.com/connect. The manual-step captions are off the published pages. · client, via Brand Vision
 - 2026-10-29 · Events: the search is a plain DOM form (form, label, input), not a Webflow Form block, as on News: the form block loaded Cloudflare Turnstile on a page that sends nothing (/events mobile 68 → 88). Edit its placeholder and label under Settings › Custom attributes. · Claude (PageSpeed)
 
 - 2026-10-28 · Button Light and Frost are variants of Button Color (the prototype drew them as combos Is Light and Is Frost on Button Color); the combos stay for card buttons that are not C | Button. Same look. · per HANDOFF components table (variant Solid, Light, Frost, Small)
