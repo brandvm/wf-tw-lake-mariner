@@ -33,13 +33,13 @@ scratchpad (`audit-*`).
 | # | Question | Design says | Staging now |
 | --- | --- | --- | --- |
 | D1 | Resources & Documents on Project Overview and Community Impact, Initiatives on Project Overview | gone from both pages (CI keeps Initiatives only) | built; Resources holds Cayuga/Lansing documents (another campus). **Chloe (Figma, 23 Sep): "Resources" and "Community & Partnership Initiatives" accordions on ALL Project Overview and Community Impact pages, hidden while empty** → keep unless she says the final design replaces that |
-| D2 | FAQ page | new `/faq` page; supersedes "FAQ links go to terawulf.com" (2026-10-27) | **2026-11-23:** empty placeholder page `/faq` (page 6b04680d2d3b401c29151b65, nav and footer only); Home "All Questions" and the footer FAQ link go to it. The page content is still to build |
+| D2 | FAQ page | new `/faq` page; supersedes "FAQ links go to terawulf.com" (2026-10-27) | **2026-11-23:** empty placeholder page `/faq` (page 6b04680d2d3b401c29151b65, nav and footer only); Home "All Questions" and the footer FAQ link go to it. **Built 2026-11-23:** toolbar, General and Propylene glycol lists, closing card, one FAQPage schema |
 | D3 | "Submit a question" button target (FAQ hero and CTA) | not given | **Chloe (23 Sep): links to the main contact form** → terawulf.com/connect, as the other Contact links |
 | D4 | Footer Insights | "News" and "Events" as two links | **done 2026-11-23**: two links, legal row spacing as the design (499 vs 498px at 1680); the credit stays "Site by Brand Vision Marketing" → brandvm.com, new tab (user) |
 | D5 | Title case | Barker accordion titles in sentence case; hero H1s, "Explore The Campus", "About The Project", "Meet Our Employees" in title case | Barker titles title case (client round 1); headings sentence case |
 | D6 | PO Highlights tab 5 | "(10+ years)" | "(15-20+ years)" — **Chloe's comment (12 Nov), keep staging** |
 | D7 | Explore card copy | older wording | newer wording from client comments; keep staging, fix "apart of" → "a part of" |
-| D8 | News Featured posts | featured block above the grid, posts repeated in the grid | none |
+| D8 | News Featured posts | featured block above the grid, posts repeated in the grid | **built 2026-11-23**: one large card + 3 rows from Featured posts, newest first |
 | D9 | CI electric-rates card titled "Hyperscale AI Infrastructure" with a natural-gas body | probably "Natural Gas Prices" | — |
 | D10 | Missing URLs | demolition video ("HERE" on PO item 5 and CI Barker item 2), EVAPCO sound solutions, NYISO 2025 report, sustainability post (FAQ), the videos | — |
 
