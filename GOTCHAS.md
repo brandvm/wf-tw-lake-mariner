@@ -550,3 +550,11 @@ collected from client repos into those files.
 - Status: worked around
 - Found by: claude
 
+### 2026-11-23 · Container queries through the style API; chips placed with cqw/cqh
+- Area: mcp
+- Scope: template-candidate
+- Symptom: Explore card chips had to sit at the Figma spots and scale with the card. Along the way: `data_element_builder` refused `settings` key `attributes` on a new DOM element ("not applicable to this element"); `insert_component_instance` refused a component instance as the `before` anchor.
+- Cause: the builder applies settings before the DOM element exists as such; the Designer rejects inserts relative to an instance.
+- Fix: the style API takes `container-type: size` and `cqw`/`cqh` values as typed (`left: calc(var(--x) * 1cqw)`, `font-size: calc(100cqh * 14 / 650)`), so no repo CSS is needed. The container must have no padding (cq units measure the content box) and a definite size (absolute, inset 0). Build the DOM element first, then `set_settings` `attributes` with `style` = `--x:…;--y:…`. Insert instances with `append` on the parent, not beside a sibling instance. Container-scaled text gets too small on phones (9.6px at 390): switch the container off (`container-type: normal`) and flow the chips at the small breakpoint.
+- Status: worked around
+- Found by: claude

@@ -49,19 +49,19 @@ scratchpad (`audit-*`).
 - Footer: done 2026-11-23 (D4).
 - FAQ "All Questions" → `/faq`: done 2026-11-23 (placeholder page).
 - Hero H1: done 2026-11-23 (title case "TeraWulf’s Flagship High-Performance Compute Campus", Is Long letter-spacing -3%). Still copy case (D5): "Explore The Campus". Keep "Setting…" (design's lowercase s is a typo).
-- No action: Explore tag bubbles, Instagram, accordion icon direction, Events/News cards (all decided earlier).
+- Explore tag bubbles: **done 2026-11-23** (user asked for them back as in the final design): chips on the Community Impact (4) and Careers (4) cards only, placed at the Figma spots with container units (C | Explore Rail; BUILD-NOTES). No action: Instagram, accordion icon direction, Events/News cards (all decided earlier).
 
 ### Project Overview — medium
 - **Hero H1:** done 2026-11-23 (C | Page Hero variant Page · Long Heading, title case).
 - **About the Project:** no change. The design shows only the 750 MW sentence, but Chloe asked to "match copy to lakemarinerdata.com project overview page" (Figma, 12 Nov), and staging is the live site's two sentences word for word.
-- **Responsible Development:** light theme (white section, Frost cards, dark text), "+" icons instead of [1]–[5], one lake/plant photo for all items (`2615:24560`). Designer combo + C | Image Accordion Item (dark) icon.
+- **Responsible Development:** done 2026-11-23: light theme (section Is Split Media, no Is Dark), the five items are C | Image Accordion Item Light (Frost cards, +/− icons) as on Community Impact, one photo (`po-rd-lake.jpg`, same as `2615:24560`). Links re-added in the Designer ("closed-loop system" → /closed-loop-cooling; "HERE" → the demolition short, new tab).
 - Resources / Initiatives removed (D1).
 - Tab 5 wording (D6). Cooling promo frame is named "Animation": ask whether the photo becomes a loop.
 
 ### Community Impact — large (design grew from ~4,400 to ~9,000px)
 Design order: Hero · How Barker Benefits · Protecting our environment (new) · statement over photo scene (new) · Strengthening the grid accordion (new) · What actually drives local electric rates? (new) · Meet Our Employees (new) · Testimonials (new) · Community & Partnership Initiatives · Footer. Resources removed.
 - **Hero:** text in two paragraphs at "As we expand…".
-- **Barker accordion:** item 1 "No lake water usage for cooling"; answers 2–7 now written in the design (full text in the audit; staging says "Text to come…"); item 2 ends with the demolition "HERE" link (D10). Autoplay with one photo, as built.
+- **Barker accordion:** done 2026-11-23: item 1 title "No Lake Water Usage for Cooling" (title case, as the client asked in round 1), answers 2–7 from the design's state frames (`2649:5710`, `2651:9017/9074/9131/9188/9245`), item 2 "HERE" → the demolition short (youtube.com/shorts/pQ4i53GA_6M, the link Project Overview already used), new tab. Item 1 keeps its "here" → /closed-loop-cooling. The section still has 7 photos (the design shows one).
 - **Protecting our environment (new):** H2 + 3 cards (300px photo, Frost body, H3, text, gradient "+" button): Closed-loop cooling → Cooling page; Ultra low noise → EVAPCO; No emissions → NYISO report. Swipe row on mobile. New card pattern (component).
 - **Statement over a photo scene (new):** two-tone text-fill statement ("Our data center investment contributes directly to Barker's future…") over a 3-layer scene (photo, smoke, worker cut-out). C | Photo Band needs image props (or a sibling component) to take this scene.
 - **Strengthening the grid (new):** dark photo background + 4 glass accordion items (Grid Connection, Privately Funded Upgrades, Supporting Grid Stability, The Result) — the Cooling Operations pattern.
@@ -111,7 +111,7 @@ CMS: FAQs gets a Category option (General, Propylene glycol); answers from the l
 3. **Community Impact new sections:** Grid accordion and Testimonials and Meet Our Employees (reuse) → Protecting our environment (new card) → Photo Band with image props → electric-rates rail.
 4. **FAQ page** (CMS category + content, page, toolbar, schema, links).
 5. **News:** card change, then Featured.
-6. **PO Responsible Development** light theme.
+6. **PO Responsible Development** light theme (done 2026-11-23).
 
 For the other four campuses: keep every campus-specific text, photo and link in
 CMS items or component props (not page text), so the duplicate site needs
