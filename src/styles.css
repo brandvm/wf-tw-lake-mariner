@@ -601,11 +601,11 @@ button.social-button { padding: 0; cursor: pointer; }
 /* repo-css: designer-cant — structural pseudo-class */
 .accordion-item:not([data-state="open"]):not([data-accordion-open-first]:not([data-accordion-state]):not(:has([data-state="open"])) .w-dyn-item:first-child > *) .accordion-icon-minus { display: none; }
 
-/* repo-css: designer-cant — scrollbar styling on the Explore rail. */
-.explore-rail { scrollbar-width: none; }
+/* repo-css: designer-cant — scrollbar styling on the swipe rows (Explore rail, Community Impact rates row and Info Grid). */
+.explore-rail, .rates-rail, .info-grid { scrollbar-width: none; }
 
 /* repo-css: designer-cant — selector the Designer has no control for */
-.explore-rail::-webkit-scrollbar { display: none; }
+.explore-rail::-webkit-scrollbar, .rates-rail::-webkit-scrollbar, .info-grid::-webkit-scrollbar { display: none; }
 
 /* repo-css: designer-cant — a child reacting to its parent's hover (Explore card image zoom). */
 .explore-card:hover .explore-card-img { transform: scale(1.04); }
@@ -669,14 +669,14 @@ button.social-button { padding: 0; cursor: pointer; }
 /* repo-css: designer-cant — attribute selector */
 .g-page-w .g-nav-w[data-state="open"] .nav-toggle { border-color: var(--_colors---paper-tint--paper-20); background-color: var(--_colors---steel-tint--steel-60); color: var(--_colors---brand--paper); }
 
-/* repo-css: js-state — the pinned sideways scroll (hscroll module), on from 992px up without reduced motion. Off, the rail is a native swipe row. The pinned layout also applies before the module runs (no state yet), under the same media query, so a page reloaded below the rail doesn't jump when the bundle arrives after the first paint. The height is the module's own sum (the pinned frame plus the travel: the four cards' 207em run minus the content width, min(80em, 100vw minus the 4em side padding twice)), the module then sets the measured value. If the cards change size, this is only an estimate and the module still corrects it. */
+/* repo-css: js-state — the pinned sideways scroll (hscroll module, Explore and the Community Impact rates row), on from 992px up without reduced motion. Off, the rail is a native swipe row. The rates row (#rates) is 108em long: four 26.25em cards and three 1em gaps. The pinned layout also applies before the module runs (no state yet), under the same media query, so a page reloaded below the rail doesn't jump when the bundle arrives after the first paint. The height is the module's own sum (the pinned frame plus the travel: the four cards' 207em run minus the content width, min(80em, 100vw minus the 4em side padding twice)), the module then sets the measured value. If the cards change size, this is only an estimate and the module still corrects it. */
 .section[data-hscroll-state="on"] { padding-top: 0; padding-bottom: 0; }
-@media screen and (min-width: 992px) and (prefers-reduced-motion: no-preference) { .section[data-hscroll]:not([data-hscroll-state]) { height: calc(100svh + 207em - min(80em, 100vw - 8em)); padding-top: 0; padding-bottom: 0; } [data-hscroll]:not([data-hscroll-state]) .pin-frame { position: sticky; top: 0; display: flex; height: 100svh; flex-direction: column; justify-content: center; } [data-hscroll]:not([data-hscroll-state]) .explore-rail { padding-right: 0; overflow: visible; } }
+@media screen and (min-width: 992px) and (prefers-reduced-motion: no-preference) { .section[data-hscroll]:not([data-hscroll-state]) { height: calc(100svh + 207em - min(80em, 100vw - 8em)); padding-top: 0; padding-bottom: 0; } [data-hscroll]:not([data-hscroll-state]) .pin-frame { position: sticky; top: 0; display: flex; height: 100svh; flex-direction: column; justify-content: center; } [data-hscroll]:not([data-hscroll-state]) .explore-rail, [data-hscroll]:not([data-hscroll-state]) .rates-rail { padding-right: 0; overflow: visible; } #rates[data-hscroll]:not([data-hscroll-state]) { height: calc(100svh + 108em - min(80em, 100vw - 8em)); } }
 
 /* repo-css: designer-cant — attribute selector */
 [data-hscroll-state="on"] .pin-frame { position: sticky; top: 0; display: flex; height: 100svh; flex-direction: column; justify-content: center; }
-[data-hscroll-state="on"] .explore-rail { padding-right: 0; overflow: visible; }
-[data-hscroll-state="on"] .explore-track { will-change: transform; }
+[data-hscroll-state="on"] .explore-rail, [data-hscroll-state="on"] .rates-rail { padding-right: 0; overflow: visible; }
+[data-hscroll-state="on"] .explore-track, [data-hscroll-state="on"] .rates-track { will-change: transform; }
 
 /* repo-css: js-state — parallax (parallax module): scaled up so the drift never shows an edge, the module sets `translate`. */
 [data-parallax-state="on"] { scale: 1.15; will-change: translate; }
