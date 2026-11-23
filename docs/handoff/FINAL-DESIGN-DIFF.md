@@ -52,7 +52,7 @@ scratchpad (`audit-*`).
 - No action: Explore tag bubbles, Instagram, accordion icon direction, Events/News cards (all decided earlier).
 
 ### Project Overview — medium
-- **About the Project:** statement is only "Upon full buildout, Lake Mariner is projected to support up to 750 MW…"; remove the hero sentence that staging repeats (C | Collage props).
+- **About the Project:** no change. The design shows only the 750 MW sentence, but Chloe asked to "match copy to lakemarinerdata.com project overview page" (Figma, 12 Nov), and staging is the live site's two sentences word for word.
 - **Responsible Development:** light theme (white section, Frost cards, dark text), "+" icons instead of [1]–[5], one lake/plant photo for all items (`2615:24560`). Designer combo + C | Image Accordion Item (dark) icon.
 - Resources / Initiatives removed (D1).
 - Tab 5 wording (D6). Cooling promo frame is named "Animation": ask whether the photo becomes a loop.
