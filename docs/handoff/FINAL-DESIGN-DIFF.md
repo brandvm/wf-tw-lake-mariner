@@ -99,7 +99,7 @@ Matches (the Follow band body line was removed in round 1 on purpose).
 
 ### FAQ — new page
 Source note: "lakemarinerdata.com/faq · Dev: add FAQPage JSON-LD schema".
-1. C | Page Hero (done 2026-11-23; photo is a stand-in): shield, "FAQ", "Straight answers to the questions we hear most from our neighbors in Barker — water, traffic, power and the environment.", glass "+ Submit a question" (D3). New hero photo.
+1. C | Page Hero (done 2026-11-23; photo from the design, `faq-hero-faq.jpg`, a data hall under construction): shield, "FAQ", "Straight answers to the questions we hear most from our neighbors in Barker — water, traffic, power and the environment.", glass "+ Submit a question" (D3). New hero photo.
 2. Toolbar: pills ALL / GENERAL / PROPYLENE GLYCOL + "Search questions…" (News toolbar pattern, Finsweet List).
 3. General (white): split head (eyebrow, H2 "General questions", "7 questions") + accordion of 7, Frost cards, first open.
 4. Propylene glycol (Frost section, white cards): "Propylene glycol FAQs", "4 questions · data from the product's Safety Data Sheet (SDS)", 4 items.
