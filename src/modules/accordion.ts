@@ -7,9 +7,10 @@
 // scope (data-accordion-scope="<selector>", else the accordion's parent)
 // follow the open item, in item order. Autoplay (optional,
 // data-accordion-autoplay="<ms>"): the next item opens when the open
-// item's data-accordion-progress bar has filled (CSS animation); paused on
-// hover, focus and off screen; stops after a click; off with reduced
-// motion. State: data-accordion-images on the scope,
+// item's data-accordion-progress bar has filled (CSS animation). It runs
+// only while the accordion's section is on screen (paused where it is when
+// it leaves); a click opens that item and its bar starts from zero, and
+// autoplay carries on from there. Off with reduced motion. State: data-accordion-images on the scope,
 // data-accordion-autoplay-state (on, paused, off) on the accordion.
 //
 // Open first (optional, data-accordion-open-first): when no item starts
@@ -51,7 +52,6 @@ export function initAccordions() {
     items.forEach((item, i) => {
       set(item, item.dataset.state === 'open');
       item.querySelector('[data-accordion-trigger]')?.addEventListener('click', () => {
-        if (duration) accordion.dataset.accordionAutoplayState = 'off';
         if (item.dataset.state === 'open') {
           // A plain accordion closes; an image accordion keeps one item open.
           if (!images.length) set(item, false);
@@ -66,15 +66,13 @@ export function initAccordions() {
     if (images.length) open(Math.max(0, openIndex()));
 
     if (autoplay) {
-      const pause = (paused: boolean) => {
-        if (accordion.dataset.accordionAutoplayState === 'off') return;
-        accordion.dataset.accordionAutoplayState = paused ? 'paused' : 'on';
-      };
-      accordion.addEventListener('pointerenter', () => pause(true));
-      accordion.addEventListener('pointerleave', () => pause(false));
-      accordion.addEventListener('focusin', () => pause(true));
-      accordion.addEventListener('focusout', (e) => { if (!accordion.contains(e.relatedTarget as Node | null)) pause(false); });
-      new IntersectionObserver(([entry]) => pause(!entry.isIntersecting), { threshold: 0.25 }).observe(accordion);
+      // Paused until the section crosses the middle 60% of the screen, and
+      // whenever it leaves (works for sections taller than the screen too).
+      accordion.dataset.accordionAutoplayState = 'paused';
+      const section = accordion.closest<HTMLElement>('section') ?? scope ?? accordion;
+      new IntersectionObserver(([entry]) => {
+        accordion.dataset.accordionAutoplayState = entry.isIntersecting ? 'on' : 'paused';
+      }, { rootMargin: '-20% 0px -20% 0px' }).observe(section);
     }
   });
 }
