@@ -24,7 +24,11 @@ function wrapLetters(el: HTMLElement) {
     (node.textContent ?? '').split(/(\s+)/).forEach((part) => {
       if (!part) return;
       if (/^\s+$/.test(part)) {
-        frag.append(part);
+        // A non-breaking space between two parts (the Webflow importer drops
+        // a plain one before a span, so markup carries &nbsp;) becomes a
+        // normal space: between nowrap word groups it would glue two words
+        // into one unbreakable unit and push the line break a word early.
+        frag.append(part.replace(/\u00a0/g, ' '));
         return;
       }
       // A hyphenated word is split after each hyphen or dash, so it can
