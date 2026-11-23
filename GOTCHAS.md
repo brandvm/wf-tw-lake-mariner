@@ -577,3 +577,12 @@ collected from client repos into those files.
 - Status: worked around (AE, AO done)
 - Found by: claude
 
+### 2026-11-23 · An absolutely centred nav menu overlaps the logo just above the tablet breakpoint
+- Area: designer
+- Scope: template-candidate
+- Symptom: from 992 to about 1130px the nav menu (position absolute, left 50%, translate -50%) sat on top of the logo block, by 67px at 992. Checks at 1440, 820 and 390 never saw it, and the approved prototype had it too.
+- Cause: an absolutely positioned menu takes no room in the bar, so nothing pushes it away from the logo when the bar gets narrow. The desktop range starts at 992, where logo + menu + actions only just fit.
+- Fix: Nav Bar as a grid `minmax(max-content, 1fr) auto minmax(max-content, 1fr)`, the menu in the flow (position relative), brand justify-self start, actions end, and display flex again at Tablet. The menu is centred while it fits and slides right when it doesn't; nothing changes at wider widths. All through the style API (grid-template-columns with minmax() is accepted as typed). Check a centred nav at 992-1200 as well as the usual widths.
+- Status: fixed (Webflow, 2026-11-23)
+- Found by: claude
+
