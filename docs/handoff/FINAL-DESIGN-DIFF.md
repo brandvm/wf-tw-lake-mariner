@@ -48,10 +48,11 @@ scratchpad (`audit-*`).
 ### Home — small
 - Footer: done 2026-11-23 (D4).
 - FAQ "All Questions" → `/faq`: done 2026-11-23 (placeholder page).
-- Copy case only (D5): hero H1, "Explore The Campus". Keep "Setting…" (design's lowercase s is a typo).
+- Hero H1: sizes match since 2026-11-23 (Is Long letter-spacing -3%). Copy case only (D5): hero H1, "Explore The Campus". Keep "Setting…" (design's lowercase s is a typo).
 - No action: Explore tag bubbles, Instagram, accordion icon direction, Events/News cards (all decided earlier).
 
 ### Project Overview — medium
+- **Hero H1:** the design sets it like Home's (64px, -3%, the long heading); staging uses the regular D1 (72px, -4%, 1033px wide, three lines at 820).
 - **About the Project:** no change. The design shows only the 750 MW sentence, but Chloe asked to "match copy to lakemarinerdata.com project overview page" (Figma, 12 Nov), and staging is the live site's two sentences word for word.
 - **Responsible Development:** light theme (white section, Frost cards, dark text), "+" icons instead of [1]–[5], one lake/plant photo for all items (`2615:24560`). Designer combo + C | Image Accordion Item (dark) icon.
 - Resources / Initiatives removed (D1).
