@@ -59,10 +59,13 @@ again at each gate, so the steps are found early and not at the end:
 
 ## To do
 
-0 rows a person still has to do in the Designer. When one is done, Claude ticks it and moves it to Done.
+3 rows a person still has to do in the Designer. When one is done, Claude ticks it and moves it to Done.
 
 | ID | Where (page › element or class) | Breakpoint | Set | Why the API can't | Done |
 | --- | --- | --- | --- | --- | --- |
+| DV | News › Featured section › Featured Side list (the 3 row cards) › Post Card Link | — | Link settings › Collection page › News Posts Template › "Current News Post". Then Claude checks the published hrefs (`/news/<slug>`) | no API link shape points at the current item (same as CY). Until then the three row cards link to `#` | |
+| DW | News › the date span (first child of Post Card Meta) in the grid card, the Featured lead card and the Featured row card | — | Binding settings › Format: `MMM D, YYYY` (e.g. Oct 20, 2026) on all three. Then Claude checks the published text | a date binding through the API takes no format (same as DI, DB). Until then the cards read "October 20, 2026" | |
+| DX | FAQ › General and Propylene glycol sections › each FAQs Collection List | — | Collection list settings › Sort: Order, ascending, on both; keep the Category filters. Then Claude checks that General opens on "Will the project use water from the Lake?" | on fresh lists a Category filter and a sort refuse each other through the API with `[Conflict] … component map` (GOTCHAS 2026-10-29, date filters); the Designer has accepted every refused sort so far. Unsorted, both lists show the newest item first | |
 
 ## Done
 

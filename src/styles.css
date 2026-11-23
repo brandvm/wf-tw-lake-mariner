@@ -775,6 +775,9 @@ button.social-button { padding: 0; cursor: pointer; }
 /* repo-css: designer-cant — vendor-prefixed -webkit-line-clamp: custom properties refuse prefixes */
 .post-card-title { -webkit-line-clamp: 4; }
 
+/* repo-css: designer-cant — vendor-prefixed -webkit-line-clamp: the featured row cards (Is Side) cap their title at two lines */
+.post-card-title.is-side { -webkit-line-clamp: 2; }
+
 /* repo-css: designer-cant — :has() */
 .post-card-title:has(+ .post-card-excerpt:not(.w-dyn-bind-empty)) { -webkit-line-clamp: 2; }
 

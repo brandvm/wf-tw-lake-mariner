@@ -613,3 +613,12 @@ collected from client repos into those files.
 - Status: worked around
 - Found by: claude
 
+
+### 2026-11-23 · A list the API refused may be refused in the Designer too; set the query in the Designer first
+- Area: mcp
+- Scope: template-candidate
+- Symptom: News Featured block and the FAQ page: on fresh Collection Lists the API refused filter and sort (`[Conflict] … component map`; on FAQ a Category filter and a sort refused each other, as on Events). On the News lists the API had already touched, the Designer then refused the same settings, although the Designer took every refused sort before (2026-11-12).
+- Cause: unknown Webflow-side; a refused write seems to leave the list in a state that both routes refuse.
+- Fix: build the empty lists with the API, set source, filter, sort, limit and skip in the Designer before any API query write, read them back, then move the bound cards in and remove the refused lists. Where only the Designer is free later, leave the sort as a MANUAL-TODO row and don't retry it through the API first (FAQ: DX). Webflow's Limit + Skip splits one sorted query into a lead card and the next three without duplicates.
+- Status: worked around
+- Found by: claude
