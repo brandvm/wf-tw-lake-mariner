@@ -38,6 +38,7 @@ current during the build. Agents read it after `AGENTS.md` and `GOTCHAS.md`.
 | `/news/<slug>` | 07 News Article (`2523:2885`) | News Posts template | CMS template |
 | `/events` | 08 Events (`2523:3252`) | Events | |
 | `/events/<slug>` | 09 Event (`2523:3595`) | Events template | CMS template |
+| `/faq` | 10 FAQ (`2597:2`, final design 2026-11-23) | FAQ | empty placeholder since 2026-11-23 (nav and footer only), linked from Home and the footer; to build |
 | `/404` | not designed | 404 (utility page) | the Page Hero centred over the campus photo: shield, Error 404, Page not found, Back to Home and News & Events, quick links to the main pages; noindex. Utility page: the API can't reach it, so it is built by hand in the Designer (a MANUAL-TODO row at build time) |
 | `/design/style-guide` | | Style guide (folder `design`) | first page built; excluded from search |
 | `/design/media` | | Media (folder `design`) | Careers and Project Overview videos; excluded from search |

@@ -33,7 +33,7 @@ scratchpad (`audit-*`).
 | # | Question | Design says | Staging now |
 | --- | --- | --- | --- |
 | D1 | Resources & Documents on Project Overview and Community Impact, Initiatives on Project Overview | gone from both pages (CI keeps Initiatives only) | built; Resources holds Cayuga/Lansing documents (another campus). **Chloe (Figma, 23 Sep): "Resources" and "Community & Partnership Initiatives" accordions on ALL Project Overview and Community Impact pages, hidden while empty** → keep unless she says the final design replaces that |
-| D2 | FAQ page | new `/faq` page; supersedes "FAQ links go to terawulf.com" (2026-10-27) | none; FAQ links are `#` |
+| D2 | FAQ page | new `/faq` page; supersedes "FAQ links go to terawulf.com" (2026-10-27) | **2026-11-23:** empty placeholder page `/faq` (page 6b04680d2d3b401c29151b65, nav and footer only); Home "All Questions" and the footer FAQ link go to it. The page content is still to build |
 | D3 | "Submit a question" button target (FAQ hero and CTA) | not given | **Chloe (23 Sep): links to the main contact form** → terawulf.com/connect, as the other Contact links |
 | D4 | Footer Insights | "News" and "Events" as two links | **done 2026-11-23**: two links, legal row spacing as the design (499 vs 498px at 1680); the credit stays "Site by Brand Vision Marketing" → brandvm.com, new tab (user) |
 | D5 | Title case | Barker accordion titles in sentence case; hero H1s, "Explore The Campus", "About The Project", "Meet Our Employees" in title case | Barker titles title case (client round 1); headings sentence case |
@@ -47,7 +47,7 @@ scratchpad (`audit-*`).
 
 ### Home — small
 - Footer: done 2026-11-23 (D4).
-- FAQ "All Questions" → `/faq` (D2).
+- FAQ "All Questions" → `/faq`: done 2026-11-23 (placeholder page).
 - Copy case only (D5): hero H1, "Explore The Campus". Keep "Setting…" (design's lowercase s is a typo).
 - No action: Explore tag bubbles, Instagram, accordion icon direction, Events/News cards (all decided earlier).
 
