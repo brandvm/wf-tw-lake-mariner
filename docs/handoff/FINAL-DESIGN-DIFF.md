@@ -35,7 +35,7 @@ scratchpad (`audit-*`).
 | D1 | Resources & Documents on Project Overview and Community Impact, Initiatives on Project Overview | gone from both pages (CI keeps Initiatives only) | built; Resources holds Cayuga/Lansing documents (another campus). **Chloe (Figma, 23 Sep): "Resources" and "Community & Partnership Initiatives" accordions on ALL Project Overview and Community Impact pages, hidden while empty** → keep unless she says the final design replaces that |
 | D2 | FAQ page | new `/faq` page; supersedes "FAQ links go to terawulf.com" (2026-10-27) | none; FAQ links are `#` |
 | D3 | "Submit a question" button target (FAQ hero and CTA) | not given | **Chloe (23 Sep): links to the main contact form** → terawulf.com/connect, as the other Contact links |
-| D4 | Footer Insights | "News" and "Events" as two links | **done 2026-11-23**: two links, credit "© by Brand Vision Marketing", legal row spacing as the design (499 vs 498px at 1680) |
+| D4 | Footer Insights | "News" and "Events" as two links | **done 2026-11-23**: two links, legal row spacing as the design (499 vs 498px at 1680); the credit stays "Site by Brand Vision Marketing" → brandvm.com, new tab (user) |
 | D5 | Title case | Barker accordion titles in sentence case; hero H1s, "Explore The Campus", "About The Project", "Meet Our Employees" in title case | Barker titles title case (client round 1); headings sentence case |
 | D6 | PO Highlights tab 5 | "(10+ years)" | "(15-20+ years)" — **Chloe's comment (12 Nov), keep staging** |
 | D7 | Explore card copy | older wording | newer wording from client comments; keep staging, fix "apart of" → "a part of" |
