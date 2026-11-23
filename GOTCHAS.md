@@ -564,7 +564,7 @@ collected from client repos into those files.
 - Scope: template-candidate
 - Symptom: Community Impact testimonials. `set_settings` `source` with a string was rejected ("must encode a JSON object or array"); Paragraphs with CMS `text` bindings in a `data_element_builder` children tree failed with "Element is not inside a CMS context"; `sort` (`[{"fieldSlug":"order","direction":"ascending"}]`) was refused with `[Conflict] … component map` on a list inside the section and on a fresh list at body level. Separately, after importing a heading with `<br>` inside a page, `query_elements` filters over that page failed with "Element does not have a configurable visibility setting".
 - Cause: the source setting is an object; the builder checks bindings before the child sits in the item; the sort conflict is the intermittent one in earlier entries; the line-break node inside the heading has no visibility setting and the filtered query trips on it.
-- Fix: `source` = `{"collectionId": "<id>"}`. Build the children plain, then `set_settings` the bindings (Image `assetId`, Rich Text `richText`, Paragraph `text`). Leave the sort to the Designer (MANUAL-TODO DU). Query that page by `element_id` with `children_depth` instead of filters.
+- Fix: `source` = `{"collectionId": "<id>"}`. Build the children plain, then `set_settings` the bindings (Image `assetId`, Rich Text `richText`, Paragraph `text`). Leave the sort to the Designer (MANUAL-TODO DU; the Designer took it on both lists the same day). Query that page by `element_id` with `children_depth` instead of filters.
 - Status: worked around
 - Found by: claude
 
