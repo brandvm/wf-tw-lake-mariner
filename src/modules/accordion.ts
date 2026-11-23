@@ -42,7 +42,8 @@ export function initAccordions() {
     };
     const open = (index: number) => {
       items.forEach((item, i) => set(item, i === index));
-      images.forEach((img, i) => img.toggleAttribute('data-active', i === index));
+      // Fewer photos than items: they repeat in order (one photo stays on).
+      images.forEach((img, i) => img.toggleAttribute('data-active', i === index % images.length));
     };
     const openIndex = () => items.findIndex((item) => item.dataset.state === 'open');
     if (accordion.hasAttribute('data-accordion-open-first') && items[0] && openIndex() < 0) items[0].dataset.state = 'open';
