@@ -532,3 +532,12 @@ collected from client repos into those files.
 - Status: worked around
 - Found by: claude
 
+### 2026-11-23 · Turning a page-markup hero into a variant of an existing component
+- Area: mcp
+- Scope: template-candidate
+- Symptom: Home's hero (page markup) and C | Page Hero differed in overlay, heading size, text width, spacing and a fact bar, mostly on combo-class elements, which a variant can't override (lessons/mcp.md).
+- Cause: variant styles apply only to elements whose own style is the single class named.
+- Fix: move each element the variant must change to a new single class with the same values (Hero Shade for the overlay combo, Hero Lead on the paragraphs); a variant on D1 sets the heading size per breakpoint; a nested instance that only one variant shows goes in a wrapper with its own class, `display: none` in the base and `display: contents` in the variant (the instance keeps its own layout at every breakpoint). Nested instance props bind to new outer props. Then insert the instance before the old markup, set its props and Variant (the variant id as a string), remove the old markup; for an empty page slot, `data_component_builder` `insert_in_slot` takes the instance directly. Every existing instance keeps its content.
+- Status: worked around
+- Found by: claude
+

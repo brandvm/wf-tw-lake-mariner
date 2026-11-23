@@ -38,7 +38,7 @@ current during the build. Agents read it after `AGENTS.md` and `GOTCHAS.md`.
 | `/news/<slug>` | 07 News Article (`2523:2885`) | News Posts template | CMS template |
 | `/events` | 08 Events (`2523:3252`) | Events | |
 | `/events/<slug>` | 09 Event (`2523:3595`) | Events template | CMS template |
-| `/faq` | 10 FAQ (`2597:2`, final design 2026-11-23) | FAQ | empty placeholder since 2026-11-23 (nav and footer only), linked from Home and the footer; to build |
+| `/faq` | 10 FAQ (`2597:2`, final design 2026-11-23) | FAQ | hero only (C \| Page Hero) since 2026-11-23, linked from Home and the footer; the rest to build |
 | `/404` | not designed | 404 (utility page) | the Page Hero centred over the campus photo: shield, Error 404, Page not found, Back to Home and News & Events, quick links to the main pages; noindex. Utility page: the API can't reach it, so it is built by hand in the Designer (a MANUAL-TODO row at build time) |
 | `/design/style-guide` | | Style guide (folder `design`) | first page built; excluded from search |
 | `/design/media` | | Media (folder `design`) | Careers and Project Overview videos; excluded from search |
@@ -78,7 +78,7 @@ From the prototype's partials and repeated blocks (each has its style-guide row;
 | G \| Nav W | every page | — (theme follows the page: `data-nav-theme="dark"` on a dark hero) | `nav`, `nav-state`, `announcement` |
 | Intro Loader (in G \| Page W) | every page (first page of a visit) | — | `intro` |
 | G \| Footer W | every page | — | `year` |
-| C \| Page Hero | Project Overview, Community Impact, Cooling, Careers (built 2026-10-28) | Image, Heading, Text, Show Text 2 + Text 2, Button Label, Button Link (text: `#section` or URL), Button Hook (`data-video-open` on Cooling), Video URL. Home's hero is page markup (its overlay, width, heading size and `hero-sequence` hook differ) with a C \| Fact Bar; 404 by hand | `intro`, `parallax` |
+| C \| Page Hero | every main page: Home, Project Overview, Community Impact, Cooling, Careers, FAQ (one component since 2026-11-23); 404 by hand | Variant (Page / Page · Long Heading / Home), Image, Heading, Text, Show Text 2 + Text 2, Button Label, Button Link (text: `#section` or URL), Button Hook (`data-video-open` on Cooling), Video URL, Fact Label/Value 1–3 (Home variant) | `hero-sequence`, entrance CSS, `parallax` |
 | C \| Button | everywhere | variant (Solid, Light, Frost, Small), label, link, icon | — |
 | C \| Fact Bar | Home (hero, aerial) (built 2026-10-28) | Label/Value 1–3, Show Labels 2 and 3 (off for the aerial bar) | `intro` (always on its root) |
 | C \| Statement | Home intro (built 2026-10-28); the larger Cooling and Careers statements and the News/Events page heads are set with their pages | Eyebrow, Statement + Statement Muted (two-tone), Show Text + Text, Show Button + Button Label + Button Link | `text-fill` |

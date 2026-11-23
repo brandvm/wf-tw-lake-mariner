@@ -52,7 +52,7 @@ scratchpad (`audit-*`).
 - No action: Explore tag bubbles, Instagram, accordion icon direction, Events/News cards (all decided earlier).
 
 ### Project Overview — medium
-- **Hero H1:** the design sets it like Home's (64px, -3%, the long heading); staging uses the regular D1 (72px, -4%, 1033px wide, three lines at 820).
+- **Hero H1:** done 2026-11-23 (C | Page Hero variant Page · Long Heading, title case).
 - **About the Project:** no change. The design shows only the 750 MW sentence, but Chloe asked to "match copy to lakemarinerdata.com project overview page" (Figma, 12 Nov), and staging is the live site's two sentences word for word.
 - **Responsible Development:** light theme (white section, Frost cards, dark text), "+" icons instead of [1]–[5], one lake/plant photo for all items (`2615:24560`). Designer combo + C | Image Accordion Item (dark) icon.
 - Resources / Initiatives removed (D1).
@@ -97,7 +97,7 @@ Matches (the Follow band body line was removed in round 1 on purpose).
 
 ### FAQ — new page
 Source note: "lakemarinerdata.com/faq · Dev: add FAQPage JSON-LD schema".
-1. C | Page Hero: shield, "FAQ", "Straight answers to the questions we hear most from our neighbors in Barker — water, traffic, power and the environment.", glass "+ Submit a question" (D3). New hero photo.
+1. C | Page Hero (done 2026-11-23; photo is a stand-in): shield, "FAQ", "Straight answers to the questions we hear most from our neighbors in Barker — water, traffic, power and the environment.", glass "+ Submit a question" (D3). New hero photo.
 2. Toolbar: pills ALL / GENERAL / PROPYLENE GLYCOL + "Search questions…" (News toolbar pattern, Finsweet List).
 3. General (white): split head (eyebrow, H2 "General questions", "7 questions") + accordion of 7, Frost cards, first open.
 4. Propylene glycol (Frost section, white cards): "Propylene glycol FAQs", "4 questions · data from the product's Safety Data Sheet (SDS)", 4 items.
