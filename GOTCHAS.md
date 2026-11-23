@@ -568,3 +568,12 @@ collected from client repos into those files.
 - Status: worked around
 - Found by: claude
 
+### 2026-11-23 · Designer: binding a variable on the Current state, and linking a nested variant
+- Area: designer
+- Scope: template-candidate
+- Symptom: (1) Nav Link's Current state published `var(--_colors---brand--storm)` but the Designer showed no variable link (MANUAL-TODO AE). Inside G | Nav W opened from the Components panel the state menu had no "Current". The colour field showed no variable control on hover, and its colour picker lists no variables. (2) Exposing a nested instance's Variant as a prop (MANUAL-TODO AO).
+- Cause: (1) The Current state only appears on a page where the link is current. The WHTML importer had stored the value as a Custom value with a Storm chip, which is not a binding. The variable dot only shows while the field has focus. (2) A prop the API can't create (variant type).
+- Fix: (1) Open the page the link points to (/careers), double-click into G | Page W and then G | Nav W, and select the link: the selector reads Nav Link + Current. Option-click the Color label to clear the custom value, open the field and Reset value (top right of the Custom value popup), click into the text field, then click the purple dot at its top left and pick the variable. Careful: keys typed while a dropdown has focus set values (an "S" set Position: Static on the state); Option-click the label to clear it. (2) In the outer component, select the inner instance, click the dot beside its Variant › New Variant property, name it, pick the group and default. Do it in the Base variant. Then set instances through the API (`string_value` = the variant id).
+- Status: worked around (AE, AO done)
+- Found by: claude
+
