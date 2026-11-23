@@ -10,6 +10,7 @@ current during the build. Agents read it after `AGENTS.md` and `GOTCHAS.md`.
 2. This file, then `MANUAL-TODO.md` and `BUILD-NOTES.md` in this folder;
    after the build handoff, `REVIEW.md` (feedback rounds until launch) and
    `SEO-PLAN.md`.
+3. **Final design (2026-11-23):** the Clean Pages page now holds the final design for all five campuses; Lake Mariner is the top row. What differs from staging, and the build plan: `FINAL-DESIGN-DIFF.md`.
 3. The approved design: Figma file `i5kBzV34Xa9qvV7I64FxFZ`, page "↪ • Template — Clean Pages"
    (node `2523:111`), desktop 1680 only. The development plan and section
    inventory are in `BUILD-PLAN.md`.
