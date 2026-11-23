@@ -9,8 +9,9 @@
 // data-accordion-autoplay="<ms>"): the next item opens when the open
 // item's data-accordion-progress bar has filled (CSS animation). It runs
 // only while the accordion is on screen (paused otherwise, also before the
-// first check) and never stops on interaction: a click opens that item and
-// its bar starts from zero, then autoplay carries on from there. Off with
+// first check) and pauses while the mouse is over it; it never stops on a
+// click: a click opens that item and its bar starts from zero, then
+// autoplay carries on from there. Off with
 // reduced motion. State: data-accordion-images on the scope,
 // data-accordion-autoplay-state (on, paused, off) on the accordion.
 //
@@ -68,9 +69,15 @@ export function initAccordions() {
     if (images.length) open(Math.max(0, openIndex()));
 
     if (autoplay) {
-      new IntersectionObserver(([entry]) => {
-        accordion.dataset.accordionAutoplayState = entry.isIntersecting ? 'on' : 'paused';
-      }, { threshold: 0.25 }).observe(accordion);
+      // Runs while on screen and not hovered (the hover pause lets a reader
+      // stop it, WCAG 2.2.2). Focus doesn't pause: a click focuses the
+      // trigger, and a click must not stop autoplay.
+      let inView = false;
+      let hovered = false;
+      const update = () => { accordion.dataset.accordionAutoplayState = inView && !hovered ? 'on' : 'paused'; };
+      accordion.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') { hovered = true; update(); } });
+      accordion.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') { hovered = false; update(); } });
+      new IntersectionObserver(([entry]) => { inView = entry.isIntersecting; update(); }, { threshold: 0.25 }).observe(accordion);
     }
   });
 }
