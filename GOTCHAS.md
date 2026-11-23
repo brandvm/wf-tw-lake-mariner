@@ -169,7 +169,7 @@ collected from client repos into those files.
 - Symptom: `create_font` for Space Grotesk returned a `hostedUrl` on cdn.prod.website-files.com, but the published CSS loads it (and the starter's Geist) from webflow-files-prod.global.ssl.fastly.net.
 - Cause: the font API stores files there, for new fonts as for replaced ones (lessons/mcp.md "Replacing a font through the API moves it to another host"); the `hostedUrl` in the API result is not the URL that publishes.
 - Fix: a `preconnect` (crossorigin) to the fastly host in loader piece 1, written to the site head code and published. Check font URLs in the published CSS, not in the API result.
-- Status: harvested into wf-template 0.9.0; worked around
+- Status: harvested into wf-template 0.9.0; worked around; superseded 2026-11-23: fonts re-uploaded in Site settings (asset CDN), preconnect removed (see "Fonts uploaded in Site settings")
 - Found by: claude
 
 ### 2026-10-28 · Style variable ids need their `variable-` prefix
@@ -484,7 +484,7 @@ collected from client repos into those files.
 - Symptom: the same page scored 84 one run and 94 the next on mobile (Project Overview, Home, Community Impact). Blocking the repo CSS, jQuery, Webflow's JS or the hero image one at a time changed nothing.
 - Cause: Lighthouse's simulated FCP/LCP averages a graph of render-blocking requests with one of *every* request that finished before the first paint in the real (unthrottled) load. The footer loader appended `index.js` (100 KB) at parse time, and the fonts (`font-display: swap`) start as soon as the CSS is parsed; whenever either finished a few ms before the paint, it was billed to the paint. The fonts uploaded through the API come from `webflow-files-prod.global.ssl.fastly.net`, which serves HTTP/1.1, so each one is also simulated as a new connection; the Space Grotesk preload made that font finish first in every run.
 - Fix: the footer requests the bundle two animation frames after it runs (at once in a hidden tab, 3 s fallback), and records `WFC.source` straight away so Embed 2b's after-`load` stylesheet refresh still runs; the head code no longer preloads Space Grotesk (24bb03f). Mobile medians: Community Impact 82 → 96, Cooling 88 → 95, Careers 92 → 96, Home 88 → 93; CLS rose to 0.02–0.03 from the later font swap. Moving the fonts to the asset CDN (Designer upload) is MANUAL-TODO DS. To diagnose, list the requests in the saved report whose `networkEndTime` is before `metrics.observedFirstContentfulPaint`; `--blocked-url-patterns` doesn't show the gain, since the blocked request still opens its connection in the simulation.
-- Status: harvested into wf-template 0.15.0; fixed 24bb03f (loader re-pasted and published); fonts open (DS)
+- Status: harvested into wf-template 0.15.0; fixed 24bb03f (loader re-pasted and published); fonts moved to the asset CDN 2026-11-23 (DS)
 - Found by: claude
 
 ### 2026-10-29 · Rich-text images publish eager; `loading="lazy"` written through the API is kept
@@ -584,5 +584,14 @@ collected from client repos into those files.
 - Cause: an absolutely positioned menu takes no room in the bar, so nothing pushes it away from the logo when the bar gets narrow. The desktop range starts at 992, where logo + menu + actions only just fit.
 - Fix: Nav Bar as a grid `minmax(max-content, 1fr) auto minmax(max-content, 1fr)`, the menu in the flow (position relative), brand justify-self start, actions end, and display flex again at Tablet. The menu is centred while it fits and slides right when it doesn't; nothing changes at wider widths. All through the style API (grid-template-columns with minmax() is accepted as typed). Check a centred nav at 992-1200 as well as the usual widths.
 - Status: fixed (Webflow, 2026-11-23)
+- Found by: claude
+
+### 2026-11-23 · Fonts uploaded in Site settings: asset CDN, variable range kept, fallback list doesn't publish
+- Area: designer
+- Scope: template-candidate
+- Symptom: MANUAL-TODO DS, moving the three API-uploaded fonts off webflow-files-prod.global.ssl.fastly.net. The upload form (Site settings › Fonts › Upload) takes one Font weight (100–900, no range), its note lists TTF, OTF, EOT and WOFF only, and the Upload button stays disabled until a Fallback is picked from named fonts (Arial, Georgia, …, no generic sans-serif or monospace).
+- Cause: —
+- Fix: WOFF2 is accepted. Upload one font first, publish and check its host before deleting anything: the Site settings upload published from cdn.prod.website-files.com, and Webflow read the variable range from the file (`font-weight: 300 700` although the form said 500), so one upload per variable font keeps every weight. Give it the exact family name the Typography Scale family variables use; it joins the existing family, then delete the API copy (the row that says "Size unavailable"). The Fallback choice only labels the family in the dashboard; nothing in the published CSS uses it (the variables carry the real stacks). Then drop the fastly preconnect from the head code. Before uploading, list the (family, weight) pairs the pages render, from computed styles, to know which weights matter.
+- Status: done (DS)
 - Found by: claude
 
