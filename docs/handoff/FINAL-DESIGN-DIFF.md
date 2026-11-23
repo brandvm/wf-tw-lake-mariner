@@ -48,7 +48,7 @@ scratchpad (`audit-*`).
 ### Home — small
 - Footer: done 2026-11-23 (D4).
 - FAQ "All Questions" → `/faq`: done 2026-11-23 (placeholder page).
-- Hero H1: sizes match since 2026-11-23 (Is Long letter-spacing -3%). Copy case only (D5): hero H1, "Explore The Campus". Keep "Setting…" (design's lowercase s is a typo).
+- Hero H1: done 2026-11-23 (title case "TeraWulf’s Flagship High-Performance Compute Campus", Is Long letter-spacing -3%). Still copy case (D5): "Explore The Campus". Keep "Setting…" (design's lowercase s is a typo).
 - No action: Explore tag bubbles, Instagram, accordion icon direction, Events/News cards (all decided earlier).
 
 ### Project Overview — medium
