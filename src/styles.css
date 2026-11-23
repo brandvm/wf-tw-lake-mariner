@@ -817,6 +817,10 @@ button.social-button { padding: 0; cursor: pointer; }
 [data-list-state="filtered"] .clear-all { visibility: visible; }
 [data-list-hidden] { display: none; }
 
+/* repo-css: designer-cant — :has() — /faq: one Finsweet List instance (faq) drives the General and Propylene glycol lists, and a filtered-out item leaves the DOM. A group whose list has no items left hides (its section or split carries data-faq-group), and the page's "No questions match" line (FAQ Empty, display none in Webflow) shows once no group has any. */
+[data-faq-group]:not(:has(.w-dyn-item)) { display: none; }
+main:has([data-faq-group]):not(:has([data-faq-group] .w-dyn-item)) .faq-empty { display: block; }
+
 /* repo-css: js-state — until Finsweet List has started (finsweet.ts sets data-fs-list on <html>, also if it fails) only the first page of a paginated list shows, as Finsweet will show it, so the cards below and the footer don't jump up when it starts. One rule per fs-list-itemsperpage value in use (News: 6). */
 html:not([data-fs-list]) [fs-list-element="list"][fs-list-itemsperpage="6"] > .w-dyn-item:nth-child(n+7) { display: none; }
 
