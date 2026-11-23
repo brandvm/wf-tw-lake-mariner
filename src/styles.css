@@ -692,8 +692,8 @@ button.social-button { padding: 0; cursor: pointer; }
 @keyframes hero-zoom { from { scale: 1.04; } }
 [data-hero-seq] [data-intro-media] { animation: hero-zoom 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) backwards; }
 [data-hero-seq] [data-intro] { animation: hero-rise 0.7s cubic-bezier(0.215, 0.61, 0.355, 1) 0.05s backwards; }
-[data-hero-seq] .hero-heading > h1[data-intro] { animation-delay: 0.11s; }
-[data-hero-seq] .hero-heading > p[data-intro] { animation-delay: 0.17s; }
+[data-hero-seq] .hero-heading h1[data-intro] { animation-delay: 0.11s; }
+[data-hero-seq] .hero-heading p[data-intro], [data-hero-seq] [data-hero-content] .hero-text[data-intro] { animation-delay: 0.17s; }
 [data-hero-seq] [data-hero-content] > [data-intro] { animation-delay: 0.23s; }
 [data-hero-seq] [data-hero-facts] { animation-delay: 0.29s; }
 
