@@ -8,9 +8,10 @@
 // follow the open item, in item order. Autoplay (optional,
 // data-accordion-autoplay="<ms>"): the next item opens when the open
 // item's data-accordion-progress bar has filled (CSS animation). It runs
-// only while the accordion's section is on screen (paused where it is when
-// it leaves); a click opens that item and its bar starts from zero, and
-// autoplay carries on from there. Off with reduced motion. State: data-accordion-images on the scope,
+// only while the accordion is on screen (paused otherwise, also before the
+// first check) and never stops on interaction: a click opens that item and
+// its bar starts from zero, then autoplay carries on from there. Off with
+// reduced motion. State: data-accordion-images on the scope,
 // data-accordion-autoplay-state (on, paused, off) on the accordion.
 //
 // Open first (optional, data-accordion-open-first): when no item starts
@@ -30,7 +31,8 @@ export function initAccordions() {
     const duration = Number(accordion.dataset.accordionAutoplay) || 0;
     const autoplay = duration > 0 && !REDUCED.matches;
     if (duration) {
-      accordion.dataset.accordionAutoplayState = autoplay ? 'on' : 'off';
+      // Paused until the observer below reports the accordion on screen.
+      accordion.dataset.accordionAutoplayState = autoplay ? 'paused' : 'off';
       accordion.style.setProperty('--accordion-duration', `${duration}ms`);
     }
 
@@ -66,13 +68,9 @@ export function initAccordions() {
     if (images.length) open(Math.max(0, openIndex()));
 
     if (autoplay) {
-      // Paused until the section crosses the middle 60% of the screen, and
-      // whenever it leaves (works for sections taller than the screen too).
-      accordion.dataset.accordionAutoplayState = 'paused';
-      const section = accordion.closest<HTMLElement>('section') ?? scope ?? accordion;
       new IntersectionObserver(([entry]) => {
         accordion.dataset.accordionAutoplayState = entry.isIntersecting ? 'on' : 'paused';
-      }, { rootMargin: '-20% 0px -20% 0px' }).observe(section);
+      }, { threshold: 0.25 }).observe(accordion);
     }
   });
 }
