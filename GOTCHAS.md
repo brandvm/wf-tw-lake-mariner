@@ -595,3 +595,21 @@ collected from client repos into those files.
 - Status: done (DS)
 - Found by: claude
 
+### 2026-11-23 · A lazy image outside a clipped box never loads
+- Area: designer
+- Scope: template-candidate
+- Symptom: the Follow band's 3D fan was blank on Events, the Event and News templates (found on the Build Review page); the `<img>` had `complete: false` and no `currentSrc` even in view.
+- Cause: the image is `loading="lazy"`, `height: auto` with no width/height attributes, absolutely placed 27.7em above its band, and the band clips (`overflow: clip`). Before loading it is 0px tall, so its box sits outside the visible part of the band and the browser's lazy-load check never sees it in view.
+- Fix: `aspect-ratio: 546 / 1024` (the file's own size) on Follow Fan Img, so the box has its real height before loading and overlaps the band. Same family as "A lazy image with no width/height takes no space until it loads": give every lazy image with `height: auto` its aspect ratio on the class.
+- Status: fixed (Webflow, 2026-11-23)
+- Found by: claude
+
+### 2026-11-23 · Date formats the preset list lacks: split the binding
+- Area: designer
+- Scope: template-candidate
+- Symptom: the design's event date "Fri, 24 July 2026" (`ddd, D MMMM YYYY`) is not among Webflow's date format presets (closest: `dddd, D MMMM YYYY`, "Friday, …").
+- Cause: bound dates only take presets, no custom format.
+- Fix: three spans bound to the same date field: one with format `ddd`, a static ", " span, one with `D MMMM YYYY`. In the Designer: select the date span, ⌘D twice, set the formats; turn the middle copy into static text through the API (`set_settings` key `text`, `static_text`). Lists whose filter hides every item on the canvas (the upcoming list) need their filter widened temporarily (GOTCHAS 2026-11-12).
+- Status: worked around
+- Found by: claude
+
