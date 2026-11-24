@@ -39,13 +39,12 @@ Still open:
 - **MANUAL-TODO FA–FD**: news card links to the source (the API binding
   doesn't publish), four rich-text links, favicon/webclip, RSVP card
   visibility on event pages.
-- **Photo `srcset`**: the four new page photos (`muskie-campus`,
-  `muskie-aerial`, `muskie-square`, `muskie-workforce`) and the news/event
-  photos were uploaded through the Data API and publish without
-  responsive sizes. Re-ingest them with `asset_tool › upload_image_by_url`
-  (needs the Webflow Designer MCP app open on Muskie) and re-point the
-  props, as CAMPUS-PORT's FAQ hero row describes; the FAQ hero row itself
-  is still open for the same reason.
+- **Photo `srcset`**: fixed 2026-11-24. The four page photos and the FAQ
+  hero were re-ingested with `asset_tool › upload_image_by_url` (Designer
+  app open) as `*-v2` assets and re-pointed; all publish with `srcset`, and
+  Home and Project Overview share images use them. The news and event card
+  photos are CMS images, which the API never gives responsive sizes
+  (GOTCHAS); they stay ≤ 1200 px WebP.
 - **MDC Power Fact Sheet**: the item exists without a file (Q7); its
   Download button goes nowhere until the client sends the PDF.
 - **Key figures** 800 / 0 / 800 MW built as in Figma (Q2), to confirm.
