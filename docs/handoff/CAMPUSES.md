@@ -25,7 +25,7 @@ Webflow duplicates of it.
 | Campus | Webflow name | Site ID | Staging | MCP server | Status |
 | --- | --- | --- | --- | --- | --- |
 | Lake Mariner Data | Lake Mariner Data (TeraWulf) | `6ae0f7d7bcf5d7622aeac214` | tw-lake-mariner.webflow.io | `webflow-tw-lake-mariner` | built; launch prep |
-| Justified Data | Justified Data (TeraWulf) | `6b05c58e6a2daeafb0769727` | tw-justified.webflow.io | `webflow-tw-justified` | Justified content built and published 2026-11-24 (batches 1–5); Cooling page dropped; open: favicon, rich-text links, RSVP card (MANUAL-TODO EA–EC), `campuses/justified-DIFF.md` |
+| Justified Data | Justified Data (TeraWulf) | `6b05c58e6a2daeafb0769727` | tw-justified.webflow.io | `webflow-tw-justified` | Justified content built and published 2026-11-24 (batches 1–5); Cooling page dropped; Build Review row 2 done; open: favicon, rich-text links, RSVP card (MANUAL-TODO EA–EC), `campuses/justified-DIFF.md` |
 | Muskie Data | Muskie Data (TeraWulf) | `6b05c5e78050528a5b59dc6a` | tw-muskie.webflow.io | `webflow-tw-muskie` | Muskie content built and published 2026-11-24 (batches 1–5): SEO and schema, logos, CMS, page copy and photos, Cooling page unpublished; open items in `campuses/muskie-DIFF.md` (MANUAL-TODO FA–FD, photo `srcset`, fact sheet file) |
 | Lake Hawkeye Data | Lake Hawkeye Data (TeraWulf) | `6b05cabde86e14300445c161` | tw-lake-hawkeye.webflow.io | `webflow-tw-lake-hawkeye` | duplicated 2026-11-24 (after SEO batch A), published; still Lake Mariner content |
 | Chesapeake Data & Energy | Chesapeake Data & Energy (TeraWulf) | `6b05cb19b2bc6f51aa8e5019` | tw-chesapeake.webflow.io | `webflow-tw-chesapeake` | duplicated 2026-11-24 (after SEO batch A), published; still Lake Mariner content; Figma row still in progress |

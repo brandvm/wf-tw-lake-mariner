@@ -119,6 +119,8 @@ Built and published on tw-justified.webflow.io (batches 1–5, user's go-ahead):
 
 Checked at 1440, 820 and 390 (full-page captures of all nine pages): no Lake Mariner, Barker, Ontario or NYISO text left except where noted below.
 
+Figma Build Review row 2 (y 13000): all nine pages, each with Justified's Clean Pages frame, staging at 1680/820/390 (captured 2026-11-24 after the shield swap) and markers: green where it matches, red for L2–L6 and L10 below; the Cooling column is empty.
+
 ## Left / differences from the design
 
 | # | What | Why / next step |
