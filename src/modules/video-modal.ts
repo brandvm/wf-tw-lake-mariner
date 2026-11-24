@@ -1,5 +1,7 @@
 // Video Modal: a [data-video-open] link opens a <dialog> that plays the video
-// in its data-video-src (a YouTube or Vimeo embed URL; autoplay is added).
+// in its data-video-src: a YouTube or Vimeo link as copied from the browser
+// (watch?v=, youtu.be/, shorts/, vimeo.com/<id>) or an embed URL; page links
+// are turned into embed URLs and autoplay is added.
 // Without a src the dialog says the video is coming (HANDOFF video list).
 // The close button, Escape or a click outside the frame closes it; the
 // iframe is removed on close so the sound stops. Page scroll pauses while
@@ -31,7 +33,7 @@ export function initVideoModal() {
     const title = link.dataset.videoTitle || 'Video';
     dialog.setAttribute('aria-label', title);
     if (src) {
-      const url = new URL(src, location.href);
+      const url = embedUrl(src);
       url.searchParams.set('autoplay', '1');
       frame.innerHTML = `<iframe class="video-modal-iframe" src="${url.href}" title="${title}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
     } else {
@@ -53,4 +55,30 @@ export function initVideoModal() {
     lenis?.start();
     opener?.focus();
   });
+}
+
+// A page link to a video (what an editor copies from the address bar) as the
+// URL its player embeds from. YouTube goes through youtube-nocookie.com, so no
+// cookies are set until the visitor plays it. Anything else is used as given.
+function embedUrl(src: string) {
+  const url = new URL(src, location.href);
+  const host = url.hostname.replace(/^(www\.|m\.)/, '');
+  let id = '';
+  if (host === 'youtu.be') id = url.pathname.slice(1);
+  else if (host === 'youtube.com' || host === 'youtube-nocookie.com') {
+    const parts = url.pathname.split('/').filter(Boolean);
+    id = url.searchParams.get('v') || (['shorts', 'embed', 'live'].includes(parts[0]) ? parts[1] : '') || '';
+  }
+  if (id) {
+    const embed = new URL(`https://www.youtube-nocookie.com/embed/${id.split(/[?&/]/)[0]}`);
+    const start = url.searchParams.get('t') || url.searchParams.get('start');
+    if (start) embed.searchParams.set('start', String(parseInt(start, 10) || 0));
+    embed.searchParams.set('rel', '0');
+    return embed;
+  }
+  if (host === 'vimeo.com') {
+    const vimeoId = url.pathname.split('/').filter(Boolean).find((part) => /^\d+$/.test(part));
+    if (vimeoId) return new URL(`https://player.vimeo.com/video/${vimeoId}`);
+  }
+  return url;
 }
