@@ -146,10 +146,16 @@ also the PO hero), and the News card image (`2679:9480`).
 6. **Designer (Chrome):** rich-text links (Highlight Tabs "Learn more here" → /community-impact), the RSVP card wrapper on the Events template; favicon and webclip.
 7. **Build Review:** Figma row 5 (y 57000, label `2789:2012`), one section per page.
 
+## Notes from the build
+
+- Home FAQ order: the list sorts by Order, shared with /faq, so Home shows noise, net provider, workforce, water; the design puts water first. Change Order if the client wants the design's order (as on Justified, L5).
+- /news after batch 3: the Featured block's lists are empty ("No items found") because the one post isn't Featured; batch 5 hides the block. /events still has Lake Mariner's "Past sessions are below" line and an empty past list: batch 4/5.
+
 ## Status
 
 | Batch | What | State |
 | --- | --- | --- |
 | 1 · port and SEO | head code `og:site_name` "Chesapeake Data & Energy"; Home schema and the News and Event template heads from `docs/seo/schema/chesapeake/` (chesapeakedatacampus.com, Charles County, MD; no e-mail in the schema until C1 is answered); SEO titles and descriptions on all pages and both templates; FAQ share image is the copy's, which is also the Chesapeake design's FAQ hero | done 2026-11-24, published, read back on staging |
 | 2 · branding | nav logos (white for dark heroes, TW-gradient for light pages; Nav Logo 12.125em / 10.125em below 768, Nav Logo Img aspect 194/48), footer vertical logo (Footer Logo 13.0625em, aspect 209/139), the Chesapeake shield as Hero Mark (aspect 79/90) and the 3D shield on news cards without a photo (`news-post-shield-cde.webp`, Post Card Mark aspect 400/425); logo link aria-labels; footer line "Chesapeake Data & Energy — a TeraWulf campus"; footer e-mail and its divider hidden until C1; announcement bar → /events. Files in `Assets/figma/chesapeake/`. Favicon and webclip files made (`Assets/favicon/*-cde-*`): MANUAL-TODO HA | done 2026-11-24, published, checked at 1440/820/390 |
-| 3–7 | — | waiting for the go-ahead |
+| 3 · CMS | FAQs: Lake Mariner's 11 replaced by Chesapeake's 22 (General, word for word from chesapeakedatacampus.com/faq, its bold kept, Order = the live order); Show on Home on water (Potomac), noise, workforce, net provider. Documents: Lake Mariner's 7 replaced by "MDE Letter of Support" (PDF re-hosted on Webflow from the Squarespace site; Resources group, Project Overview only). News: the 9 samples replaced by the 2 Feb 2026 press release (Press Releases, source TeraWulf → investors.terawulf.com, no cover, so the card shows the Chesapeake shield as in Figma; not Featured). Events: Lake Mariner's 5 deleted; Event Types and Perks left in the collections, unused. Testimonials kept | done 2026-11-24, published |
+| 4–7 | — | waiting for the go-ahead |
