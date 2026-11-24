@@ -161,4 +161,12 @@ None. Lake Hawkeye has the same 10 pages, the Cooling page included.
 - Lake Hawkeye's own photos for heroes and sections, where Figma reuses Lake Mariner's.
 
 ## Status
-Filled in batch by batch below.
+
+| Batch | What | State |
+| --- | --- | --- |
+| 1 · site and global | og:site_name, Home schema, News and Event template head code (lakehawkeyedata.com, Lansing NY), SEO title and description on every page and both templates, nav logos (light and dark) and footer logo from the Figma nav/footer (`Assets/figma/lake-hawkeye/`), logo classes sized to the new files (Nav Logo 11.8125em / 9.875em small, aspect 189/48; Footer Logo 12.75em, aspect 204/141), footer campus line and e-mail, logo link aria-labels | done 2026-11-24, published |
+| 2 · CMS | news, categories, events, event types, documents, FAQs | next |
+| 3 · page content and photos | heroes, statements, facts, stats, Explore text, section copy | to do |
+| 4 · section differences | 6th Highlight tab, Topping Out section, rates Learn More, upcoming event card | to do |
+
+Left from batch 1: the FAQ Open Graph image is still Lake Mariner's FAQ photo (changes with the FAQ hero); the announcement bar still advertises Lake Mariner's hiring event (batch 2, with the events).
