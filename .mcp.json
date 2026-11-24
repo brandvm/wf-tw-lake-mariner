@@ -3,6 +3,14 @@
     "webflow-tw-lake-mariner": {
       "type": "http",
       "url": "https://mcp.webflow.com/mcp"
+    },
+    "webflow-tw-justified": {
+      "type": "http",
+      "url": "https://mcp.webflow.com/mcp"
+    },
+    "webflow-tw-muskie": {
+      "type": "http",
+      "url": "https://mcp.webflow.com/mcp"
     }
   }
 }

@@ -17,6 +17,19 @@ Filled in by `pnpm new-project` on 2026-10-27.
 - Production domain: `not attached yet`
 - Production release: `none yet`
 
+**Five campus sites share this repo and bundle** (decided 2026-11-24). Each
+Webflow site has its own MCP server; write to a site only through its own
+server, and check the site ID before the first write. Details, status and
+per-site differences: `docs/handoff/CAMPUSES.md`.
+
+| Site | Webflow site ID | MCP server | Staging |
+| --- | --- | --- | --- |
+| Lake Mariner Data | `6ae0f7d7bcf5d7622aeac214` | `webflow-tw-lake-mariner` | tw-lake-mariner.webflow.io |
+| Justified Data | `6b05c58e6a2daeafb0769727` | `webflow-tw-justified` | tw-justified.webflow.io |
+| Muskie Data | `6b05c5e78050528a5b59dc6a` | `webflow-tw-muskie` | tw-muskie.webflow.io |
+| Lake Hawkeye Data | not created (workspace site limit) | — | — |
+| Chesapeake Data & Energy | not created (workspace site limit) | — | — |
+
 ## Who owns what
 
 Webflow owns markup, layout, classes, components, CMS content, interactions
