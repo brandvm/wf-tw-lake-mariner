@@ -160,6 +160,27 @@ None. Lake Hawkeye has the same 10 pages, the Cooling page included.
 - The Topping Out line names Lake Mariner as the flagship. Is that intended on the Lake Hawkeye site?
 - Lake Hawkeye's own photos for heroes and sections, where Figma reuses Lake Mariner's.
 
+## Redirect map (lakehawkeyedata.com, Squarespace → Webflow)
+
+For launch: enter these in Site settings › Publishing › 301 redirects, in this order (the specific `/newsroom/` row above the wildcard). Built 2026-11-24 from the live sitemap, `/newsroom?format=json` and `/events?format=json`; every target was checked on tw-lake-hawkeye.webflow.io (200).
+
+| Old URL | New URL | Status |
+| --- | --- | --- |
+| `/newsroom` | `/news` | 301 |
+| `/newsroom/jhukiy18z424qr4zd0cnrj61uabjzo` | `/news/protecting-lansings-future-starts-with-progress` | 301 |
+| `/newsroom/(.*)` | `/news/%1` | 301 |
+| `/home` | `/` | 301 |
+| `/s/110125-WULF-Letter-to-C-Pettograsso-and-K-Heath.pdf` | https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05e46b004d35a1750ca7f3_110125-WULF-Letter-to-C-Pettograsso-and-K-Heath.pdf | 301 |
+| `/s/Anna-Kelles-Request-for-Information_NYSEGC.pdf` | https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05e46b05e33fd43343e986_Anna-Kelles-Request-for-Information_NYSEGC.pdf | 301 |
+| `/s/Couch-White-Energy-Paper_Cayuga-Data-Campus-Dec-2025.pdf` | https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05e46bd0a72c1c181023c1_Couch-White-Energy-Paper_Cayuga-Data-Campus-Dec-2025.pdf | 301 |
+| `/s/Independent-Assessment-of-the-Proposed-Cayuga-Data-Campus.pdf` | https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05e46b7c7961f459f494b3_Independent-Assessment-of-the-Proposed-Cayuga-Data-Campus.pdf | 301 |
+| `/s/Lake-Hawkeye-Fact-vs-Fiction-Oct-2026-V2.pdf` | https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05e46c58b29500634e8438_Lake-Hawkeye-Fact-vs-Fiction-Oct-2026-V2.pdf | 301 |
+| `/s/Lake-Hawkeye-Open-House-Presentation-November-2026-2yn6.pdf` | https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05e46cd0a72c1c1810244d_Lake-Hawkeye-Open-House-Presentation-November-2026.pdf | 301 |
+| `/s/Letters-of-Support_Local-Contractors.pdf` | https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05cabde86e14300445c1e3_Letters-of-Support_Local-Contractors.pdf | 301 |
+| `/s/TCF-Donation-Letter_Lansing-Community-Council-2025-10-29.pdf` | https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05e46df845a5dc2ad64efa_TCF-Donation-Letter_Lansing-Community-Council-2025-10-29.pdf | 301 |
+
+The other 15 newsroom posts keep their slugs under `/news/`, so the wildcard covers them. Unchanged paths, no redirect needed: `/project-overview`, `/community-impact`, `/closed-loop-cooling`, `/faq`, `/events` and the 6 event pages (`/events/<slug>`, same slugs). The `/s/` rows send old links to the PDFs (shared in emails, letters and other sites) to the Webflow copies; if Webflow refuses an absolute target, leave those rows out (nothing on the site links to `/s/` any more).
+
 ## Status
 
 | Batch | What | State |
@@ -185,7 +206,7 @@ Left from batch 3:
 
 Left from batch 2:
 - ~~Document links and several post links point at lakehawkeyedata.com/s/… PDFs on Squarespace~~ done 2026-11-24: the 8 PDFs are Webflow assets (originals in `Assets/lake-hawkeye-pdfs/`; Letters of Support was already on the site from the Lake Mariner copy), and every link points at them: Documents (4 items, URL and the study's description), news bodies (energy pricing, open letter, open-house recap, webinar), the webinar event body, Project Overview tab 3 and the Community Impact grid "HERE" (Designer). Published: no lakehawkeyedata.com/s/ link left on staging, all 8 files 200.
-- ~~News Source links to lakehawkeyedata.com/newsroom/~~ done 2026-11-24: the 5 posts from Lake Hawkeye's own newsroom (energy pricing, Built for the Future, open letter, open-house recap, webinar) have no Source Name or URL, so their Source card is hidden (the card shows only for posts from other outlets). Published and checked. Still worth a launch redirect `/newsroom/(.*)` → `/news/%1` for old inbound links.
+- ~~News Source links to lakehawkeyedata.com/newsroom/~~ done 2026-11-24: the 5 posts from Lake Hawkeye's own newsroom (energy pricing, Built for the Future, open letter, open-house recap, webinar) have no Source Name or URL, so their Source card is hidden (the card shows only for posts from other outlets). Published and checked. The launch redirect for old inbound links is in the Redirect map below.
 - The 6 Resources & Documents items are the copy's (Cayuga study, Lansing planning board…) with placeholder descriptions.
 
 Left from batch 1: the FAQ Open Graph image is still Lake Mariner's FAQ photo (changes with the FAQ hero).
