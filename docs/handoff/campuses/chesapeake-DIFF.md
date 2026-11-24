@@ -146,6 +146,68 @@ also the PO hero), and the News card image (`2679:9480`).
 6. **Designer (Chrome):** rich-text links (Highlight Tabs "Learn more here" → /community-impact), the RSVP card wrapper on the Events template; favicon and webclip.
 7. **Build Review:** Figma row 5 (y 57000, label `2789:2012`), one section per page.
 
+## Live-site files moved to Webflow (2026-11-24)
+
+The Squarespace site www.chesapeakedatacampus.com is going away, so every file it hosts was crawled (sitemap, every page, the `?format=json` feeds: 1 news post, 0 events). The files were saved locally in `Assets/chesapeake/live-site/` as originals (the PNG/JPEG first uploaded to Squarespace); `inventory.json` there lists the pages each file is on. They were then uploaded to Chesapeake's own Webflow assets (user's choice, 2026-11-24: Chesapeake files only).
+
+- Images: `asset_tool › upload_image_by_url`, so they get responsive variants. The three over Webflow's 4 MB image limit (DS3, DS5, hpc1) went up as WebP q90.
+- The PDF and the 32 px favicon: through the assets API.
+- None of these images is placed on a page yet: they are kept for the build and the client.
+
+| Old URL | Webflow asset id | New URL / note |
+| --- | --- | --- |
+| https://images.squarespace-cdn.com/content/v1/696faaa0c3b11975cca24e4c/1768925874881-D19HZGC7OGPEEBXTU929/favicon.ico | `6b05f0c6760e45008c13fc8b` | https://s3.amazonaws.com/webflow-prod-assets/6b05cb19b2bc6f51aa8e5019/6b05f0c6760e45008c13fc8b_live-favicon.png |
+| https://static1.squarespace.com/static/696faaa0c3b11975cca24e4c/t/69ab473cecdee5129be2baa0/1772832572140/morgantown-2019-alanlehmanphoto-potomacriverkeeper1.jpg | `6b05f077fdef96de907edb3f` | https://s3.amazonaws.com/webflow-prod-assets/6b05cb19b2bc6f51aa8e5019/6b05f077fdef96de907edb3f_live-morgantown-2019-alanlehmanphoto-potomacriverkeeper1.jpg |
+| https://images.squarespace-cdn.com/content/v1/696faaa0c3b11975cca24e4c/df07d741-18a9-456e-9d6e-2691ac48a4f2/Chesapeake+Data+%26+Energy+Logo.png | `6b05f0783165aef5b9316edc` | https://s3.amazonaws.com/webflow-prod-assets/6b05cb19b2bc6f51aa8e5019/6b05f0783165aef5b9316edc_live-chesapeake-data-energy-logo.png |
+| https://images.squarespace-cdn.com/content/v1/696faaa0c3b11975cca24e4c/1768925874190-PYQJFS3RS381LLXOSNJ2/Cayuga-1.png | — | not uploaded: Lake Hawkeye's Cayuga plant (the live site's share image); local copy only |
+| https://images.squarespace-cdn.com/content/v1/696faaa0c3b11975cca24e4c/1768925859605-DMLSS6J991V9WAT94LAT/coolers.png | `6b05f0a336d35bb8a356c669` | https://s3.amazonaws.com/webflow-prod-assets/6b05cb19b2bc6f51aa8e5019/6b05f0a336d35bb8a356c669_live-coolers2.png |
+| https://images.squarespace-cdn.com/content/v1/696faaa0c3b11975cca24e4c/16c5f76f-3280-46c8-87de-526a262039c0/CDC+Logo.png | `6b05f07beb06209c3732b633` | https://s3.amazonaws.com/webflow-prod-assets/6b05cb19b2bc6f51aa8e5019/6b05f07beb06209c3732b633_live-cdc-logo.png |
+| https://static1.squarespace.com/static/696faaa0c3b11975cca24e4c/t/69ab489cecdee5129be2bc2e/1772832924019/Image_Construction_2.png | `6b05f07c8eb513527a19e62e` | https://s3.amazonaws.com/webflow-prod-assets/6b05cb19b2bc6f51aa8e5019/6b05f07c8eb513527a19e62e_live-image_construction_2.png |
+| https://images.squarespace-cdn.com/content/v1/696faaa0c3b11975cca24e4c/1768925865004-00ZZFUAV689NWH4LQ5GA/about+terawulf.png | `6b05f07e4bf869d2721a1aa5` | https://s3.amazonaws.com/webflow-prod-assets/6b05cb19b2bc6f51aa8e5019/6b05f07e4bf869d2721a1aa5_live-about-terawulf.png |
+| https://images.squarespace-cdn.com/content/v1/696faaa0c3b11975cca24e4c/1768925865023-D902YFPKEP402IMBPVKH/Project+Highlights.png | `6b05f082b15b51e3e21508ab` | https://s3.amazonaws.com/webflow-prod-assets/6b05cb19b2bc6f51aa8e5019/6b05f082b15b51e3e21508ab_live-project-highlights.png |
+| https://images.squarespace-cdn.com/content/v1/696faaa0c3b11975cca24e4c/1768925865033-OME9YE2DIBFB9A0O2HD7/lake+view.png | `6b05f05e2c5ab8afece9439f` | https://s3.amazonaws.com/webflow-prod-assets/6b05cb19b2bc6f51aa8e5019/6b05f05e2c5ab8afece9439f_live-lake-view.png |
+| https://images.squarespace-cdn.com/content/v1/696faaa0c3b11975cca24e4c/1768925870237-5USJONGGEJ99Y6I70I3V/DS5.png | `6b05f1ef86eb942bbbe8e6b1` | https://cdn.prod.website-files.com/6b05cb19b2bc6f51aa8e5019/6b05f1ef86eb942bbbe8e6b1_live-ds5.webp |
+| https://images.squarespace-cdn.com/content/v1/696faaa0c3b11975cca24e4c/1768925870284-2LXTHH9YCPYIH29PPTIP/jesse+rohring.png | `6b05f08441d6352215154303` | https://s3.amazonaws.com/webflow-prod-assets/6b05cb19b2bc6f51aa8e5019/6b05f08441d6352215154303_live-jesse-rohring.png |
+| https://images.squarespace-cdn.com/content/v1/696faaa0c3b11975cca24e4c/1768925870301-8ZRZ1P255NO6F0SRP3W0/jim+spoon+1.png | `6b05f08681518eec55a370c9` | https://s3.amazonaws.com/webflow-prod-assets/6b05cb19b2bc6f51aa8e5019/6b05f08681518eec55a370c9_live-jim-spoon-1.png |
+| https://images.squarespace-cdn.com/content/v1/696faaa0c3b11975cca24e4c/1768925870318-QTPRFYMGO8UT72G65HYO/Dan+H+2.png | `6b05f08770240dba02b93803` | https://s3.amazonaws.com/webflow-prod-assets/6b05cb19b2bc6f51aa8e5019/6b05f08770240dba02b93803_live-dan-h-2.png |
+| https://static1.squarespace.com/static/696faaa0c3b11975cca24e4c/t/69ab47987eda616e4f07e13d/1772832664310/nil+Foundation+Scale+Summit+Nikki+A+Rae+02.27.2024+all-233.jpg | `6b05f088ca33fa7f3755c56c` | https://s3.amazonaws.com/webflow-prod-assets/6b05cb19b2bc6f51aa8e5019/6b05f088ca33fa7f3755c56c_live-nil-foundation-scale-summit-nikki-a-rae-02-27-2024-all-233.jpg |
+| https://static1.squarespace.com/static/696faaa0c3b11975cca24e4c/t/69ab47bbc384586fa00b9376/1772832699812/community-1.png | `6b05f08a1623809fafc434be` | https://s3.amazonaws.com/webflow-prod-assets/6b05cb19b2bc6f51aa8e5019/6b05f08a1623809fafc434be_live-community-1.png |
+| https://static1.squarespace.com/static/696faaa0c3b11975cca24e4c/t/69ab4752c384586fa00b930d/1772832594025/closed+loop.png | `6b05f0a81460b227c94c406d` | https://s3.amazonaws.com/webflow-prod-assets/6b05cb19b2bc6f51aa8e5019/6b05f0a81460b227c94c406d_live-closed-loop-bp-air-cooler-side.png |
+| https://images.squarespace-cdn.com/content/v1/696faaa0c3b11975cca24e4c/1768925859615-QSRNK8KV4Y6WVGXEBED8/lakefront+view.png | `6b05f09f8d34141223d67ec7` | https://s3.amazonaws.com/webflow-prod-assets/6b05cb19b2bc6f51aa8e5019/6b05f09f8d34141223d67ec7_live-lakefront-view.png |
+| https://images.squarespace-cdn.com/content/v1/696faaa0c3b11975cca24e4c/1768925859625-UM42563DYOX1NNGGQRWL/rear+door+heat+exchangers.png | `6b05f0a1eb06209c3732bb4f` | https://s3.amazonaws.com/webflow-prod-assets/6b05cb19b2bc6f51aa8e5019/6b05f0a1eb06209c3732bb4f_live-rear-door-heat-exchangers.png |
+| https://images.squarespace-cdn.com/content/v1/696faaa0c3b11975cca24e4c/1768925859635-F10FO5DUZLSPFXQK5W3W/coolers2.png | `6b05f0a336d35bb8a356c669` | https://s3.amazonaws.com/webflow-prod-assets/6b05cb19b2bc6f51aa8e5019/6b05f0a336d35bb8a356c669_live-coolers2.png |
+| https://images.squarespace-cdn.com/content/v1/696faaa0c3b11975cca24e4c/1768925859645-FL0CBF61UV65FGRJUG1Z/data+hall.png | `6b05f0a56059042813c91e73` | https://s3.amazonaws.com/webflow-prod-assets/6b05cb19b2bc6f51aa8e5019/6b05f0a56059042813c91e73_live-data-hall.png |
+| https://images.squarespace-cdn.com/content/v1/696faaa0c3b11975cca24e4c/1768925859702-IFF9MMN8YHITPHVKYBTL/closed+loop+BP+data+center+side.png | `6b05f0a6ac352db12f6a5fc5` | https://s3.amazonaws.com/webflow-prod-assets/6b05cb19b2bc6f51aa8e5019/6b05f0a6ac352db12f6a5fc5_live-closed-loop-bp-data-center-side.png |
+| https://images.squarespace-cdn.com/content/v1/696faaa0c3b11975cca24e4c/1768925859718-UFTA9FTRX0QCXAIQQ9LV/closed+loop+BP+air+cooler+side.png | `6b05f0a81460b227c94c406d` | https://s3.amazonaws.com/webflow-prod-assets/6b05cb19b2bc6f51aa8e5019/6b05f0a81460b227c94c406d_live-closed-loop-bp-air-cooler-side.png |
+| https://static1.squarespace.com/static/696faaa0c3b11975cca24e4c/t/69ab484c0630042b7362d09d/1772832844089/vlcsnap-2025-09-16-15h02m18s180.png | `6b05f0ab7cd4c717bb75ae36` | https://s3.amazonaws.com/webflow-prod-assets/6b05cb19b2bc6f51aa8e5019/6b05f0ab7cd4c717bb75ae36_live-vlcsnap-2025-09-16-15h02m18s180.png |
+| https://images.squarespace-cdn.com/content/v1/696faaa0c3b11975cca24e4c/a2a27fac-d1ba-45a6-aa4d-20efd0adc15d/Screenshot+2026-01-20+131830.png | `6b05f0adae2e8aa5acb96105` | https://s3.amazonaws.com/webflow-prod-assets/6b05cb19b2bc6f51aa8e5019/6b05f0adae2e8aa5acb96105_live-screenshot-2026-01-20-131830.png |
+| https://images.squarespace-cdn.com/content/v1/696faaa0c3b11975cca24e4c/1768925872705-7VVQU1NOG4JORXN2VJ1H/DS3.png | `6b05f203c75ce964e46cecf2` | https://cdn.prod.website-files.com/6b05cb19b2bc6f51aa8e5019/6b05f203c75ce964e46cecf2_live-ds3.webp |
+| https://images.squarespace-cdn.com/content/v1/696faaa0c3b11975cca24e4c/6056707e-5665-44c9-895e-f1f4cd018807/Image_Jerry+Goodenough.png | `6b05f0b0291da8d505ac94ed` | https://s3.amazonaws.com/webflow-prod-assets/6b05cb19b2bc6f51aa8e5019/6b05f0b0291da8d505ac94ed_live-image_jerry-goodenough.png |
+| https://images.squarespace-cdn.com/content/v1/696faaa0c3b11975cca24e4c/1768925872714-ZMGG2T76PC7R3WDPY1AL/hpc1.png | `6b05f204ab815878f782d137` | https://cdn.prod.website-files.com/6b05cb19b2bc6f51aa8e5019/6b05f204ab815878f782d137_live-hpc1.webp |
+| https://static1.squarespace.com/static/696faaa0c3b11975cca24e4c/t/69ab4829c384586fa00b93e4/1772832809482/hpc3.png | `6b05f0b26059042813c91f9b` | https://s3.amazonaws.com/webflow-prod-assets/6b05cb19b2bc6f51aa8e5019/6b05f0b26059042813c91f9b_live-hpc3.png |
+| https://static1.squarespace.com/static/696faaa0c3b11975cca24e4c/t/6ab530d5750e7226dba470fb/1790266767190/ | — | same file as the Chesapeake logo (post thumbnail); see the logo row |
+| https://www.chesapeakedatacampus.com/s/MDE-Letter-of-Support.pdf | `6b05ebc45b65a4aba96ba98d` | https://s3.amazonaws.com/webflow-prod-assets/6b05cb19b2bc6f51aa8e5019/6b05ebc45b65a4aba96ba98d_MDE-Letter-of-Support.pdf |
+| video.squarespace-cdn.com/…/1768925862484-K5SMTJ0GVMC8RS0A8F7K (Home hero video "Cayuga Website Hero.mp4") | — | not uploaded: Lake Hawkeye's Cayuga plant; local copy `home-hero-video.mp4` (8.9 MB) |
+| video.squarespace-cdn.com/…/1768925870270-OMXH0LCFFDYUTW0AS4MA (Careers video) | — | not uploaded: Lake Mariner employees ("Dan Heidemann, Site Lead, Lake Mariner"); local copy `careers-video.mp4` (50 MB, over the 30 MB upload limit) |
+
+Other campus files the copy still loaded, now Chesapeake's own:
+- Closed-Loop Cooling › Inside the Loop: the two loop videos and posters came from Lake Mariner's CDN (`cdn.prod.website-files.com/6ae0f7d7…`). They now use Chesapeake's copies, which came with the duplicate (`6b05cb19b2bc6f51aa8e5098`, `…5099`; posters `…509a`, `…509b`).
+- Style guide: the Source Card and Doc Accordion Item defaults linked to lakehawkeyedata.com; they now link to terawulf.com and the MDE PDF.
+- Favicon and webclip: Chesapeake's (MANUAL-TODO HA), so no icon loads from Lake Mariner's CDN. The Home schema logo is the Chesapeake logo above.
+
+Checked after publishing, on all 12 published pages (`/design/*` and `/404` included): no reference to the Squarespace CDN, chesapeakedatacampus.com/s/, lakehawkeyedata, cayugadatacampus, lakemarinerdata, justifieddatacampus, muskiedatacampus or another campus's Webflow asset CDN. The only chesapeakedatacampus.com URLs left are the schema's canonical `@id` and `url` values, which name the production domain (kept, user 2026-11-24).
+
+### 301 redirects for launch (old Squarespace paths)
+
+| Old path | New path |
+| --- | --- |
+| `/s/MDE-Letter-of-Support.pdf` | `https://cdn.prod.website-files.com/6b05cb19b2bc6f51aa8e5019/6b05ebc45b65a4aba96ba98d_MDE-Letter-of-Support.pdf` |
+| `/home` | `/` |
+| `/newsroom` | `/news` |
+| `/newsroom/terawulf-expands-digital-and-power-infrastructure-portfolio-with-strategic-acquisitions-in-kentucky-and-maryland` | `/news/terawulf-expands-portfolio-kentucky-and-maryland` |
+
+`/project-overview`, `/community-impact`, `/closed-loop-cooling`, `/careers`, `/events` and `/faq` keep their paths.
+
 ## Notes from the build
 
 - Home FAQ order: the list sorts by Order, shared with /faq, so Home shows noise, net provider, workforce, water; the design puts water first. Change Order if the client wants the design's order (as on Justified, L5).
