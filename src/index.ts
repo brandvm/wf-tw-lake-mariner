@@ -39,6 +39,7 @@ import { initListCount } from './modules/list-count';
 import { initListState } from './modules/list-state';
 import { initFinsweet } from './modules/finsweet';
 import { initLoopModes } from './modules/loop-modes';
+import { initCardRail } from './modules/card-rail';
 
 // Each module runs in isolation: one that throws is logged and skipped,
 // and every module after it still initializes.
@@ -89,6 +90,7 @@ function boot() {
   run('video-modal', initVideoModal);
   run('benefits', initBenefits);
   run('loop-modes', initLoopModes);
+  run('card-rail', initCardRail);
   run('quote-slider', initQuoteSlider);
   run('custom-select', initCustomSelect);
   run('reveal', initReveal);

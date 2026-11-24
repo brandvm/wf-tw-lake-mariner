@@ -826,6 +826,16 @@ button.social-button { padding: 0; cursor: pointer; }
 [data-faq-group]:not(:has(.w-dyn-item)) { display: none; }
 main:has([data-faq-group]):not(:has([data-faq-group] .w-dyn-item)) .faq-empty { display: block; }
 
+/* repo-css: designer-cant — :has() — a section marked data-hide-empty is left out while its Collection List has no items (a campus with no past events, no featured posts, no initiatives yet); it comes back by itself when items are added. */
+[data-hide-empty]:not(:has(.w-dyn-item)) { display: none; }
+
+/* repo-css: designer-cant — card rail (card-rail module, Chesapeake's Community benefits): the row scrolls sideways under its own arrows, so its scrollbar is hidden; ::-webkit-scrollbar and scrollbar-width have no Designer setting */
+[data-card-rail-track] { scrollbar-width: none; }
+[data-card-rail-track]::-webkit-scrollbar { display: none; }
+
+/* repo-css: js-state — card rail arrows at either end of the row (aria-disabled, set by card-rail): the design's light inactive arrow */
+[data-card-rail] [aria-disabled="true"] { background-color: #ebf0f5; color: #3e5570; cursor: default; }
+
 /* repo-css: js-state — until Finsweet List has started (finsweet.ts sets data-fs-list on <html>, also if it fails) only the first page of a paginated list shows, as Finsweet will show it, so the cards below and the footer don't jump up when it starts. One rule per fs-list-itemsperpage value in use (News: 6). */
 html:not([data-fs-list]) [fs-list-element="list"][fs-list-itemsperpage="6"] > .w-dyn-item:nth-child(n+7) { display: none; }
 
