@@ -703,3 +703,12 @@ collected from client repos into those files.
 - Fix: double-click the word (or click before it and shift+click after it for several words), the toolbar's link button, triple-click the URL field, type, ✓; then select the link again and ✓ once more (the field now shows the URL), or retype it. For a new tab, tick ⚙ › Open in a new tab and go back with ← before ✓. Read the editor's `<a>` back with JS before closing the dialog, and the published HTML after publishing.
 - Status: worked around
 - Found by: claude
+
+### 2026-11-24 · A list in a rich-text prop: paste it as HTML; Edit Rich Text greyed out after an API select
+- Area: designer
+- Scope: template-candidate
+- Symptom: Lake Hawkeye MANUAL-TODO GB needed five paragraphs of a C | Highlight Tabs rich-text prop as a bulleted list. The Edit Rich Text dialog's toolbar has no list button (a multi-paragraph selection shows only B, I, sup, sub, code, H1–H6, quote), and typing `* ` or `- ` at a line start stays literal text. Separately, on Community Impact the Answer's Edit Rich Text button was disabled after the instance was selected through `designer_tool › select_element`.
+- Cause: the dialog's editor has no list command, but its paste handler keeps HTML lists. The disabled button seems to be a panel state after a programmatic select.
+- Fix: in the dialog, select the paragraphs, then dispatch a `paste` ClipboardEvent whose DataTransfer has `text/html` = `<ul><li>…</li></ul>`. The editor inserts the list (it published as `<ul role="list">`) but keeps the selected paragraphs, so select them again (click before, shift+click after) and press Backspace twice (the second removes the empty paragraph left behind). Check `[...editor.children]` before closing. For the disabled button, click another element in the Navigator and then the instance again. A link inside a plain Paragraph: double-click the paragraph on the canvas, click before the words and shift+click after them, then the toolbar's link button. The new inline link can't be addressed by `set_link` ("Element not found"), so set Type › Page in its Settings (select it in the Navigator under the paragraph).
+- Status: worked around
+- Found by: claude
