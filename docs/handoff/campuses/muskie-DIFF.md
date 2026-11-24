@@ -46,15 +46,11 @@ Still open:
   Home and Project Overview share images use them. The news and event card
   photos are CMS images, which the API never gives responsive sizes
   (GOTCHAS); they stay ≤ 1200 px WebP.
-- **MDC Power Fact Sheet**: the item exists without a file (Q7); its
-  Download button goes nowhere until the client sends the PDF (asked for
-  in a Figma annotation on the row, Clean Pages › Muskie 03 Community
-  Impact, node `2681:9521`, 2026-11-24). When it
-  arrives: save it as `Assets/figma/muskie/MDC-Power-Fact-Sheet.pdf`,
-  upload it as a site asset through `webflow-tw-muskie` (as the
-  Community Info Session PDF was), put the asset URL in the Documents
-  item's External URL, publish the item and the site, and check that the
-  Download button on /project-overview and /community-impact opens it.
+- **MDC Power Fact Sheet**: done 2026-11-24. The PDF was on the live site
+  after all (`/s/MDC-Power-Fact-Sheet.pdf`); it is now a Muskie asset and
+  the Documents item's External URL points at it (Download works on
+  /project-overview and /community-impact). The Figma annotation asking
+  the client for it was removed.
 - **Key figures** 800 / 0 / 800 MW built as in Figma (Q2), to confirm.
 - **CI card 3 button** reads "View openings" → /careers (Figma says
   "CTA"; Q6 default); EVAPCO button keeps Lake Mariner's brochure link.
@@ -68,6 +64,77 @@ Still open:
 - **Event pages**: no tagline, no RSVP; the community meeting links the
   presentation (re-hosted on Webflow) and the YouTube replay.
 - Checked at 820 too (Home, Community Impact): layout holds; the Info cards become a swipe row.
+
+## Live-site files (2026-11-24)
+
+muskiedatacampus.com (Squarespace) goes down soon, so every file it hosts
+was copied to Muskie's Webflow assets (`webflow-tw-muskie`, display names
+`live-…`) and kept locally in `Assets/muskie/live-site/` (`pdf/`,
+`images/`). Crawled: `sitemap.xml` (23 URLs), every page, and the
+`/newsroom?format=json` and `/events?format=json` feeds.
+
+- **News and event images:** none. Every item's `assetUrl` on the live
+  site is the same 2 KB placeholder; the posts link out to their sources.
+- **Videos:** no files; two YouTube links (the community meeting replay,
+  already on the event page and the Documents item, and youtu.be/T5nfF4dFTUo).
+- **Links to the old domain on the new site:** none to files. Published
+  HTML of all pages and every CMS field checked after the publish; the
+  only muskiedatacampus.com URLs left are the JSON-LD `@id`/`url` values
+  on Home and the event pages, which name the production domain the site
+  moves to (keep them).
+
+PDFs (`/s/` paths):
+
+| Old URL | Local copy | Webflow asset | New URL |
+| --- | --- | --- | --- |
+| `/s/MDC-Power-Fact-Sheet.pdf` (127 KB) | `pdf/MDC-Power-Fact-Sheet.pdf` | `6b05f084fdb8e3e6724a4ee6` | https://cdn.prod.website-files.com/6b05c5e78050528a5b59dc6a/6b05f084fdb8e3e6724a4ee6_MDC-Power-Fact-Sheet.pdf |
+| `/s/Muskie-Community-Info-Session-Presentation.pdf` (7.2 MB) | `pdf/Muskie-Community-Info-Session-Presentation.pdf` | `6b05d3c42bda5e3299be3dbf` (uploaded with the CMS batch) | https://cdn.prod.website-files.com/6b05c5e78050528a5b59dc6a/6b05d3c42bda5e3299be3dbf_Muskie-Community-Info-Session-Presentation.pdf |
+
+Images, all from `images.squarespace-cdn.com/content/v1/6a17cad62ec3163d783b0a90/…`
+(page on the live site in brackets). None is placed on a page of the new
+site, which uses the Figma photos; they are kept as the client's
+originals. All have responsive variants (`upload_image_by_url`); DS3 and
+DS5 are WebP files served under `.png` names, which the importer
+refuses, so they went up through the assets API first (GOTCHAS
+2026-11-24, Squarespace WebP). New URL:
+`https://cdn.prod.website-files.com/6b05c5e78050528a5b59dc6a/<asset>_<name>`.
+
+| Old file (live page) | Local copy | Webflow asset | Asset name |
+| --- | --- | --- | --- |
+| `CB4 TOP OUT PHOTOS 139.jpg` (community-impact) | `images/cb4-top-out-photos-139-ddd700.jpg` | `6b05f0d7d4c045a0cd21eead` | `live-cb4-top-out-photos-139.jpg` |
+| `CB4 TOP OUT PHOTOS 56.jpg` (events) | `images/cb4-top-out-photos-56-42c1e5.jpg` | `6b05f15e9c1f223cb59fafdb` | `live-cb4-top-out-photos-56.jpg` |
+| `CB4 TOP OUT PHOTOS 67.jpg` (community-impact) | `images/cb4-top-out-photos-67-cdf04a.jpg` | `6b05f19cdf75801487cb7e2f` | `live-cb4-top-out-photos-67.jpg` |
+| `closed loop BP air cooler side.png` (closed-loop-cooling) | `images/closed-loop-bp-air-cooler-side-9e03e6.png` | `6b05f1bf811e53aed137b178` | `live-closed-loop-bp-air-cooler-side.png` |
+| `closed loop BP data center side.png` (closed-loop-cooling) | `images/closed-loop-bp-data-center-side-1dbec1.png` | `6b05f1bcd21ef8fca453833a` | `live-closed-loop-bp-data-center-side.png` |
+| `closed loop.png` (community-impact) | `images/closed-loop-f048bb.png` | `6b05f1da6059042813c95771` | `live-closed-loop.png` |
+| `community-1.png` (community-impact) | `images/community-1-271783.png` | `6b05f1c97c7cd05f16c47f55` | `live-community-1.png` |
+| `coolers.png` (closed-loop-cooling) | `images/coolers-6b34c1.png` | `6b05f1a9d21ef8fca4538016` | `live-coolers.png` |
+| `coolers2.png` (closed-loop-cooling) | `images/coolers2-2b1a57.png` | `6b05f1adca33fa7f37561194` | `live-coolers2.png` |
+| `Dan H 2.png` (careers) | `images/dan-h-2-fbb831.png` | `6b05f1d7f21c29a2411f55b5` | `live-dan-h-2.png` |
+| `data hall.png` (closed-loop-cooling) | `images/data-hall-c10910.png` | `6b05f1b61ca12f8b36872bb4` | `live-data-hall.png` |
+| `data hall capture.png` (project-overview) | `images/data-hall-capture-0e749c.png` | `6b05f19f70240dba02b9697a` | `live-data-hall-capture.png` |
+| `DS3.png` (community-impact) | `images/ds3-16e55a.webp` | `6b05f215174b1c801fe51191` | `live-ds3.webp` |
+| `DS5.png` (careers) | `images/ds5-87fc66.webp` | `6b05f21286eb942bbbe8f0d5` | `live-ds5.webp` |
+| `DS5.png` (careers) | `images/ds5-a98153.webp` | `6b05f21286eb942bbbe8f0d5` | `live-ds5.webp` |
+| `favicon.ico` (careers, closed-loop-cooling, community-impact, events, faq, home, newsroom, project-overview) | `images/favicon-f09896.ico` | `6b05f1f6462122de2cc9213a` | `live-favicon.ico` |
+| `jesse rohring.png` (careers) | `images/jesse-rohring-95f147.png` | `6b05f1d19b455fa066e08340` | `live-jesse-rohring.png` |
+| `jim spoon 1.png` (careers) | `images/jim-spoon-1-613b68.png` | `6b05f1d5e504558e6c017e81` | `live-jim-spoon-1.png` |
+| `Lake Mariner Site Aerial.png` (project-overview) | `images/lake-mariner-site-aerial-4e334c.png` | `6b05f1de3877a8a8cedd82e8` | `live-lake-mariner-site-aerial.png` |
+| `lakefront view.png` (closed-loop-cooling) | `images/lakefront-view-2f53d7.png` | `6b05f1afa1b68b664f5c2967` | `live-lakefront-view.png` |
+| `Muskie Data Campus Aerial-1.png` (home, project-overview) | `images/muskie-data-campus-aerial-1-ac2f22.png` | `6b05f0d49b455fa066dffd12` | `live-muskie-data-campus-aerial-1.png` |
+| `Muskie Data Campus Aerial-2.png` (home, project-overview) | `images/muskie-data-campus-aerial-2-63ddfd.png` | `6b05f0d2e1ae36a5294944ff` | `live-muskie-data-campus-aerial-2.png` |
+| `muskiedata-horizontal_filled.png` (careers, closed-loop-cooling, community-impact, events, faq, home, newsroom, project-overview) | `images/muskiedata-horizontal-filled-30e809.png` | `6b05f0d68b0b7cf21bcae56a` | `live-muskiedata-horizontal-filled.png` |
+| `Project Highlights.png` (project-overview) | `images/project-highlights-de8141.png` | `6b05f1a311abdd745f7a8969` | `live-project-highlights.png` |
+| `rear door heat exchangers.png` (closed-loop-cooling) | `images/rear-door-heat-exchangers-75d6f0.png` | `6b05f1b3bb91ef4259638640` | `live-rear-door-heat-exchangers.png` |
+| `Vic Wheel Shot.png` (faq) | `images/vic-wheel-shot-f465bd.png` | `6b05f192211c29019bd64d6d` | `live-vic-wheel-shot.png` |
+
+301 rows for launch (Site settings › Publishing › 301 redirects; absolute
+targets, as on Lake Mariner):
+
+| Old URL | New URL | Status |
+| --- | --- | --- |
+| `/s/MDC-Power-Fact-Sheet.pdf` | https://cdn.prod.website-files.com/6b05c5e78050528a5b59dc6a/6b05f084fdb8e3e6724a4ee6_MDC-Power-Fact-Sheet.pdf | 301 |
+| `/s/Muskie-Community-Info-Session-Presentation.pdf` | https://cdn.prod.website-files.com/6b05c5e78050528a5b59dc6a/6b05d3c42bda5e3299be3dbf_Muskie-Community-Info-Session-Presentation.pdf | 301 |
 
 ## Frames
 
@@ -231,8 +298,8 @@ Q1, Q3, Q4 and Q5 are decided (above).
    (excerpt + Source card), or link straight to the source in a new tab?
 6. **CI card 3 button** reads "CTA" in Figma: label and link (e.g. View
    openings → /careers)? And the URL for "EVAPCO's sound solutions".
-7. **MDC Power Fact Sheet** file: not on the live site; needed from the
-   client.
+7. ~~**MDC Power Fact Sheet** file~~: found on the live site and moved
+   to Webflow, 2026-11-24 (see Live-site files).
 8. **Document lists on Project Overview.** LM staging has Resources and
    Initiatives after Explore on Project Overview (Chloe, 23 Sep: both lists
    on both pages), although neither Figma row shows them there. Proposed
