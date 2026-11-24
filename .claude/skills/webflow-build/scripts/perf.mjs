@@ -12,6 +12,10 @@
 // Extra Chrome flags come from WF_PERF_CHROME_FLAGS, e.g. on a network
 // where local runs are slow only there (lessons › loader-release-ci):
 //   WF_PERF_CHROME_FLAGS=--disable-features=HappyEyeballsV3,AsyncDns
+// Chrome runs with --disable-gpu, as PageSpeed's servers do. With the GPU
+// on (seen on macOS), simulated FCP came out ~0.6 s higher and some runs
+// held the first frame ~1 s: /careers scored 88 here, 96 with
+// --disable-gpu and 99 on pagespeed.web.dev (2026-11-24).
 import fs from 'fs';
 import path from 'path';
 import { execFile } from 'child_process';
@@ -40,7 +44,7 @@ const METRICS = [
 const median = (a) => { const s = [...a].sort((x, y) => x - y); const m = s.length >> 1; return s.length % 2 ? s[m] : Math.round(((s[m - 1] + s[m]) / 2) * 1000) / 1000; };
 
 async function once(url, mode) {
-  const a = ['--yes', LIGHTHOUSE, url, '--output=json', '--output-path=stdout', '--quiet', '--only-categories=performance', `--chrome-flags=--headless=new --no-sandbox${process.env.WF_PERF_CHROME_FLAGS ? ' ' + process.env.WF_PERF_CHROME_FLAGS : ''}`];
+  const a = ['--yes', LIGHTHOUSE, url, '--output=json', '--output-path=stdout', '--quiet', '--only-categories=performance', `--chrome-flags=--headless=new --no-sandbox --disable-gpu${process.env.WF_PERF_CHROME_FLAGS ? ' ' + process.env.WF_PERF_CHROME_FLAGS : ''}`];
   if (mode === 'desktop') a.push('--preset=desktop');
   const { stdout } = await run('npx', a, { env: { ...process.env, CHROME_PATH: chrome }, maxBuffer: 64 * 1024 * 1024 });
   const lhr = JSON.parse(stdout);

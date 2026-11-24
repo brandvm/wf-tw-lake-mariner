@@ -622,3 +622,48 @@ collected from client repos into those files.
 - Fix: build the empty lists with the API, set source, filter, sort, limit and skip in the Designer before any API query write, read them back, then move the bound cards in and remove the refused lists. Where only the Designer is free later, leave the sort as a MANUAL-TODO row and don't retry it through the API first (FAQ: DX). Webflow's Limit + Skip splits one sorted query into a lead card and the next three without duplicates.
 - Status: worked around (DX: the Designer took both FAQ sorts on lists the API had refused once)
 - Found by: claude
+
+### 2026-11-24 · Local Lighthouse on macOS with the GPU on scores ~8 points under PageSpeed
+- Area: perf
+- Scope: template-candidate
+- Symptom: `pnpm wf:perf --mobile` medians of 77–92 on pages that pagespeed.web.dev scored 97–100 (/careers: 88 locally, 99 on PageSpeed). Single runs swung ±10. In some runs the observed first paint came ~1 s after every resource had arrived (/community-impact: main thread idle from 0.37 to 1.25 s, no main frame scheduled), and Lighthouse then billed every request of that second to FCP.
+- Cause: headless Chrome with the GPU on, on this Mac. Nothing in the page: no task, timer or response ends the stall, and Playwright loads of the same pages painted in 0.1–0.4 s every time. Even without a stall, simulated FCP was ~0.6 s higher (2.49 vs 1.85 s on /careers, 6 runs each). PageSpeed runs without a GPU.
+- Fix: `perf.mjs` passes `--disable-gpu` by default: /careers 96 locally (94–97), close to PageSpeed. Before trusting a score, check one page on pagespeed.web.dev (the keyless API quota is usually spent). Medians from before 2026-11-24 in BUILD-NOTES were taken with the GPU on, so they read low.
+- Status: fixed in this repo's copy of perf.mjs; not upstreamed
+- Found by: claude
+
+### 2026-11-24 · Lighthouse's "render-blocking" saving for the repo stylesheet isn't real
+- Area: perf
+- Scope: template-candidate
+- Symptom: every page listed `brandvm.github.io/…/styles.css` as render-blocking with ~750 ms of savings, which pointed at inlining the repo CSS or loading it async (a loader change on five sites).
+- Cause: the audit's estimate. Removing the stylesheet's requests from a saved run and re-scoring it changed nothing (/community-impact 81 → 81, /faq 78 → 78): Webflow's own stylesheet, on its own new connection, holds the first paint just as long.
+- Fix: none needed. To test a change before making it: save a run with `lighthouse <url> -G=<dir>`, edit `defaultPass.devtoolslog.json` (drop the requests of a URL), re-score with `lighthouse -A=<dir>`. Same check on /news: dropping the lead image, jQuery or the Satoshi font each saved only 150–300 ms. The cost is spread out, not one request.
+- Status: documented
+- Found by: claude
+
+### 2026-11-24 · `upload_image_by_url` gives an asset its responsive variants at once
+- Area: mcp
+- Scope: template-candidate
+- Symptom: the FAQ hero (`faq-hero-faq.webp`, uploaded through `create_asset` + the presigned S3 POST) still had no variants 19 hours later, so the hero published a 250 KB file without `srcset` on phones.
+- Cause: assets uploaded through the Data API's presigned upload get their variants late or never (earlier entries: 40 minutes, then never). `asset_tool › upload_image_by_url` goes through the Designer's import (the Designer MCP app must be open in a Designer tab).
+- Fix: `upload_image_by_url` with the asset's own CDN URL as the source: the new asset (`faq-hero-faq-v2.webp`) had 500/800/1080/1600/2000 variants in the same call; set the hero's Image prop to it and the hero published with `srcset` (phones load the 46 KB `-p-800`). Use this route for every image upload. It does not help CMS images: setting a News post's Cover Image to a variant-bearing asset left the item on its old file (same bytes, same fileId), and CMS images made through the API have no `-p-*` files.
+- Status: worked around (FAQ hero)
+- Found by: claude
+
+### 2026-11-24 · A video `poster` is fetched at load, wherever the video is
+- Area: perf
+- Scope: template-candidate
+- Symptom: the two Loop Modes posters at the bottom of Closed-Loop Cooling (110 KB) loaded before the first paint, although the videos are `preload="none"` far below the first screen.
+- Cause: browsers fetch a `poster` image as soon as the element is parsed; there is no lazy loading for posters, and Lighthouse bills every request that ends before the first paint to it.
+- Fix: the posters moved to `data-poster` (Webflow custom attribute) and loop-modes sets `poster` when the frame is within a screen of the viewport (d2b7284). Checked at 390 and 1440: no poster request at load, both set on approach. The Designer canvas shows no poster now. Any other DOM `<video>` with a poster below the fold needs the same.
+- Status: fixed d2b7284 (Webflow attributes published)
+- Found by: claude
+
+### 2026-11-24 · Per-instance image loading on a component: bind `loading` and `fetchpriority` to props
+- Area: mcp
+- Scope: template-candidate
+- Symptom: C | Empty Card's image was `loading="eager" fetchpriority="high"` in the component, right for /events (it is that page's LCP) but wrong for the same card at the bottom of /faq, where it competed with the hero.
+- Cause: attributes on an element inside a component are the same for every instance unless bound.
+- Fix: two string props in a Performance group, Image Loading (default `lazy`) and Image Priority (default `auto`), bound with `set_settings` key `attributes` (`value_binding` source `prop`) on the Image inside the component; /events instance set to `eager` / `high`. The bindings took and publish per instance (/events eager/high, /faq lazy/auto); read them back with `get_settings`.
+- Status: done (published)
+- Found by: claude
