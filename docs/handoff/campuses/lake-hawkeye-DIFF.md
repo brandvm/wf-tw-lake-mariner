@@ -103,11 +103,11 @@ Compared 2026-11-24 from layer text and screenshots at 1680.
   - Partnership with the Lansing Community Council;
   - Donation to the Lansing Central School District;
   - Local Contractors Letters of Support.
-  - Lake Mariner's line "View letters of support from our local contracting partners at the Lake Mariner facility" is gone.
+  - Its open state in Figma keeps Lake Mariner's line "View letters of support from our local contracting partners at the Lake Mariner facility" (frame `2657:12513`), so the Documents item keeps it.
 
 ### Closed-Loop Cooling — content only
 - **Intro:** "Sustainable, water-responsible design that protects Cayuga Lake", with new text (air-cooled, no withdrawal or discharge).
-- **Key Benefits list:** the Figma says "Lake Ontario" in the first bullet. This is a slip in the design; the build will say Cayuga Lake.
+- **Key Benefits list:** the Figma says "Lake Ontario" in the first bullet. This is a slip in the design; the build keeps Lake Mariner's "Zero water withdrawal or discharge to local sources", which is right for Lake Hawkeye.
 - Everything else is the same text as Lake Mariner's: How It Works, Operations, Inside the Loop.
 
 ### Careers — no difference
@@ -135,7 +135,7 @@ CMS templates; the content comes from the items.
 - **Search placeholder:** Figma says "Search upcoming and past events…". Lake Mariner's says "Search past events…", since the search covers the past list only. Keep Lake Mariner's.
 
 ### FAQ — content only
-- **Hero:** "Straight answers to the questions we hear most from our neighbors in Lansing — water, noise, traffic and power."
+- **Hero:** Figma repeats Lake Mariner's Community Impact paragraph ("As we expand operations in Barker…"), a slip. The build keeps Lake Mariner's FAQ line with Lansing: "Straight answers to the questions we hear most from our neighbors in Lansing — water, traffic, power and the environment."
 - **General:** 15 questions.
 - **Propylene glycol:** 4 questions (the same questions as Lake Mariner; the answers to check).
 - The answers come from the design and lakehawkeyedata.com/faq.
@@ -166,15 +166,22 @@ None. Lake Hawkeye has the same 10 pages, the Cooling page included.
 | --- | --- | --- |
 | 1 · site and global | og:site_name, Home schema, News and Event template head code (lakehawkeyedata.com, Lansing NY), SEO title and description on every page and both templates, nav logos (light and dark) and footer logo from the Figma nav/footer (`Assets/figma/lake-hawkeye/`), logo classes sized to the new files (Nav Logo 11.8125em / 9.875em small, aspect 189/48; Footer Logo 12.75em, aspect 204/141), footer campus line and e-mail, logo link aria-labels | done 2026-11-24, published |
 | 2 · CMS | FAQs: Lake Mariner's 7 General replaced by Lake Hawkeye's 15 (lakehawkeyedata.com/faq), 4 on Home; the 4 propylene glycol FAQs kept. News: the 9 sample posts replaced by the 16 from lakehawkeyedata.com/newsroom (bodies cleaned from Squarespace markup, body images re-hosted by Webflow as WebP), categories + Media Coverage, Videos, Podcasts with their pills on /news, newest 4 Featured; covers for 10 posts exported from the Figma News frame (`Assets/figma/lake-hawkeye/news/`), the other 6 show the shield fallback as in Figma; Source Name is the outlet, or Lake Hawkeye Data with the post's lakehawkeyedata.com URL. Events: the 5 samples replaced by Lake Hawkeye's 6 (Dec 1 open house upcoming), types Open House, Webinar, Town Board, Info Session; the empty perks list hidden (class Perk Grid Empty). Documents: NYSERDA, Lansing Community Council and Lansing CSD donation added to Initiatives, Letters of Support linked. Announcement bar → the Dec 1 open house | done 2026-11-24, published |
-| 3 · page content and photos | heroes, statements, facts, stats, Explore text, section copy | to do |
+| 3 · page content and photos | Project Overview: hero (heading, line, the Home aerial), About TeraWulf text (in C \| Intro Row, Lake Hawkeye's copy of the component), About the Project eyebrow, statement and both photos, Cooling promo text, Highlight Tabs texts 1–5 (Scale, Clean Energy, Jobs, Community Benefits, Tenants; Timing is batch 4), Responsible Development as 4 items (Water, Noise, Design, Land) with the plant aerial. Community Impact: hero line, Project Impacts (6 items, the plant aerial), Community benefits cards (Closed-loop cooling, Tax base restoration, Aesthetic improvements), Lansing statement, Grid accordion copy, rates line (Central New York). Cooling: hero line and Photo Band (Cayuga Lake). FAQ hero line (Lansing). News intro from the design. C \| Page Hero fact defaults Lansing, NY / Permitting. RSVP card on the Events template wrapped in a div shown only when RSVP URL is set (MANUAL-TODO GA, done in the Designer). New photos uploaded with `upload_image_by_url` (responsive sizes) | done 2026-11-24, published |
 | 4 · section differences | 6th Highlight tab, Topping Out section, rates Learn More, upcoming event card | to do |
 
 Done-list for every page: when a page is finished on tw-lake-hawkeye.webflow.io, add its section to row 4 (Lake Hawkeye, y 39000) of the Figma Build Review page (`2556:2`), in that page's column, as `CAMPUSES.md` › "Compare page in Figma" describes: Lake Hawkeye's Clean Pages frame, staging screenshots at 1680, 820 and 390, and red or ✓ green markers. Pages finished so far: none (batch 1 changed only global parts).
 
+Left from batch 3:
+- The Tax base restoration and Aesthetic improvements cards have no button: Figma's buttons read "CTA" with no target, and Lake Mariner's EVAPCO and NYISO buttons were removed (open question above). Duplicate the Closed-loop cooling card's C | Button when targets come.
+- Links the design shows inside rich-text props are plain text until set in the Designer (GOTCHAS 2026-11-12): Highlight Tab 3 "letters of support" (the Lake Hawkeye PDF), Community Impact Grid item 2 "HERE" (NYSEG's RFI response), Community benefits card 1 "closed-loop system" (/closed-loop-cooling; a plain paragraph, can be linked by the API).
+- Highlight Tab 1 is one sentence with semicolons; the design has a bullet list (batch 4, with the Timing tab, which needs Text 1 as rich text).
+- About the Project's two body paragraphs (300 MW; reduced grading) aren't shown: C | Collage has no paragraph prop (batch 4).
+- The Responsible Development photo (`po-lh-responsible`) is the Figma render at 716px wide, so it only has a 500px variant. A larger export or the original photo would be sharper on retina screens.
+- The Inside the Loop videos and posters load from Lake Mariner's asset CDN (`6ae0f7d7…`). They work, but would break if those assets were deleted from Lake Mariner: re-upload them to this site before launch.
+- Event photos: the Figma events use the same sample photos as the copy (vest crowd, orange shirts, the UTV), so nothing changed. Real photos from the client are still an open question.
+
 Left from batch 2:
-- The RSVP card shows on every event with a dead Reserve button (no Lake Hawkeye event has an RSVP link): MANUAL-TODO GA.
-- The Figma events use their own photos (a crowd in TeraWulf vests, a group in orange shirts); the copy's sample event photos stand in until batch 3.
 - Document links and several post links point at lakehawkeyedata.com/s/… PDFs on Squarespace. They break when the domain moves to Webflow: download the PDFs and upload them to Webflow before launch.
 - The 6 Resources & Documents items are the copy's (Cayuga study, Lansing planning board…) with placeholder descriptions.
 
-Left from batch 1: the FAQ Open Graph image is still Lake Mariner's FAQ photo (changes with the FAQ hero); the announcement bar still advertises Lake Mariner's hiring event (batch 2, with the events).
+Left from batch 1: the FAQ Open Graph image is still Lake Mariner's FAQ photo (changes with the FAQ hero).
