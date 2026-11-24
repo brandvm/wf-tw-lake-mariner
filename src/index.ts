@@ -35,6 +35,7 @@ import { initShare } from './modules/share';
 import { initReadProgress } from './modules/read-progress';
 import { initFollowFan } from './modules/follow-fan';
 import { initFaqSchema } from './modules/faq-schema';
+import { initListCount } from './modules/list-count';
 import { initListState } from './modules/list-state';
 import { initFinsweet } from './modules/finsweet';
 import { initLoopModes } from './modules/loop-modes';
@@ -96,6 +97,7 @@ function boot() {
   run('read-progress', initReadProgress);
   run('follow-fan', initFollowFan);
   run('faq-schema', initFaqSchema);
+  run('list-count', initListCount);
   run('list-state', initListState);
   // Finsweet last: it starts a microtask later, so attributes set by the
   // modules above are seen (recipes/finsweet).
