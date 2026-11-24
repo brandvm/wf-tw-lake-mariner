@@ -36,9 +36,10 @@ page and turn its red marker green.
 
 Still open:
 
-- **MANUAL-TODO FA–FD**: news card links to the source (the API binding
-  doesn't publish), four rich-text links, favicon/webclip, RSVP card
-  visibility on event pages.
+- **MANUAL-TODO FA–FD**: done 2026-11-24 in the Designer and Site
+  settings and published. The news cards link to their publishers in a new
+  tab; the four rich-text links are in; Muskie has its own favicon and
+  webclip; the RSVP card hides on events without an RSVP URL (both today).
 - **Photo `srcset`**: fixed 2026-11-24. The four page photos and the FAQ
   hero were re-ingested with `asset_tool › upload_image_by_url` (Designer
   app open) as `*-v2` assets and re-pointed; all publish with `srcset`, and
