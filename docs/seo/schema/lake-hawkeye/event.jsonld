@@ -1,0 +1,34 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Event",
+      "@id": "https://lakehawkeyedata.com/events/{Slug}#event",
+      "url": "https://lakehawkeyedata.com/events/{Slug}",
+      "name": "{Name}",
+      "startDate": "{Start}",
+      "endDate": "{End}",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "location": {
+        "@type": "Place",
+        "name": "{Location}",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Lansing",
+          "addressRegion": "NY",
+          "addressCountry": "US"
+        }
+      },
+      "image": ["{Image}"],
+      "description": "{Summary}",
+      "organizer": { "@id": "https://lakehawkeyedata.com/#organization" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Events", "item": "https://lakehawkeyedata.com/events" },
+        { "@type": "ListItem", "position": 2, "name": "{Name}", "item": "https://lakehawkeyedata.com/events/{Slug}" }
+      ]
+    }
+  ]
+}
