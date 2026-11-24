@@ -216,8 +216,8 @@ The interaction level is set by two reference sites (2026-10-27): marketcap.webf
 | Current Openings source | the prototype shows the design's screenshot of the TeraWulf careers portal and a View All Openings button (no link yet) | iframe or widget of that portal (URL needed), a link out, or a CMS list |
 | Explore rail behaviour | cards run off the right edge | drag/scroll rail (planned), or cards that widen on hover |
 | "Subscribe to updates" (Events) | no target | a Webflow form, a newsletter tool, or the campus Facebook page |
-| Privacy and Cookie policy | footer links | local pages, or terawulf.com's |
-| Social links | Facebook, LinkedIn, X | per campus or TeraWulf's accounts |
+| Privacy and Cookie policy | footer links to `#`; the live campus site has no legal pages | terawulf.com/legal/privacy-policy (cookie section `#cookie`), or campus pages |
+| Social links | LinkedIn, X, Instagram (TeraWulf's, as on terawulf.com); Facebook removed 2026-11-24 | done |
 | Videos | Meet our employees, Cooling Explained, About TeraWulf | files or YouTube URLs needed |
 | Cooling operations accordion | "Maintenance and Longevity" and "Continuous Operations During Maintenance" have no copy in the Figma | copy from the client; the items say "Copy to come" |
 | How It Works eyebrow | "Lorem Ipsum" in the Figma | a real eyebrow line, or none |
