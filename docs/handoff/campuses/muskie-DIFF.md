@@ -47,7 +47,12 @@ Still open:
   photos are CMS images, which the API never gives responsive sizes
   (GOTCHAS); they stay ≤ 1200 px WebP.
 - **MDC Power Fact Sheet**: the item exists without a file (Q7); its
-  Download button goes nowhere until the client sends the PDF.
+  Download button goes nowhere until the client sends the PDF. When it
+  arrives: save it as `Assets/figma/muskie/MDC-Power-Fact-Sheet.pdf`,
+  upload it as a site asset through `webflow-tw-muskie` (as the
+  Community Info Session PDF was), put the asset URL in the Documents
+  item's External URL, publish the item and the site, and check that the
+  Download button on /project-overview and /community-impact opens it.
 - **Key figures** 800 / 0 / 800 MW built as in Figma (Q2), to confirm.
 - **CI card 3 button** reads "View openings" → /careers (Figma says
   "CTA"; Q6 default); EVAPCO button keeps Lake Mariner's brochure link.
