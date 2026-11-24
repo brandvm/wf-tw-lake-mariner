@@ -66,3 +66,42 @@ Content first, then whatever the campus's Figma row changes:
 6. **Pages the campus doesn't have**, such as Closed-Loop Cooling where the
    campus isn't water-cooled: unpublish them and remove their nav and
    footer links.
+
+## Compare page in Figma (Build Review)
+
+Figma page "↪ • Build Review — Staging vs Design" (`2556:2`) holds **one
+horizontal row per site**. Pages run left to right in page order, and each
+page's column lines up across rows. When a page is finished on a site, add
+its section to that site's row, built the same way as Lake Mariner's
+sections.
+
+| Row | Site | Row top (y) | Row label node |
+| --- | --- | --- | --- |
+| 1 | Lake Mariner Data | 0 | `2560:3` |
+| 2 | Justified Data | 13000 | `2789:2009` |
+| 3 | Muskie Data | 26000 | `2789:2010` |
+| 4 | Lake Hawkeye Data | 39000 | `2789:2011` |
+| 5 | Chesapeake Data & Energy | 52000 | `2789:2012` |
+
+Columns (section x, the same in every row; each section is 5410 wide with
+a 400 gap): 01 Home 0 · 02 Project Overview 5810 · 03 Community Impact 11620 ·
+04 Closed-Loop Cooling 17430 · 05 Careers 23240 · 06 News 29050 ·
+07 News Article 34860 · 08 Events 40670 · 09 Event 46480 · 10 FAQ 52290.
+A page a campus doesn't have leaves its column empty. A page only that
+campus has goes after FAQ, at x 58100, then 63910 and so on.
+
+**One section per page** (copy Lake Mariner's, e.g. `2691:3923` for FAQ,
+and replace its contents):
+- section name `NN Page — /path`;
+- inside: the page title (x 120, y 60) and a staging URL line with the
+  build date (y 190);
+- at y 360: "Design (Figma, Clean Pages) · 1680", a copy of the campus's
+  own Clean Pages frame for that page (x 120);
+- staging screenshots at 1680 (x 2000), 820 (x 3880) and 390 (x 4900),
+  each with its label at y 310;
+- mismatch markers over the design copy, as on Lake Mariner's sections:
+  red while something differs, ✓ green with a one-line note once it
+  matches.
+
+If a section is taller than 12,400 it runs into the next row: move the rows
+below it down, and update the table above.
