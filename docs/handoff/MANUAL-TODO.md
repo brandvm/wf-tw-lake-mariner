@@ -59,10 +59,11 @@ again at each gate, so the steps are found early and not at the end:
 
 ## To do
 
-0 rows a person still has to do in the Designer. When one is done, Claude ticks it and moves it to Done.
+1 row a person still has to do in the Designer. When one is done, Claude ticks it and moves it to Done.
 
 | ID | Where (page › element or class) | Breakpoint | Set | Why the API can't | Done |
 | --- | --- | --- | --- | --- | --- |
+| HA | **Chesapeake** (tw-chesapeake) › Site settings › General › Favicon and Webclip | — | Favicon: `Assets/favicon/favicon-cde-512.png` (Chesapeake's shield, globe over chevrons, transparent). Webclip: `Assets/favicon/webclip-cde-256.png` (shield on Night). Publish. Then Claude checks the published icon links and points the Home schema logo at the new 512 icon | not in the Webflow API (same as DT, EA, FC). Until then Chesapeake shows Lake Mariner's shield in the tab | ☐ |
 
 ## Done
 

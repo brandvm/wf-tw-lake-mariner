@@ -712,3 +712,13 @@ collected from client repos into those files.
 - Fix: in the dialog, select the paragraphs, then dispatch a `paste` ClipboardEvent whose DataTransfer has `text/html` = `<ul><li>…</li></ul>`. The editor inserts the list (it published as `<ul role="list">`) but keeps the selected paragraphs, so select them again (click before, shift+click after) and press Backspace twice (the second removes the empty paragraph left behind). Check `[...editor.children]` before closing. For the disabled button, click another element in the Navigator and then the instance again. A link inside a plain Paragraph: double-click the paragraph on the canvas, click before the words and shift+click after them, then the toolbar's link button. The new inline link can't be addressed by `set_link` ("Element not found"), so set Type › Page in its Settings (select it in the Navigator under the paragraph).
 - Status: worked around
 - Found by: claude
+
+### 2026-11-24 · Figma `download_assets` SVG exports carry the page's frame backgrounds
+- Area: mcp
+- Scope: template-candidate
+- Symptom: the Chesapeake logo and shield SVGs from the Figma MCP's `download_assets` (format svg) showed a light box behind them on staging and in the favicon renders. The `use_figma` `exportAsync({format: 'SVG_STRING'})` of the same nodes did not.
+- Cause: `download_assets` exports the node in its page context: a `#F5F5F5` page rect and every ancestor frame's fill (`<rect width="1680" … fill="white"/>`, the footer's Night rect) come before the node's own paths.
+- Fix: delete the root-level `<rect>` lines that are not the node's own (here every `<rect width="1680"` and the first `#F5F5F5` rect) and re-render to check before uploading; or export with `use_figma` `exportAsync` when the SVG is small enough to return. AppKit (`NSImage`) draws these SVGs without their masks, so render PNGs (favicon, webclip) with Playwright Chromium (`omitBackground`).
+- Status: worked around
+- Found by: claude
+
