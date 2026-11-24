@@ -676,3 +676,21 @@ collected from client repos into those files.
 - Fix: open the same link a second time once the Designer has loaded (the Bridge panel then shows "Connected"). Pass `asset_name` without an extension, or rename with `update_asset` afterwards.
 - Status: worked around
 - Found by: claude
+
+### 2026-11-24 · A component instance takes no conditional visibility; wrap it in a div
+- Area: designer
+- Scope: template-candidate
+- Symptom: on the Lake Hawkeye Events template the RSVP card (C | Download Card) had to hide when an event has no RSVP URL. The instance's right panel shows only Properties and Interactions, with no Visibility; `set_visibility` on the instance answered "Element does not support setVisibility"; `data_element_builder` refused `before` the instance ("Cannot insert elements directly into a component instance").
+- Cause: visibility on an instance exists only as a visibility prop bound inside the component; conditional visibility on a CMS field is set on plain elements.
+- Fix: build a plain DivBlock `after` the instance's previous sibling, `move_element` the instance into it (append), give the div a Navigator name that says what it is for, then in the Designer select the div (breadcrumb), Settings › Visibility › the dot › Create conditional › field › "is set" → Visible, else Hidden. Published: the div and card are left out on items without the field.
+- Status: worked around (Lake Hawkeye MANUAL-TODO GA)
+- Found by: claude
+
+### 2026-11-24 · `create_asset` answers with the existing asset when the file's MD5 is already on the site
+- Area: mcp
+- Scope: template-candidate
+- Symptom: `create_asset` for a new file name (`ci-lh-impacts-src.webp`) came back with an older asset id and key (`…_aerial-lh-home-src.webp`).
+- Cause: Webflow addresses assets by content hash; the same bytes (here the same Figma image exported twice) map to the asset already uploaded.
+- Fix: none needed; useful as a duplicate check. Reuse the existing asset (and its `upload_image_by_url` copy with variants) instead of uploading again; don't assume the returned key carries the name you sent.
+- Status: documented
+- Found by: claude
