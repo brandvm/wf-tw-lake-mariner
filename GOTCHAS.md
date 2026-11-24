@@ -722,3 +722,12 @@ collected from client repos into those files.
 - Status: worked around
 - Found by: claude
 
+
+### 2026-11-24 · API-uploaded images get their variants at once while the Designer app is open
+- Area: mcp
+- Scope: template-candidate
+- Symptom: moving Justified's live-site files, 28 WebP images uploaded through `create_asset` + the presigned S3 POST all had their `-p-500` … `-p-2000` variants within a minute (`list_assets` variants 1–5 each), unlike the earlier entries where API uploads got variants late or never.
+- Cause: unconfirmed. The difference seen: the Designer MCP Bridge app was open in a Designer tab of the same site during the upload. Earlier API uploads were made with no Designer open.
+- Fix: open the Designer app link (twice, see "Designer MCP app link lost on the first load") before bulk uploads through the assets API, then check `variants` with `list_assets`. `upload_image_by_url` is then not needed, and re-importing only makes a duplicate asset. A Squarespace site's `?format=json` item `assetUrl` with `contentType` text/html is a placeholder, not an image. Squarespace videos download with ffmpeg from the 1080p variant playlist plus the audio playlist in `playlist.m3u8` (`-extension_picky 0`).
+- Status: worked around
+- Found by: claude
