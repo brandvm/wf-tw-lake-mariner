@@ -141,7 +141,19 @@ article page or the source.
 | FAQs | replace with the 12 (Category General; 4 with Show on Home) |
 | Testimonials | Careers keeps LM's 3 (Q3) |
 
+## Decisions (2026-11-24, user)
+
+- Q1 Cooling: unpublish `/closed-loop-cooling`, remove its nav and footer
+  links; the four Cooling links point at the FAQ water answer.
+- Q3 Careers testimonials: keep Lake Mariner's three, as in Figma.
+- Q4 Announcement bar: hidden on Muskie until there is a Muskie event.
+- Q5 News cards: link straight to the source article in a new tab (as the
+  live site does); the /news/<slug> pages stay, unlinked.
+
 ## Open questions
+
+Q1, Q3, Q4 and Q5 are decided (above).
+
 
 1. **Closed-Loop Cooling.** Muskie's Figma row has no Cooling page, but the
    live muskiedatacampus.com has `/closed-loop-cooling`, and four Muskie
