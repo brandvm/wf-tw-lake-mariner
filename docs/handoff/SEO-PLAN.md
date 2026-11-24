@@ -16,15 +16,28 @@ duplicate is in `CAMPUS-PORT.md` and in "Per-site values" below.
 
 ## Status
 
+2026-11-24 (evening) — Batch A applied with the project lead's go-ahead
+and published to webflow.io: site head code (piece 1 with `og:site_name`,
+`og:locale`, `twitter:site`; `pnpm wf:install` 0 findings), Home schema
+(Organization × 2 + WebSite), NewsArticle / Event + BreadcrumbList on the
+two CMS templates, the FAQ share image. `pnpm wf:seo` on every static page
+and all 14 CMS items: every JSON-LD block parses, no HTML entities, dates
+come out ISO (UTC). What it still reports is content: the 404 has no
+description or share image (draft below), 8 of 9 news posts and the 4
+sample events have an empty Excerpt / Summary (empty meta description),
+the one real post has no cover (empty `og:image`, `"image": [""]` in its
+schema) and a 407-character excerpt, and long names make long titles.
+Waiting on the client: the title and description drafts, the default share
+image, the domain, the street address (list at the end). Canonical waits
+for launch. Webflow changes to repeat on the duplicated campuses:
+`CAMPUS-PORT.md`.
+
 2026-11-24 — Inventory done (below). Drafted: titles and descriptions for
 every static page and the 404 (waiting on the client), the default share
 image (`Assets/seo/lake-mariner-og-1200x630.jpg`, waiting on the client),
 schema for Home, the News Posts template and the Events template
 (`docs/seo/schema/lake-mariner/`, `templates.md`), and the site-wide
-head tags (per-site block in `loader.html` piece 1). Structural Webflow
-settings that need no client copy are proposed as batch A (see Steps);
-written only after the project lead's go-ahead. Canonical waits for
-launch. What waits on the client is at the end.
+head tags (per-site block in `loader.html` piece 1).
 
 ## What staging outputs today
 
@@ -38,8 +51,8 @@ read of every tag with `curl`), not from the page settings.
 | `og:image` | Yes, page settings (upload, or bind an image field on templates) | Static pages: each page's hero photo; **FAQ, 404 and the style guide have none**. Templates: Cover Image / Image through page head code (`og:image` and `twitter:image` tokens) |
 | `og:type` | Webflow writes `website` on every page | Articles and events are `website` too; a second `og:type` in head code would duplicate it, so left as is |
 | `<link rel="canonical">` | Yes, once Site settings › SEO › Global canonical URL is set | Not on staging (correct; set at launch) |
-| `og:site_name`, `og:locale`, `twitter:site` | No: head code in `loader.html` | Missing everywhere. Drafted in the per-site block of `loader.html` piece 1 (batch A) |
-| JSON-LD schema | No: page settings › custom code, from `docs/seo/schema/` | **None in the served HTML.** FAQPage is added by the `faq-schema` module in the browser (Home, /faq), so `wf:seo`, which reads served HTML, doesn't see it |
+| `og:site_name`, `og:locale`, `twitter:site` | No: head code in `loader.html` | Were missing everywhere; on every page since batch A (per-site block of `loader.html` piece 1) |
+| JSON-LD schema | No: page settings › custom code, from `docs/seo/schema/` | Before batch A: **none in the served HTML.** Now: Home, every news post and event (see Status). FAQPage is added by the `faq-schema` module in the browser (Home, /faq), so `wf:seo`, which reads served HTML, doesn't see it |
 | `lang` | Yes, from the primary locale | `en` on every page |
 | `robots` noindex | Page head code | `/design/style-guide` and `/design/media` only (`noindex, nofollow`) |
 | `sitemap.xml` | Yes, Site settings › SEO | **Stale on staging:** lists only `/`, `/design/style-guide` and `/design/media`, lastmod Oct 27–28. Site settings › SEO has no API; check "Auto-generate sitemap" in the dashboard at launch (and exclude `/design/*` once the site plan is on, `lessons/mcp.md`) |
@@ -127,10 +140,10 @@ decide with the client, since both fields also show on the page:
    upload it as an asset and set it on Home, FAQ and 404.
 4. **Canonical** (Webflow, at launch): Site settings › SEO › Global
    canonical URL = the production domain. Not on staging.
-5. **Site-wide head tags** (batch A): `og:site_name`, `og:locale`,
+5. **Site-wide head tags** (batch A, done 2026-11-24): `og:site_name`, `og:locale`,
    `twitter:site` in the per-site block at the top of `loader.html`
    piece 1, written to the site head code and published.
-6. **Schema** (batch A): Home's Organization + WebSite in the page
+6. **Schema** (batch A, done 2026-11-24): Home's Organization + WebSite in the page
    settings' Schema markup (static page: the pages API stores it); the
    News Posts and Events templates' NewsArticle / Event + BreadcrumbList
    in each template's head code with field tokens (`templates.md`; the
@@ -142,7 +155,7 @@ decide with the client, since both fields also show on the page:
    each type (needs the page reachable: paste the HTML, staging is
    `Disallow: /`). At launch, `pnpm wf:seo --live --canonical`.
 
-Batch A (structural, no client copy; needs the project lead's go-ahead):
+Batch A (structural, no client copy; go-ahead given and applied 2026-11-24):
 site head code (step 5), Home schema, the two template head codes
 (step 6), `seo.noindexOk` / `seo.noSchemaOk` in
 `webflow-build.config.json`, then one publish to webflow.io.
