@@ -10,6 +10,48 @@ and by image fill. Live site for real copy and links: muskiedatacampus.com
 (FAQ answers, newsroom links, event details). Status column: ☐ to do,
 ☑ done on staging, — not needed.
 
+## Build status (2026-11-24)
+
+Built and published to tw-muskie.webflow.io in five batches, each with the
+user's go-ahead: (1) CAMPUS-PORT rows with Muskie's values (head SEO tags,
+Home schema, template schema, page SEO, image priorities; schema files in
+`docs/seo/schema/muskie/`); (2) logos, labels, footer line and e-mail,
+Cooling links removed, Cooling page set to draft (404), announcement bar
+hidden; (3) CMS: 12 FAQs (from muskiedatacampus.com/faq), 10 news posts,
+2 past events, 2 documents, Lake Mariner items, perks and unused event
+types deleted; (4–5) page copy and photos from Figma, and the section
+changes below. Checked at 1440 and 390 (full-page screenshots) and in the
+published HTML: no Lake Mariner, Barker or Lake Ontario text left outside
+Careers (testimonials kept, Q3).
+
+Still open:
+
+- **MANUAL-TODO FA–FD**: news card links to the source (the API binding
+  doesn't publish), four rich-text links, favicon/webclip, RSVP card
+  visibility on event pages.
+- **Photo `srcset`**: the four new page photos (`muskie-campus`,
+  `muskie-aerial`, `muskie-square`, `muskie-workforce`) and the news/event
+  photos were uploaded through the Data API and publish without
+  responsive sizes. Re-ingest them with `asset_tool › upload_image_by_url`
+  (needs the Webflow Designer MCP app open on Muskie) and re-point the
+  props, as CAMPUS-PORT's FAQ hero row describes; the FAQ hero row itself
+  is still open for the same reason.
+- **MDC Power Fact Sheet**: the item exists without a file (Q7); its
+  Download button goes nowhere until the client sends the PDF.
+- **Key figures** 800 / 0 / 800 MW built as in Figma (Q2), to confirm.
+- **CI card 3 button** reads "View openings" → /careers (Figma says
+  "CTA"; Q6 default); EVAPCO button keeps Lake Mariner's brochure link.
+- **About the Project** (C | Collage): Figma colours part of sentence 1
+  muted and paragraph 2 dark; the component's Statement/Muted split gives
+  sentence 1 dark and paragraph 2 muted.
+- **Home FAQ order**: one Order field serves Home and /faq, so Home shows
+  communities, water, noise, prices (Figma: water first).
+- **Highlight tab photos** and the investment scene are Lake Mariner's
+  photos, as in Muskie's Figma row.
+- **Event pages**: no tagline, no RSVP; the community meeting links the
+  presentation (re-hosted on Webflow) and the YouTube replay.
+- Not checked at 820 yet.
+
 ## Frames
 
 | Page | Lake Mariner | Muskie | Change |
@@ -30,50 +72,50 @@ and by image fill. Live site for real copy and links: muskiedatacampus.com
 
 | Item | Lake Mariner | Muskie | Status |
 | --- | --- | --- | --- |
-| Nav logo (light and dark) | `logo-lmd-horizontal(-dark).svg`, 182×48 | `logo-muskie-horizontal(-dark).svg`, 122×48: Nav Logo Img's `aspect-ratio` changes with it | ☐ |
-| Footer logo | `logo-lmd-vertical.svg` | `logo-muskie-vertical.svg` (195×118) | ☐ |
+| Nav logo (light and dark) | `logo-lmd-horizontal(-dark).svg`, 182×48 | `logo-muskie-horizontal(-dark).svg`, 122×48: Nav Logo Img's `aspect-ratio` changes with it | ☑ |
+| Footer logo | `logo-lmd-vertical.svg` | `logo-muskie-vertical.svg` (195×118) | ☑ |
 | Label beside the TeraWulf logo | "Part of" | Figma mixes "SITE OF" and "Part of"; keep "Part of" (decision 2026-10-27) | — |
-| Closed-Loop Cooling links | nav Insights, footer Insights | none (no Cooling page) | ☐ |
-| Footer line, e-mail | Lake Mariner Data — a TeraWulf campus © 2026, info@lakemarinerdata.com | Muskie Data — a TeraWulf campus © 2026, info@muskiedatacampus.com | ☐ |
-| Announcement bar | hiring event (Barker) → LM event page | same text in Figma; Muskie has no upcoming event | ☐ open (Q4) |
-| Domain (SEO, schema) | lakemarinerdata.com | muskiedatacampus.com | ☐ |
-| Location (schema, Events) | Barker, NY | EastPark Industrial Park, Grayson, KY (Eastern Kentucky) | ☐ |
+| Closed-Loop Cooling links | nav Insights, footer Insights | none (no Cooling page) | ☑ |
+| Footer line, e-mail | Lake Mariner Data — a TeraWulf campus © 2026, info@lakemarinerdata.com | Muskie Data — a TeraWulf campus © 2026, info@muskiedatacampus.com | ☑ |
+| Announcement bar | hiring event (Barker) → LM event page | same text in Figma; Muskie has no upcoming event | ☑ hidden (Q4) |
+| Domain (SEO, schema) | lakemarinerdata.com | muskiedatacampus.com | ☑ |
+| Location (schema, Events) | Barker, NY | EastPark Industrial Park, Grayson, KY (Eastern Kentucky) | ☑ |
 
 ## Home
 
 | Section | Muskie | Status |
 | --- | --- | --- |
-| Hero (C \| Page Hero, Home) | Heading "Your Go-To Source for Information on the Muskie Data Campus" (title case as on LM); text "The Muskie Data Campus establishes one of the largest…by the end of 2028."; facts Location Eastern, KY · Power Market PJM · Status Planning & Permitting; new photo (`2602:11725`) | ☐ |
-| Intro + Key Figures | eyebrow Muskie Data; new statement ("Engineered for demanding…heritage."); stats Total Capacity 800 MW, Contracted 0 MW, Open 800 MW (Q2); aerial photo (`2610:18858`) and its bar: Key Highlights: Initial 500 MW targeted by 2H 2028 · Significant expansion capability beyond 1 GW · Utility-scale, redundant transmission infrastructure | ☐ |
-| Explore (C \| Explore Rail) | Community Impact card: "How Grayson benefits — reuse of a former coal mining site and long-term regional economic growth"; the other cards and the chips as on Lake Mariner's Home. Figma uses the same rail text on Project Overview | ☐ |
-| FAQ preview | 4 FAQs (water, communities, noise, prices): FAQs collection, Show on Home | ☐ (CMS) |
+| Hero (C \| Page Hero, Home) | Heading "Your Go-To Source for Information on the Muskie Data Campus" (title case as on LM); text "The Muskie Data Campus establishes one of the largest…by the end of 2028."; facts Location Eastern, KY · Power Market PJM · Status Planning & Permitting; new photo (`2602:11725`) | ☑ |
+| Intro + Key Figures | eyebrow Muskie Data; new statement ("Engineered for demanding…heritage."); stats Total Capacity 800 MW, Contracted 0 MW, Open 800 MW (Q2); aerial photo (`2610:18858`) and its bar: Key Highlights: Initial 500 MW targeted by 2H 2028 · Significant expansion capability beyond 1 GW · Utility-scale, redundant transmission infrastructure | ☑ |
+| Explore (C \| Explore Rail) | Community Impact card: "How Grayson benefits — reuse of a former coal mining site and long-term regional economic growth"; the other cards and the chips as on Lake Mariner's Home. Figma uses the same rail text on Project Overview | ☑ |
+| FAQ preview | 4 FAQs (water, communities, noise, prices): FAQs collection, Show on Home | ☑ |
 
 ## Project Overview
 
 | Section | Muskie | Status |
 | --- | --- | --- |
-| Hero (Page · Long Heading) | same heading as Home; text "Located on approximately 285 acres…in the state."; new photo (`2602:14273`) | ☐ |
-| About TeraWulf (C \| Intro Row) | new paragraph (no "sustainably powered"); the text is inside the component, so it is edited there on this site | ☐ |
-| About the Project (C \| Collage) | eyebrow Muskie Data; statement "The phased buildout…beginning in 2028."; paragraph "TeraWulf is committed to responsible site stewardship…"; new wide (`2602:14365`) and square (`2602:14366`) photos | ☐ |
-| Closed-Loop Cooling promo (C \| Promo Card) | **removed** | ☐ |
-| Highlight Tabs | titles Scale & Infrastructure · High-Quality Jobs · Timing · Community Benefits · World-Class Tenants, with new texts (tab 4 ends "Learn more here." → /community-impact). Same photos as LM in Figma | ☐ |
-| Responsible Development (light accordion) | **4 items** (LM 5): Closed-Loop Cooling, Ultra Low Noise, Low-Impact Design, Established Industrial Zoning; new photo (`2615:24637`). Item 1 ends "…can be found here." (link: Q1) | ☐ |
-| Explore | as Home | ☐ |
+| Hero (Page · Long Heading) | same heading as Home; text "Located on approximately 285 acres…in the state."; new photo (`2602:14273`) | ☑ |
+| About TeraWulf (C \| Intro Row) | new paragraph (no "sustainably powered"); the text is inside the component, so it is edited there on this site | ☑ |
+| About the Project (C \| Collage) | eyebrow Muskie Data; statement "The phased buildout…beginning in 2028."; paragraph "TeraWulf is committed to responsible site stewardship…"; new wide (`2602:14365`) and square (`2602:14366`) photos | ☑ |
+| Closed-Loop Cooling promo (C \| Promo Card) | **removed** | ☑ |
+| Highlight Tabs | titles Scale & Infrastructure · High-Quality Jobs · Timing · Community Benefits · World-Class Tenants, with new texts (tab 4 ends "Learn more here." → /community-impact). Same photos as LM in Figma | ☑ |
+| Responsible Development (light accordion) | **4 items** (LM 5): Closed-Loop Cooling, Ultra Low Noise, Low-Impact Design, Established Industrial Zoning; new photo (`2615:24637`). Item 1 ends "…can be found here." (link: Q1) | ☑ |
+| Explore | as Home | ☑ |
 
 ## Community Impact
 
 | Section | Muskie | Status |
 | --- | --- | --- |
-| Hero | Eastern Kentucky text; same photo as LM in Figma | ☐ |
-| How Barker Benefits → "How Your Community Benefits" | **6 items** (LM 7): Lasting economic and fiscal impact, Local employment ("…career opportunities HERE." → /careers), Community commitment, Established industrial zoning, Low-noise profile, Closed-loop cooling ("…found HERE.", Q1); new photo (`2602:12230`) | ☐ |
-| Protecting Our Environment → "Design and environmental impacts" | 3 cards: Closed-loop cooling (button "Cooling explained", Q1), Ultra low noise (button "EVAPCO's sound solutions", URL needed), Economic & workforce impact (button "CTA" placeholder, Q6); card 3 photo new (`2602:12263`) | ☐ |
-| Investment statement over the photo scene | Eastern Kentucky wording; same scene | ☐ |
-| Strengthening The Grid (`#grid`, 4 items) | **replaced** by "Ratepayer Protections & Long-Term Value", 3 items: Transmission Upgrades, Protection for Ratepayers, Long-Term Value Creation. Same accordion, same photo | ☐ |
-| What actually drives local electric rates? (`#rates`) | **removed** | ☐ |
-| Meet Our Employees (video) | **removed** | ☐ |
-| Our Team, In Their Own Words (testimonials) | **removed** | ☐ |
-| Resources & Documents | 2 documents: "MDC Power Fact Sheet" (Download; file needed, Q7) and "Community Information Session 6/17/26" (presentation PDF and replay video, two buttons in Figma: Download presentation, Watch video). Documents collection | ☐ |
-| Community & Partnership Initiatives | **removed** | ☐ |
+| Hero | Eastern Kentucky text; same photo as LM in Figma | ☑ |
+| How Barker Benefits → "How Your Community Benefits" | **6 items** (LM 7): Lasting economic and fiscal impact, Local employment ("…career opportunities HERE." → /careers), Community commitment, Established industrial zoning, Low-noise profile, Closed-loop cooling ("…found HERE.", Q1); new photo (`2602:12230`) | ☑ |
+| Protecting Our Environment → "Design and environmental impacts" | 3 cards: Closed-loop cooling (button "Cooling explained", Q1), Ultra low noise (button "EVAPCO's sound solutions", URL needed), Economic & workforce impact (button "CTA" placeholder, Q6); card 3 photo new (`2602:12263`) | ☑ |
+| Investment statement over the photo scene | Eastern Kentucky wording; same scene | ☑ |
+| Strengthening The Grid (`#grid`, 4 items) | **replaced** by "Ratepayer Protections & Long-Term Value", 3 items: Transmission Upgrades, Protection for Ratepayers, Long-Term Value Creation. Same accordion, same photo | ☑ |
+| What actually drives local electric rates? (`#rates`) | **removed** | ☑ |
+| Meet Our Employees (video) | **removed** | ☑ |
+| Our Team, In Their Own Words (testimonials) | **removed** | ☑ |
+| Resources & Documents | 2 documents: "MDC Power Fact Sheet" (Download; file needed, Q7) and "Community Information Session 6/17/26" (presentation PDF and replay video, two buttons in Figma: Download presentation, Watch video). Documents collection | ☑ |
+| Community & Partnership Initiatives | **removed** | ☑ |
 
 ## Careers, News Article, Event
 

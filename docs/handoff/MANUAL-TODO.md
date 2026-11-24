@@ -59,7 +59,7 @@ again at each gate, so the steps are found early and not at the end:
 
 ## To do
 
-5 rows a person still has to do in the Designer. When one is done, Claude ticks it and moves it to Done.
+9 rows a person still has to do in the Designer. When one is done, Claude ticks it and moves it to Done.
 
 | ID | Where (page › element or class) | Breakpoint | Set | Why the API can't | Done |
 | --- | --- | --- | --- | --- | --- |
@@ -67,6 +67,10 @@ again at each gate, so the steps are found early and not at the end:
 | EB | **Justified** › rich-text props: Project Overview › C \| Highlight Tabs › Text 4 ("here" → /community-impact); Responsible Development › item 1 ("here" → /faq, J2) and item 3 ("HERE" → https://www.cayugadatacampus.com/newsroom/built-for-the-future-how-terawulf-is-redefining-sustainable-infrastructure, new tab); Community Impact › How Your Community Benefits › item 1 ("HERE" → /faq), item 4 ("HERE" → /careers), item 6 ("charitable contributions" → https://www.terawulf.com/our-impact?our-impact=charitable-foundation, new tab) | — | Select the instance › Properties › the prop's Edit Rich Text, select the words, add the link (GOTCHAS 2026-11-12) | a rich-text prop takes plain text through the API (same as BB, BM) | |
 | EC | **Justified** › Events Template › C \| Download Card (Reserve your spot) | — | Conditional visibility: show only when RSVP URL is set (same as GA). Justified's events have no RSVP link | conditional visibility on a CMS field isn't in the API | |
 | GA | **Lake Hawkeye** (tw-lake-hawkeye) › Events Template › C \| Download Card (Reserve your spot) | — | Element settings › Conditional visibility: show only when RSVP URL is set. Lake Hawkeye's events have no RSVP link, so the card shows a dead Reserve button | conditional visibility on a CMS field isn't in the API (`set_visibility` binds to props only) | |
+| FA | **Muskie** (tw-muskie) › News › Post Card Link in the Featured Lead, Featured Side and grid lists | — | Link settings › Get URL from **Source URL** (the field), open in new tab, on all three. Then Claude checks the published hrefs point at the publishers (decision Q5: Muskie's posts are external articles) | `set_settings` key `link` with a CMS binding to Source URL is stored and reads back, but the published card still links to `/news/<slug>`; an `href` attribute is reserved. Until then the cards open the article page, whose Source card links out | |
+| FB | **Muskie** › rich-text props: Project Overview › C \| Highlight Tabs › Text 4 ("here" → /community-impact); Project Overview › Responsible Development › Closed-Loop Cooling › Answer ("here" → /faq); Community Impact › How Your Community Benefits › Local Employment ("HERE" → /careers) and Closed-Loop Cooling ("HERE" → /faq) | — | Select the instance › Properties › the prop's Edit Rich Text › select the word › link (GOTCHAS 2026-11-12). Muskie has no Cooling page (decision Q1), so the cooling links go to the FAQ | a rich-text prop takes plain text through the API (same as BB, BM, EB) | |
+| FC | **Muskie** › Site settings › General › Favicon and Webclip | — | Favicon: `Assets/favicon/favicon-mdc-512.png` (Muskie's shield, transparent). Webclip: `Assets/favicon/webclip-mdc-256.png` (shield on Night). Publish. Then Claude checks the published icon links | not in the Webflow API (same as DT, EA). Until then Muskie shows Lake Mariner's shield in the tab | |
+| FD | **Muskie** › Events Template › C \| Download Card (Reserve your spot) | — | Element settings › Conditional visibility: show only when RSVP URL is set (same as EC, GA). Muskie's two events have no RSVP link | conditional visibility on a CMS field isn't in the API | |
 
 ## Done
 
