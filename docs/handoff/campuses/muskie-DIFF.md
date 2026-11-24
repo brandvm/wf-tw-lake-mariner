@@ -20,7 +20,7 @@ Cooling links removed, Cooling page set to draft (404), announcement bar
 hidden; (3) CMS: 12 FAQs (from muskiedatacampus.com/faq), 10 news posts,
 2 past events, 2 documents, Lake Mariner items, perks and unused event
 types deleted; (4–5) page copy and photos from Figma, and the section
-changes below. Checked at 1440 and 390 (full-page screenshots) and in the
+changes below. Checked at 1440, 820 and 390 (full-page screenshots) and in the
 published HTML: no Lake Mariner, Barker or Lake Ontario text left outside
 Careers (testimonials kept, Q3).
 
@@ -50,7 +50,7 @@ Still open:
   photos, as in Muskie's Figma row.
 - **Event pages**: no tagline, no RSVP; the community meeting links the
   presentation (re-hosted on Webflow) and the YouTube replay.
-- Not checked at 820 yet.
+- Checked at 820 too (Home, Community Impact): layout holds; the Info cards become a swipe row.
 
 ## Frames
 
