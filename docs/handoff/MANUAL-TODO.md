@@ -59,10 +59,11 @@ again at each gate, so the steps are found early and not at the end:
 
 ## To do
 
-0 rows a person still has to do in the Designer. When one is done, Claude ticks it and moves it to Done.
+1 row a person still has to do in the Designer. When one is done, Claude ticks it and moves it to Done.
 
 | ID | Where (page › element or class) | Breakpoint | Set | Why the API can't | Done |
 | --- | --- | --- | --- | --- | --- |
+| GD | **Lake Hawkeye** (tw-lake-hawkeye) › Site settings › General › Favicon and Webclip | — | Favicon: `Assets/favicon/favicon-lhd-512.png` (Lake Hawkeye's own shield, the three curves from its logo, transparent). Webclip: `Assets/favicon/webclip-lhd-256.png` (shield on Night). Publish. Then Claude checks the published icon links: none may load from Lake Mariner's CDN (`6ae0f7d7…`) | not in the Webflow API (same as DT, EA, FC, HA). Until then Lake Hawkeye shows Lake Mariner's zigzag shield, and the 48/180/192 px icons load from Lake Mariner's CDN | ☐ |
 
 ## Done
 
