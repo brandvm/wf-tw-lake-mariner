@@ -121,6 +121,8 @@ Checked at 1440, 820 and 390 (full-page captures of all nine pages): no Lake Mar
 
 Figma Build Review row 2 (y 13000): all nine pages, each with Justified's Clean Pages frame, staging at 1680/820/390 (captured 2026-11-24 after the shield swap) and markers: green where it matches, red for L2–L6 and L10 below; the Cooling column is empty.
 
+**Sample event — delete or replace before launch.** "Sample Event — Justified Data Hiring Day" (`/events/sample-justified-hiring-day`, item `6b060b8fc06b4ed42be7e874`), added 2026-11-24 at the user's request so the Event template could be checked with every field filled. Hiring Event, 18 March 2027 9:00 AM–3:00 PM (site time zone, Eastern), Justified text marked as sample in the tagline, summary, body, location note, callout and RSVP line; image the events photo already used on the site; perks Career growth, 401(k) match, Health insurance, Generous PTO (existing items; no starting pay); RSVP URL https://www.terawulf.com/connect. The RSVP card condition (EC) was tested on it: with RSVP URL cleared the published page had no Reserve card, restored it came back. While it is upcoming, /events shows it instead of the "No events scheduled" card. Build Review row 2: Event (`2800:5670`) shot with it, Events (`2800:5397`) re-shot and its marker (the passed Career Fair, L4) now green. Delete it in the CMS (or overwrite it with a real event) before launch.
+
 ## Left / differences from the design
 
 | # | What | Why / next step |
