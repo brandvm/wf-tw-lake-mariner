@@ -47,7 +47,9 @@ Still open:
   photos are CMS images, which the API never gives responsive sizes
   (GOTCHAS); they stay ≤ 1200 px WebP.
 - **MDC Power Fact Sheet**: the item exists without a file (Q7); its
-  Download button goes nowhere until the client sends the PDF. When it
+  Download button goes nowhere until the client sends the PDF (asked for
+  in a Figma annotation on the row, Clean Pages › Muskie 03 Community
+  Impact, node `2681:9521`, 2026-11-24). When it
   arrives: save it as `Assets/figma/muskie/MDC-Power-Fact-Sheet.pdf`,
   upload it as a site asset through `webflow-tw-muskie` (as the
   Community Info Session PDF was), put the asset URL in the Documents
