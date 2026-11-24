@@ -740,3 +740,12 @@ collected from client repos into those files.
 - Fix: download originals with `curl -H 'Accept: image/png,image/jpeg'` and keep both. For a URL `upload_image_by_url` refuses: upload the file through `create_asset` + the S3 POST, call `upload_image_by_url` with that asset's `cdn.prod.website-files.com` URL (it then gets its variants), and delete the staging asset. Read the `content-length-range` in the decoded policy before uploading; re-encode a longer video under 30 MB (here 2:12 at 1080p, H.264 1.6 Mb/s + AAC 128k = 28 MB). Squarespace videos are HLS: `ffmpeg -extension_picky 0 -i <variant .m3u8>` (the segments have no extension), with the separate audio playlist as a second input where there is one.
 - Status: worked around (Lake Mariner live-site archive, BUILD-NOTES)
 - Found by: claude
+
+### 2026-11-24 · `upload_image_by_url` refuses a URL whose extension doesn't match the file served
+- Area: mcp
+- Scope: template-candidate
+- Symptom: moving Lake Hawkeye's Squarespace images, 50 of 53 `upload_image_by_url` calls worked with `?format=original`; the three PNGs over 4 MB, sent as `….png?format=2500w`, failed with "Failed to create asset for lh-live-hpc1.png" and no other detail.
+- Cause: Squarespace serves every sized format (`?format=2500w`) as WebP whatever the Accept header or `content-type` parameter, and the tool names the asset after the URL's extension (`.png`), then refuses the mismatched file. `?format=original` returns the real file (PNG, JPEG or GIF, kept as such), but a file over about 4 MB is refused too.
+- Fix: for those, convert the local original (`cwebp -q 85`, at its own size: `-resize` scales up) and upload it through `create_asset` + the S3 POST, named `.webp`. Those get no responsive variants (see "API-uploaded assets"), which is fine for files not placed on a page.
+- Status: worked around
+- Found by: claude

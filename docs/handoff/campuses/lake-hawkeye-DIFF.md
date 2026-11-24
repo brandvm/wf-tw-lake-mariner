@@ -178,8 +178,101 @@ For launch: enter these in Site settings › Publishing › 301 redirects, in th
 | `/s/Lake-Hawkeye-Open-House-Presentation-November-2026-2yn6.pdf` | https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05e46cd0a72c1c1810244d_Lake-Hawkeye-Open-House-Presentation-November-2026.pdf | 301 |
 | `/s/Letters-of-Support_Local-Contractors.pdf` | https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05cabde86e14300445c1e3_Letters-of-Support_Local-Contractors.pdf | 301 |
 | `/s/TCF-Donation-Letter_Lansing-Community-Council-2025-10-29.pdf` | https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05e46df845a5dc2ad64efa_TCF-Donation-Letter_Lansing-Community-Council-2025-10-29.pdf | 301 |
+| `/s/Lake-Hawkeye-Data-Campus-Site-Plan-Design-Refinements-November-3-2026.pdf` | https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f0b1bfc922646bf94599_Lake-Hawkeye-Data-Campus-Site-Plan-Design-Refinements-November-3-2026.pdf | 301 |
+| `/s/Independent-Advisory-Council-Agreement-10_23_25_Redacted.pdf` | https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f0b1a36936cb4add5346_Independent-Advisory-Council-Agreement-10_23_25_Redacted.pdf | 301 |
+| `/s/TeraWulf-Lansing-Proposed-Zoning-Amendment-Comments-111326.pdf` | https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f0b119614353e575226b_TeraWulf-Lansing-Proposed-Zoning-Amendment-Comments-111326.pdf | 301 |
 
 The other 15 newsroom posts keep their slugs under `/news/`, so the wildcard covers them. Unchanged paths, no redirect needed: `/project-overview`, `/community-impact`, `/closed-loop-cooling`, `/faq`, `/events` and the 6 event pages (`/events/<slug>`, same slugs). The `/s/` rows send old links to the PDFs (shared in emails, letters and other sites) to the Webflow copies; if Webflow refuses an absolute target, leave those rows out (nothing on the site links to `/s/` any more).
+
+## Live-site files on Webflow (lakehawkeyedata.com, 2026-11-24)
+
+lakehawkeyedata.com (Squarespace) is going down, so every file it hosts is now a Lake Hawkeye Webflow asset. Found by crawling the live sitemap, every page's links and the `?format=json` feeds of the newsroom and events. Local copies are in `Assets/lake-hawkeye/live-site/` (`pdfs/`, `images/`, `videos/`, with `pdfs.tsv` and `images.tsv` listing each file's old URL). cayugadatacampus.com stays (parent decision), so its links and `info@cayugadatacampus.com` were left alone.
+
+After the move nothing on the site points at the old domain: a check of every CMS item (16 posts, 6 events, 10 documents, 19 FAQs, 3 testimonials, 6 perks) and all 30 published pages found only the schema `@id`, breadcrumb and canonical URLs, which name the production domain on purpose.
+
+**PDFs** (12 links on the live site, 11 files; the `/s/` rows in the redirect map above send the old links here):
+
+| Old URL | Asset id | Webflow URL |
+| --- | --- | --- |
+| `/s/110125-WULF-Letter-to-C-Pettograsso-and-K-Heath.pdf` | `6b05e46b004d35a1750ca7f3` | see the redirect map |
+| `/s/Anna-Kelles-Request-for-Information_NYSEGC.pdf` | `6b05e46b05e33fd43343e986` | see the redirect map |
+| `/s/Couch-White-Energy-Paper_Cayuga-Data-Campus-Dec-2025.pdf` | `6b05e46bd0a72c1c181023c1` | see the redirect map |
+| `/s/Independent-Assessment-of-the-Proposed-Cayuga-Data-Campus.pdf` | `6b05e46b7c7961f459f494b3` | see the redirect map |
+| static1.squarespace.com `…/Independent+Assessment+of+the+Proposed+Cayuga+Data+Campus+.pdf` | `6b05e46b7c7961f459f494b3` | same file as the row above (same MD5) |
+| `/s/Lake-Hawkeye-Fact-vs-Fiction-Oct-2026-V2.pdf` | `6b05e46c58b29500634e8438` | see the redirect map |
+| `/s/Lake-Hawkeye-Open-House-Presentation-November-2026-2yn6.pdf` | `6b05e46cd0a72c1c1810244d` | see the redirect map |
+| `/s/Letters-of-Support_Local-Contractors.pdf` | `6b05cabde86e14300445c1e3` | see the redirect map |
+| `/s/TCF-Donation-Letter_Lansing-Community-Council-2025-10-29.pdf` | `6b05e46df845a5dc2ad64efa` | see the redirect map |
+| `/s/Lake-Hawkeye-Data-Campus-Site-Plan-Design-Refinements-November-3-2026.pdf` | `6b05f0b1bfc922646bf94599` | see the redirect map (new 2026-11-24) |
+| `/s/Independent-Advisory-Council-Agreement-10_23_25_Redacted.pdf` | `6b05f0b1a36936cb4add5346` | see the redirect map (new 2026-11-24) |
+| `/s/TeraWulf-Lansing-Proposed-Zoning-Amendment-Comments-111326.pdf` | `6b05f0b119614353e575226b` | see the redirect map (new 2026-11-24) |
+
+**Videos** (Squarespace HLS streams, saved as MP4 at 1080p):
+
+| On the live site | Asset id | Webflow URL |
+| --- | --- | --- |
+| Home hero video (24 s loop) | `6b05f0b1c7087b237fc34ae1` | [cayuga-website-hero.mp4](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f0b1c7087b237fc34ae1_cayuga-website-hero.mp4) |
+| Community Impact video | `6b05f0b18110748db1fa0acc` | [community-impact-video.mp4](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f0b18110748db1fa0acc_community-impact-video.mp4) (re-encoded 51 → 30 MB to fit the 30 MiB upload limit; the original is in `videos/community-impact-video-original.mp4`) |
+
+**Images** (54 on the live site: pages, posts and events; uploaded with `upload_image_by_url`, so they have responsive sizes, except the three WebPs, which went through the assets API). The old URL of each is in `images.tsv`; these copies are not placed on any page (the pages use the Figma exports); they are there for posts, events and later edits:
+
+| File on the live site | Asset id | Webflow asset |
+| --- | --- | --- |
+| favicon.ico | — | not uploaded: the old Squarespace favicon; the site favicon is set in Site settings |
+| CEO MAG - TEAM-4.png | `6b05f1374d59ac9ca32c1055` | [lh-live-ceo-mag-team-4.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f1374d59ac9ca32c1055_lh-live-ceo-mag-team-4.png) |
+| Lake Hawkeye Data Logo.png | `6b05f1161f3b661059c1925b` | [lh-live-lake-hawkeye-data-logo.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f1161f3b661059c1925b_lh-live-lake-hawkeye-data-logo.png) |
+| Cayuga-1.png | `6b05f139811e53aed1379fd3` | [lh-live-cayuga-1.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f139811e53aed1379fd3_lh-live-cayuga-1.png) |
+| Lake Mariner Recycling - 4.jpg | `6b05f13a62691160f2a52827` | [lh-live-lake-mariner-recycling-4.jpg](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f13a62691160f2a52827_lh-live-lake-mariner-recycling-4.jpg) |
+| Lake Mariner Recycling -5.jpg | `6b05f13c49b846d4a54d5652` | [lh-live-lake-mariner-recycling-5.jpg](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f13c49b846d4a54d5652_lh-live-lake-mariner-recycling-5.jpg) |
+| pallet recycle.png | `6b05f13ebe558dfa98b93131` | [lh-live-pallet-recycle.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f13ebe558dfa98b93131_lh-live-pallet-recycle.png) |
+| epe foam melter.jpg | `6b05f13f8138a4cd3e4da7d3` | [lh-live-epe-foam-melter.jpg](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f13f8138a4cd3e4da7d3_lh-live-epe-foam-melter.jpg) |
+| CEO MAG - TEAM-3.png | `6b05f141490c13f2b481923c` | [lh-live-ceo-mag-team-3.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f141490c13f2b481923c_lh-live-ceo-mag-team-3.png) |
+| Image_Ops Team-8.png | `6b05f143375e4ff96e5b5c5e` | [lh-live-image-ops-team-8.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f143375e4ff96e5b5c5e_lh-live-image-ops-team-8.png) |
+| on site dual batch plant 2.png | `6b05f145a1b68b664f5c0440` | [lh-live-on-site-dual-batch-plant-2.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f145a1b68b664f5c0440_lh-live-on-site-dual-batch-plant-2.png) |
+| on site dual batch plant.png | `6b05f147df75801487cb673f` | [lh-live-on-site-dual-batch-plant.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f147df75801487cb673f_lh-live-on-site-dual-batch-plant.png) |
+| closed loop.png | `6b05f14980b557a081469f48` | [lh-live-closed-loop.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f14980b557a081469f48_lh-live-closed-loop.png) |
+| Paul Prager.jpg | `6b05f14bca33fa7f3755e47e` | [lh-live-paul-prager.jpg](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f14bca33fa7f3755e47e_lh-live-paul-prager.jpg) |
+| TERAWULF LANSING 2.jpg | `6b05f14c5128d9a0893ae5ac` | [lh-live-terawulf-lansing-2.jpg](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f14c5128d9a0893ae5ac_lh-live-terawulf-lansing-2.jpg) |
+| lake hawkeye open house_1 | `6b05f14c5128d9a0893ae5ac` | same file as TERAWULF LANSING 2.jpg (same MD5), not uploaded twice |
+| TERAWULF LANSING 12.jpg | `6b05f15da12e5aa9f28d91f6` | [lh-live-terawulf-lansing-12.jpg](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f15da12e5aa9f28d91f6_lh-live-terawulf-lansing-12.jpg) |
+| TERAWULF LANSING 33.jpg | `6b05f15fa8884e9eeb3000df` | [lh-live-terawulf-lansing-33.jpg](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f15fa8884e9eeb3000df_lh-live-terawulf-lansing-33.jpg) |
+| TERAWULF LANSING 71.jpg | `6b05f1603d454b00e1d31196` | [lh-live-terawulf-lansing-71.jpg](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f1603d454b00e1d31196_lh-live-terawulf-lansing-71.jpg) |
+| TERAWULF LANSING 46.jpg | `6b05f161d57390821840dfe4` | [lh-live-terawulf-lansing-46.jpg](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f161d57390821840dfe4_lh-live-terawulf-lansing-46.jpg) |
+| hpc5.png | `6b05f1630f1b2ee3b5100eb4` | [lh-live-hpc5.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f1630f1b2ee3b5100eb4_lh-live-hpc5.png) |
+| Screenshot 2026-10-29 150320.png | `6b05f1641460b227c94c7101` | [lh-live-screenshot-2026-10-29-150320.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f1641460b227c94c7101_lh-live-screenshot-2026-10-29-150320.png) |
+| imgg-od3-agw8jcae.png | `6b05f166c75ce964e46cd3f7` | [lh-live-imgg-od3-agw8jcae.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f166c75ce964e46cd3f7_lh-live-imgg-od3-agw8jcae.png) |
+| Image_Jerry Goodenough (1).png | `6b05f168ae2e8aa5acb978b7` | [lh-live-image-jerry-goodenough-1.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f168ae2e8aa5acb978b7_lh-live-image-jerry-goodenough-1.png) |
+| data center image.png | `6b05f16bd3310c8c7c173391` | [lh-live-data-center-image.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f16bd3310c8c7c173391_lh-live-data-center-image.png) |
+| Cayuga-2.png | `6b05f16d8d34141223d69fe7` | [lh-live-cayuga-2.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f16d8d34141223d69fe7_lh-live-cayuga-2.png) |
+| Project Highlights.png | `6b05f16f3a38869b41cc41d8` | [lh-live-project-highlights.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f16f3a38869b41cc41d8_lh-live-project-highlights.png) |
+| Lake Hawkeye Rendering_Updated 4.15.26.png | `6b05f1713877a8a8cedd6f46` | [lh-live-lake-hawkeye-rendering-updated-4-15-26.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f1713877a8a8cedd6f46_lh-live-lake-hawkeye-rendering-updated-4-15-26.png) |
+| Cayuga Rendering 1.png | `6b05f1747cda229ad8dc2c23` | [lh-live-cayuga-rendering-1.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f1747cda229ad8dc2c23_lh-live-cayuga-rendering-1.png) |
+| Cayuga Rendering 2.png | `6b05f187c463c6c273ddb278` | [lh-live-cayuga-rendering-2.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f187c463c6c273ddb278_lh-live-cayuga-rendering-2.png) |
+| View 03.2 without Stack.png | `6b05f188ca33fa7f37560a6b` | [lh-live-view-03-2-without-stack.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f188ca33fa7f37560a6b_lh-live-view-03-2-without-stack.png) |
+| lake view.png | `6b05f18be09287fab2ddefd1` | [lh-live-lake-view.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f18be09287fab2ddefd1_lh-live-lake-view.png) |
+| about terawulf.png | `6b05f18d41d63522151591fc` | [lh-live-about-terawulf.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f18d41d63522151591fc_lh-live-about-terawulf.png) |
+| community-3.png | `6b05f1b8760e45008c1426db` | [lh-live-community-3.webp](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f1b8760e45008c1426db_lh-live-community-3.webp) (WebP from the original PNG: the URL import refused it) |
+| community impact-2.png | `6b05f19089fc135a06df0efa` | [lh-live-community-impact-2.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f19089fc135a06df0efa_lh-live-community-impact-2.png) |
+| tax base.png | `6b05f1923877a8a8cedd735a` | [lh-live-tax-base.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f1923877a8a8cedd735a_lh-live-tax-base.png) |
+| lakefront view.png | `6b05f194376c2942b3775479` | [lh-live-lakefront-view.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f194376c2942b3775479_lh-live-lakefront-view.png) |
+| jobs.png | `6b05f195e504558e6c017642` | [lh-live-jobs.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f195e504558e6c017642_lh-live-jobs.png) |
+| hpc1.png | `6b05f1b87abab49174853707` | [lh-live-hpc1.webp](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f1b87abab49174853707_lh-live-hpc1.webp) (WebP from the original PNG: the URL import refused it) |
+| community-1.png | `6b05f1987cda229ad8dc324c` | [lh-live-community-1.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f1987cda229ad8dc324c_lh-live-community-1.png) |
+| ippny graphic.jfif | `6b05f199490c13f2b481a4ba` | [lh-live-ippny-graphic.jpg](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f199490c13f2b481a4ba_lh-live-ippny-graphic.jpg) |
+| DS5.png | `6b05f1b8f803353ba4b4bc08` | [lh-live-ds5.webp](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f1b8f803353ba4b4bc08_lh-live-ds5.webp) (WebP from the original PNG: the URL import refused it) |
+| jesse rohring.png | `6b05f1c72c5ab8afece9a089` | [lh-live-jesse-rohring.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f1c72c5ab8afece9a089_lh-live-jesse-rohring.png) |
+| jim spoon 1.png | `6b05f1c9d4c045a0cd22315a` | [lh-live-jim-spoon-1.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f1c9d4c045a0cd22315a_lh-live-jim-spoon-1.png) |
+| Dan H 2.png | `6b05f1ca6059042813c95435` | [lh-live-dan-h-2.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f1ca6059042813c95435_lh-live-dan-h-2.png) |
+| Image_Ops Team 3.png | `6b05f1cc8eb513527a1a23c2` | [lh-live-image-ops-team-3.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f1cc8eb513527a1a23c2_lh-live-image-ops-team-3.png) |
+| coolers.png | `6b05f1cea970ed0996a184ec` | [lh-live-coolers.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f1cea970ed0996a184ec_lh-live-coolers.png) |
+| rear door heat exchangers.png | `6b05f1d0c463c6c273ddbfdf` | [lh-live-rear-door-heat-exchangers.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f1d0c463c6c273ddbfdf_lh-live-rear-door-heat-exchangers.png) |
+| coolers2.png | `6b05f1d5e48e776dc06c44fe` | [lh-live-coolers2.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f1d5e48e776dc06c44fe_lh-live-coolers2.png) |
+| data hall.png | `6b05f1d73fe128baf2037ffd` | [lh-live-data-hall.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f1d73fe128baf2037ffd_lh-live-data-hall.png) |
+| Cooling Loops - Cooler Days (Below 60F) Simulation.gif | `6b05f1d8e48e776dc06c4580` | [lh-live-cooling-loops-cooler-days-below-60f-simulation.gif](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f1d8e48e776dc06c4580_lh-live-cooling-loops-cooler-days-below-60f-simulation.gif) |
+| Cooling Loops - Warmer Days Simulation.gif | `6b05f1d92c5ab8afece9a717` | [lh-live-cooling-loops-warmer-days-simulation.gif](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f1d92c5ab8afece9a717_lh-live-cooling-loops-warmer-days-simulation.gif) |
+| closed loop BP data center side.png | `6b05f1db8d34141223d6afd8` | [lh-live-closed-loop-bp-data-center-side.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f1db8d34141223d6afd8_lh-live-closed-loop-bp-data-center-side.png) |
+| closed loop BP air cooler side.png | `6b05f1dc376c2942b377663e` | [lh-live-closed-loop-bp-air-cooler-side.png](https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05f1dc376c2942b377663e_lh-live-closed-loop-bp-air-cooler-side.png) |
+
 
 ## Status
 
