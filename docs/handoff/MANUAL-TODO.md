@@ -59,15 +59,14 @@ again at each gate, so the steps are found early and not at the end:
 
 ## To do
 
-1 row a person still has to do in the Designer. When one is done, Claude ticks it and moves it to Done.
+0 rows a person still has to do in the Designer. When one is done, Claude ticks it and moves it to Done.
 
 | ID | Where (page › element or class) | Breakpoint | Set | Why the API can't | Done |
 | --- | --- | --- | --- | --- | --- |
-| GD | **Lake Hawkeye** (tw-lake-hawkeye) › Site settings › General › Favicon and Webclip | — | Favicon: `Assets/favicon/favicon-lhd-512.png` (Lake Hawkeye's own shield, the three curves from its logo, transparent). Webclip: `Assets/favicon/webclip-lhd-256.png` (shield on Night). Publish. Then Claude checks the published icon links: none may load from Lake Mariner's CDN (`6ae0f7d7…`) | not in the Webflow API (same as DT, EA, FC, HA). Until then Lake Hawkeye shows Lake Mariner's zigzag shield, and the 48/180/192 px icons load from Lake Mariner's CDN | ☐ |
 
 ## Done
 
-78 rows, ticked and checked.
+79 rows, ticked and checked.
 
 From `pnpm wf:styles` (2026-10-28), in class creation order. Borders and outlines (`1px solid ⟨variable⟩`) are set through the API as longhands instead (confirmed on .button-color and the nav classes); the border rows are ticked when their class batch is written. Rows AF–AL are classes not created yet: do them after their batch. Values are written with Designer variable names; type `calc(` and insert the variables with the picker. Check each against `prototype/src/css/new-classes.css` when doing it.
 
@@ -152,3 +151,4 @@ From `pnpm wf:styles` (2026-10-28), in class creation order. Borders and outline
 | HB | **Chesapeake** › Events Template › C \| Download Card (Reserve your spot) | — | Conditional visibility: show only when RSVP URL is set (same as GA, EC, FD) | conditional visibility on a CMS field isn't in the API (`set_visibility` answered "Element is not inside a CMS context") | ☑ by Claude, 2026-11-24, as GA: the card sits in a plain div made through the API (Navigator: "RSVP (shown when RSVP URL is set)"), its Visibility set in the Designer (Chrome) to Conditional: RSVP URL is set → Visible, else Hidden. Published; Chesapeake has no events yet, so check it on the first event page |
 | HC | **Chesapeake** › Project Overview › C \| Highlight Tabs › Text 1 Rich | — | Link "here" ("…Learn more here.") to /community-impact | a rich-text prop takes plain text through the API (same as BB, EB, FB) | ☑ by Claude in the Designer (Chrome), 2026-11-24: Edit Rich Text dialog, stored on the first ✓ and read back in the editor. Published: `<a href="/community-impact">here</a>` on /project-overview |
 | GC | **Lake Hawkeye** › Community Impact › Strengthening The Grid › C \| Accordion Item 2 (Privately Funded Upgrades) › Answer; Community benefits › Closed-loop cooling card text | — | Answer: link "HERE" to NYSEG's RFI response, https://www.lakehawkeyedata.com/s/Anna-Kelles-Request-for-Information_NYSEGC.pdf (re-host it on Webflow before launch, like the other lakehawkeyedata.com/s/ PDFs). Card: link "closed-loop system" to /closed-loop-cooling (a plain paragraph: select the words, Link settings) | a rich-text prop takes plain text through the API; a link inside an existing plain paragraph needs the text split, which the API can't do || ☑ by Claude in the Designer (Chrome), 2026-11-24: "HERE" → the NYSEG RFI PDF (new tab) in the Edit Rich Text dialog; "closed-loop system" selected on the canvas, link button, Type Page › Closed-Loop Cooling. Published and read back. The PDF still points at lakehawkeyedata.com/s/ (re-host before launch) |
+| GD | **Lake Hawkeye** (tw-lake-hawkeye) › Site settings › General › Favicon and Webclip | — | Favicon: `Assets/favicon/favicon-lhd-512.png` (Lake Hawkeye's own shield, the three curves from its logo, transparent). Webclip: `Assets/favicon/webclip-lhd-256.png` (shield on Night). Publish. Then Claude checks the published icon links: none may load from Lake Mariner's CDN (`6ae0f7d7…`) | not in the Webflow API (same as DT, EA, FC, HA). Until then Lake Hawkeye shows Lake Mariner's zigzag shield, and the 48/180/192 px icons load from Lake Mariner's CDN | ☑ by Claude in Site settings (Chrome), 2026-11-24: favicon-lhd-512 for Favicon light and dark (Webclip unticked), then webclip-lhd-256 for Webclip only; published. All six icon links (32 light/dark, 48, 180 apple-touch, 192, 512) load from Lake Hawkeye's CDN and show its own shield; no page or template loads anything from Lake Mariner's CDN any more |

@@ -43,7 +43,7 @@ Compared 2026-11-24 from layer text and screenshots at 1680.
 
 ## Global
 
-- **Logos:** the nav (light and dark versions) and footer (vertical) use the Lake Hawkeye Data wordmark. The shield mark in the heroes is the same as Lake Mariner's.
+- **Logos:** the nav (light and dark versions) and footer (vertical) use the Lake Hawkeye Data wordmark. The shield mark in the heroes is the same as Lake Mariner's. The favicon and webclip are Lake Hawkeye's own shield (the three curves from its logo), since 2026-11-24 (MANUAL-TODO GD; files `Assets/favicon/favicon-lhd-512.png`, `webclip-lhd-256.png`).
 - **Footer:** the e-mail address and the campus line change. The links and columns are the same.
 - **Follow band and footer social links:** the Figma row still shows the Facebook button and the line "Community sessions and hiring days are announced on the campus Facebook page first." Lake Mariner removed both in review round 1 at the client's request. **We keep Lake Mariner's version** (no Facebook, no body line, Instagram added).
 - **Nav:** the same links. Closed-Loop Cooling stays, because Lake Hawkeye has its own Cooling page.
