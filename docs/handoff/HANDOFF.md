@@ -144,6 +144,7 @@ In `prototype/src/modules/`, one file each, run from `prototype/src/main.ts`; al
 | follow-fan | `data-follow-area`, `data-follow-fan` | the Follow Band fan fans in and drifts against the pointer |
 | style-guide-nav | `data-sg-nav` | the style guide's sidebar (style guide page only) |
 | faq-schema | `data-faq-schema` (on the Home FAQ Accordion; reads each `data-accordion-item`'s `.accordion-question` and `.accordion-body`) | FAQPage JSON-LD in the head from the FAQs shown; none without items, no duplicate on re-run |
+| list-count | `data-list-count` (optional value: a selector to count, default `.w-dyn-item`), `data-count-noun`, `data-count-plural` | writes the number of Collection List items in the element's section into its text ("7 questions"), once at boot; the typed text is the fallback |
 
 ## Video list
 
