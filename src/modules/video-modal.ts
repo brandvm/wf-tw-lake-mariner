@@ -1,12 +1,17 @@
 // Video Modal: a [data-video-open] link opens a <dialog> that plays the video
 // in its data-video-src: a YouTube or Vimeo link as copied from the browser
 // (watch?v=, youtu.be/, shorts/, vimeo.com/<id>) or an embed URL; page links
-// are turned into embed URLs and autoplay is added.
+// are turned into embed URLs and autoplay is added. A video file (.mp4, .webm,
+// .mov, .m4v, e.g. a Webflow asset URL) plays in a native <video> with
+// controls; data-video-captions (a .vtt URL) adds its captions track, fetched
+// into a blob URL so a captions file on another host needs no crossorigin
+// attribute on the video.
 // Without a src the dialog says the video is coming (HANDOFF video list).
 // The close button, Escape or a click outside the frame closes it; the
-// iframe is removed on close so the sound stops. Page scroll pauses while
+// player is removed on close so the sound stops. Page scroll pauses while
 // it is open and focus goes back to the link.
-// Markup: <a href="…" data-video-open data-video-src="…" data-video-title="…">;
+// Markup: <a href="…" data-video-open data-video-src="…" data-video-title="…"
+//   data-video-captions="…">;
 // the href is the no-script fallback (the video's page).
 
 import { gsap, reducedMotion } from './gsap';
@@ -32,7 +37,9 @@ export function initVideoModal() {
     const src = link.dataset.videoSrc?.trim();
     const title = link.dataset.videoTitle || 'Video';
     dialog.setAttribute('aria-label', title);
-    if (src) {
+    if (src && isVideoFile(src)) {
+      playFile(frame, src, title, link.dataset.videoCaptions?.trim());
+    } else if (src) {
       const url = embedUrl(src);
       url.searchParams.set('autoplay', '1');
       frame.innerHTML = `<iframe class="video-modal-iframe" src="${url.href}" title="${title}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
@@ -81,4 +88,41 @@ function embedUrl(src: string) {
     if (vimeoId) return new URL(`https://player.vimeo.com/video/${vimeoId}`);
   }
   return url;
+}
+
+function isVideoFile(src: string) {
+  return /\.(mp4|webm|mov|m4v)$/i.test(new URL(src, location.href).pathname);
+}
+
+// A native player for a self-hosted file. Autoplay with sound is allowed here
+// because the dialog opens from a click; if the browser still refuses, the
+// controls stay for the visitor to press play.
+function playFile(frame: HTMLElement, src: string, title: string, captions?: string) {
+  const video = document.createElement('video');
+  video.className = 'video-modal-iframe';
+  video.src = src;
+  video.controls = true;
+  video.playsInline = true;
+  video.preload = 'auto';
+  video.setAttribute('aria-label', title);
+  frame.replaceChildren(video);
+  if (captions) addCaptions(video, captions);
+  video.play().catch(() => {});
+}
+
+async function addCaptions(video: HTMLVideoElement, url: string) {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) return;
+    const blob = new Blob([await response.text()], { type: 'text/vtt' });
+    if (!video.isConnected) return;
+    const track = document.createElement('track');
+    track.kind = 'captions';
+    track.label = 'English';
+    track.srclang = 'en';
+    track.src = URL.createObjectURL(blob);
+    video.append(track);
+  } catch {
+    // Captions are optional: the video plays without them.
+  }
 }
