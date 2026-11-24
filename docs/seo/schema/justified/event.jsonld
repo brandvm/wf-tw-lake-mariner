@@ -1,0 +1,34 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Event",
+      "@id": "https://justifieddatacampus.com/events/{Slug}#event",
+      "url": "https://justifieddatacampus.com/events/{Slug}",
+      "name": "{Name}",
+      "startDate": "{Start}",
+      "endDate": "{End}",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "location": {
+        "@type": "Place",
+        "name": "{Location}",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Hawesville",
+          "addressRegion": "KY",
+          "addressCountry": "US"
+        }
+      },
+      "image": ["{Image}"],
+      "description": "{Summary}",
+      "organizer": { "@id": "https://justifieddatacampus.com/#organization" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Events", "item": "https://justifieddatacampus.com/events" },
+        { "@type": "ListItem", "position": 2, "name": "{Name}", "item": "https://justifieddatacampus.com/events/{Slug}" }
+      ]
+    }
+  ]
+}

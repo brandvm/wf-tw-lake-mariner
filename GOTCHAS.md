@@ -667,3 +667,12 @@ collected from client repos into those files.
 - Fix: two string props in a Performance group, Image Loading (default `lazy`) and Image Priority (default `auto`), bound with `set_settings` key `attributes` (`value_binding` source `prop`) on the Image inside the component; /events instance set to `eager` / `high`. The bindings took and publish per instance (/events eager/high, /faq lazy/auto); read them back with `get_settings`.
 - Status: done (published)
 - Found by: claude
+
+### 2026-11-24 · Designer MCP app link lost on the first load; `upload_image_by_url` doubles the extension
+- Area: mcp
+- Scope: template-candidate
+- Symptom: on Justified, opening the Designer app link (`<site>.design.webflow.com?app=…`) in a fresh tab went through a webflow.com redirect and loaded the Designer without the MCP Bridge app, so Designer-only tools still answered "Unable to connect". Separately, `upload_image_by_url` with `asset_name: "faq-hero-faq-v2.webp"` created `faq-hero-faq-v2.webp.webp`.
+- Cause: the sign-in redirect drops the `?app=` query; the tool appends the source's extension to the name it is given.
+- Fix: open the same link a second time once the Designer has loaded (the Bridge panel then shows "Connected"). Pass `asset_name` without an extension, or rename with `update_asset` afterwards.
+- Status: worked around
+- Found by: claude
