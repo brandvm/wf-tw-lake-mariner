@@ -169,4 +169,6 @@ None. Lake Hawkeye has the same 10 pages, the Cooling page included.
 | 3 · page content and photos | heroes, statements, facts, stats, Explore text, section copy | to do |
 | 4 · section differences | 6th Highlight tab, Topping Out section, rates Learn More, upcoming event card | to do |
 
+Done-list for every page: when a page is finished on tw-lake-hawkeye.webflow.io, add its section to row 4 (Lake Hawkeye, y 39000) of the Figma Build Review page (`2556:2`), in that page's column, as `CAMPUSES.md` › "Compare page in Figma" describes: Lake Hawkeye's Clean Pages frame, staging screenshots at 1680, 820 and 390, and red or ✓ green markers. Pages finished so far: none (batch 1 changed only global parts).
+
 Left from batch 1: the FAQ Open Graph image is still Lake Mariner's FAQ photo (changes with the FAQ hero); the announcement bar still advertises Lake Mariner's hiring event (batch 2, with the events).
