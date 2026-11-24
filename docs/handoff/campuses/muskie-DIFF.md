@@ -206,6 +206,13 @@ targets, as on Lake Mariner):
 Branding only in Figma (nav, footer). Careers keeps Lake Mariner's
 testimonials in Figma (Q3).
 
+Careers › Meet Our Employees (2026-11-24): plays the employees film
+self-hosted on Muskie's own CDN (asset `6b05fbdf0a2546887bc5308b`,
+`mdc-meet-our-employees.mp4`, 28 MB, the same file as Lake Mariner and
+Justified) with English captions (`6b05fbdfe7faba05bb2697bf`), instead of
+the YouTube topping-out video. C | Video Frame got the Captions URL prop
+(CAMPUS-PORT). Checked on staging: plays with sound, captions track loaded.
+
 ## News
 
 10 real posts (newest first), from muskiedatacampus.com/newsroom; every one

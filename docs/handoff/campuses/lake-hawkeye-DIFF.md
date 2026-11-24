@@ -288,6 +288,7 @@ Done-list for every page: when a page is finished on tw-lake-hawkeye.webflow.io,
 Left from batch 4:
 - Rates Learn More: still not built; neither Figma nor the live site gives a target.
 - Upcoming card chip: shows the event type ("Open House"); the design shows "Upcoming · Tue, Dec 1, 2026", which needs a date format set in the Designer.
+- Done 2026-11-24 (evening): Careers and Community Impact › Meet Our Employees play the site's own copy of the employees film (asset `6b05f0b18110748db1fa0acc`, the live site's Community Impact video) with English captions (`6b05fc394e5fbcce8f730aab`, the same cues as Lake Mariner's; the film is the same 2:12.48 cut) instead of the YouTube topping-out video, which stays on the Topping Out section. C | Video Frame got the Captions URL prop (CAMPUS-PORT). Checked on staging: plays with sound, captions track loaded. Still Lake Mariner text: both employees frames' Poster Alt ("…Lake Mariner data halls…" on Careers, "…Lake Mariner campus on the shore of Lake Ontario" on Community Impact), and the Community Impact poster may be Lake Mariner's photo.
 - Done 2026-11-24 (evening): MANUAL-TODO GB and GC in the Designer (d8c0f9d); the Topping Out poster re-ingested with `upload_image_by_url` and set on the Video Frame (publishes with `srcset`). Build Review: Project Overview re-shot and its marker green; Community Impact's red marker now lists only the missing CTA targets.
 
 Left from batch 3:
