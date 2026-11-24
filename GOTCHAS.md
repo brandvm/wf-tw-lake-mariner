@@ -731,3 +731,12 @@ collected from client repos into those files.
 - Fix: open the Designer app link (twice, see "Designer MCP app link lost on the first load") before bulk uploads through the assets API, then check `variants` with `list_assets`. `upload_image_by_url` is then not needed, and re-importing only makes a duplicate asset. A Squarespace site's `?format=json` item `assetUrl` with `contentType` text/html is a placeholder, not an image. Squarespace videos download with ffmpeg from the 1080p variant playlist plus the audio playlist in `playlist.m3u8` (`-extension_picky 0`).
 - Status: worked around
 - Found by: claude
+
+### 2026-11-24 · Squarespace serves WebP under `.png` names; some fail `upload_image_by_url`; asset uploads stop at 30 MB
+- Area: mcp
+- Scope: template-candidate
+- Symptom: archiving www.lakemarinerdata.com, every `images.squarespace-cdn.com` "….png" downloaded as WebP, whatever `?format=` was added. `upload_image_by_url` took 33 of 38 of those URLs and answered "Failed to create asset" for 5 (1.7–3.3 MB WebP, the same on a retry). Separately, `create_asset` for a 51 MB MP4 returned upload details whose policy caps `content-length-range` at 31,457,280 bytes, so the S3 POST would be refused.
+- Cause: Squarespace picks the format from the `Accept` header (WebP for `*/*`); the originals come back with `Accept: image/png,image/jpeg`. Why the Designer importer refuses some WebP files is not known. The 30 MB cap is in the presigned policy for every asset type.
+- Fix: download originals with `curl -H 'Accept: image/png,image/jpeg'` and keep both. For a URL `upload_image_by_url` refuses: upload the file through `create_asset` + the S3 POST, call `upload_image_by_url` with that asset's `cdn.prod.website-files.com` URL (it then gets its variants), and delete the staging asset. Read the `content-length-range` in the decoded policy before uploading; re-encode a longer video under 30 MB (here 2:12 at 1080p, H.264 1.6 Mb/s + AAC 128k = 28 MB). Squarespace videos are HLS: `ffmpeg -extension_picky 0 -i <variant .m3u8>` (the segments have no extension), with the separate audio playlist as a second input where there is one.
+- Status: worked around (Lake Mariner live-site archive, BUILD-NOTES)
+- Found by: claude

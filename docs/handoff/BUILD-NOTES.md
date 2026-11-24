@@ -153,6 +153,70 @@ Unchanged paths, no redirect needed: `/project-overview`, `/community-impact`, `
 - The Documents item "Third-Party Independent Study" linked to `lakehawkeyedata.com/s/Independent-Assessment-of-the-Proposed-Cayuga-Data-Campus.pdf` (URL and description), which breaks when Lake Hawkeye's domain moves to Webflow. Since 2026-11-24 the PDF is a Lake Mariner asset (`6b05ee23402946e6b0ff1c84`, same file, 16.8 MB) and both links point at it; published, checked on Project Overview and Community Impact (no link to another site left).
 - `/cart` (a Squarespace default link) is not mapped.
 
+### Live-site files (archived 2026-11-24)
+
+www.lakemarinerdata.com (Squarespace) goes down soon, so every file it hosts that the new site uses or may need now lives in Lake Mariner's Webflow assets, in the folder **Live site (lakemarinerdata.com)** (`6b05efe40ad06e1179b672a1`). Local originals: `Assets/lake-mariner/live-site/` (`images/` the original PNG/JPEG, `images-webp/` the WebP copies Squarespace serves, `files/`, `videos/`). Crawled: `sitemap.xml` (19 URLs), every page plus `/` and `/careers`, `/newsroom?format=json` (5 posts), `/events?format=json` (1 event). The post thumbnails in the feeds are Squarespace's 300×300 placeholder (no post on the live site has a cover image), so none were archived.
+
+Images went in with `asset_tool › upload_image_by_url` from the Squarespace URL, so each has its responsive sizes (2–5 variants). Five failed that way (`hpc1`, `hpc2`, `DS3`, `DS5`, Shores of Lake Ontario; GOTCHAS 2026-11-24): they were staged through the assets API as the WebP Squarespace serves, re-ingested by URL from the Webflow CDN, and the staging copies deleted. The two "closed loop.png" files are the same bytes, so Webflow kept one asset. `favicon.ico` (Squarespace's) is kept locally only: the site has its own favicon set.
+
+**Files and videos**
+
+| Old URL | Asset id | Webflow URL | Notes |
+| --- | --- | --- | --- |
+| `/s/Letters-of-Support_Local-Contractors.pdf` | `6af643e559a3e0fc228dd034` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6af643e559a3e0fc228dd034_Letters-of-Support_Local-Contractors.pdf | same bytes as live (MD5 checked); 301 row above. Both "Local Contractors Letters of Support" Documents items now link it (they linked nowhere) |
+| `/s/Anna-Kelles-Request-for-Information_NYSEGC.pdf` | `6b05ee68b656341c0b4ceba5` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05ee68b656341c0b4ceba5_Anna-Kelles-Request-for-Information_NYSEGC.pdf | 404 on lakemarinerdata.com; the file is Lake Hawkeye's copy (same bytes as lakehawkeyedata.com/s/…); 301 row above |
+| `video.squarespace-cdn.com/…/e01d033f-031e-45b2-889c-bc63c7f69f66` (Home hero) | `6b05f004f9f45c49ef3f6d65` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f004f9f45c49ef3f6d65_lmd-home-aerial-loop.mp4 | 33 s silent aerial loop, 1080p60, 13 MB, as served |
+| `video.squarespace-cdn.com/…/1767384462316-X969YDGF4V76VMA3CHWI` (Community Impact, "Meet our employees") | `6b05f051a36936cb4add32b3` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f051a36936cb4add32b3_lmd-meet-our-employees.mp4 | 2:12 with sound. Re-encoded to 28 MB (1080p, H.264 1.6 Mb/s, AAC 128k) because asset uploads stop at 30 MB; the 51 MB download is the local original. This is the live site's own "Meet our employees" film; the new site's Video Frame plays the YouTube topping-out ceremony instead (BUILD-NOTES 2026-11-24, "to confirm with the client") |
+
+**Images** (Squarespace URL under `images.squarespace-cdn.com/content/v1/6958258549ce904afb0d828d/`)
+
+| Old URL | Used on (live) | Asset id | Webflow URL |
+| --- | --- | --- | --- |
+| `…/0813f371-b8de-466c-85f3-ca7a36866ab6/Lake+Mariner+Data+Logo_White.png` | every page (logo / share image) | `6b05f063b15b51e3e214ff6b` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f063b15b51e3e214ff6b_live-Lake-Mariner-Data-Logo_White.png |
+| `…/1767384454382-511CUQVYPA3KCTAHZT2E/hpc2.png` | /, /home, /project-overview | `6b05f13095c41aaa087fdc88` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f13095c41aaa087fdc88_live-hpc2.webp |
+| `…/1767384457287-CGX6REMNC7Y4TQ1UCJ8U/hpc5.png` | /events | `6b05f07cca33fa7f3755c351` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f07cca33fa7f3755c351_live-hpc5.png |
+| `…/1767384459010-8NCJ474BFT5C1OP8PPWI/imgg-od3-agw8jcae.png` | /, /home | `6b05f07d8b8bba64855d5571` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f07d8b8bba64855d5571_live-imgg-od3-agw8jcae.png |
+| `…/1767384462181-0TQPSL8CWRV6I0LR0M13/closed+loop.png` | /community-impact, /newsroom/built-for-the-future… | `6b05f07f0e9de7f9a486e9dc` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f07f0e9de7f9a486e9dc_live-closed-loop.png |
+| `…/1767384462201-QSTLCP420ECZHDW0D2MG/DS3.png` | /community-impact | `6b05f132ac352db12f6a7c1f` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f132ac352db12f6a7c1f_live-ds3.webp |
+| `…/1767384462221-J5919S1OIRD8KTT4YHCX/hpc1.png` | /community-impact | `6b05f134d4c045a0cd221b64` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f134d4c045a0cd221b64_live-hpc1.webp |
+| `…/1767384462259-OV6L83Z628VRJH824SEP/community-1.png` | /community-impact | `6b05f083a12e5aa9f28d643b` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f083a12e5aa9f28d643b_live-community-1.png |
+| `…/1767384462282-7Y6226Z7CX9Z4G8WJWDL/ippny+graphic.jfif` | /community-impact | `6b05f0874d59ac9ca32bf0c7` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f0874d59ac9ca32bf0c7_live-ippny-graphic.jpg |
+| `…/1767384462305-OLWZ6U7JCQUYR2MLGIIN/DS5.png` | /community-impact | `6b05f135dbecbde5c0d7bac0` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f135dbecbde5c0d7bac0_live-ds5.webp |
+| `…/1767384462326-AVH6IQ3II4HAGZGAY14Y/jesse+rohring.png` | /community-impact | `6b05f0893a38869b41cc0ed4` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f0893a38869b41cc0ed4_live-jesse-rohring.png |
+| `…/1767384462338-P9ZFB2FXVR26S9VLXCCE/jim+spoon+1.png` | /community-impact | `6b05f08c13e7137461cbcef6` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f08c13e7137461cbcef6_live-jim-spoon-1.png |
+| `…/1767384462347-GYJM7KEB9CNYWP82LP9C/Dan+H+2.png` | /community-impact | `6b05f08e8b8bba64855d5974` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f08e8b8bba64855d5974_live-dan-h-2.png |
+| `…/1767384466488-QOG3WMBBLIJHJ6SO68G9/Lake+Mariner+Recycling+-+4.jpg` | /newsroom/built-for-the-future… | `6b05f0906bb4047f68814b7a` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f0906bb4047f68814b7a_live-lake-mariner-recycling-4.jpg |
+| `…/1767384466523-5F4LK5B18JET0H7HKQZJ/Lake+Mariner+Recycling+-5.jpg` | /newsroom/built-for-the-future… | `6b05f091e8a4e3555f53627c` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f091e8a4e3555f53627c_live-lake-mariner-recycling-5.jpg |
+| `…/1767384466694-LKL7LEDQ5L9L5ZXDR61H/epe+foam+melter.jpg` | /newsroom/built-for-the-future… | `6b05f093df66f42887935639` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f093df66f42887935639_live-epe-foam-melter.jpg |
+| `…/1767384466784-OJOW6UMCD8VRH1IRXSWU/pallet+recycle.png` | /newsroom/built-for-the-future… | `6b05f094d4c045a0cd21e143` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f094d4c045a0cd21e143_live-pallet-recycle.png |
+| `…/1767384466921-EJ9C2DW6QHRW9K29Q97I/Image_Ops+Team-8.png` | /newsroom/built-for-the-future… | `6b05f0968d34141223d67e04` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f0968d34141223d67e04_live-image-ops-team-8.png |
+| `…/1767384466952-6APQDZ024QL9QM8QL8IH/CEO+MAG+-+TEAM-3.png` | /newsroom/built-for-the-future… | `6b05f0987c7cd05f16c446b0` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f0987c7cd05f16c446b0_live-ceo-mag-team-3.png |
+| `…/1767384467038-UHAPVKH4XFO51WEKTI8Z/on+site+dual+batch+plant+2.png` | /newsroom/built-for-the-future… | `6b05f09a5c87c7259575c798` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f09a5c87c7259575c798_live-on-site-dual-batch-plant-2.png |
+| `…/1767384467063-HQ5304LQAZ8OK274XNRE/on+site+dual+batch+plant.png` | /newsroom/built-for-the-future… | `6b05f09c6059042813c91dbc` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f09c6059042813c91dbc_live-on-site-dual-batch-plant.png |
+| `…/1767384467127-VPUE29DXHQPSS4LMY87V/closed+loop.png` | /community-impact, /newsroom/built-for-the-future… | `6b05f07f0e9de7f9a486e9dc` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f07f0e9de7f9a486e9dc_live-closed-loop.png |
+| `…/1767384467151-YEHG9S9S4UON6SQ9C9SK/CEO+MAG+-+TEAM-4.png` | /newsroom/built-for-the-future… | `6b05f0a09c1f223cb59f83ef` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f0a09c1f223cb59f83ef_live-ceo-mag-team-4.png |
+| `…/1767384469380-MK75RNOCLAZS4P7LAYKO/Project+Highlights.png` | /project-overview | `6b05f0a2eb06209c3732bb7b` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f0a2eb06209c3732bb7b_live-project-highlights.png |
+| `…/1767384469390-5S8BRRGP1MAR1F0XRHVK/lake+view.png` | /project-overview | `6b05f0a43d454b00e1d2fb5b` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f0a43d454b00e1d2fb5b_live-lake-view.png |
+| `…/1767384469495-UDRTRH6017LKDBZ74KHL/about+terawulf.png` | /community-impact, /project-overview | `6b05f0a66acb48d40bcf8c57` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f0a66acb48d40bcf8c57_live-about-terawulf.png |
+| `…/1767384471476-XS5L4Y50ERC2WFGESYGH/coolers.png` | /closed-loop-cooling | `6b05f0a8e504558e6c0155c9` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f0a8e504558e6c0155c9_live-coolers.png |
+| `…/1767384471486-SJWXBN4CUARKF3BUQ097/lakefront+view.png` | /closed-loop-cooling, /events | `6b05f0a986eb942bbbe8abb8` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f0a986eb942bbbe8abb8_live-lakefront-view.png |
+| `…/1767384471499-331MAB1BB7MDCCDBSK13/rear+door+heat+exchangers.png` | /closed-loop-cooling | `6b05f0ace504558e6c015663` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f0ace504558e6c015663_live-rear-door-heat-exchangers.png |
+| `…/1767384471510-49S8Z6INMU7NCU6415OS/coolers2.png` | /closed-loop-cooling | `6b05f0ae2c5ab8afece95eb5` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f0ae2c5ab8afece95eb5_live-coolers2.png |
+| `…/1767384471521-BSRUQ9AODB0F595XTGM2/data+hall.png` | /closed-loop-cooling | `6b05f0b0c75ce964e46cb78d` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f0b0c75ce964e46cb78d_live-data-hall.png |
+| `…/1767384471564-U7GSESZLDF55ELFIKJMQ/closed+loop+BP+data+center+side.png` | /closed-loop-cooling | `6b05f0b2ca33fa7f3755cb49` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f0b2ca33fa7f3755cb49_live-closed-loop-bp-data-center-side.png |
+| `…/1767384471584-PL7K96434IAZJLDMDSKE/closed+loop+BP+air+cooler+side.png` | /closed-loop-cooling | `6b05f0b38138a4cd3e4d569e` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f0b38138a4cd3e4d569e_live-closed-loop-bp-air-cooler-side.png |
+| `…/1767384473186-KA3S2Y3A8MAJV14OO3EL/Cayuga-1.png` | every page (logo / share image) | `6b05f0b599dba46cc067f59c` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f0b599dba46cc067f59c_live-cayuga-1.png |
+| `…/772f5080-d88c-41c1-a1d9-f725c522a6ac/Lake+Mariner+-+Shores+of+Lake+Ontario.png` | /community-impact | `6b05f1375c487973b4fd002e` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f1375c487973b4fd002e_live-lake-mariner-shores-of-lake-ontario.webp |
+| `…/7da8ee38-9f89-4821-a471-77ee8081e4a3/lmd+site-7.png` | /project-overview | `6b05f0b9f6c836e8b3387b23` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f0b9f6c836e8b3387b23_live-lmd-site-7.png |
+| `…/7fe831df-3cad-4630-a7cb-3f9205241d84/lmd+site-1.png` | newsroom feed | `6b05f0bb174b1c801fe48648` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f0bb174b1c801fe48648_live-lmd-site-1.png |
+| `…/88bbf1f6-2be6-4538-ae2a-8b77a66bec2e/data+hall+capture.png` | /events, /events/terawulf-hiring-event… | `6b05f0bc7d55679968054348` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f0bc7d55679968054348_live-data-hall-capture.png |
+| `…/c9edadb2-eb54-46a2-9ddf-2fbd6948e9f7/lmd+site-4.png` | /faq | `6b05f0be8e50bb4d5affbe41` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05f0be8e50bb4d5affbe41_live-lmd-site-4.png |
+
+**Links repointed** (published 2026-11-24, then every page grepped: no `href`/`src` to lakemarinerdata.com, lakehawkeyedata.com, cayugadatacampus.com or Squarespace is left; `lakemarinerdata.com` remains only in the JSON-LD `@id`/`url` values, the planned production domain, and in `mailto:info@lakemarinerdata.com`):
+- News Posts › "Understanding Energy Pricing in New York": Source Name / Source URL were `lakehawkeyedata.com` (another campus); cleared, so the Source card is hidden. The live post is TeraWulf's own, with no outside source.
+- Documents › both "Local Contractors Letters of Support" items: External URL = the Letters PDF asset (it was empty, so the Download button went nowhere).
+- C | Doc Accordion Item › Link default: lakehawkeyedata.com study PDF → the Lake Mariner study asset (`6b05ee23402946e6b0ff1c84`). C | Source Card › Link default → https://www.terawulf.com/ and Link Text default "Originally published on terawulf.com". Only the style guide specimens use the defaults; page instances are bound to CMS fields.
+
 ## Known issues
 
 ### Fix before launch
