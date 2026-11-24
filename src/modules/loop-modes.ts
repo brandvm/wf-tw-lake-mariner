@@ -8,6 +8,11 @@
 // on the root, data-active on the active video, aria-selected on the tabs.
 // Reduced motion: nothing plays and nothing alternates; the tabs switch
 // between the two posters.
+// Posters: put the poster URL in data-poster, not poster. A poster
+// attribute is fetched at once, wherever the video is on the page, and
+// Lighthouse bills it to the first paint (Cooling: 110 KB). The module sets
+// the poster when the frame comes within a screen of the viewport. A
+// plain poster attribute still works as before.
 
 import { reducedMotion } from './gsap';
 
@@ -77,6 +82,16 @@ export function initLoopModes() {
         select(next);
       });
     });
+
+    const lazyPosters = videos.filter((video) => video.dataset.poster && !video.getAttribute('poster'));
+    if (lazyPosters.length) {
+      const near = new IntersectionObserver(([entry]) => {
+        if (!entry.isIntersecting) return;
+        near.disconnect();
+        lazyPosters.forEach((video) => { video.poster = video.dataset.poster!; });
+      }, { rootMargin: '100% 0px' });
+      near.observe(root);
+    }
 
     new IntersectionObserver(([entry]) => {
       inView = entry.isIntersecting;
