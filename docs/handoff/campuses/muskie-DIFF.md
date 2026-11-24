@@ -24,6 +24,16 @@ changes below. Checked at 1440, 820 and 390 (full-page screenshots) and in the
 published HTML: no Lake Mariner, Barker or Lake Ontario text left outside
 Careers (testimonials kept, Q3).
 
+**Build Review (Figma `2556:2`, row 3, y 26000)**, done-list: add or
+refresh a page's section when that page changes on staging. Built
+2026-11-24 for all nine Muskie pages (Cooling column empty), each with
+Muskie's Clean Pages frame, staging at 1680/820/390 and markers (green ✓
+built/matches, red for the open items above): Home `2801:2943`, Project
+Overview `2801:3845`, Community Impact `2801:4432`, Careers `2801:5023`,
+News `2801:5357`, News Article `2801:6031`, Events `2801:6335`, Event
+`2801:6515`, FAQ `2801:6890`. When an open item is fixed, re-shoot that
+page and turn its red marker green.
+
 Still open:
 
 - **MANUAL-TODO FA–FD**: news card links to the source (the API binding
