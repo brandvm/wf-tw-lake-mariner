@@ -150,4 +150,5 @@ also the PO hero), and the News card image (`2679:9480`).
 
 | Batch | What | State |
 | --- | --- | --- |
-| 1–7 | — | waiting for the go-ahead |
+| 1 · port and SEO | head code `og:site_name` "Chesapeake Data & Energy"; Home schema and the News and Event template heads from `docs/seo/schema/chesapeake/` (chesapeakedatacampus.com, Charles County, MD; no e-mail in the schema until C1 is answered); SEO titles and descriptions on all pages and both templates; FAQ share image is the copy's, which is also the Chesapeake design's FAQ hero | done 2026-11-24, published, read back on staging |
+| 2–7 | — | waiting for the go-ahead |
