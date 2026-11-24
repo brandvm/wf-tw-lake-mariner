@@ -126,8 +126,8 @@ Figma Build Review row 2 (y 13000): all nine pages, each with Justified's Clean 
 | # | What | Why / next step |
 | --- | --- | --- |
 | L1 | Favicon and webclip still Lake Mariner's shield | MANUAL-TODO EA (Site settings upload) |
-| L2 | Six links inside rich-text props have no link yet (PO tab 4 "here", RD items 1 and 3, CI benefits items 1, 4, 6) | MANUAL-TODO EB (Designer) |
-| L3 | Event pages show the Reserve card with no RSVP link | MANUAL-TODO EC (conditional visibility, as GA on Lake Hawkeye) |
+| L2 | ~~Six links inside rich-text props~~ done 2026-11-24 (MANUAL-TODO EB) | — |
+| L3 | ~~Reserve card with no RSVP link~~ hidden when RSVP URL is empty, 2026-11-24 (MANUAL-TODO EC) | — |
 | L4 | Upcoming events: the design shows the 22 Oct career fair as upcoming; it has passed, so /events shows the empty card ("TeraWulf plans to schedule…") and the fair in Past | data-driven, correct for today |
 | L5 | Home FAQ order: the design shows water first; the list sorts by Order, so the community question (Order 1, as on the live FAQ page) comes first | change Order if the client wants water first |
 | L6 | News posts from other publishers have a one-line body and a Source card linking out; excerpts are generic ("Coverage of the Justified Data Campus from …") | the live site links out without text; client can add summaries |

@@ -694,3 +694,12 @@ collected from client repos into those files.
 - Fix: none needed; useful as a duplicate check. Reuse the existing asset (and its `upload_image_by_url` copy with variants) instead of uploading again; don't assume the returned key carries the name you sent.
 - Status: documented
 - Found by: claude
+
+### 2026-11-24 · Rich-text prop links in the Designer: the first confirm stores `#`
+- Area: designer
+- Scope: template-candidate
+- Symptom: on Justified (MANUAL-TODO EB), a new link in a rich-text prop's Edit Rich Text dialog read back as `href="#"` after its ✓, although the URL had been typed; opening the link options (⚙, "Open in a new tab") before ✓ also dropped the typed URL.
+- Cause: the dialog's toolbar appears only after a real mouse selection (a DOM Range alone shows no toolbar), and the first ✓ on a new link seems to commit the link before the URL field's value.
+- Fix: double-click the word (or click before it and shift+click after it for several words), the toolbar's link button, triple-click the URL field, type, ✓; then select the link again and ✓ once more (the field now shows the URL), or retype it. For a new tab, tick ⚙ › Open in a new tab and go back with ← before ✓. Read the editor's `<a>` back with JS before closing the dialog, and the published HTML after publishing.
+- Status: worked around
+- Found by: claude
