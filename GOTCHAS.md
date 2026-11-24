@@ -502,7 +502,7 @@ collected from client repos into those files.
 - Symptom: `careers-openings.jpg` had variants (500–2000) from `get_asset`, but a new Image built with `data_element_builder` and that asset published with no `srcset`; after `compress_assets` (WebP, 351 → 99 KB, same asset id) and `set_image_asset` it still had none.
 - Cause: unknown; `get_asset` reports `size: 0` for API uploads, which may be what the publisher reads. Component image props on such assets do get `srcset` (heroes, Step List).
 - Fix: none through the API; the image is lazy and below the fold, so it costs bytes but not the LCP. A Designer re-pick (or upload in the Designer) is the remaining route. `compress_assets` replaces the file in place and keeps the asset id, which is useful on its own.
-- Status: harvested into wf-template 0.15.0; open
+- Status: harvested into wf-template 0.15.0; open. Seen again 2026-11-23: the FAQ hero (`faq-hero-faq.jpg`, uploaded through the API at 23:00) still had no variants after 60 minutes (`get_asset` variants [], no `-p-500` file on the CDN), so the C | Page Hero image publishes without `srcset`.
 - Found by: claude
 
 ### 2026-10-29 · Once the bundle starts after first paint, every layout a module sets is a visible shift
