@@ -831,6 +831,9 @@ main:has([data-faq-group]):not(:has([data-faq-group] .w-dyn-item)) .faq-empty { 
 /* repo-css: designer-cant — :has() — a section marked data-hide-empty is left out while its Collection List has no items (a campus with no past events, no featured posts, no initiatives yet); it comes back by itself when items are added. */
 [data-hide-empty]:not(:has(.w-dyn-item)) { display: none; }
 
+/* repo-css: designer-cant — :has() — an element marked data-hide-single (the /news filter and sort toolbar) is left out while its list section has fewer than two items, since there is nothing to filter or sort (Chesapeake's design with one post); it comes back by itself with the second item. */
+[data-list-root]:not(:has([fs-list-element="list"] > .w-dyn-item + .w-dyn-item)) [data-hide-single] { display: none; }
+
 /* repo-css: designer-cant — card rail (card-rail module, Chesapeake's Community benefits): the row scrolls sideways under its own arrows, so its scrollbar is hidden; ::-webkit-scrollbar and scrollbar-width have no Designer setting */
 [data-card-rail-track] { scrollbar-width: none; }
 [data-card-rail-track]::-webkit-scrollbar { display: none; }
