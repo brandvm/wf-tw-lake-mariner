@@ -11,6 +11,14 @@
     "webflow-tw-muskie": {
       "type": "http",
       "url": "https://mcp.webflow.com/mcp"
+    },
+    "webflow-tw-lake-hawkeye": {
+      "type": "http",
+      "url": "https://mcp.webflow.com/mcp"
+    },
+    "webflow-tw-chesapeake": {
+      "type": "http",
+      "url": "https://mcp.webflow.com/mcp"
     }
   }
 }

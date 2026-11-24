@@ -27,13 +27,15 @@ Webflow duplicates of it.
 | Lake Mariner Data | Lake Mariner Data (TeraWulf) | `6ae0f7d7bcf5d7622aeac214` | tw-lake-mariner.webflow.io | `webflow-tw-lake-mariner` | built; launch prep |
 | Justified Data | Justified Data (TeraWulf) | `6b05c58e6a2daeafb0769727` | tw-justified.webflow.io | `webflow-tw-justified` | duplicated 2026-11-24, published; still Lake Mariner content |
 | Muskie Data | Muskie Data (TeraWulf) | `6b05c5e78050528a5b59dc6a` | tw-muskie.webflow.io | `webflow-tw-muskie` | duplicated 2026-11-24, published; still Lake Mariner content |
-| Lake Hawkeye Data | — | — | — | — | not created: the workspace hit its unhosted site limit |
-| Chesapeake Data & Energy | — | — | — | — | not created: same limit; its Figma row is still in progress |
+| Lake Hawkeye Data | Lake Hawkeye Data (TeraWulf) | `6b05cabde86e14300445c161` | tw-lake-hawkeye.webflow.io | `webflow-tw-lake-hawkeye` | duplicated 2026-11-24 (after SEO batch A), published; still Lake Mariner content |
+| Chesapeake Data & Energy | Chesapeake Data & Energy (TeraWulf) | `6b05cb19b2bc6f51aa8e5019` | tw-chesapeake.webflow.io | `webflow-tw-chesapeake` | duplicated 2026-11-24 (after SEO batch A), published; still Lake Mariner content; Figma row still in progress |
+
+Lake Hawkeye and Chesapeake were made later the same day, after slots were freed in the workspace, so they already carry SEO batch A (`CAMPUS-PORT.md`).
 
 Each copy was made with Duplicate site and all three options on (hosting,
 SEO, integration settings). It brought every page, component, class,
 variable, CMS collection and item, asset, the head and footer code and the
-fonts. Checked on both copies after publishing: `/`, `/news` and `/faq`
+fonts. Checked on every copy after publishing: `/`, `/news` and `/faq`
 return 200, load the shared bundle with no script errors, and list the CMS
 items.
 

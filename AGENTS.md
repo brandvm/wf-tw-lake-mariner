@@ -27,8 +27,8 @@ per-site differences: `docs/handoff/CAMPUSES.md`.
 | Lake Mariner Data | `6ae0f7d7bcf5d7622aeac214` | `webflow-tw-lake-mariner` | tw-lake-mariner.webflow.io |
 | Justified Data | `6b05c58e6a2daeafb0769727` | `webflow-tw-justified` | tw-justified.webflow.io |
 | Muskie Data | `6b05c5e78050528a5b59dc6a` | `webflow-tw-muskie` | tw-muskie.webflow.io |
-| Lake Hawkeye Data | not created (workspace site limit) | — | — |
-| Chesapeake Data & Energy | not created (workspace site limit) | — | — |
+| Lake Hawkeye Data | `6b05cabde86e14300445c161` | `webflow-tw-lake-hawkeye` | tw-lake-hawkeye.webflow.io |
+| Chesapeake Data & Energy | `6b05cb19b2bc6f51aa8e5019` | `webflow-tw-chesapeake` | tw-chesapeake.webflow.io |
 
 ## Who owns what
 

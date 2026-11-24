@@ -6,6 +6,12 @@ that is listed here, newest last, with how to repeat it on a copy. Repo
 changes (`src/`, `dist/`) need no porting: every site loads the same
 bundle. Tick a site's column when the change is repeated there.
 
+Lake Hawkeye and Chesapeake were duplicated later on 2026-11-24, after
+the five SEO batch A rows below were live, so they already have those
+changes, with Lake Mariner's values. On those two, change the values
+(campus name, domain, address, assets) rather than adding the code a
+second time. Rows added after this note apply to all four copies.
+
 Write to a copy only through its own MCP server, after checking its site
 ID (`AGENTS.md` › Project facts).
 
