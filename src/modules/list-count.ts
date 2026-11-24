@@ -13,7 +13,9 @@
 export function initListCount() {
   document.querySelectorAll<HTMLElement>('[data-list-count]').forEach((el) => {
     const scope = el.closest('section') ?? document.body;
-    const selector = el.dataset.listCount?.trim() || '.w-dyn-item';
+    // An empty attribute can publish as "true" from Webflow: both mean the default.
+    const value = el.dataset.listCount?.trim() ?? '';
+    const selector = value && value !== 'true' ? value : '.w-dyn-item';
     const count = scope.querySelectorAll(selector).length;
     writeCount(el, count);
   });
