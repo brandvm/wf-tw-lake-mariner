@@ -127,11 +127,30 @@ who approved them.
 
 ## Redirect map
 
-Every old URL → its closest new page, from the crawl saved in discovery.
+Every old URL → its closest new page. Crawled 2026-11-24 from the live Squarespace site (www.lakemarinerdata.com: `sitemap.xml`, `/newsroom?format=json`, `/events?format=json`, the links on every page); each target checked on tw-lake-mariner.webflow.io (200). Enter in Site settings › Publishing › 301 redirects at launch, in this order (the specific `/newsroom/…` rows above the wildcard). The other campuses' maps are in `campuses/<campus>-DIFF.md`.
 
 | Old URL | New URL | Status |
 | --- | --- | --- |
-| | | 301 |
+| `/home` | `/` | 301 |
+| `/insights` | `/community-impact` | 301 |
+| `/news-events` | `/news` | 301 |
+| `/newsroom` | `/news` | 301 |
+| `/newsroom/terawulfs-lake-mariner-data-center-expansion-creates-200-jobs-in-somerset-niagra-county` | `/news/lake-mariner-expansion-creates-200-jobs` | 301 |
+| `/newsroom/inside-an-accelerated-ai-data-center-project` | `/news/inside-an-accelerated-ai-data-center-project` | 301 |
+| `/newsroom/built-for-the-future-how-terawulf-is-redefining-sustainable-infrastructure-jeprt` | `/news/built-for-the-future` | 301 |
+| `/newsroom/understanding-energy-pricing-in-new-york-what-residents-should-know-9l7mz` | `/news/understanding-energy-pricing-in-new-york` | 301 |
+| `/newsroom/how-data-centers-are-transforming-local-communities-4h444` | `/news` | 301 |
+| `/newsroom/category/(.*)` | `/news` | 301 |
+| `/newsroom/tag/(.*)` | `/news` | 301 |
+| `/newsroom/(.*)` | `/news` | 301 |
+| `/s/Letters-of-Support_Local-Contractors.pdf` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6af643e559a3e0fc228dd034_Letters-of-Support_Local-Contractors.pdf | 301 |
+| `/s/Anna-Kelles-Request-for-Information_NYSEGC.pdf` | https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05e46b05e33fd43343e986_Anna-Kelles-Request-for-Information_NYSEGC.pdf | 301 |
+
+Unchanged paths, no redirect needed: `/project-overview`, `/community-impact`, `/closed-loop-cooling`, `/faq`, `/events`, `/events/terawulf-hiring-event-data-center-operators`. `/careers` is new on Webflow. Notes:
+- "How data centers are transforming local communities" is on the live newsroom but not in this site's News Posts, so it goes to `/news`; if the post is added, point the row at its slug.
+- The category pages have no per-category URL on Webflow (the pills filter in place), so they land on `/news`.
+- The NYSEG RFI PDF is linked from the live site but has no copy on this site; the row points at the Lake Hawkeye site's Webflow copy (re-hosted 2026-11-24). Upload it here instead if the two sites must not depend on each other. If Webflow refuses absolute targets, leave the two `/s/` rows out.
+- `/cart` (a Squarespace default link) is not mapped.
 
 ## Known issues
 
