@@ -40,7 +40,7 @@ webclip change too.
 
 | # | Question | Figma | Proposal |
 | --- | --- | --- | --- |
-| J1 | Closed-Loop Cooling page | no Cooling frame in the Justified row; nav Insights lists Community Impact and FAQ only; footer has no Cooling link. The live justifieddatacampus.com does have `/closed-loop-cooling` | follow Figma: set the page to draft, remove nav and footer links. The "closed-loop cooling … found here/HERE" links (PO Responsible Development 1, CI Barker 1) and CI's first environment card button then need a target |
+| J1 | Closed-Loop Cooling page | no Cooling frame in the Justified row; nav Insights lists Community Impact and FAQ only; footer has no Cooling link. The live justifieddatacampus.com does have `/closed-loop-cooling` | **Decided 2026-11-24 (user): drop it.** Set the page to draft, remove nav and footer links. The "closed-loop cooling … found here/HERE" links (PO Responsible Development 1, CI Barker 1) and CI's first environment card button then need a target |
 | J2 | Target of those cooling links and of the CI card button labelled "CTA" | not given | the FAQ answer on water (`/faq`) until decided |
 | J3 | Nav parent label | Home, PO, CI, Careers, FAQ show "SITE OF"; News, Article, Events, Event show "Part of" (the Lake Mariner row has the same mix the other way round) | keep "Part of" everywhere, as decided for Lake Mariner (HANDOFF 2026-10-27) |
 | J4 | CI "No emissions" card links "NYISO 2025 report" | a New York grid report on a Kentucky (MISO) campus | keep the label, link `#` until the client gives a MISO source; or drop the button |
@@ -81,7 +81,7 @@ webclip change too.
 - Strengthening The Grid: Grid Connection "The Justified Data Campus connects to the regional grid instead of the local power distribution system. …" · Privately Funded Upgrades · Supporting Grid Stability · The Result (copy from the state frames).
 - **Removed:** What Actually Drives Local Electric Rates (rates row), Meet Our Employees, Our Team testimonials, Community & Partnership Initiatives.
 
-### Closed-Loop Cooling — page not in the design (J1)
+### Closed-Loop Cooling — dropped (J1, user 2026-11-24): page to draft, nav and footer links removed
 
 ### Careers — branding only (J5)
 
@@ -101,11 +101,11 @@ webclip change too.
 
 ## Build plan (each batch waits for the user's go-ahead)
 
-1. **Port:** CAMPUS-PORT rows with Justified's values (head code piece 1 with `og:site_name` "Justified Data", Home/News/Event schema from `docs/seo/schema/justified/`, FAQ OG image and hero re-ingest, Empty Card loading props, Featured lead eager). The Cooling poster row only if the page stays (J1).
+1. **Port:** CAMPUS-PORT rows with Justified's values (head code piece 1 with `og:site_name` "Justified Data", Home/News/Event schema from `docs/seo/schema/justified/`, FAQ OG image and hero re-ingest, Empty Card loading props, Featured lead eager). The Cooling poster row is n/a (page dropped, J1).
 2. **Branding:** logos (upload with `upload_image_by_url`), nav/footer text and links, footer line and e-mail, favicon/webclip (manual, EA), page SEO titles.
 3. **CMS:** News Posts, Events (+ types), FAQs, Documents replaced; Testimonials kept.
 4. **Page content and photos:** Home, PO, CI, FAQ, Events as above.
-5. **Sections:** PO promo out and Responsible Development to 4 items; CI four sections out; FAQ Propylene section and pills out; Cooling page to draft (J1).
+5. **Sections:** PO promo out and Responsible Development to 4 items; CI four sections out; FAQ Propylene section and pills out; Cooling page to draft and its links removed (J1, decided).
 
 ## Status
 
