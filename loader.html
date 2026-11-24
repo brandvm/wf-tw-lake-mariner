@@ -45,6 +45,17 @@ published.
 ------------------------------------------------------------ -->
 <meta name="theme-color" content="#000000" />
 
+<!-- SEO, per site: the only campus-specific line in this snippet. A
+     duplicated campus site changes og:site_name here and in its own head
+     code (docs/handoff/CAMPUS-PORT.md); wf:install then reports this one
+     tag as different on that site, which is expected. og:locale and
+     twitter:site (TeraWulf's X account) are the same on all five sites.
+     Webflow writes title, description, og:title/description/image and
+     twitter:card from the page settings; these are the tags it doesn't. -->
+<meta property="og:site_name" content="Lake Mariner Data" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:site" content="@terawulfinc" />
+
 <script>
   (function () {
     var RELEASE = null; // the release tag, e.g. "1.0.0" — the only version string

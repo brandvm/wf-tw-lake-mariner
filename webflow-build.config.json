@@ -8,5 +8,9 @@
     [820, 1180],
     [390, 844]
   ],
-  "pages": ["/"]
+  "pages": ["/"],
+  "seo": {
+    "noindexOk": ["^/design/"],
+    "noSchemaOk": ["^/project-overview$", "^/community-impact$", "^/closed-loop-cooling$", "^/careers$", "^/news$", "^/events$", "^/faq$", "^/404$", "^/design/"]
+  }
 }
