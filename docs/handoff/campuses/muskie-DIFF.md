@@ -34,6 +34,8 @@ News `2801:5357`, News Article `2801:6031`, Events `2801:6335`, Event
 `2801:6515`, FAQ `2801:6890`. When an open item is fixed, re-shoot that
 page and turn its red marker green.
 
+**Sample event — delete or replace before launch.** "Sample Event — Muskie Data Hiring Day" (`/events/sample-muskie-hiring-day`, item `6b060a42df813d92fad55cd8`), added 2026-11-24 at the user's request so the Event template could be checked. Hiring Event, 18 March 2027 9:00 AM–3:00 PM New York, Muskie text marked as sample in the tagline, summary, body, location note, callout and RSVP line; image the Home aerial (`muskie-campus-v2`); perks Career growth, 401(k) 5% match, 80% health insurance, Generous PTO (four Event Perks items created for it, the first on Muskie: delete them with the event if no real event uses them); RSVP URL https://www.terawulf.com/connect. The RSVP card condition (FD) was tested on it: with RSVP URL cleared the published page had no Reserve card, restored it came back. While it is upcoming, /events shows it instead of the "Nothing scheduled" card. Build Review row 3: Event (`2801:6515`) shot with it, Events (`2801:6335`) re-shot, markers green. Delete it in the CMS (or overwrite it with a real event) before launch.
+
 Still open:
 
 - **MANUAL-TODO FA–FD**: done 2026-11-24 in the Designer and Site
