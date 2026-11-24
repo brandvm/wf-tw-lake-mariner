@@ -131,7 +131,7 @@ In `prototype/src/modules/`, one file each, run from `prototype/src/main.ts`; al
 | band-inset | `data-band-inset`, `data-band-content` | the full-bleed photo draws in to an inset frame |
 | steps | `data-steps`, `data-step`, `data-steps-bar`, `data-steps-count` | step cards fill in turn beside a sticky heading with a progress line |
 | lightbox | `data-lightbox-group`, `data-lightbox`, `data-lightbox-item`, `data-lightbox-rich`, `data-full` | image viewer dialog with arrows and thumbnails; wraps rich-text images by itself |
-| video-modal | `data-video-open`, `data-video-src`, `data-video-title` | the video in a dialog; "Video coming soon" without a src |
+| video-modal | `data-video-open`, `data-video-src`, `data-video-title`, `data-video-captions` | the video in a dialog: YouTube/Vimeo links as an embed, a video file (.mp4/.webm/.mov) in a native player with its captions track; "Video coming soon" without a src |
 | benefits | `data-benefits`, `data-benefit-grid`, `data-benefit`, `data-benefit-progress` | the active Benefit box grows and hands over on a 4 s timer while on screen |
 | loop-modes | `data-loop-modes` (ms), `data-loop-tab`, `data-loop-video` | Cooling › Inside the Loop: two looping diagram videos, tabs switch them, alternates while on screen until a tab is clicked; posters only with reduced motion (added 2026-11-12) |
 | quote-slider | `data-quote-slider`, `data-quote-slide`, `data-quote-bg`, `data-quote-prev`, `data-quote-next`, `data-quote-count` | quote and background photo change together; arrows, keys, swipe |
@@ -150,7 +150,7 @@ In `prototype/src/modules/`, one file each, run from `prototype/src/main.ts`; al
 
 | Video | Where | Status |
 | --- | --- | --- |
-| Meet our employees | Careers and Community Impact › Video Frame (Play Video) | in since 2026-11-24: youtube.com/watch?v=EPB3uiyWuoo (from the designer's Figma annotation; the video is "TeraWulf's Topping Out Ceremony", confirm it is the one meant) |
+| Meet our employees | Careers and Community Impact › Video Frame (Play Video) | in since 2026-11-24: the old site's own "Meet our employees" film (2:12), self-hosted on Lake Mariner's CDN (`6b05f051a36936cb4add32b3_lmd-meet-our-employees.mp4`, 1080p, 28 MB) with English captions (`6b05f5547abab491748580b7_lmd-meet-our-employees-captions.vtt`); client to confirm, and to send the original export if they have one |
 | Cooling explained | Closed-Loop Cooling hero (Watch Cooling Explained) | file or YouTube URL needed |
 | About TeraWulf | Project Overview › About TeraWulf media (a video in Figma; a still is used) | file needed; then the Media page (`/design/media`) holds it |
 
@@ -218,7 +218,7 @@ The interaction level is set by two reference sites (2026-10-27): marketcap.webf
 | "Subscribe to updates" (Events) | no target | a Webflow form, a newsletter tool, or the campus Facebook page |
 | Privacy and Cookie policy | footer links to `#`; the live campus site has no legal pages | terawulf.com/legal/privacy-policy (cookie section `#cookie`), or campus pages |
 | Social links | LinkedIn, X, Instagram (TeraWulf's, as on terawulf.com); Facebook removed 2026-11-24 | done |
-| Videos | Cooling Explained, About TeraWulf (Meet our employees is in, 2026-11-24) | files or YouTube URLs needed; paste the YouTube or Vimeo page link into Video URL, the module turns it into an embed |
+| Videos | Cooling Explained, About TeraWulf (Meet our employees is in, 2026-11-24) | files or YouTube URLs needed. Video URL takes a YouTube or Vimeo page link (embedded), or a self-hosted video file URL (.mp4) with a `.vtt` in Captions URL; self-host only files under Webflow's 30 MB asset limit |
 | Cooling operations accordion | "Maintenance and Longevity" and "Continuous Operations During Maintenance" have no copy in the Figma | copy from the client; the items say "Copy to come" |
 | How It Works eyebrow | "Lorem Ipsum" in the Figma | a real eyebrow line, or none |
 | Past events on the Event template | the page looks the same before and after the event | hide RSVP and Add to calendar once the end date has passed (Webflow conditional visibility on the date, or calendar-links sets a state) |
