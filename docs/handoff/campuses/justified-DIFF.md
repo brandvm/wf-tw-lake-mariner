@@ -181,11 +181,11 @@ Not moved, and why:
 - **Videos** (local only, in `Assets/justified/live-site/`): `video-careers.mp4` ("Meet Our Employees", 2:12, 1080p, with sound, 51 MB, Lake Mariner footage; the live Careers page plays it from Squarespace) and `video-home.mp4` (35 s aerial of the Justified site with the title burned in, the live Home hero). Webflow hosts video only as muted background loops of 30 MB or less, so the careers video needs a YouTube or Vimeo home before the live site goes down. Open question for the client.
 
 Links repointed:
-- **Project Overview › Responsible Development › item 3 "HERE":** `cayugadatacampus.com/newsroom/built-for-the-future-…` now goes to `https://www.lakehawkeyedata.com/news/built-for-the-future-how-terawulf-is-redefining-sustainable-infrastructure`, Lake Hawkeye's Webflow post (user's choice). It returns 404 until Lake Hawkeye launches on Webflow. cayugadatacampus.com now redirects to Lake Hawkeye's Squarespace newsroom, which is also going away.
+- **Project Overview › Responsible Development › item 3 "HERE":** stays on `https://www.cayugadatacampus.com/newsroom/built-for-the-future-how-terawulf-is-redefining-sustainable-infrastructure`. The Cayuga site is staying (user, 2026-11-24), so no Cayuga files were moved. The link was briefly pointed at Lake Hawkeye's /news/ URL the same day, then restored and republished.
 - **Style guide** (component defaults): C | Doc Accordion Item › Link and C | Source Card › Link now point to Justified's own info-session PDF (Source Card › Link Text "Justified Information Session Presentation (PDF)"), not lakehawkeyedata.com.
 - **CMS:** no field points at the old domain, Squarespace or another campus site (checked every item in News, Events, Documents, FAQs, Testimonials, Perks). The Documents item already used the Webflow copy of the info-session PDF (same bytes, MD5 279f2c2a…).
 
-Checked: all 35 published pages of tw-justified.webflow.io, grepped for justifieddatacampus.com/s/, squarespace, sqspcdn, cayugadatacampus, lakehawkeyedata, lakemarinerdata and muskiedata. The only hit is the Lake Hawkeye /news/ link above. The remaining justifieddatacampus.com references are the new site's own canonical and schema URLs, which become live when the domain moves to Webflow.
+Checked: all 35 published pages of tw-justified.webflow.io, grepped for justifieddatacampus.com/s/, squarespace, sqspcdn, lakehawkeyedata, lakemarinerdata and muskiedata: no hits. The Cayuga article link above is intended. The remaining justifieddatacampus.com references are the new site's own canonical and schema URLs, which become live when the domain moves to Webflow.
 
 301 redirects for files (add in Site settings › Publishing › 301 redirects when the domain moves):
 
