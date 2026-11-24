@@ -59,10 +59,13 @@ again at each gate, so the steps are found early and not at the end:
 
 ## To do
 
-0 rows a person still has to do in the Designer. When one is done, Claude ticks it and moves it to Done.
+5 rows a person still has to do in the Designer. When one is done, Claude ticks it and moves it to Done.
 
 | ID | Where (page › element or class) | Breakpoint | Set | Why the API can't | Done |
 | --- | --- | --- | --- | --- | --- |
+| EA | **Justified** (tw-justified) › Site settings › General › Favicon and Webclip | — | Favicon: upload `Assets/favicon/favicon-jd-512.png` (Justified's own shield, signal arcs, transparent). Webclip: `Assets/favicon/webclip-jd-256.png` (shield on Night). Publish. Then Claude checks the published icon links | the favicon and webclip aren't in the Webflow API (same as DT on Lake Mariner). Until then Justified shows Lake Mariner's water shield in the tab | |
+| EB | **Justified** › rich-text props: Project Overview › C \| Highlight Tabs › Text 4 ("here" → /community-impact); Responsible Development › item 1 ("here" → /faq, J2) and item 3 ("HERE" → https://www.cayugadatacampus.com/newsroom/built-for-the-future-how-terawulf-is-redefining-sustainable-infrastructure, new tab); Community Impact › How Your Community Benefits › item 1 ("HERE" → /faq), item 4 ("HERE" → /careers), item 6 ("charitable contributions" → https://www.terawulf.com/our-impact?our-impact=charitable-foundation, new tab) | — | Select the instance › Properties › the prop's Edit Rich Text, select the words, add the link (GOTCHAS 2026-11-12) | a rich-text prop takes plain text through the API (same as BB, BM) | |
+| EC | **Justified** › Events Template › C \| Download Card (Reserve your spot) | — | Conditional visibility: show only when RSVP URL is set (same as GA). Justified's events have no RSVP link | conditional visibility on a CMS field isn't in the API | |
 | GA | **Lake Hawkeye** (tw-lake-hawkeye) › Events Template › C \| Download Card (Reserve your spot) | — | Element settings › Conditional visibility: show only when RSVP URL is set. Lake Hawkeye's events have no RSVP link, so the card shows a dead Reserve button | conditional visibility on a CMS field isn't in the API (`set_visibility` binds to props only) | |
 
 ## Done

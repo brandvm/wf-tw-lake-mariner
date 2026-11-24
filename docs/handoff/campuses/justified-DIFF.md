@@ -107,6 +107,30 @@ webclip change too.
 4. **Page content and photos:** Home, PO, CI, FAQ, Events as above.
 5. **Sections:** PO promo out and Responsible Development to 4 items; CI four sections out; FAQ Propylene section and pills out; Cooling page to draft and its links removed (J1, decided).
 
-## Status
+## Status (2026-11-24, evening)
 
-Nothing written to Webflow yet (2026-11-24): waiting for the `webflow-tw-justified` sign-in and the go-ahead per batch.
+Built and published on tw-justified.webflow.io (batches 1–5, user's go-ahead):
+
+- **Batch 1, port:** every CAMPUS-PORT row for Justified (head code with `og:site_name` "Justified Data", Home/News/Event schema from `docs/seo/schema/justified/`, FAQ share image and re-ingested hero, Empty Card loading props, eager /news lead image). The Cooling poster row is n/a.
+- **Batch 2, branding:** nav logos (white and dark, 144×49, Nav Logo 9em / 7.5em), footer logo (vertical), Justified's shield on every hero (Hero Mark) and on news cards without a photo, footer line and e-mail, Cooling links out of the nav and footer, page titles and descriptions "… — Justified Data", template titles. Favicon files ready (`Assets/favicon/favicon-jd-512.png`, `webclip-jd-256.png`): MANUAL-TODO EA.
+- **Batch 3, CMS:** 13 FAQs (General; Show on Home: community, water, noise, electricity), 1 Document (the info-session PDF, re-hosted on Webflow; Resources group, Project Overview only), 18 news posts (17 from the design plus "TeraWulf starts construction", 23 Nov, from the live newsroom; covers from the Figma cards; featured: Fluor, fire trucks, noise levels, noise study), 7 events (types Hiring Event, Community Meeting, Contractor Event, Career Expo; the design's single event photo on all). Lake Mariner's posts, documents and events are deleted; Testimonials kept (J5); the unused Event Perks and the Webinar type stay in the collections.
+- **Batch 4, content:** Home (hero, facts, statement, 401/401/0 MW, highlights, aerial photo, Explore card), Project Overview (hero and photo, About TeraWulf without "sustainably powered", About the Project, five tabs, four Responsible Development items, photo), Community Impact (hero line, How Your Community Benefits ×7, environment cards, investment statement, grid answers), FAQ hero line, Events empty-state line, announcement bar → /events.
+- **Batch 5, sections:** Project Overview: Cooling promo and Initiatives out, Responsible Development to 4 items. Community Impact: rates row, Meet Our Employees, testimonials, Resources and Initiatives out. FAQ: Propylene glycol section and category pills out. Closed-Loop Cooling page set to draft (404 on staging).
+
+Checked at 1440, 820 and 390 (full-page captures of all nine pages): no Lake Mariner, Barker, Ontario or NYISO text left except where noted below.
+
+## Left / differences from the design
+
+| # | What | Why / next step |
+| --- | --- | --- |
+| L1 | Favicon and webclip still Lake Mariner's shield | MANUAL-TODO EA (Site settings upload) |
+| L2 | Six links inside rich-text props have no link yet (PO tab 4 "here", RD items 1 and 3, CI benefits items 1, 4, 6) | MANUAL-TODO EB (Designer) |
+| L3 | Event pages show the Reserve card with no RSVP link | MANUAL-TODO EC (conditional visibility, as GA on Lake Hawkeye) |
+| L4 | Upcoming events: the design shows the 22 Oct career fair as upcoming; it has passed, so /events shows the empty card ("TeraWulf plans to schedule…") and the fair in Past | data-driven, correct for today |
+| L5 | Home FAQ order: the design shows water first; the list sorts by Order, so the community question (Order 1, as on the live FAQ page) comes first | change Order if the client wants water first |
+| L6 | News posts from other publishers have a one-line body and a Source card linking out; excerpts are generic ("Coverage of the Justified Data Campus from …") | the live site links out without text; client can add summaries |
+| L7 | Careers testimonials and roles are Lake Mariner's (as in the design and the live Justified site) | J5 |
+| L8 | Announcement bar keeps the design's text (hiring event for data center operators), now linking to /events | confirm text with the client |
+| L9 | CI environment card 1 button says "Read the FAQ" (design: "CTA"), card 3 keeps "NYISO 2025 report" | J2, J4 |
+| L10 | Project Overview hero photo is 1024 px wide in the design export | ask for a larger file |
+| L11 | Highlight tab photos and the About TeraWulf video still are Lake Mariner's (same in the design) | J7 |
