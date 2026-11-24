@@ -59,11 +59,13 @@ again at each gate, so the steps are found early and not at the end:
 
 ## To do
 
-1 row a person still has to do in the Designer. When one is done, Claude ticks it and moves it to Done.
+3 rows a person still has to do in the Designer. When one is done, Claude ticks it and moves it to Done.
 
 | ID | Where (page › element or class) | Breakpoint | Set | Why the API can't | Done |
 | --- | --- | --- | --- | --- | --- |
 | EA | **Justified** (tw-justified) › Site settings › General › Favicon and Webclip | — | Favicon: upload `Assets/favicon/favicon-jd-512.png` (Justified's own shield, signal arcs, transparent). Webclip: `Assets/favicon/webclip-jd-256.png` (shield on Night). Publish. Then Claude checks the published icon links | the favicon and webclip aren't in the Webflow API (same as DT on Lake Mariner). Until then Justified shows Lake Mariner's water shield in the tab | |
+| GB | **Lake Hawkeye** › Project Overview › C \| Highlight Tabs instance › Text 1 Rich and Text 3 | — | Text 1 Rich: select the five lines after the lead sentence and click the bulleted-list button (the design shows them as a list). Text 3: link "letters of support" to the same PDF as the Documents item "Local Contractors Letters of Support". Select the instance › Properties › Edit Rich Text (GOTCHAS 2026-11-12) | a rich-text prop takes plain paragraphs through the API: no lists, no links (same as BB, EB) | |
+| GC | **Lake Hawkeye** › Community Impact › Strengthening The Grid › C \| Accordion Item 2 (Privately Funded Upgrades) › Answer; Community benefits › Closed-loop cooling card text | — | Answer: link "HERE" to NYSEG's RFI response, https://www.lakehawkeyedata.com/s/Anna-Kelles-Request-for-Information_NYSEGC.pdf (re-host it on Webflow before launch, like the other lakehawkeyedata.com/s/ PDFs). Card: link "closed-loop system" to /closed-loop-cooling (a plain paragraph: select the words, Link settings) | a rich-text prop takes plain text through the API; a link inside an existing plain paragraph needs the text split, which the API can't do | |
 
 ## Done
 

@@ -27,7 +27,7 @@ Webflow duplicates of it.
 | Lake Mariner Data | Lake Mariner Data (TeraWulf) | `6ae0f7d7bcf5d7622aeac214` | tw-lake-mariner.webflow.io | `webflow-tw-lake-mariner` | built; launch prep |
 | Justified Data | Justified Data (TeraWulf) | `6b05c58e6a2daeafb0769727` | tw-justified.webflow.io | `webflow-tw-justified` | Justified content built and published 2026-11-24 (batches 1–5); Cooling page dropped; Build Review row 2 done; open: favicon (MANUAL-TODO EA; EB, EC done), `campuses/justified-DIFF.md` |
 | Muskie Data | Muskie Data (TeraWulf) | `6b05c5e78050528a5b59dc6a` | tw-muskie.webflow.io | `webflow-tw-muskie` | Muskie content built and published 2026-11-24 (batches 1–5): SEO and schema, logos, CMS, page copy and photos, Cooling page unpublished; MANUAL-TODO FA–FD done the same day; open items in `campuses/muskie-DIFF.md` (fact sheet file, figures to confirm) |
-| Lake Hawkeye Data | Lake Hawkeye Data (TeraWulf) | `6b05cabde86e14300445c161` | tw-lake-hawkeye.webflow.io | `webflow-tw-lake-hawkeye` | duplicated 2026-11-24 (after SEO batch A), published; still Lake Mariner content |
+| Lake Hawkeye Data | Lake Hawkeye Data (TeraWulf) | `6b05cabde86e14300445c161` | tw-lake-hawkeye.webflow.io | `webflow-tw-lake-hawkeye` | duplicated 2026-11-24; Lake Hawkeye content and section changes built and published 2026-11-24 (batches 1–4, `campuses/lake-hawkeye-DIFF.md`); open: MANUAL-TODO GB, GC and the client questions in the DIFF |
 | Chesapeake Data & Energy | Chesapeake Data & Energy (TeraWulf) | `6b05cb19b2bc6f51aa8e5019` | tw-chesapeake.webflow.io | `webflow-tw-chesapeake` | duplicated 2026-11-24 (after SEO batch A), published; still Lake Mariner content; Figma row still in progress |
 
 Lake Hawkeye and Chesapeake were made later the same day, after slots were freed in the workspace, so they already carry SEO batch A (`CAMPUS-PORT.md`).
@@ -81,7 +81,7 @@ sections.
 | 2 | Justified Data | 13000 | `2789:2009` |
 | 3 | Muskie Data | 26000 | `2789:2010` |
 | 4 | Lake Hawkeye Data | 39000 | `2789:2011` |
-| 5 | Chesapeake Data & Energy | 52000 | `2789:2012` |
+| 5 | Chesapeake Data & Energy | 57000 (moved down 2026-11-24: Lake Hawkeye's row runs to 55705) | `2789:2012` |
 
 Columns (section x, the same in every row; each section is 5410 wide with
 a 400 gap): 01 Home 0 · 02 Project Overview 5810 · 03 Community Impact 11620 ·
