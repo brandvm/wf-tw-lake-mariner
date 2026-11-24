@@ -7,7 +7,7 @@ skill). Agents read this file after `HANDOFF.md` once it has a status line.
 
 ## Status
 
-2026-11-24 — launch blockers marked in Figma (Clean Pages, Lake Mariner row): a summary note "Launch blockers — Lake Mariner Data" above the row, and 20 annotations in the red "Launch blocker" category on the frames (videos, `#` links, Documents without files, missing copy, sample posts and events). Turn a blocker's annotation off, or delete it, when it is resolved.
+2026-11-24 — client-facing launch blockers are Figma annotations (Clean Pages, Lake Mariner row; Dev Mode or the annotations toggle shows them): 20 in the red "Launch blocker" category on the frames (videos, `#` links, Documents without files, missing copy, testimonial names, sample posts and events). Client asks only: Brand Vision's own to-dos stay in this repo (BUILD-NOTES › Known issues), never in Figma. Delete an annotation when its item is resolved.
 
 2026-11-12 — round 1 feedback received (client PDF "Terawulf - Lake Mariner"). Staging:
 `https://tw-lake-mariner.webflow.io`. Waiting on: FAQ page content, Facebook URL, Benefits layout go-ahead. Figma has a second set of client comments (Chloe, 2026-11-12, ~40 threads) not yet logged as a round.
