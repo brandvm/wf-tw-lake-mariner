@@ -130,7 +130,7 @@ Figma Build Review row 2 (y 13000): all nine pages, each with Justified's Clean 
 | L1 | ~~Favicon and webclip still Lake Mariner's shield~~ Justified's own shield and navy webclip, 2026-11-24 (MANUAL-TODO EA) | — |
 | L2 | ~~Six links inside rich-text props~~ done 2026-11-24 (MANUAL-TODO EB) | — |
 | L3 | ~~Reserve card with no RSVP link~~ hidden when RSVP URL is empty, 2026-11-24 (MANUAL-TODO EC) | — |
-| L4 | Upcoming events: the design shows the 22 Oct career fair as upcoming; it has passed, so /events shows the empty card ("TeraWulf plans to schedule…") and the fair in Past | data-driven, correct for today |
+| L4 | Upcoming events: the design shows the 22 Oct career fair as upcoming; it has passed, so it is under Past. Since 2026-11-24 the sample event fills Upcoming (see the sample-event note); without it /events shows the empty card | data-driven, correct for today; the sample goes before launch |
 | L5 | Home FAQ order: the design shows water first; the list sorts by Order, so the community question (Order 1, as on the live FAQ page) comes first | change Order if the client wants water first |
 | L6 | News posts from other publishers have a one-line body and a Source card linking out; excerpts are generic ("Coverage of the Justified Data Campus from …") | the live site links out without text; client can add summaries |
 | L7 | Careers testimonials and roles are Lake Mariner's (as in the design and the live Justified site) | J5 |
