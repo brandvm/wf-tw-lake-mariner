@@ -185,7 +185,7 @@ Left from batch 3:
 
 Left from batch 2:
 - ~~Document links and several post links point at lakehawkeyedata.com/s/… PDFs on Squarespace~~ done 2026-11-24: the 8 PDFs are Webflow assets (originals in `Assets/lake-hawkeye-pdfs/`; Letters of Support was already on the site from the Lake Mariner copy), and every link points at them: Documents (4 items, URL and the study's description), news bodies (energy pricing, open letter, open-house recap, webinar), the webinar event body, Project Overview tab 3 and the Community Impact grid "HERE" (Designer). Published: no lakehawkeyedata.com/s/ link left on staging, all 8 files 200.
-- News Source links: 5 posts from lakehawkeyedata.com's own newsroom keep Source URL `https://www.lakehawkeyedata.com/newsroom/<slug>`. Once the domain points at Webflow those paths 404 unless the redirect map sends `/newsroom/(.*)` to `/news/%1` (the slugs match). Add that redirect at launch, or point the Source URLs at `/news/<slug>`.
+- ~~News Source links to lakehawkeyedata.com/newsroom/~~ done 2026-11-24: the 5 posts from Lake Hawkeye's own newsroom have Source URL `/news/<slug>` (relative, accepted by the Link field), so the Source card points at the post on this site. Published: no lakehawkeyedata.com/newsroom link left. Still worth a launch redirect `/newsroom/(.*)` → `/news/%1` for old inbound links.
 - The 6 Resources & Documents items are the copy's (Cayuga study, Lansing planning board…) with placeholder descriptions.
 
 Left from batch 1: the FAQ Open Graph image is still Lake Mariner's FAQ photo (changes with the FAQ hero).
