@@ -165,10 +165,16 @@ None. Lake Hawkeye has the same 10 pages, the Cooling page included.
 | Batch | What | State |
 | --- | --- | --- |
 | 1 · site and global | og:site_name, Home schema, News and Event template head code (lakehawkeyedata.com, Lansing NY), SEO title and description on every page and both templates, nav logos (light and dark) and footer logo from the Figma nav/footer (`Assets/figma/lake-hawkeye/`), logo classes sized to the new files (Nav Logo 11.8125em / 9.875em small, aspect 189/48; Footer Logo 12.75em, aspect 204/141), footer campus line and e-mail, logo link aria-labels | done 2026-11-24, published |
-| 2 · CMS | news, categories, events, event types, documents, FAQs | next |
+| 2 · CMS | FAQs: Lake Mariner's 7 General replaced by Lake Hawkeye's 15 (lakehawkeyedata.com/faq), 4 on Home; the 4 propylene glycol FAQs kept. News: the 9 sample posts replaced by the 16 from lakehawkeyedata.com/newsroom (bodies cleaned from Squarespace markup, body images re-hosted by Webflow as WebP), categories + Media Coverage, Videos, Podcasts with their pills on /news, newest 4 Featured; covers for 10 posts exported from the Figma News frame (`Assets/figma/lake-hawkeye/news/`), the other 6 show the shield fallback as in Figma; Source Name is the outlet, or Lake Hawkeye Data with the post's lakehawkeyedata.com URL. Events: the 5 samples replaced by Lake Hawkeye's 6 (Dec 1 open house upcoming), types Open House, Webinar, Town Board, Info Session; the empty perks list hidden (class Perk Grid Empty). Documents: NYSERDA, Lansing Community Council and Lansing CSD donation added to Initiatives, Letters of Support linked. Announcement bar → the Dec 1 open house | done 2026-11-24, published |
 | 3 · page content and photos | heroes, statements, facts, stats, Explore text, section copy | to do |
 | 4 · section differences | 6th Highlight tab, Topping Out section, rates Learn More, upcoming event card | to do |
 
 Done-list for every page: when a page is finished on tw-lake-hawkeye.webflow.io, add its section to row 4 (Lake Hawkeye, y 39000) of the Figma Build Review page (`2556:2`), in that page's column, as `CAMPUSES.md` › "Compare page in Figma" describes: Lake Hawkeye's Clean Pages frame, staging screenshots at 1680, 820 and 390, and red or ✓ green markers. Pages finished so far: none (batch 1 changed only global parts).
+
+Left from batch 2:
+- The RSVP card shows on every event with a dead Reserve button (no Lake Hawkeye event has an RSVP link): MANUAL-TODO GA.
+- The Figma events use their own photos (a crowd in TeraWulf vests, a group in orange shirts); the copy's sample event photos stand in until batch 3.
+- Document links and several post links point at lakehawkeyedata.com/s/… PDFs on Squarespace. They break when the domain moves to Webflow: download the PDFs and upload them to Webflow before launch.
+- The 6 Resources & Documents items are the copy's (Cayuga study, Lansing planning board…) with placeholder descriptions.
 
 Left from batch 1: the FAQ Open Graph image is still Lake Mariner's FAQ photo (changes with the FAQ hero); the announcement bar still advertises Lake Mariner's hiring event (batch 2, with the events).

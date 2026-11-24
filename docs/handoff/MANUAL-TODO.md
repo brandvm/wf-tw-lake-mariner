@@ -63,6 +63,7 @@ again at each gate, so the steps are found early and not at the end:
 
 | ID | Where (page › element or class) | Breakpoint | Set | Why the API can't | Done |
 | --- | --- | --- | --- | --- | --- |
+| GA | **Lake Hawkeye** (tw-lake-hawkeye) › Events Template › C \| Download Card (Reserve your spot) | — | Element settings › Conditional visibility: show only when RSVP URL is set. Lake Hawkeye's events have no RSVP link, so the card shows a dead Reserve button | conditional visibility on a CMS field isn't in the API (`set_visibility` binds to props only) | |
 
 ## Done
 
