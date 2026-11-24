@@ -144,12 +144,12 @@ Every old URL → its closest new page. Crawled 2026-11-24 from the live Squares
 | `/newsroom/tag/(.*)` | `/news` | 301 |
 | `/newsroom/(.*)` | `/news` | 301 |
 | `/s/Letters-of-Support_Local-Contractors.pdf` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6af643e559a3e0fc228dd034_Letters-of-Support_Local-Contractors.pdf | 301 |
-| `/s/Anna-Kelles-Request-for-Information_NYSEGC.pdf` | https://cdn.prod.website-files.com/6b05cabde86e14300445c161/6b05e46b05e33fd43343e986_Anna-Kelles-Request-for-Information_NYSEGC.pdf | 301 |
+| `/s/Anna-Kelles-Request-for-Information_NYSEGC.pdf` | https://cdn.prod.website-files.com/6ae0f7d7bcf5d7622aeac214/6b05ee68b656341c0b4ceba5_Anna-Kelles-Request-for-Information_NYSEGC.pdf | 301 |
 
 Unchanged paths, no redirect needed: `/project-overview`, `/community-impact`, `/closed-loop-cooling`, `/faq`, `/events`, `/events/terawulf-hiring-event-data-center-operators`. `/careers` is new on Webflow. Notes:
 - "How data centers are transforming local communities" is on the live newsroom but not in this site's News Posts, so it goes to `/news`; if the post is added, point the row at its slug.
 - The category pages have no per-category URL on Webflow (the pills filter in place), so they land on `/news`.
-- The NYSEG RFI PDF is linked from the live site but has no copy on this site; the row points at the Lake Hawkeye site's Webflow copy (re-hosted 2026-11-24). Upload it here instead if the two sites must not depend on each other. If Webflow refuses absolute targets, leave the two `/s/` rows out.
+- The NYSEG RFI PDF: the live site links `/s/Anna-Kelles-Request-for-Information_NYSEGC.pdf`, but that path already returns a Squarespace 404 on lakemarinerdata.com (the file only exists on lakehawkeyedata.com). Since 2026-11-24 the PDF is a Lake Mariner asset (`6b05ee68b656341c0b4ceba5`, the Lake Hawkeye file), and the row points at it, so the old link works again after launch. If Webflow refuses absolute targets, leave the two `/s/` rows out.
 - The Documents item "Third-Party Independent Study" linked to `lakehawkeyedata.com/s/Independent-Assessment-of-the-Proposed-Cayuga-Data-Campus.pdf` (URL and description), which breaks when Lake Hawkeye's domain moves to Webflow. Since 2026-11-24 the PDF is a Lake Mariner asset (`6b05ee23402946e6b0ff1c84`, same file, 16.8 MB) and both links point at it; published, checked on Project Overview and Community Impact (no link to another site left).
 - `/cart` (a Squarespace default link) is not mapped.
 
