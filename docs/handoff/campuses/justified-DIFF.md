@@ -125,7 +125,7 @@ Figma Build Review row 2 (y 13000): all nine pages, each with Justified's Clean 
 
 | # | What | Why / next step |
 | --- | --- | --- |
-| L1 | Favicon and webclip still Lake Mariner's shield | MANUAL-TODO EA (Site settings upload) |
+| L1 | ~~Favicon and webclip still Lake Mariner's shield~~ Justified's own shield and navy webclip, 2026-11-24 (MANUAL-TODO EA) | — |
 | L2 | ~~Six links inside rich-text props~~ done 2026-11-24 (MANUAL-TODO EB) | — |
 | L3 | ~~Reserve card with no RSVP link~~ hidden when RSVP URL is empty, 2026-11-24 (MANUAL-TODO EC) | — |
 | L4 | Upcoming events: the design shows the 22 Oct career fair as upcoming; it has passed, so /events shows the empty card ("TeraWulf plans to schedule…") and the fair in Past | data-driven, correct for today |
