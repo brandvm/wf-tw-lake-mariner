@@ -1,0 +1,23 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "NewsArticle",
+      "@id": "https://muskiedatacampus.com/news/{Slug}#article",
+      "mainEntityOfPage": "https://muskiedatacampus.com/news/{Slug}",
+      "headline": "{Name}",
+      "image": ["{Cover Image}"],
+      "datePublished": "{Publish Date}",
+      "author": { "@type": "Person", "name": "{Author}" },
+      "publisher": { "@id": "https://muskiedatacampus.com/#organization" },
+      "isPartOf": { "@id": "https://muskiedatacampus.com/#website" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "News", "item": "https://muskiedatacampus.com/news" },
+        { "@type": "ListItem", "position": 2, "name": "{Name}", "item": "https://muskiedatacampus.com/news/{Slug}" }
+      ]
+    }
+  ]
+}
