@@ -150,7 +150,7 @@ In `prototype/src/modules/`, one file each, run from `prototype/src/main.ts`; al
 
 | Video | Where | Status |
 | --- | --- | --- |
-| Meet our employees | Careers › Video Frame (Play Video) | file or YouTube URL needed; the dialog says "Video coming soon" |
+| Meet our employees | Careers and Community Impact › Video Frame (Play Video) | in since 2026-11-24: youtube.com/watch?v=EPB3uiyWuoo (from the designer's Figma annotation; the video is "TeraWulf's Topping Out Ceremony", confirm it is the one meant) |
 | Cooling explained | Closed-Loop Cooling hero (Watch Cooling Explained) | file or YouTube URL needed |
 | About TeraWulf | Project Overview › About TeraWulf media (a video in Figma; a still is used) | file needed; then the Media page (`/design/media`) holds it |
 
@@ -218,7 +218,7 @@ The interaction level is set by two reference sites (2026-10-27): marketcap.webf
 | "Subscribe to updates" (Events) | no target | a Webflow form, a newsletter tool, or the campus Facebook page |
 | Privacy and Cookie policy | footer links to `#`; the live campus site has no legal pages | terawulf.com/legal/privacy-policy (cookie section `#cookie`), or campus pages |
 | Social links | LinkedIn, X, Instagram (TeraWulf's, as on terawulf.com); Facebook removed 2026-11-24 | done |
-| Videos | Meet our employees, Cooling Explained, About TeraWulf | files or YouTube URLs needed |
+| Videos | Cooling Explained, About TeraWulf (Meet our employees is in, 2026-11-24) | files or YouTube URLs needed; paste the YouTube or Vimeo page link into Video URL, the module turns it into an embed |
 | Cooling operations accordion | "Maintenance and Longevity" and "Continuous Operations During Maintenance" have no copy in the Figma | copy from the client; the items say "Copy to come" |
 | How It Works eyebrow | "Lorem Ipsum" in the Figma | a real eyebrow line, or none |
 | Past events on the Event template | the page looks the same before and after the event | hide RSVP and Add to calendar once the end date has passed (Webflow conditional visibility on the date, or calendar-links sets a state) |
