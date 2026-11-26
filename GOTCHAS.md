@@ -758,3 +758,12 @@ collected from client repos into those files.
 - Fix: `.article-byline-dot:has(+ * > .w-dyn-bind-empty)` (the relative selector walks to the sibling's child). Check a new `:has()` rule against the published page, not only the build.
 - Status: fixed (see the commit that adds this entry)
 - Found by: claude
+
+### 2026-11-26 · A centred fact bar with longer campus copy runs off both edges, and `wf:overflow` doesn't see it
+- Area: css
+- Scope: template-candidate
+- Symptom: on Chesapeake the Home Key Highlights bar (C | Fact Bar, `white-space: nowrap`, `left: 50%` + `translateX(-50%)`) was 1173–1340 px wide between 768 and 1200 px, so it ran off both screen edges (x −286 at 768). Lake Mariner's three highlights are shorter and fit. `wf:overflow` reported "nothing passes the right edge" at all 13 widths.
+- Cause: nothing limits the width of a nowrap, translate-centred absolute box; its section clips (`overflow: clip`), so the document never scrolls and the overflow check (which looks for elements past the right edge of the viewport) never sees a box cut on both sides.
+- Fix (Chesapeake, Webflow): Fact Bar `width: max-content; max-width: calc(100vw - 8em)` (Tablet `- 5em`), `white-space: normal`: the bar keeps one row and each item's text wraps inside its column (dividers stay between items). Wrapping the items themselves (`flex-wrap`) left dividers hanging at line ends. Other campuses with long highlights need the same check; Lake Mariner's QA found it too (N1). The overflow script should also flag elements whose box starts left of 0 inside a clipping ancestor.
+- Status: fixed on Chesapeake (Webflow, 2026-11-26); script not changed
+- Found by: claude

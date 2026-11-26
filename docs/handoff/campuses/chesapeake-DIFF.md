@@ -235,6 +235,8 @@ The Build Review found five red pages; four were fixed the same day, published, 
 Still open:
 - Client questions C1 (footer e-mail) and C3 (Chesapeake's own accordion photo).
 
+**Launch QA (2026-11-26):** `docs/handoff/qa/chesapeake.md` — design re-check, pre-launch checks, fixes N1–N7 (statement width, aerial height, Key Highlights bar at tablet widths, CI heading, a Lake Mariner alt, footer links, the Careers film), the client punch list and the launch steps.
+
 ## Status
 
 | Batch | What | State |
