@@ -56,9 +56,10 @@ Still open:
 - **Key figures** 800 / 0 / 800 MW built as in Figma (Q2), to confirm.
 - **CI card 3 button** reads "View openings" → /careers (Figma says
   "CTA"; Q6 default); EVAPCO button keeps Lake Mariner's brochure link.
-- **About the Project** (C | Collage): Figma colours part of sentence 1
-  muted and paragraph 2 dark; the component's Statement/Muted split gives
-  sentence 1 dark and paragraph 2 muted.
+- ~~**About the Project** (C | Collage): Figma colours part of sentence 1
+  muted and paragraph 2 dark~~ fixed 2026-11-26 (launch QA): C | Collage has
+  new props Show Text + Text (off by default) and the Project Overview
+  instance uses the design's split. See `qa/muskie.md`.
 - **Home FAQ order**: one Order field serves Home and /faq, so Home shows
   communities, water, noise, prices (Figma: water first).
 - **Highlight tab photos** and the investment scene are Lake Mariner's
@@ -66,6 +67,13 @@ Still open:
 - **Event pages**: no tagline, no RSVP; the community meeting links the
   presentation (re-hosted on Webflow) and the YouTube replay.
 - Checked at 820 too (Home, Community Impact): layout holds; the Info cards become a swipe row.
+
+Launch QA 2026-11-26 (`qa/muskie.md`): Muskie's own shield on every hero and
+on news cards without a photo (they showed Lake Mariner's), /news subhead,
+Home statement width (C | Statement variant Wide), Community Impact
+Resources on Frost and its heading on 2 lines, empty Perks box hidden on
+event pages, article byline without empty Author/Read Time (repo CSS
+41626dd). Build Review row 3 re-shot and markers updated.
 
 ## Live-site files (2026-11-24)
 
