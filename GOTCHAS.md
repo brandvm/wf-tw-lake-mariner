@@ -765,5 +765,24 @@ collected from client repos into those files.
 - Symptom: on Chesapeake the Home Key Highlights bar (C | Fact Bar, `white-space: nowrap`, `left: 50%` + `translateX(-50%)`) was 1173–1340 px wide between 768 and 1200 px, so it ran off both screen edges (x −286 at 768). Lake Mariner's three highlights are shorter and fit. `wf:overflow` reported "nothing passes the right edge" at all 13 widths.
 - Cause: nothing limits the width of a nowrap, translate-centred absolute box; its section clips (`overflow: clip`), so the document never scrolls and the overflow check (which looks for elements past the right edge of the viewport) never sees a box cut on both sides.
 - Fix (Chesapeake, Webflow): Fact Bar `width: max-content; max-width: calc(100vw - 8em)` (Tablet `- 5em`), `white-space: normal`: the bar keeps one row and each item's text wraps inside its column (dividers stay between items). Wrapping the items themselves (`flex-wrap`) left dividers hanging at line ends. Other campuses with long highlights need the same check; Lake Mariner's QA found it too (N1). The overflow script should also flag elements whose box starts left of 0 inside a clipping ancestor.
-- Status: fixed on Chesapeake (Webflow, 2026-11-26); script not changed
+- Status: fixed on Chesapeake (Webflow, 2026-11-26); script not changed. Seen again on Justified the same day (first item at x −225 at 820, clipped 768–1110 px): fixed with base `width: max-content; max-width: calc(100% - 4em); white-space: normal` (the section is the containing block, so `100%` works too); Justified QA N3
 - Found by: claude
+
+### 2026-11-26 · The 404 utility page is reachable through the element and component tools
+- Area: mcp
+- Scope: template-candidate
+- Symptom: every campus 404 was a bare "404" heading, logged as "Designer only (utility page)" in the QA docs and HANDOFF.
+- Cause: the pages tool's `list_pages` does list the 404 (`slug: 404`, utility page), and `data_element_tool`, `data_component_tool` and `data_component_props_tool` accept its page id like any page; only page settings are limited.
+- Fix (Justified): `insert_component_instance` C | Page Hero `before` the old `Section Is Top` in the G | Main slot (a plain element in the slot is the anchor), props set (Heading, Text, Button Label/Link, Image); in the old section the bare H1 removed, class `Section`, a DOM `nav` with the existing `Quick Links` class (+ `width: 100%`) and six C | Button instances appended into it. Published: any unknown URL answers 404 with the new page; one H1; axe clean at 1440 and 390.
+- Status: done on Justified (2026-11-26); the other campuses can repeat it
+- Found by: claude
+
+### 2026-11-26 · A Figma image node can stack several image fills; the first raw image is not the visible one
+- Area: mcp
+- Scope: template-candidate
+- Symptom: Justified's "TeraWulf, Anthropic Donate Fire Trucks" post had a dark data-hall interior as its cover; the design card shows a group photo with two fire trucks.
+- Cause: the card's image node holds four IMAGE fills (two of the data hall, two of the group photo); `download_assets` lists them as `rawImages` in fill order, and the build took the first (largest, 3780 px) one, which is covered by the later fills.
+- Fix: compare each raw image with the node's export (`download_assets` › `export`, or `get_screenshot` of the node) and use the topmost visible fill (the last image fill in `node.fills`). The cover was replaced with the visible fill (768 px). Check every card image exported from Figma this way.
+- Status: fixed (Justified CMS, 2026-11-26)
+- Found by: claude
+

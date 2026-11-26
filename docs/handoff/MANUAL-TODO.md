@@ -59,10 +59,12 @@ again at each gate, so the steps are found early and not at the end:
 
 ## To do
 
-0 rows a person still has to do in the Designer. When one is done, Claude ticks it and moves it to Done.
+2 rows a person (or Claude in the Designer) still has to do. When one is done, Claude ticks it and moves it to Done.
 
 | ID | Where (page › element or class) | Breakpoint | Set | Why the API can't | Done |
 | --- | --- | --- | --- | --- | --- |
+| JA | **Justified** › Community Impact › Strengthening The Grid › C \| Accordion Item "Grid Connection" › Answer | — | Select the instance › Properties › Answer › Edit Rich Text, select "not impact local power availability or reliability" and press the toolbar's B (cmd+b does nothing there). Then Claude checks the published `<strong>` | a rich-text prop takes plain text through the API (same as BB, EB); found in the 2026-11-26 QA (N10) | ☐ |
+| JB | **Justified** › Home › C \| Page Hero › Image (`jd-home-hero.webp`, asset `6b088d43954df1a49d14f68f`) | — | With the Designer MCP app open on Justified, Claude re-ingests the asset with `asset_tool › upload_image_by_url` (its CDN URL, name without extension), sets the hero Image prop to the new asset, publishes and checks the hero `<img>` has `srcset` | the asset was uploaded through the assets API without the Designer open, so it has no responsive variants (GOTCHAS 2026-11-24); on 2026-11-26 the user's Chrome was signed into another Webflow account, so the Designer link 404'd | ☐ |
 
 ## Done
 
