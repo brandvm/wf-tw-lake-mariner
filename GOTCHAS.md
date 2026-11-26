@@ -765,7 +765,7 @@ collected from client repos into those files.
 - Symptom: on Chesapeake the Home Key Highlights bar (C | Fact Bar, `white-space: nowrap`, `left: 50%` + `translateX(-50%)`) was 1173–1340 px wide between 768 and 1200 px, so it ran off both screen edges (x −286 at 768). Lake Mariner's three highlights are shorter and fit. `wf:overflow` reported "nothing passes the right edge" at all 13 widths.
 - Cause: nothing limits the width of a nowrap, translate-centred absolute box; its section clips (`overflow: clip`), so the document never scrolls and the overflow check (which looks for elements past the right edge of the viewport) never sees a box cut on both sides.
 - Fix (Chesapeake, Webflow): Fact Bar `width: max-content; max-width: calc(100vw - 8em)` (Tablet `- 5em`), `white-space: normal`: the bar keeps one row and each item's text wraps inside its column (dividers stay between items). Wrapping the items themselves (`flex-wrap`) left dividers hanging at line ends. Other campuses with long highlights need the same check; Lake Mariner's QA found it too (N1). The overflow script should also flag elements whose box starts left of 0 inside a clipping ancestor.
-- Status: fixed on Chesapeake (Webflow, 2026-11-26); script not changed. Seen again on Justified the same day (first item at x −225 at 820, clipped 768–1110 px): fixed with base `width: max-content; max-width: calc(100% - 4em); white-space: normal` (the section is the containing block, so `100%` works too); Justified QA N3
+- Status: fixed on Chesapeake (Webflow, 2026-11-26); script not changed. Seen again on Justified the same day (first item at x −225 at 820, clipped 768–1110 px): fixed with base `width: max-content; max-width: calc(100% - 4em); white-space: normal` (the section is the containing block, so `100%` works too); Justified QA N3. Seen again on Lake Hawkeye (left edge at −304 px at 768, clipped 768–1200 px): same fix, Lake Hawkeye QA N9
 - Found by: claude
 
 ### 2026-11-26 · The 404 utility page is reachable through the element and component tools
@@ -784,5 +784,23 @@ collected from client repos into those files.
 - Cause: the card's image node holds four IMAGE fills (two of the data hall, two of the group photo); `download_assets` lists them as `rawImages` in fill order, and the build took the first (largest, 3780 px) one, which is covered by the later fills.
 - Fix: compare each raw image with the node's export (`download_assets` › `export`, or `get_screenshot` of the node) and use the topmost visible fill (the last image fill in `node.fills`). The cover was replaced with the visible fill (768 px). Check every card image exported from Figma this way.
 - Status: fixed (Justified CMS, 2026-11-26)
+- Found by: claude
+
+### 2026-11-26 · Exporting a Figma image fill at full size: get_screenshot never upscales
+- Area: mcp
+- Scope: template-candidate
+- Symptom: Lake Hawkeye's 3D news shield is a 176 × 188 node in the design (an image fill, CROP), and the Community benefits photos are 416 × 300 nodes; `get_screenshot` with a large `maxDimension` returned them at node size, too small for a 2× card. The plugin sandbox has no `fetch` and `getImageByHash().getBytesAsync()` bytes can only leave through the tool result.
+- Cause: `get_screenshot` scales down to `maxDimension` but never above the node's own size.
+- Fix: read the fill's natural size (`figma.getImageByHash(hash).getSizeAsync()`) and crop (`imageTransform`), create a temporary rectangle on a working page (here the Build Review page, far off to the side) at that size with a copy of the paint (FILL, or the CROP transform), `get_screenshot` it (comes back at full resolution, transparent where the image is), download the URL, delete the rectangle. Used for `news-post-shield-lhd.webp` (1155 × 1234 source) and the CI card photos (1291–1339 px). Never on the client-facing Clean Pages page.
+- Status: documented
+- Found by: claude
+
+### 2026-11-26 · The Designer app link moves a Claude in Chrome tab out of its tab group
+- Area: mcp
+- Scope: template-candidate
+- Symptom: opening `https://tw-lake-hawkeye.design.webflow.com?app=…` in a Claude in Chrome tab went through webflow.com (once to a webflow.com 404, "external/designer/tw-lake-hawkeye"); on the second try the tab left Claude's tab group, so it could no longer be driven or closed, and `designer_tool` still answered "Unable to connect".
+- Cause: unconfirmed: the Designer redirect seems to open or move the tab outside the extension's group. The Justified QA saw the same link 404 because the Chrome profile was signed into another Webflow workspace.
+- Fix: none in the session. Without the bridge, API uploads (`create_asset` + S3 POST) work but get no responsive variants; list the images for a later `upload_image_by_url` (Lake Hawkeye MANUAL-TODO LA). Check which Webflow account the Chrome profile is signed into before opening Designer links, and ask the person to open the link if the tab leaves the group.
+- Status: open
 - Found by: claude
 

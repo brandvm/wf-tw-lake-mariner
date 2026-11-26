@@ -59,12 +59,13 @@ again at each gate, so the steps are found early and not at the end:
 
 ## To do
 
-2 rows a person (or Claude in the Designer) still has to do. When one is done, Claude ticks it and moves it to Done.
+3 rows a person (or Claude in the Designer) still has to do. When one is done, Claude ticks it and moves it to Done.
 
 | ID | Where (page › element or class) | Breakpoint | Set | Why the API can't | Done |
 | --- | --- | --- | --- | --- | --- |
 | JA | **Justified** › Community Impact › Strengthening The Grid › C \| Accordion Item "Grid Connection" › Answer | — | Select the instance › Properties › Answer › Edit Rich Text, select "not impact local power availability or reliability" and press the toolbar's B (cmd+b does nothing there). Then Claude checks the published `<strong>` | a rich-text prop takes plain text through the API (same as BB, EB); found in the 2026-11-26 QA (N10) | ☐ |
 | JB | **Justified** › Home › C \| Page Hero › Image (`jd-home-hero.webp`, asset `6b088d43954df1a49d14f68f`) | — | With the Designer MCP app open on Justified, Claude re-ingests the asset with `asset_tool › upload_image_by_url` (its CDN URL, name without extension), sets the hero Image prop to the new asset, publishes and checks the hero `<img>` has `srcset` | the asset was uploaded through the assets API without the Designer open, so it has no responsive variants (GOTCHAS 2026-11-24); on 2026-11-26 the user's Chrome was signed into another Webflow account, so the Designer link 404'd | ☐ |
+| LA | **Lake Hawkeye** › FAQ › C \| Page Hero › Image (`faq-hero-faq-v2.webp.webp`, asset `6b05cabde86e14300445c201`); Community Impact › Community benefits card photos 2–3 (`ci-lh-benefit-tax-base.webp` `6b0893f2465264e053340766`, `ci-lh-benefit-aesthetic.webp` `6b0893f3c80785aa55407bf2`) | — | Open the Lake Hawkeye Designer app link (https://tw-lake-hawkeye.design.webflow.com?app=dc8209c65e3ec02254d15275ca056539c89f6d15741893a0adf29ad6f381eb99, twice if the Bridge panel doesn't say Connected) in the Chrome window Claude can drive, or tell Claude it is open. Then Claude re-ingests the three images with `upload_image_by_url` (their CDN URLs), sets them on the hero prop and the two Info Card Media images, publishes and checks `srcset` | these assets have no responsive variants (the FAQ hero publishes one 2400w entry; the card photos none), and `upload_image_by_url` needs the Designer bridge. On 2026-11-26 the app link sent Claude's Chrome tab through a webflow.com redirect and out of its tab group (GOTCHAS 2026-11-26); found in the Lake Hawkeye QA (N6, N13) | ☐ |
 
 ## Done
 
