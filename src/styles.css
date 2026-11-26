@@ -856,6 +856,11 @@ html:not([data-fs-list]) [fs-list-element="list"][fs-list-itemsperpage="6"] > .w
 .download-card:has(.download-name:empty) { display: none; }
 .source-card:has(.source-link > :first-child:empty) { display: none; }
 
+/* repo-css: designer-cant — :has() and sibling selectors — the article byline (Author · Publish Date · Read Time) drops an empty Author with the dot after it, and an empty Read Time ("min read" with no number) with the dot before it. External posts (Muskie) have neither field. */
+.article-byline > .w-dyn-bind-empty + .article-byline-dot { display: none; }
+.article-byline > :has(> .w-dyn-bind-empty) { display: none; }
+.article-byline-dot:has(+ * > .w-dyn-bind-empty) { display: none; }
+
 /* ============================================================
    06. UTILITIES
    ============================================================ */

@@ -749,3 +749,12 @@ collected from client repos into those files.
 - Fix: for those, convert the local original (`cwebp -q 85`, at its own size: `-resize` scales up) and upload it through `create_asset` + the S3 POST, named `.webp`. Those get no responsive variants (see "API-uploaded assets"), which is fine for files not placed on a page.
 - Status: worked around
 - Found by: claude
+
+### 2026-11-26 · `:has()` can't be nested; a relative selector reaches the next sibling's child instead
+- Area: css
+- Scope: template-candidate
+- Symptom: a rule hiding the byline dot before an empty Read Time, `.article-byline-dot:has(+ :has(> .w-dyn-bind-empty))`, never matched; the dot stayed on Muskie's article pages.
+- Cause: `:has()` inside `:has()` is invalid CSS, so the browser drops the whole rule silently.
+- Fix: `.article-byline-dot:has(+ * > .w-dyn-bind-empty)` (the relative selector walks to the sibling's child). Check a new `:has()` rule against the published page, not only the build.
+- Status: fixed (see the commit that adds this entry)
+- Found by: claude
