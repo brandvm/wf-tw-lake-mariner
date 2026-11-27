@@ -813,3 +813,12 @@ collected from client repos into those files.
 - Fix: rebuild the cut-out from the photo itself: the old alpha mask transformed onto the photo's pixel grid, the photo's own RGB under it, so photo and cut-out can't diverge; then the mask eroded 4 px (MinFilter 9) and feathered 1.5 px, since the cut-out sits above the smoke layer and any sky pixels in its soft edge show as a light rim. Check a layered scene by compositing the layers yourself and looking at the edges at 2×, not only on the page.
 - Status: fixed on all five sites (2026-11-27; Lake Mariner after its MCP sign-in, asset `6b09a7569f2f2472f51d85e6`)
 - Found by: human + claude
+
+### 2026-11-27 · Site images exported from Figma carry the frame's overlay; a CMS image field re-hosts any URL byte for byte
+- Area: mcp
+- Scope: template-candidate
+- Symptom: re-exporting the Project Overview tab photos and the testimonial backgrounds from their Figma image fills (3780–4096 px originals) gave brighter pictures than the site: the site files had the frame's navy overlay (a gradient at 90%, plus a person cut-out at 49% on the testimonials) baked in. One testimonial (Jesse Rohring) on the site was from an older crop than the current Figma frame. Separately, needing the same new files on five sites looked like five rounds of `create_asset` + presigned S3 POST.
+- Cause: earlier sessions exported the Figma node (photo plus overlay layers) at node size; the site CSS has no overlay of its own for these. Webflow's CMS Image field fetches whatever public URL it is given.
+- Fix: crop the raw fill with its own `imageTransform` (CROP: visible region = x tx…tx+a, y ty…ty+d of the image; designers stretch, so resize the region to the node's aspect), then match the old file's tone (per-channel least-squares fit, then a gain map blurred ~60 px; check correlation ≥ 0.98 with the old file before uploading). Check alignment first: where the old file is a different crop, use Figma's own composite instead. Upload each file once (here to Justified's assets) and pass that CDN URL to every site's CMS items: the item came back with the same bytes (MD5 checked, WebP kept). The same URL serves as the `upload_image_by_url` source for site assets on the other sites, which still needs each site's Designer bridge to get variants.
+- Status: worked around (IMAGE-QUALITY.md)
+- Found by: claude
