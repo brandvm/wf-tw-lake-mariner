@@ -822,3 +822,21 @@ collected from client repos into those files.
 - Fix: crop the raw fill with its own `imageTransform` (CROP: visible region = x tx…tx+a, y ty…ty+d of the image; designers stretch, so resize the region to the node's aspect), then match the old file's tone (per-channel least-squares fit, then a gain map blurred ~60 px; check correlation ≥ 0.98 with the old file before uploading). Check alignment first: where the old file is a different crop, use Figma's own composite instead. Upload each file once (here to Justified's assets) and pass that CDN URL to every site's CMS items: the item came back with the same bytes (MD5 checked, WebP kept). The same URL serves as the `upload_image_by_url` source for site assets on the other sites, which still needs each site's Designer bridge to get variants.
 - Status: worked around (IMAGE-QUALITY.md)
 - Found by: claude
+
+### 2026-11-27 · Migrating a Squarespace blog: link-out posts have no body, gallery images hide in `<noscript>`
+- Area: mcp
+- Scope: template-candidate
+- Symptom: moving lakemarinerdata.com's newsroom into News Posts, 3 of 5 posts came back from `?format=json` with an empty `body` and no excerpt; the 2 real posts had their photos only as slideshow galleries whose visible `<img>` tags carry no `src`.
+- Cause: a Squarespace post with a `sourceUrl` is a link to another publisher (the title links out; nothing else is stored), and the `author` is whoever posted it. Gallery slides load by script; the real URL and alt (= the caption) are in the `<noscript><img>` of each slide, plus `system-gallery-thumbnail` duplicates. Text sits in `.sqs-html-content` blocks with `<li><p>` lists and `<strong> </strong>` debris.
+- Fix: a converter that walks the body in order: `.sqs-html-content` cleaned to p/h/ul/ol/li/a/strong/em (h4 → h2, `<li><p>` flattened, empty strong removed, external links `target="_blank"`, internal links to the new paths), each gallery/image block as Webflow figures (`w-richtext-figure-type-image w-richtext-align-fullwidth`, `<img loading="lazy">`, `<figcaption>` from the alt), images as WebP ≤1520px uploaded to the asset folder and passed by URL (the CMS re-hosts them and keeps `loading` and `figcaption`). Link-out posts: publisher as Author, Source Name/URL, External Article URL, a one-line body linking out. The first paragraph of an own post becomes the Excerpt (lead). Script: in the session scratchpad only; worth adding to the template's webflow-audit/migration tooling.
+- Status: worked around (Lake Mariner, 5 posts + 1 event)
+- Found by: claude
+
+### 2026-11-27 · An empty CMS Image binding publishes a hidden placeholder that 403s, eager on the Featured lead
+- Area: perf
+- Scope: template-candidate
+- Symptom: on /news and on a post without a Cover Image, Playwright reported a broken image: `cdn.prod.website-files.com/webflow-prod-assets/<site>/…_news-post-shield.webp` (403). On the Featured lead card it has `loading="eager" fetchpriority="high"`.
+- Cause: Webflow publishes the Image element's design-time placeholder with the class `w-dyn-bind-empty` (display none) when the bound field is empty, and writes its URL with an extra `webflow-prod-assets/` segment that the CDN refuses. The element's own loading settings still apply, so the browser requests it.
+- Fix: none yet; invisible, but a wasted request (high priority when the lead Featured post has no cover). Options: give every post a cover, or set the bound Image's placeholder to a tiny asset / make the lead image lazy. Check other templates with eager CMS images the same way.
+- Status: open
+- Found by: claude
