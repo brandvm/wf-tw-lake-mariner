@@ -3,7 +3,8 @@
 // Article URL") goes to that URL in a new tab instead of the post's own
 // page. Its card's arrow icon turns into ↗ and the link's label says it
 // opens in a new tab. An empty attribute (the field not filled) leaves the
-// link as Webflow published it, /news/<slug>.
+// link as Webflow published it, /news/<slug>; if that href already goes to
+// another site, the card only gets the ↗ cue and label.
 //
 // Used on the Post Card Link in the /news grid, the Featured lead and side
 // lists and Related articles on the News template. Finsweet List moves the
@@ -12,16 +13,23 @@
 
 const SELECTOR = 'a[data-external-url]';
 
-function apply(link: HTMLAnchorElement) {
-  const url = link.dataset.externalUrl?.trim() ?? '';
-  if (!url || link.dataset.externalApplied === 'true') return;
-  let parsed: URL;
+function parse(url: string): URL | null {
   try {
-    parsed = new URL(url, location.href);
+    const parsed = new URL(url, location.href);
+    return parsed.protocol === 'https:' || parsed.protocol === 'http:' ? parsed : null;
   } catch {
-    return;
+    return null;
   }
-  if (parsed.protocol !== 'https:' && parsed.protocol !== 'http:') return;
+}
+
+function apply(link: HTMLAnchorElement) {
+  if (link.dataset.externalApplied === 'true') return;
+  const url = link.dataset.externalUrl?.trim() ?? '';
+  // Empty field: keep Webflow's href, unless the Designer already points the
+  // card at another site (Muskie binds its cards to Source URL), which only
+  // gets the same new-tab cue.
+  const parsed = url ? parse(url) : parse(link.getAttribute('href') ?? '');
+  if (!parsed || (!url && parsed.host === location.host)) return;
   link.href = parsed.href;
   link.target = '_blank';
   link.rel = 'noopener';
