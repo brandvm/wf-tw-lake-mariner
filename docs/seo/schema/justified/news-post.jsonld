@@ -3,8 +3,8 @@
   "@graph": [
     {
       "@type": "NewsArticle",
-      "@id": "https://justifieddatacampus.com/news/{Slug}#article",
-      "mainEntityOfPage": "https://justifieddatacampus.com/news/{Slug}",
+      "@id": "https://justifieddatacampus.com/newsroom/{Slug}#article",
+      "mainEntityOfPage": "https://justifieddatacampus.com/newsroom/{Slug}",
       "headline": "{Name}",
       "image": ["{Cover Image}"],
       "datePublished": "{Publish Date}",
@@ -15,8 +15,8 @@
     {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "News", "item": "https://justifieddatacampus.com/news" },
-        { "@type": "ListItem", "position": 2, "name": "{Name}", "item": "https://justifieddatacampus.com/news/{Slug}" }
+        { "@type": "ListItem", "position": 1, "name": "News", "item": "https://justifieddatacampus.com/newsroom" },
+        { "@type": "ListItem", "position": 2, "name": "{Name}", "item": "https://justifieddatacampus.com/newsroom/{Slug}" }
       ]
     }
   ]

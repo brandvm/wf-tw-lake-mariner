@@ -3,8 +3,8 @@
   "@graph": [
     {
       "@type": "NewsArticle",
-      "@id": "https://muskiedatacampus.com/news/{Slug}#article",
-      "mainEntityOfPage": "https://muskiedatacampus.com/news/{Slug}",
+      "@id": "https://muskiedatacampus.com/newsroom/{Slug}#article",
+      "mainEntityOfPage": "https://muskiedatacampus.com/newsroom/{Slug}",
       "headline": "{Name}",
       "image": ["{Cover Image}"],
       "datePublished": "{Publish Date}",
@@ -15,8 +15,8 @@
     {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "News", "item": "https://muskiedatacampus.com/news" },
-        { "@type": "ListItem", "position": 2, "name": "{Name}", "item": "https://muskiedatacampus.com/news/{Slug}" }
+        { "@type": "ListItem", "position": 1, "name": "News", "item": "https://muskiedatacampus.com/newsroom" },
+        { "@type": "ListItem", "position": 2, "name": "{Name}", "item": "https://muskiedatacampus.com/newsroom/{Slug}" }
       ]
     }
   ]

@@ -3,8 +3,8 @@
   "@graph": [
     {
       "@type": "NewsArticle",
-      "@id": "https://lakehawkeyedata.com/news/{Slug}#article",
-      "mainEntityOfPage": "https://lakehawkeyedata.com/news/{Slug}",
+      "@id": "https://lakehawkeyedata.com/newsroom/{Slug}#article",
+      "mainEntityOfPage": "https://lakehawkeyedata.com/newsroom/{Slug}",
       "headline": "{Name}",
       "image": ["{Cover Image}"],
       "datePublished": "{Publish Date}",
@@ -15,8 +15,8 @@
     {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "News", "item": "https://lakehawkeyedata.com/news" },
-        { "@type": "ListItem", "position": 2, "name": "{Name}", "item": "https://lakehawkeyedata.com/news/{Slug}" }
+        { "@type": "ListItem", "position": 1, "name": "News", "item": "https://lakehawkeyedata.com/newsroom" },
+        { "@type": "ListItem", "position": 2, "name": "{Name}", "item": "https://lakehawkeyedata.com/newsroom/{Slug}" }
       ]
     }
   ]

@@ -34,8 +34,8 @@ current during the build. Agents read it after `AGENTS.md` and `GOTCHAS.md`.
 | `/community-impact` | 03 Community Impact (`2523:1235`) | Community Impact | |
 | `/closed-loop-cooling` | 04 Closed-Loop Cooling (`2523:1696`) | Closed-Loop Cooling | optional per campus (water-cooled only) |
 | `/careers` | 05 Careers (`2523:2102`) | Careers | |
-| `/news` | 06 News (`2523:2511`) | News | |
-| `/news/<slug>` | 07 News Article (`2523:2885`) | News Posts template | CMS template |
+| `/newsroom` | 06 News (`2523:2511`) | News (slug `newsroom` since 2026-11-27, as on the live sites) | |
+| `/newsroom/<slug>` | 07 News Article (`2523:2885`) | News Posts template | CMS template; collection slug `newsroom`, item slugs = the live sites' slugs |
 | `/events` | 08 Events (`2523:3252`) | Events | |
 | `/events/<slug>` | 09 Event (`2523:3595`) | Events template | CMS template |
 | `/faq` | 10 FAQ (`2597:2`, final design 2026-11-23) | FAQ | hero only (C \| Page Hero) since 2026-11-23, linked from Home and the footer; the rest to build |
