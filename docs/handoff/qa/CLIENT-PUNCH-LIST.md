@@ -90,8 +90,10 @@ _Its QA is still running; this list grows when it reports._
 
 ## Lake Hawkeye
 
-- **Community benefits cards.** The design shows five cards in a slider.
-  Do you want all five? Where should the buttons labelled "CTA" go?
+- **Community benefits cards.** Now a five-card slider as in the design.
+  The design's "CTA" buttons are filled in with our suggestions: Read the
+  FAQ, Project overview, View careers, Grid upgrades. Keep, relink, or
+  remove any of them.
 - **"Learn more"** under "What actually drives local electric rates?":
   where should it link?
 - **Topping Out Ceremony.** The text calls Lake Mariner "our flagship
