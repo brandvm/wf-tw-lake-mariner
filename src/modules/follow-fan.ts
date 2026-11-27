@@ -1,13 +1,9 @@
 // Follow Band fan (adapted from marketcap's brand-lines): the 3D fan fans
-// in — rotates up from below and fades in — as the band arrives, then
-// drifts against the pointer inside the band, easing back to rest when the
-// pointer leaves. Hooks: data-follow-area (the band), data-follow-fan (the
-// image). Pointer drift only on fine pointers; nothing with reduced motion.
+// in — rotates up from below and fades in — as the band arrives. No pointer
+// drift (removed 2026-11-27 at the user's request). Hooks: data-follow-area
+// (the band), data-follow-fan (the image). Nothing with reduced motion.
 
 import { gsap, reducedMotion } from './gsap';
-
-const SHIFT = 28; // px the fan travels at the band's edge
-const TURN = 4; // degrees it turns at the band's edge
 
 export function initFollowFan() {
   if (reducedMotion()) return;
@@ -23,20 +19,5 @@ export function initFollowFan() {
       immediateRender: true,
       scrollTrigger: { trigger: area, start: 'top 80%', once: true },
     });
-
-    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-    const wrap = fan.parentElement!;
-    const x = gsap.quickTo(wrap, 'x', { duration: 0.9, ease: 'power3.out' });
-    const y = gsap.quickTo(wrap, 'y', { duration: 0.9, ease: 'power3.out' });
-    const r = gsap.quickTo(wrap, 'rotate', { duration: 0.9, ease: 'power3.out' });
-    area.addEventListener('pointermove', (event) => {
-      const box = area.getBoundingClientRect();
-      const dx = (event.clientX - box.left) / box.width - 0.5;
-      const dy = (event.clientY - box.top) / box.height - 0.5;
-      x(-dx * SHIFT * 2);
-      y(-dy * SHIFT);
-      r(dx * TURN);
-    });
-    area.addEventListener('pointerleave', () => { x(0); y(0); r(0); });
   });
 }
