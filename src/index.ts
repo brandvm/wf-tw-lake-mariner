@@ -40,6 +40,7 @@ import { initListState } from './modules/list-state';
 import { initFinsweet } from './modules/finsweet';
 import { initLoopModes } from './modules/loop-modes';
 import { initCardRail } from './modules/card-rail';
+import { initExternalLinks } from './modules/external-links';
 
 // Each module runs in isolation: one that throws is logged and skipped,
 // and every module after it still initializes.
@@ -96,6 +97,7 @@ function boot() {
   run('reveal', initReveal);
   run('calendar-links', initCalendarLinks);
   run('share', initShare);
+  run('external-links', initExternalLinks);
   run('read-progress', initReadProgress);
   run('follow-fan', initFollowFan);
   run('faq-schema', initFaqSchema);
