@@ -46,7 +46,12 @@ waiting on Brand Vision.
 9. **Photos.** Several pages reuse Lake Mariner photos, as the designs do.
    Do you have each campus's own photos for the heroes, the Project
    Highlights tabs, About TeraWulf, the event cards and the community
-   cards?
+   cards? We also need the original, full-size files (2400 px wide or
+   more) of these hero photos, which look soft on large and retina
+   screens because the copies we have are small: Chesapeake Home (1671 px)
+   and Project Overview (1700 px), the Closed-Loop Cooling hero (1339 px,
+   Lake Mariner, Lake Hawkeye, Chesapeake), Justified Project Overview and
+   Cooling (1024 px), Muskie Home (1448 px) and Project Overview (1374 px).
 10. **Sample events.** Each site has one "Sample Event" for review. We
     delete them before launch unless you want a real event in their place.
 
