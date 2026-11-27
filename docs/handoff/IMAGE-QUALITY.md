@@ -32,16 +32,16 @@ plus a smooth gain map, correlation ≥ 0.98 with the old file at thumbnail size
 
 | Image | Where | Before | After | srcset | Status |
 | --- | --- | --- | --- | --- | --- |
-| Testimonial › Jim Spoon background (`careers-quote-bg`) | Careers, CI (LH, LM) · CMS Testimonials | 1600×904, 73 KB | 1794×1013, 137 KB (Figma original, q88) | no (CMS) | ☑ JD MU LH CH · ☐ LM |
-| Testimonial › Dan Heidemann | same | 1680×985, 34 KB (0.17 bpp) | 1680×985, 74 KB (lossless original, same grade, q90) | no (CMS) | ☑ JD MU LH CH · ☐ LM |
-| Testimonial › Jesse Rohring | same | 1680×985, 43 KB (0.21 bpp) | 1680×985, 106 KB (Figma's current composite: photo + shade + cut-out, q90) | no (CMS) | ☑ JD MU LH CH · ☐ LM |
+| Testimonial › Jim Spoon background (`careers-quote-bg`) | Careers, CI (LH, LM) · CMS Testimonials | 1600×904, 73 KB | 1794×1013, 137 KB (Figma original, q88) | no (CMS) | ☑ all five |
+| Testimonial › Dan Heidemann | same | 1680×985, 34 KB (0.17 bpp) | 1680×985, 74 KB (lossless original, same grade, q90) | no (CMS) | ☑ all five |
+| Testimonial › Jesse Rohring | same | 1680×985, 43 KB (0.21 bpp) | 1680×985, 106 KB (Figma's current composite: photo + shade + cut-out, q90) | no (CMS) | ☑ all five |
 | Justified fire-trucks news cover | /news (Featured), every article's Related list | 768×513 PNG, 725 KB | 768×513 WebP, 101 KB | no (CMS) | ☑ JD |
-| PO Highlight Tabs 1–5 (`po-tab-N`) | Project Overview | 1680×952, 212–481 KB | 2400×1360 (tab 3: 2007×1137), 89–317 KB | yes, after re-ingest | uploaded; swap needs the Designer bridge |
-| Careers video poster | Careers › Meet our employees | 1600×871, 218 KB | 2400×1307, 111 KB | yes, after re-ingest | uploaded; swap needs the Designer bridge |
-| CI employees poster | Community Impact (LM, LH) | 600×419, 32 KB | 1920×1080, 99 KB (first frame of the film) | yes, after re-ingest | file ready; swap needs the Designer bridge |
-| Explore › Events card | Home, Project Overview | 1640×545, 195 KB | 2174×723, 114 KB | yes, after re-ingest | uploaded; swap needs the Designer bridge |
-| Explore › News card | Home, Project Overview | 1100×763, 176 KB | 1840×1277, 152 KB | yes, after re-ingest | uploaded; swap needs the Designer bridge |
-| LH topping-out poster | Lake Hawkeye › CI | 1600×901, 52 KB | 2400×1351, 93 KB | yes, after re-ingest | file ready; swap needs the Designer bridge |
+| PO Highlight Tabs 1–5 (`po-tab-N`) | Project Overview | 1680×952, 212–481 KB | 2400×1360 (tab 3: 2007×1137), 89–317 KB | yes (to 1840–2400w) | ☑ all five |
+| Careers video poster | Careers › Meet our employees | 1600×871, 218 KB | 2400×1307, 111 KB | yes (to 1840–2400w) | ☑ all five |
+| CI employees poster | Community Impact (LM, LH) | 600×419, 32 KB | 1920×1080, 99 KB (first frame of the film) | yes (to 1920w) | ☑ LM LH |
+| Explore › Events card | Home, Project Overview | 1640×545, 195 KB | 2174×723, 114 KB | yes (to 1840–2400w) | ☑ all five |
+| Explore › News card | Home, Project Overview | 1100×763, 176 KB | 1840×1277, 152 KB | yes (to 1840–2400w) | ☑ all five |
+| LH topping-out poster | Lake Hawkeye › CI | 1600×901, 52 KB | 2400×1351, 93 KB | yes (to 2400w) | ☑ LH |
 
 Bytes above are the uploaded originals. Pages with `srcset` serve Webflow's
 own `-p-500` … `-p-2000` variants to smaller screens, so phones download less
@@ -73,16 +73,22 @@ client.
 - **Smoke layers** (1024 px in Figma too) and the **Follow fan** (a 546×1024
   export, now static): soft by nature.
 
-## Still to do
+## Done on staging (2026-11-27)
 
-1. **Designer bridge, site by site.** Site assets get responsive variants only
-   through `asset_tool › upload_image_by_url` with the Designer MCP app open
-   (GOTCHAS 2026-11-24). For each site: open its Designer app link, then
-   ingest the files above by URL (they are on Justified's CDN, see below),
-   swap the PO tab images, the Careers/CI Video Frame posters and the Explore
-   card images, publish, check `srcset` on the published `<img>`.
-2. **Lake Mariner** (`webflow-tw-lake-mariner` needs signing in again with
-   `/mcp`): the testimonials (CMS, no bridge needed) and the same swaps.
+Every row above is in and published to webflow.io on its sites. Site assets
+were ingested with `asset_tool › upload_image_by_url` (Designer MCP app open
+on each site), so each has Webflow's responsive variants; the published
+`<img>` of every swapped image carries a `srcset` (checked on all five with
+curl). The component image props (Highlight Tabs Photo 1–6, Video Frame
+Poster) were set to `null` and then to the new asset id, as GOTCHAS asks; the
+Explore Rail cards are images inside the component definition, set with
+`set_image_asset` scoped to the component. Lake Hawkeye's tab 6 reuses the
+tab 5 photo, as before; Chesapeake has four tabs. Spot check: Lake Mariner
+Project Overview at 1440 @2× serves the 2400 px tab originals, sharp, same
+grade as before.
+
+Not part of this pass: Lake Mariner's Community Impact investment scene
+(cut-out realignment, 447e779 and GOTCHAS 2026-11-27) was done separately.
 
 Uploaded files (Justified CDN, usable as the source URL for every site):
 
