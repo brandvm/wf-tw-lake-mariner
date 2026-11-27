@@ -141,6 +141,32 @@ published.
     var root = document.documentElement;
     root.classList.add("is-loading");
     setTimeout(function () { root.classList.remove("is-loading"); }, 3000);
+
+    // Full-bleed photos (.s-bg-media): Webflow writes the `sizes` of an image
+    // inside a component from the component's width on the Designer canvas
+    // (C | Page Hero: 250-260px), so every screen picks the 500-800px file
+    // and stretches it. `sizes` is a reserved attribute in Webflow, so it is
+    // set to 100vw here as the parser inserts each image, before the browser
+    // settles on a file (GOTCHAS 2026-11-27).
+    if (window.MutationObserver) {
+      var fixSizes = function (img) {
+        if (img.srcset && img.getAttribute("sizes") !== "100vw") img.setAttribute("sizes", "100vw");
+      };
+      var bg = new MutationObserver(function (records) {
+        records.forEach(function (r) {
+          r.addedNodes.forEach(function (node) {
+            if (node.nodeType !== 1) return;
+            if (node.matches("img.s-bg-media")) fixSizes(node);
+            else if (node.firstElementChild) node.querySelectorAll("img.s-bg-media").forEach(fixSizes);
+          });
+        });
+      });
+      bg.observe(document.documentElement, { childList: true, subtree: true });
+      document.addEventListener("DOMContentLoaded", function () {
+        bg.disconnect();
+        document.querySelectorAll("img.s-bg-media").forEach(fixSizes);
+      });
+    }
   })();
 </script>
 
