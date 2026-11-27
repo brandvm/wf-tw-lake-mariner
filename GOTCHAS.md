@@ -868,3 +868,12 @@ collected from client repos into those files.
 - Status: fixed 20584d2 (all five sites); low-res sources open
 - Found by: claude
 
+
+### 2026-11-27 · A size variable in em resolves on the element's own font; a class breakpoint style beats a variant's base style
+- Area: designer
+- Scope: template-candidate
+- Symptom: Lake Mariner's default buttons measured 40px tall at 1680, the design 46. `Button/Height` is 2.875em (46px at the 16px body), bound to Button Size's height. After setting Button Size's own height (3.2857em) and a phone height on the class (small breakpoint), the Small variant's buttons became 41px on phones although the variant sets its height (2.1875em) at the base breakpoint.
+- Cause: em in a variable is resolved where it is used: Button Size has a 14px font, so 2.875em = 40px. And a class style at a smaller breakpoint is a more specific rule than a variant style at the base breakpoint, so the class's phone height overrode the variant at ≤767px.
+- Fix: height on the class in em of its own font (46/14 = 3.2857em; 44/14 on phones), and the same breakpoint on the variant (`set_variant_styles` with `breakpoint_id: "small"`, height 2.1875em). When a class gets a breakpoint override, check every variant of the component at that breakpoint.
+- Status: fixed (Lake Mariner, Webflow, 2026-11-27; CAMPUS-PORT row for the copies)
+- Found by: claude

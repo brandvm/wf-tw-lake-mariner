@@ -57,13 +57,27 @@ waiting on Brand Vision.
 
 ## Lake Mariner
 
-_Its QA is still running; this list grows when it reports._
+From the launch QA of 2026-11-27 (`lake-mariner.md`).
 - Confirm the "Meet our employees" film is the right video for that
   section.
 - "About TeraWulf" on Project Overview is a video in the design: please
   send the file.
 - Testimonials 2 and 3: confirm the spelling of Jesse Rohring and Dan
-  Heidemann's role.
+  Heidemann's role (his quote mentions "Director of Operations", the card
+  says "VP of Construction").
+- **Footer › Part of TeraWulf:** "All Sites" now opens
+  terawulf.com/our-sites (at Lake Mariner), "Impact" terawulf.com/our-impact
+  and "Investors" investors.terawulf.com, as on Chesapeake. Tell us if
+  other pages are wanted.
+- **"Understanding Energy Pricing in New York"** (news post, copied word
+  for word from lakemarinerdata.com) says household rates "in Lansing".
+  Lansing is Lake Hawkeye's town. Should it say Barker?
+- **Announcement bar** still promotes the 24 July hiring event, which is
+  over. Change the message, point it at a new event, or hide it?
+- **Events:** the site has one event (the 24 July hiring event), so the event page's "Other events" column is empty. Send any other past or upcoming events to add.
+- **Project Overview › About the Project:** the final design shows only
+  the 750 MW sentence; the site keeps the live site's two sentences, as
+  Chloe asked on 12 November. Confirm that is still wanted.
 
 ## Justified
 
