@@ -840,3 +840,12 @@ collected from client repos into those files.
 - Fix: none yet; invisible, but a wasted request (high priority when the lead Featured post has no cover). Options: give every post a cover, or set the bound Image's placeholder to a tiny asset / make the lead image lazy. Check other templates with eager CMS images the same way.
 - Status: open
 - Found by: claude
+
+### 2026-11-27 · A CMS item's page can't be left out per item; an outside article's page needs a head-script redirect
+- Area: mcp
+- Scope: template-candidate
+- Symptom: news posts that are outside articles (cards open the publisher) should have no page on the site, but Webflow publishes `/<collection>/<slug>` for every item of a template that publishes; only the whole template can be switched off. A robots meta or redirect can't be made conditional on a field in page settings, and the per-item sitemap setting (`data_sitemap_tool › bulk_update_items_sitemap_status`) answered 403 "Site plan doesn't support sitemap indexing controls" on the staging plan.
+- Cause: Webflow has no per-item publish switch; page settings have no conditions; sitemap indexing controls belong to paid site plans.
+- Fix: the template head starts with a script reading the field token (`{{wf {&quot;path&quot;:&quot;external-article-url&quot;,&quot;type&quot;:&quot;Link&quot;\} }}` renders the URL, `&amp;` to undo): when filled it adds `noindex, follow`, sets the canonical to the article and `location.replace`s there (generator: `docs/seo/schema/build-template-head.mjs`). The cards link out through the `external-links` module. At launch, with a paid plan, also exclude those items from the sitemap; a 301 per item in Site settings is the only server-side redirect. Separately, the News Collection Lists took `filters` = `[]` and `offset` writes through the API on all five sites (no `[Conflict]`).
+- Status: worked around
+- Found by: claude
