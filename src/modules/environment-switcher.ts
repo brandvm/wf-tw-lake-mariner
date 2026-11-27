@@ -1,10 +1,15 @@
 // A staging-only utility. Shadow DOM keeps Webflow's button/font styles out
 // and prevents the site's click handlers from treating these as page controls.
+// Hidden by default (2026-11-27, so clients reviewing staging don't see it):
+// it shows only when asked for with ?wfc-switcher=1 (remembered in this
+// browser until ?wfc-switcher=0), when WFC.switcher is set, or while dev mode
+// is on, so a developer can always switch back.
 export function initEnvironmentSwitcher() {
   const config = window.WFC;
   if (!/\.webflow\.io$/.test(location.hostname) || !config) return;
   if (window.Webflow?.env?.('editor') || window.Webflow?.env?.('design')) return;
   if (document.getElementById('wfc-environment')) return;
+  if (!switcherWanted(config)) return;
 
   const isDev = config.source ? config.source === config.devBase : !!config.dev;
   const releaseFallback = !!config.source
@@ -146,4 +151,18 @@ export function initEnvironmentSwitcher() {
     if (!event.composedPath().includes(host)) expand(false);
   });
   document.body.appendChild(host);
+}
+
+function switcherWanted(config: NonNullable<Window['WFC']>) {
+  const flag = new URLSearchParams(location.search).get('wfc-switcher');
+  if (flag !== null) {
+    try {
+      if (flag === '1') localStorage.setItem('wfc-switcher', '1');
+      else localStorage.removeItem('wfc-switcher');
+    } catch { /* The URL flag still applies to this page. */ }
+    if (flag === '1') return true;
+  }
+  if (config.switcher || config.dev) return true;
+  if (flag !== null) return false;
+  try { return localStorage.getItem('wfc-switcher') === '1'; } catch { return false; }
 }

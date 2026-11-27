@@ -19,6 +19,9 @@ declare global {
       prod: string;
       // Set before script execution, including when a fallback URL is used.
       source?: string;
+      // Show the Dev / Staging switcher on webflow.io without asking for it
+      // (it is hidden by default; see environment-switcher.ts).
+      switcher?: boolean;
     };
     Webflow?: { env?: (mode: string) => boolean };
   }

@@ -108,8 +108,9 @@ What `pnpm new-project` does, and the person's steps after it, in order.
 - Live reload works in the browser. It does **not** work on the Designer canvas,
   which never runs scripts — reload the Designer tab instead.
 
-The switcher is limited to `*.webflow.io`, hidden in the Webflow editor/Designer
-and print, and isolated from site styles with Shadow DOM. Its implementation is
+The switcher is limited to `*.webflow.io` and hidden unless asked for
+(`?wfc-switcher=1`, remembered in that browser until `?wfc-switcher=0`; it also
+shows while dev mode is on), hidden in the Webflow editor/Designer and print, and isolated from site styles with Shadow DOM. Its implementation is
 `src/modules/environment-switcher.ts`; `src/index.ts` initializes it after the DOM
 is ready. It has no runtime dependencies or client-specific URLs.
 

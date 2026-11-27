@@ -31,6 +31,7 @@ async function setup(page, {
   editor = false,
   design = false,
   release = '1.0.0',
+  switcher = true,
   requests = [],
   consoleErrors = [],
 } = {}) {
@@ -43,7 +44,9 @@ async function setup(page, {
   if (blockedStorage) await page.addInitScript(() => {
     Object.defineProperty(window, 'localStorage', { get() { throw new Error('Storage blocked'); } });
   });
-  const html = `<!doctype html><html><head>${scripts[0]}</head><body>
+  // The switcher is hidden unless asked for; most tests ask for it.
+  const optIn = switcher ? '<script>window.WFC.switcher=true;</script>' : '';
+  const html = `<!doctype html><html><head>${scripts[0]}${optIn}</head><body>
     ${links}${scripts[1]}<h1>Example client website</h1>
     <script>window.Webflow={env:mode=>mode==='editor'?${editor}:mode==='design'?${design}:false};</script>
     ${scripts[2]}</body></html>`;
@@ -253,4 +256,18 @@ test('on a release domain, a failed release stylesheet leaves Embed 2a on stagin
   await expect(page.locator('#wfc-css')).toHaveAttribute('href', stage + 'styles.css?v=1');
   // A cross-origin sheet's rules can't be read; a link that failed has none.
   await expect.poll(() => page.evaluate(() => Boolean(document.getElementById('wfc-css').sheet))).toBe(true);
+});
+
+test('hidden on staging unless asked for, and remembered when asked', async ({ page }) => {
+  const errors = await setup(page, { switcher: false });
+  await expect(page.locator('#wfc-environment')).toHaveCount(0);
+  await page.goto('https://example.webflow.io/?wfc-switcher=1');
+  await expect(page.locator('#wfc-environment')).toHaveCount(1);
+  await page.goto('https://example.webflow.io/about');
+  await expect(page.locator('#wfc-environment')).toHaveCount(1);
+  await page.goto('https://example.webflow.io/?wfc-switcher=0');
+  await expect(page.locator('#wfc-environment')).toHaveCount(0);
+  await page.goto('https://example.webflow.io/?wfc-dev=1');
+  await expect(page.locator('#wfc-environment')).toHaveCount(1);
+  expect(errors).toEqual([]);
 });
