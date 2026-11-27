@@ -14,8 +14,9 @@ waiting on Brand Vision.
    campus have its own pages? terawulf.com has no Terms page.
 2. **Footer › Part of TeraWulf.** Which terawulf.com pages should "All
    Sites", "Impact" and "Investors" open?
-3. **Careers › "View All Openings".** Which careers portal URL? Should the
-   section show a live job list instead of the portal screenshot?
+3. **Careers › Current Openings.** Done: every site now shows TeraWulf's
+   live job list from terawulf.com/careers (ADP), and "View All Openings"
+   opens it. Tell us if a campus should show only its own openings.
 4. **Employee testimonials and the "Meet our employees" film.** Every site
    shows the same three Lake Mariner employees (Jim Spoon, Dan Heidemann,
    Jesse Rohring) and the same film, shot at Lake Mariner. Keep them on
