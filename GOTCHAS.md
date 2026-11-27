@@ -849,3 +849,12 @@ collected from client repos into those files.
 - Fix: the template head starts with a script reading the field token (`{{wf {&quot;path&quot;:&quot;external-article-url&quot;,&quot;type&quot;:&quot;Link&quot;\} }}` renders the URL, `&amp;` to undo): when filled it adds `noindex, follow`, sets the canonical to the article and `location.replace`s there (generator: `docs/seo/schema/build-template-head.mjs`). The cards link out through the `external-links` module. At launch, with a paid plan, also exclude those items from the sitemap; a 301 per item in Site settings is the only server-side redirect. Separately, the News Collection Lists took `filters` = `[]` and `offset` writes through the API on all five sites (no `[Conflict]`).
 - Status: worked around
 - Found by: claude
+
+### 2026-11-27 · Renaming a static page doesn't move links that only look like page links; the collection URL is Designer-only
+- Area: mcp
+- Scope: template-candidate
+- Symptom: after the News page slug went from `news` to `newsroom` (all five sites), the nav and footer News links still published `href="/news"`, although on /news they carried `w--current` like page links. The Explore News card, the article breadcrumb (C | Breadcrumb Parent Link default `{url, /news}`), Justified's 404 News button and rich-text links to `/news/<slug>` (an FAQ answer, an event body) did the same.
+- Cause: they were typed URL links, each also carrying an imported `href="/news"` custom attribute (the WHTML importer keeps `href` as an attribute, and the attribute overrides the link setting). Webflow marks `w--current` on any link whose URL matches the page, so it doesn't tell a page link from a URL. The CMS API has no write for a collection's slug.
+- Fix: `set_link` linkType page → the page id, then `remove_attribute` ["href"] (read the attributes back); component link props to `link_mode: page`; rich text rewritten. Collection URL changed in the Designer (CMS › collection › Settings › Collection URL, then Save Collection; the API shows the new slug a few seconds later). Then grep every published page (and `/404`) for `href="/news`. Prefer page links over typed URLs for internal navigation from the start.
+- Status: worked around (all five sites)
+- Found by: claude

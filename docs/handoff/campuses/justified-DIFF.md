@@ -121,7 +121,7 @@ Checked at 1440, 820 and 390 (full-page captures of all nine pages): no Lake Mar
 
 Figma Build Review row 2 (y 13000): all nine pages, each with Justified's Clean Pages frame, staging at 1680/820/390 (captured 2026-11-24 after the shield swap) and markers: green where it matches, red for L2–L6 and L10 below; the Cooling column is empty.
 
-**Sample event — delete or replace before launch.** "Sample Event — Justified Data Hiring Day" (`/events/sample-justified-hiring-day`, item `6b060b8fc06b4ed42be7e874`), added 2026-11-24 at the user's request so the Event template could be checked with every field filled. Hiring Event, 18 March 2027 9:00 AM–3:00 PM (site time zone, Eastern), Justified text marked as sample in the tagline, summary, body, location note, callout and RSVP line; image the events photo already used on the site; perks Career growth, 401(k) match, Health insurance, Generous PTO (existing items; no starting pay); RSVP URL https://www.terawulf.com/connect. The RSVP card condition (EC) was tested on it: with RSVP URL cleared the published page had no Reserve card, restored it came back. While it is upcoming, /events shows it instead of the "No events scheduled" card. Build Review row 2: Event (`2800:5670`) shot with it, Events (`2800:5397`) re-shot and its marker (the passed Career Fair, L4) now green. Delete it in the CMS (or overwrite it with a real event) before launch.
+**Sample event — deleted 2026-11-27 (user: all sample content goes).** Was: "Sample Event — Justified Data Hiring Day" (`/events/sample-justified-hiring-day`, item `6b060b8fc06b4ed42be7e874`), added 2026-11-24 at the user's request so the Event template could be checked with every field filled. Hiring Event, 18 March 2027 9:00 AM–3:00 PM (site time zone, Eastern), Justified text marked as sample in the tagline, summary, body, location note, callout and RSVP line; image the events photo already used on the site; perks Career growth, 401(k) match, Health insurance, Generous PTO (existing items; no starting pay); RSVP URL https://www.terawulf.com/connect. The RSVP card condition (EC) was tested on it: with RSVP URL cleared the published page had no Reserve card, restored it came back. While it is upcoming, /events shows it instead of the "No events scheduled" card. Build Review row 2: Event (`2800:5670`) shot with it, Events (`2800:5397`) re-shot and its marker (the passed Career Fair, L4) now green. Delete it in the CMS (or overwrite it with a real event) before launch.
 
 **Launch QA 2026-11-26:** `docs/handoff/qa/justified.md` (independent design check, pre-launch checks, fixes, client punch list, redirect map). Corrections to this file: the Home hero still showed Lake Mariner's coolers photo until then (fixed); the fire-trucks cover was the wrong image fill (fixed); the Events frame gives each past card its own photo, not one shared photo (open, client). Batch 4's "Home (hero …)" is now true.
 
@@ -197,4 +197,15 @@ Checked: all 35 published pages of tw-justified.webflow.io, grepped for justifie
 | --- | --- |
 | `/s/Hawesville-Community-Info-Session-Presentation-Feb-2026vF.pdf` | `https://cdn.prod.website-files.com/6b05c58e6a2daeafb0769727/6b05d2de33ab8e1d3ea40c1c_Justified-Information-Session-Presentation-Feb-2026.pdf` |
 
-The live site's page paths (`/newsroom/<slug>` → `/news/<slug>`, `/events/<old-slug>`, `/home`, `/closed-loop-cooling`) belong in the site's redirect map at launch. They are not files, so they are not listed here.
+The live site's page paths belong in the site's redirect map at launch. They are not files, so they are not listed above. Since 2026-11-27 the news section is `/newsroom` and all 18 posts have their live slugs (including the live typo `kentucky-pdc-…` and the Squarespace id `cowj3pcg7it5lgv4y3oz1pz4vcvlhm`), so `/newsroom` and every `/newsroom/<slug>` need no redirect. Still needed: `/home` → `/`, and the six events whose slugs differ (the live slugs are Squarespace's reused ones):
+
+| Old path | Redirect to |
+| --- | --- |
+| `/events/community-hiring-session` | `/events/local-hiring-event-with-gradd` |
+| `/events/community-hiring-session-rmb7b` | `/events/hancock-county-career-fair` |
+| `/events/community-information-session` | `/events/community-informational-event-february-2026` |
+| `/events/community-information-session-pjte5` | `/events/community-informational-event-october-2026` |
+| `/events/contractor-outreach` | `/events/local-contractor-outreach-event` |
+| `/events/contractor-outreach-gsfrt` | `/events/local-contractor-event-with-terawulf-and-fluor` |
+
+`/events/hancock-county-opportunity-expo` keeps its slug.

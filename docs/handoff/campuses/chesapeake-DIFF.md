@@ -203,10 +203,8 @@ Checked after publishing, on all 12 published pages (`/design/*` and `/404` incl
 | --- | --- |
 | `/s/MDE-Letter-of-Support.pdf` | `https://cdn.prod.website-files.com/6b05cb19b2bc6f51aa8e5019/6b05ebc45b65a4aba96ba98d_MDE-Letter-of-Support.pdf` |
 | `/home` | `/` |
-| `/newsroom` | `/news` |
-| `/newsroom/terawulf-expands-digital-and-power-infrastructure-portfolio-with-strategic-acquisitions-in-kentucky-and-maryland` | `/news/terawulf-expands-portfolio-kentucky-and-maryland` |
 
-`/project-overview`, `/community-impact`, `/closed-loop-cooling`, `/careers`, `/events` and `/faq` keep their paths.
+`/newsroom` and its post keep their paths (since 2026-11-27 the news section is `/newsroom` and the post has its live slug, `terawulf-expands-digital-and-power-infrastructure-portfolio-with-strategic-acquisitions-in-kentucky-and-maryland`). `/project-overview`, `/community-impact`, `/closed-loop-cooling`, `/careers`, `/events` and `/faq` keep their paths too. 2026-11-27: the sample event and the four perks only it used are deleted; Chesapeake has no events, as on the live site.
 
 ## Notes from the build
 
@@ -230,7 +228,7 @@ The Build Review found five red pages; four were fixed the same day, published, 
 
 - **Event:** shot with a sample event (below) and green. The RSVP card condition (HB) was tested: with RSVP URL cleared the published page had no Reserve card, with it restored the card came back. The Other events column now carries `data-hide-empty`, so it is left out while there is no other event.
 
-**Sample event — delete or replace before launch.** "Sample Event — Chesapeake Hiring Day" (`/events/sample-chesapeake-hiring-day`, item `6b0604db08a0966b48ce62fd`), added 2026-11-24 at the user's request so the Event template could be checked. Hiring Day, 18 March 2027 9:00 AM–3:00 PM New York, Chesapeake text marked as sample in the summary, body, location note, callout and RSVP line; image the Home aerial; perks Career growth, 401(k) 5% match, 80% health insurance, Generous PTO (no starting pay); RSVP URL https://www.terawulf.com/connect. While it is upcoming, /events shows it instead of the "No events scheduled" card. Delete it in the CMS (or overwrite it with a real event) before launch.
+**Sample event — deleted 2026-11-27 (user: all sample content goes).** Was: "Sample Event — Chesapeake Hiring Day" (`/events/sample-chesapeake-hiring-day`, item `6b0604db08a0966b48ce62fd`), added 2026-11-24 at the user's request so the Event template could be checked. Hiring Day, 18 March 2027 9:00 AM–3:00 PM New York, Chesapeake text marked as sample in the summary, body, location note, callout and RSVP line; image the Home aerial; perks Career growth, 401(k) 5% match, 80% health insurance, Generous PTO (no starting pay); RSVP URL https://www.terawulf.com/connect. While it is upcoming, /events shows it instead of the "No events scheduled" card. Delete it in the CMS (or overwrite it with a real event) before launch.
 
 Still open:
 - Client questions C1 (footer e-mail) and C3 (Chesapeake's own accordion photo).
