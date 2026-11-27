@@ -804,3 +804,12 @@ collected from client repos into those files.
 - Status: open
 - Found by: claude
 
+
+### 2026-11-27 · A cut-out layered over its photo shows a ghost when the two exports differ
+- Area: designer
+- Scope: template-candidate
+- Symptom: Community Impact's investment scene (photo, smoke, then a cut-out of the worker on top so the statement text passes behind him) showed a second hat brim and pair of glasses below the worker's on all five sites, at every width.
+- Cause: the cut-out (1024 × 650) was made from a differently graded, slightly shifted copy of the photo (2000 × 1269): same aspect ratio and the same box on the page, but its content sat ~7.5 px (at 1024) higher and 0.6% larger. Colour comparison can't find the offset (the grading differs everywhere); an edge-magnitude correlation inside the mask can (0.56 → 1.25 at dy 7.5, scale 0.994).
+- Fix: rebuild the cut-out from the photo itself: the old alpha mask transformed onto the photo's pixel grid, the photo's own RGB under it, so photo and cut-out can't diverge; then the mask eroded 4 px (MinFilter 9) and feathered 1.5 px, since the cut-out sits above the smoke layer and any sky pixels in its soft edge show as a light rim. Check a layered scene by compositing the layers yourself and looking at the edges at 2×, not only on the page.
+- Status: fixed on Justified, Muskie, Lake Hawkeye, Chesapeake (2026-11-27); Lake Mariner waits for its MCP sign-in
+- Found by: human + claude
