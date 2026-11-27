@@ -47,7 +47,7 @@ to sort the findings):
 | N7 | PO › About the Project | Wide photo alt "Aerial view of the Lake Mariner campus … Lake Ontario" (component default alt) | **Fixed**: "Aerial view of the former Hawesville smelter site beside the Ohio River" |
 | N8 | CI › How Your Community Benefits | Heading 3 lines in a 375px measure (design 2 lines, 537px); items started 86px low | **Fixed**: combo Is Wide (max-width 9.6em) on this heading only |
 | N9 | CI › investment statement | Muted part started at "generating tax revenue"; design starts it at "and collaborating…" | **Fixed** |
-| N10 | CI › Strengthening The Grid | Grid Connection answer: design sets "not impact local power availability or reliability" in bold; staging regular | **Open**: MANUAL-TODO JA (rich-text prop, Designer) |
+| N10 | CI › Strengthening The Grid | Grid Connection answer: design sets "not impact local power availability or reliability" in bold; staging regular | **Fixed** 2026-11-27 in the Designer (JA) |
 | N11 | News › page head | Line read "Read on for project updates and news coverage." (Lake Mariner's); design "Project updates, announcements and coverage from around the region." | **Fixed** |
 | N12 | News › fire-trucks post | Cover was a dark data-hall interior: the Figma node stacks four image fills and the build took the bottom one. Design shows the group photo with the two fire trucks | **Fixed**: cover replaced with the visible fill (768px; the article cover is soft at full width — a larger file from the client would help) |
 | N13 | Noise-levels post | Source card "Justified Data Campus" linked to `#` (Source Name set, no URL) | **Fixed**: Source fields cleared (it's Justified's own post); the card hides. The card meta no longer shows "· Justified Data Campus" |
@@ -56,7 +56,8 @@ to sort the findings):
 | N16 | PO › Explore rail | Design gives this page its own heading and texts ("Explore the campus", "Everything about the project, the community and working here — in one place.", Careers "Construction and trade roles…"); staging shows Home's. The rail is one prop-less component, same on Lake Mariner | Open, low: needs props on the component (all sites) |
 | N17 | /404 | Only a bare "404" heading between nav and footer (same on every campus) | **Fixed** (built through the API, see below) |
 | N18 | Event template | Sample event body uses an H3 ("Why TeraWulf") under the H1: skipped level | Goes with the sample event |
-| N19 | Home › hero photo sizes | The new hero asset was uploaded through the assets API without the Designer app open, so it has no responsive variants yet: the hero publishes without `srcset` (280 KB WebP at 1717px on phones) | Open: MANUAL-TODO JB |
+| N19 | Home › hero photo sizes | The new hero asset was uploaded through the assets API without the Designer app open, so it had no responsive variants | **Done** 2026-11-27 (JB): variants arrived once the Designer was open; the hero publishes with `srcset` |
+| N20 | Every page hero (all five sites) | C \| Page Hero's image publishes `sizes="250px"`, so a 1440@2× screen loads the 500 px file for a 1656 px-wide hero (soft); phones get `-p-800`. Static full-width images publish `100vw` correctly | **Open**, cross-site: GOTCHAS 2026-11-27 lists what was tried and the options |
 
 Smaller differences, accepted or shared with Lake Mariner (no action):
 headings in title case where Figma uses sentence or TITLE case ("Site of
@@ -132,9 +133,7 @@ phrase · Careers 1 ✗ testimonials (Lake Mariner) · News 1 ✓ featured, 2 �
 newer post leads, 3 ✓ page head · Article 1 ✗ one-line bodies · Events 1 ✓
 upcoming (sample), 2 ✗ one photo for all past cards · Event 1 ✓ · FAQ 1 ✓.
 
-Not done, needs the Designer (the user's Chrome is signed into a different
-Webflow account, so the tw-justified Designer link returns 404 there):
-MANUAL-TODO JA (bold phrase) and JB (hero responsive sizes).
+MANUAL-TODO JA (bold phrase) and JB (hero responsive sizes) done 2026-11-27 in the Designer; CI marker 4 is green. Found then: N20, every hero's `sizes="250px"` (open, all sites).
 
 ## Client punch list
 
@@ -186,4 +185,4 @@ MANUAL-TODO JA (bold phrase) and JB (hero responsive sizes).
 5. **Sitemap:** turn on auto-generate, exclude `/design/style-guide` and `/design/media`; submit in Search Console.
 6. **Release:** tag the bundle and set `RELEASE` in Justified's head code (shared bundle).
 7. **Launch checks:** `wf:install --live`, `wf:seo --live --canonical`, noindex off, forms (none on this site), GA4 if wanted.
-8. MANUAL-TODO JA, JB.
+8. N20: hero `sizes="250px"` on all five sites (GOTCHAS 2026-11-27).

@@ -858,3 +858,13 @@ collected from client repos into those files.
 - Fix: `set_link` linkType page → the page id, then `remove_attribute` ["href"] (read the attributes back); component link props to `link_mode: page`; rich text rewritten. Collection URL changed in the Designer (CMS › collection › Settings › Collection URL, then Save Collection; the API shows the new slug a few seconds later). Then grep every published page (and `/404`) for `href="/news`. Prefer page links over typed URLs for internal navigation from the start.
 - Status: worked around (all five sites)
 - Found by: claude
+
+### 2026-11-27 · Hero images bound to a component image prop publish `sizes="250px"`
+- Area: perf
+- Scope: template-candidate
+- Symptom: on every page hero of all five sites (C | Page Hero › S Bg Media, the image bound to the Image prop), the published `<img>` has a full `srcset` (500–2000) but `sizes="250px"`, so a 1440 px screen at 2× loads the `-p-500` file for a 1656 px-wide hero (checked with `currentSrc`); phones at 3× get `-p-800`. Static full-width images with the same class (Home FAQ background, Community Impact scene) publish `sizes="100vw"` and load the right file. The Image Quality pass measured the largest file in `srcset`, not the one the browser picks, so it didn't show.
+- Cause: Webflow computes `sizes` from the Image element; for an image bound to a component prop it falls back to 250px. Not changed by: giving the prop a default image (`update_prop` default_text = asset id, then published), the Image's Width/Height settings (both Auto). A `sizes` custom attribute is refused ("reserved attribute name").
+- Fix: none yet. Options to try: re-pick the image on an instance in the Designer (Properties › Replace Image) and publish; turn on Settings › Disable responsiveness on the hero Image (no srcset: one full file for every screen); or a tiny inline head script that rewrites `sizes` on `[data-hero-seq] img` before the browser picks (must run before the image is parsed, so in head code with a MutationObserver, not in the bundle). Check with `img.currentSrc` at 1440@2×, not only the HTML.
+- Status: open (all five sites)
+- Found by: claude
+
